@@ -46,7 +46,7 @@ Each hook has its own typeface, colours, motion and effects and appears only at 
 
 * 52 pre-existing files compared with the SHA-256 snapshot taken before any change: **0 differences** (original MP4, phase-1 portrait video, lyrics, timing, overrides, docs, tools, assets).
 * Original uploaded MP4 SHA-256 `d039d759…94401` unchanged; phase-1 portrait video SHA-256 `93e8b527…f4f8da` unchanged.
-* New files live only in `hinglish_landscape/`, `output_hinglish_landscape/`, `backups/`; git tag `pre-hinglish-landscape`.
+* New files live only in `hinglish_landscape/`, `output_hinglish_landscape/`, `backups/`; the untouched starting point is git commit `6a8cf89` (a local tag `pre-hinglish-landscape` marks it too, but the tag could not be pushed).
 
 ## 7. Visual review (manual)
 

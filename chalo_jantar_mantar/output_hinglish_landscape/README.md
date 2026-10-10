@@ -33,7 +33,7 @@ Companion files in this folder
 | 5 | Creative typography | **Done** | Three regular-lyric families (condensed rap / italic melodic / elegant cinematic) + five different hook treatments; white/gold/saffron/green with red accents; word-by-word reveals, scale pops, light sweeps, motion trails, beat-locked pulses. Settled text keeps ≥ 69 px from every edge (measured). While hook words slide in/out, 26 of 2,672 sampled frames show a word box crossing the frame edge for a moment (deliberate kinetic entrances/exits). |
 | 6 | Five special hook animations, each at its own song positions | **Done** | See table below. Never shown together. |
 | 7 | Audio unchanged, accurate sync | **Done, sync partly inherited** | Audio is bit-identical. Line timing is the phase-1 timing (Whisper forced alignment 4-run vote + manual spectrogram refinement), reused unchanged. Words *inside* a line are revealed in proportion to syllable counts — approximate, not word-level aligned. |
-| 8 | Safe project management | **Done** | Nothing existing was changed (52 files compared against a pre-work SHA-256 snapshot: 0 differences). New work lives only in `hinglish_landscape/`, `output_hinglish_landscape/` and `backups/`; git tag `pre-hinglish-landscape` marks the starting point. |
+| 8 | Safe project management | **Done** | Nothing existing was changed (52 files compared against a pre-work SHA-256 snapshot: 0 differences). New work lives only in `hinglish_landscape/`, `output_hinglish_landscape/` and `backups/`; git commit `6a8cf89` is the untouched starting point. |
 | 9 | Export & verify | **Done** | `Chalo_Jantar_Mantar_Hinglish_Landscape_1080p.mp4`; see `VERIFICATION.md`. |
 
 ### What the background is (requirement 4)
