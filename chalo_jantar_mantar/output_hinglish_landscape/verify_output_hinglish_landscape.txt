@@ -1,0 +1,77 @@
+Verification of Chalo_Jantar_Mantar_Hinglish_Landscape_1080p.mp4  (95.1 MB)
+====================================================================================================
+[1] Video format
+    video: h264 High 1920x1080 yuv420p SAR None DAR None r=30/1 avg=30/1 frames=8016 dur=267.200000s bitrate=2.64 Mb/s
+    audio: aac 48000 Hz 2ch dur=267.200000s
+    original: video 824x1464 10/1 fps; audio aac 48000 Hz 2ch dur=267.200000s; container 267.200000s
+   [PASS] resolution is exactly 1920x1080
+   [PASS] aspect ratio 16:9 with square pixels
+   [PASS] constant 30 fps
+   [PASS] frame count == duration x 30  — 8016 frames
+   [PASS] container duration equals original  — 267.200000 vs 267.200000
+   [PASS] video and audio streams have equal length
+   [PASS] file < 100 MB (GitHub per-file limit)
+   [PASS] file name as requested
+
+[2] Audio unchanged
+    audio-stream md5 final=250eedb6e69647ad0ee51cc62d0c750c  original=250eedb6e69647ad0ee51cc62d0c750c
+   [PASS] audio stream is bit-identical to the original (stream copy)
+   [PASS] decoded PCM identical  — 08f0a8296d6b4ad909614671b8fa108f
+   [PASS] same codec/bitrate  — aac 196563
+
+[3] Lyrics, order and timing
+   [PASS] 95 lyric lines in both timing files  — 95 / 95
+   [PASS] ids, order, start/end times and Devanagari source text identical to the verified phase-1 timing file
+   [PASS] supplied lyrics.txt == timing source text (every line, in order, none added/dropped)  — 95 lines
+   [PASS] timing monotonic, positive durations, inside the song
+
+[4] Roman Hindi
+   [PASS] word-by-word consonant-skeleton check Devanagari->Roman: 0 problems  — 0 problems
+   [PASS] no Devanagari characters in any Roman lyric output (txt/srt/json roman field)
+   [PASS] every displayed lyric uses only Latin letters + , ! ? … -
+
+[5] Text actually drawn by the compositor
+    settled lyric text: 5573 sprite placements checked; smallest margin to the frame edge in px (value, line id, t): {'left': (155, 51, 146.0), 'right': (162, 51, 146.0), 'top': (271, 39, 114.94), 'bottom': (69, 12, 46.15)}
+   [PASS] all settled lyric text sits inside the 5 % action-safe area (margin >= 54 px)  — {'left': (155, 51, 146.0), 'right': (162, 51, 146.0), 'top': (271, 39, 114.94), 'bottom': (69, 12, 46.15)}
+    all 2672 sampled frames: 26 show a text box crossing the frame edge (hook words sliding in/out): 31.6s, 32.1s, 34.8s, 39.8s, 88.2s, 90.2s, 100.5s, 113.7s, 114.1s, 125.5s, 144.7s, 145.0s, 146.8s, 147.1s, 148.7s, 212.6s, 214.5s, 214.8s, 216.9s, 223.4s ...
+   [PASS] all 315 distinct strings drawn are Roman-only
+   [PASS] no branding / credit strings among everything drawn
+   [PASS] every drawn word comes from the lyrics (or the song title); single letters are per-letter hook animations  — extra: []; 12 single-letter sprites
+    distinct strings drawn: !; A; AAO,; AAYE; ADHIKAAR!; APNA; APNE; APNI; AWAAZ; Apne; Apne haq ki awaaz lekar,; Apne sawaal uthaao! ...
+   [PASS] background modules contain no text-drawing calls and never read the original video frames  — []
+
+[6] OCR on decoded frames of the FINAL MP4 (independent check of what a viewer sees)
+   [PASS] OCR sweep of 133 frames found no SUNO / MIRA / studio / @handle / credit text  — 157 text fragments read
+   [PASS] OCR sweep found no non-Latin (e.g. Devanagari) characters
+    OCR letter-match per style (mean): defiant=0.78 (n=3), march=1.00 (n=10), people=1.00 (n=2), regular=0.98 (n=71), stamp=1.00 (n=2), wake=0.93 (n=7)
+    lines with OCR match < 0.6: 1 (stylised display fonts / animation in flight are expected to read poorly):
+      L94  defiant  score 0.48  expected «Ye mulk tera baap ka nahin…»  read «yemulktera»
+   [PASS] regular lyric lines are legible: OCR recovers > 80% of the Roman letters on average  — mean 0.98
+   [PASS] all lines (incl. hooks) OCR mean > 70%  — mean 0.98
+
+[7] Lyric sync vs. the audio (signal-level sanity check of the phase-1 timing)
+    |line start - strongest vocal-band onset within +-0.35 s|: median 188 ms, 90th pct 311 ms, 44% of lines within 150 ms
+    (INFO only: drum/beat transients inside the same band make this a coarse, noisy check; the line times themselves come from the phase-1 Whisper forced alignment + manual spectrogram refinement, reused unchanged)
+    note: word-by-word reveals inside a line are spread over the line's sung span in proportion to syllable counts (approximate, not word-level aligned).
+
+[8] Special hook animations: where they appear in the song
+    Deshwasiyo Jaago!                style 'wake': L8 27.8-30.9s, L27 83.5-85.3s, L31 93.2-95.7s, L75 202.3-204.5s, L76 204.5-207.1s, L90 243.9-245.7s, L92 249.1-251.5s
+    Chalo Jantar-Mantar!             style 'march': L9 31.6-34.6s, L10 36.8-39.6s, L29 87.9-90.2s, L33 98.2-100.6s, L51 144.7-146.8s, L52 146.8-148.7s, L79 212.3-214.5s, L80 214.5-216.9s, L91 246.0-248.4s, L93 251.6-254.1s
+    Vote Chori! Gaddi Chor!          style 'stamp': L39 113.6-116.2s, L82 223.0-225.0s
+    Ye Mulk Tera Baap Ka Nahin!      style 'defiant': L43 124.5-127.0s, L84 227.9-230.0s, L94 254.8-258.1s
+    Ye Janta Ka Hindustan Hai!       style 'people': L85 230.0-233.0s, L95 258.9-264.4s
+   [PASS] all five hook types are present at their own song positions
+   [PASS] each hook has its own set of lines (never shown all together)
+
+[9] Final encode vs. near-lossless render
+    PSNR (final vs near-lossless chunks) average 49.794061 dB
+   [PASS] final encode keeps > 38 dB PSNR vs the near-lossless render
+
+[10] Existing files untouched
+    manifest check: 52 files compared, 0 differences
+   [PASS] every pre-existing project file matches the snapshot taken before any change
+   [PASS] original uploaded MP4 sha256 unchanged
+   [PASS] phase-1 portrait video unchanged
+
+====================================================================================================
+OVERALL: PASS   [696s]

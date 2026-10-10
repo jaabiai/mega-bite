@@ -1,0 +1,9 @@
+# Python 3.13 environment used for the Hinglish landscape build (FFmpeg 6.1 with libx264 must be on PATH)
+numpy==2.5.3
+scipy==1.18.1
+pillow==12.3.0
+soundfile==0.14.0
+fonttools==4.66.1
+onnxruntime==1.29.0
+# only for tools/verify_landscape.py (independent OCR of the finished video)
+rapidocr-onnxruntime==1.2.3

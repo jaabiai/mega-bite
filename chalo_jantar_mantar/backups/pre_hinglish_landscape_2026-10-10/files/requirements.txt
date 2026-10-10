@@ -1,0 +1,10 @@
+numpy
+scipy
+pillow            # built with libraqm for Devanagari shaping
+soundfile
+fonttools
+brotli
+onnxruntime
+# external: ffmpeg >= 6 (libx264, libass optional)
+# Whisper ONNX models (sherpa-onnx export) are only needed to re-derive the lyric timing:
+#   https://github.com/k2-fsa/sherpa-onnx/releases/tag/asr-models  (sherpa-onnx-whisper-turbo)
