@@ -1,0 +1,86 @@
+Verification of Chalo_Jantar_Mantar_Reel_01m44s_to_02m35s_1080x1920.mp4  (37.85 MB)
+====================================================================================================
+[1] Format, aspect ratio, duration
+    video: h264 High 1080x1920 yuv420p r=30/1 avg=30/1 frames=1530 dur=51.000000 s  5.73 Mb/s  color=bt709/bt709/bt709
+    audio: aac LC 48000 Hz 2ch dur=50.986667 s  196 kb/s
+    container duration = 51.000000 s
+   [PASS] H.264 MP4, yuv420p  — High
+   [PASS] resolution exactly 1080 x 1920
+   [PASS] aspect ratio exactly 9:16 (width/height = 0.5625), square pixels (SAR unspecified = 1:1)
+   [PASS] constant 30 fps
+   [PASS] 1530 video frames (= 51 s x 30)  — 1530
+   [PASS] container duration is exactly 51.000000 s  — 51.000000
+   [PASS] video stream duration is exactly 51.000000 s  — 51.000000
+   [PASS] frame times 0.000 ... 50.9667 s in exact 1/30 s steps  — first 0.000000, last 50.966667, max step error 0.0007 ms
+   [PASS] audio stream ends within one AAC frame (21.3 ms) of 51.000 s  — 50.986667 s: the last whole AAC frame that starts before 155.000 s ends at 154.9867 s; the container duration is set by the video
+   [PASS] file < 100 MB
+   [PASS] file name as requested
+
+[2] Audio = the original, from 01:44.000, untouched
+    reel audio packets: 2390 (first pts 0.000000 s, last pts 50.965333 s); source packet at 104.000 s is #5 of the window read
+   [PASS] audio starts at 0.000 s of the Reel
+   [PASS] all 2390 audio packets are byte-identical (SHA-256 per packet) to the landscape/original packets 104.000 s ... 154.9867 s  — 2390/2390 identical
+   [PASS] codec / sample rate / channels unchanged (AAC LC 48 kHz stereo)
+    decoded PCM vs the song decoded from its start (after the first 2 AAC frames): 91.4 % of samples identical, SNR 35.7 dB over 50.99 s; difference vs signal: below 2 kHz -103 dB, above 2 kHz -27 dB
+    (the AAC packets are byte-identical; a decoder that starts at the cut has a different noise-substitution state than one that has decoded the whole song, which only changes noise-filled high-frequency content; the first 2 frames (43 ms) also lack their overlap partner)
+   [PASS] decoded audio is the original signal: SNR >= 30 dB and the difference is >= 90 dB below the signal under 2 kHz (vocals / bass / beat untouched)  — SNR 35.7 dB, <2 kHz -103 dB
+   [PASS] cross-correlation of Reel audio vs the song at 104.000 s: lag 0 samples (no shift)  — lag 0 samples
+    no music, vocals or sound effects were added or mixed: the audio stream is the copied packets only
+
+[3] Lyrics included, Roman Hindi only
+    20 lines in the clip: L35 ... L54; hooks: L39 stamp, L43 defiant, L51 march, L52 march
+   [PASS] lines L35-L54 (all 20 sung lines of 01:44-02:35, none missing, none from outside)
+   [PASS] no Devanagari in any displayed lyric
+   [PASS] spelling check of the Roman lines against the Devanagari source: 0 problems (whole song)
+   [PASS] hook animations present in this section: Vote Chori! Gaddi Chor!, Ye Mulk Tera Baap Ka Nahin!, Chalo Jantar-Mantar! (x2)  — ['defiant', 'march', 'stamp']
+
+[4] Text actually drawn: safe zones, no cut-off, no stray strings
+    settled lyric text: 932 sprite placements; smallest margin to each frame edge (px, line id, song t): {'left': (81, 53, 151.22), 'right': (85, 44, 128.6), 'top': (411, 39, 114.64), 'bottom': (464, 41, 121.42)}
+   [PASS] settled text keeps >= 60 px from the left and right edges (nothing cut off)  — left 81, right 85
+   [PASS] settled text stays below the top ~260 px (Reels header zone)  — top margin 411
+   [PASS] settled text stays above the bottom ~420 px (Reels caption / buttons zone)  — bottom margin 464
+   [PASS] all 151 distinct strings the engine drew are Roman-only
+   [PASS] no branding / credit / handle strings
+   [PASS] every letter drawn belongs to the lyrics
+
+[5] Picture: no black bars, no letterboxing, nothing stretched
+    left/right edge columns: darkest mean luma 16.4 / 23.6 (never black: no pillarbox)
+    near-black run from the top edge: longest 172 px (frames with > 80 px: 1); from the bottom edge: longest 88 px, mean 19 px (dark foreground crowd / ground silhouettes)
+   [PASS] no black pillar bars at the left/right edges
+   [PASS] no letterbox band at the top (only isolated whip-transition frames)  — 1 frame(s) > 80 px
+   [PASS] bottom edge never has a black bar > 120 px (the dark strip is crowd/ground silhouette detail)  — max 88 px
+    picture fade (audio untouched): mean luma frames 0/3/8 = 1.0/23.8/48.3; last two samples = 3.0/57.5
+
+[6] Lyric synchronisation (measured from the finished MP4)
+    L39: red banner of 'Vote Chori!' lands: first visible frame 290 (= 9.667 s) vs timing-file line start frame 289.2 (= 9.640 s)  -> offset +27 ms
+    L51: saffron slab of 'Chalo' slams in: first visible frame 1223 (= 40.767 s) vs timing-file line start frame 1221.0 (= 40.700 s)  -> offset +67 ms
+   [PASS] hook onsets in the MP4 land within 0-2 frames of the timing file's line starts (frame-exact mapping 104.000 s -> frame 0)
+    INFO: |timing-file line start - strongest vocal-band onset of the Reel's own audio within +-0.35 s|: median 200 ms, 90th pct 320 ms (coarse: drum transients share the band; the line times are the phase-1 Whisper alignment + manual refinement, reused unchanged)
+    OCR of the finished MP4, each line when fully built: regular lines mean 0.95 (n=16); stamp 0.78 (n=1), defiant 1.00 (n=1), march 1.00 (n=2)
+      L53  regular  0.58  expected «Apne haq ki awaaz lekar,»  read «haqapnekilekaraeaas»
+      regular lines below 0.85 (stylised italic / partly covered by a flag or flash): [(45, 0.75), (47, 0.82), (53, 0.58)]
+   [PASS] the right lyric is on screen at the right time: OCR recovers > 85 % of the letters of every regular line  — mean 0.95, min 0.58
+   [PASS] hook lines are legible to OCR as well  — {'stamp': 0.78, 'defiant': 1.0, 'march': 1.0}
+    onset of each line's first word on screen (bisection, OCR of the MP4) vs the timing file:
+      L36  'janta': readable from frame 55 (1.833 s) ; timing-file start 1.840 s ; offset -7 ms
+      L38  'saamne': readable from frame 226 (7.533 s) ; timing-file start 7.530 s ; offset +3 ms
+      L40  'goonje': readable from frame 369 (12.300 s) ; timing-file start 12.240 s ; offset +60 ms
+      L41  'janta': readable from frame 453 (15.100 s) ; timing-file start 15.120 s ; offset -20 ms
+      L49  'janta': readable from frame 1062 (35.400 s) ; timing-file start 35.420 s ; offset -20 ms
+      L50  'milta': readable from frame 1139 (37.967 s) ; timing-file start 37.980 s ; offset -13 ms
+      L53  'apne': readable from frame 1342 (44.733 s) ; timing-file start 44.690 s ; offset +43 ms
+      L54  'ek': readable from frame 1440 (48.000 s) ; timing-file start 47.960 s ; offset +40 ms
+   [PASS] every measured line appears (becomes readable) between 0.1 s before and 0.4 s after its timing-file start (the pop-in itself takes ~0.1-0.2 s)  — median -2 ms, range -20 .. +60 ms
+   [PASS] OCR sweep (50 frames, 1 per second) finds no SUNO / Mira / @handle / credit text  — 103 text fragments read
+   [PASS] OCR sweep finds no non-Latin (e.g. Devanagari) characters
+
+[7] Existing files untouched
+   [PASS] landscape MP4 SHA-256 unchanged since it was delivered  — 2d9bc9347e94fbfd...
+    git status outside chalo_jantar_mantar/reels/: clean
+   [PASS] no existing tracked file modified, nothing new outside the reels/ folder
+   [PASS] git diff is empty (no tracked file content changed)
+   [PASS] original MP4, lyrics, timing, portrait video, docs, tools, assets all match the pre-work SHA-256 manifest  — 52 files compared
+   [PASS] Reel saved in the separate reels/ folder
+
+====================================================================================================
+OVERALL: PASS   [153s]
