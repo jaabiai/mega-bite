@@ -1,0 +1,6 @@
+__pycache__/
+work/
+models/
+*.u8
+*.npy
+*.wav

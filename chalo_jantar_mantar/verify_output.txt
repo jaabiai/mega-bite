@@ -1,0 +1,15 @@
+[1] video h264 1080x1920 @ 30/1 (8016 frames); audio aac 48000 Hz 2ch
+    source video 824x1464 @ 10/1; duration final 267.200s vs original 267.200s (diff 0.0 ms)
+    video stream duration 267.200s, audio stream duration 267.200s
+    aspect ratio final 0.5625 vs source 0.5628
+[2] audio stream md5  final MD5=250eedb6e69647ad0ee51cc62d0c750c
+                      source MD5=250eedb6e69647ad0ee51cc62d0c750c   -> IDENTICAL
+[3] lyric lines supplied 95, in timing file 95; text byte-identical & in order: True
+    timing monotonic / positive durations / within song: True
+[4] distinct codepoints used: 60; missing glyphs per font: Hind-Bold.ttf:0, RozhaOne-Regular.ttf:0, Khand-Bold.ttf:0
+    RozhaOne-Regular.ttf: characters it renders but lacks: none
+    Khand-Bold.ttf: characters it renders but lacks: none
+[5] PSNR decoded-video vs fresh render at 16 times: min 35.3 dB, mean 36.8 dB
+[6] on-screen lyric at mid-line matches the intended line for 71/71 regular lines; mismatches: []
+
+OVERALL: PASS
