@@ -1,0 +1,2 @@
+# rendered videos exceed GitHub's 100 MB file limit; keep them out of git
+output/*.mp4

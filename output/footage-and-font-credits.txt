@@ -1,0 +1,53 @@
+FOOTAGE & FONT CREDITS — "നീ എന്നോർമ്മ" lyric video
+=================================================
+Background footage: free stock video from Pexels (https://www.pexels.com/license/ — free to use, attribution not required).
+Each clip's page (open by ID):
+  https://www.pexels.com/video/6203545/
+  https://www.pexels.com/video/4814489/
+  https://www.pexels.com/video/6546062/
+  https://www.pexels.com/video/4512205/
+  https://www.pexels.com/video/5107299/
+  https://www.pexels.com/video/4767606/
+  https://www.pexels.com/video/8296710/
+  https://www.pexels.com/video/6960047/
+  https://www.pexels.com/video/9629261/
+  https://www.pexels.com/video/10536904/
+  https://www.pexels.com/video/1233886/
+  https://www.pexels.com/video/5668820/
+  https://www.pexels.com/video/15654897/
+  https://www.pexels.com/video/16298299/
+  https://www.pexels.com/video/3987640/
+  https://www.pexels.com/video/13382270/
+  https://www.pexels.com/video/4729553/
+  https://www.pexels.com/video/6550969/
+  https://www.pexels.com/video/5153190/
+  https://www.pexels.com/video/5587007/
+  https://www.pexels.com/video/4221509/
+  https://www.pexels.com/video/10848134/
+  https://www.pexels.com/video/3140104/
+  https://www.pexels.com/video/17981111/
+  https://www.pexels.com/video/8816326/
+  https://www.pexels.com/video/8522207/
+  https://www.pexels.com/video/5234909/
+  https://www.pexels.com/video/5692315/
+  https://www.pexels.com/video/4816732/
+  https://www.pexels.com/video/1409899/
+  https://www.pexels.com/video/10867353/
+  https://www.pexels.com/video/5909598/
+  https://www.pexels.com/video/854638/
+  https://www.pexels.com/video/4946120/
+  https://www.pexels.com/video/854656/
+  https://www.pexels.com/video/5963242/
+  https://www.pexels.com/video/13085360/
+  https://www.pexels.com/video/3139195/
+  https://www.pexels.com/video/11861875/
+  https://www.pexels.com/video/18322074/
+  https://www.pexels.com/video/6547523/
+  https://www.pexels.com/video/13384219/
+  https://www.pexels.com/video/9665239/
+
+Fonts:
+  Chilanka (Malayalam handwriting/calligraphic style) — SIL Open Font License 1.1 — Swathanthra Malayalam Computing / Santhosh Thottingal
+  Cormorant Garamond (Latin credit line) — SIL Open Font License 1.1 — Christian Thalmann / Catharsis Fonts
+
+Lyric timing: forced alignment of the lyrics embedded in the MP3 (MMS wav2vec2 aligner) on a Demucs-separated vocal stem.
