@@ -51,3 +51,9 @@ Fonts:
   Cormorant Garamond (Latin credit line) — SIL Open Font License 1.1 — Christian Thalmann / Catharsis Fonts
 
 Lyric timing: forced alignment of the lyrics embedded in the MP3 (MMS wav2vec2 aligner) on a Demucs-separated vocal stem.
+
+Opening credits shown in the video:
+  V Create presents
+  Lyrics — Jabir Varikkodan (ജാബിർ വരിക്കോടൻ)
+  Singing & Mixing — Miraya (മിറായ)
+  Title card: നീ എന്നോർമ്മ — V CREATE
