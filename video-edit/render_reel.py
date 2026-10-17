@@ -47,8 +47,9 @@ def encoder(path, crf=17, preset="medium"):
 def plan():
     import edl_reel
     for c in edl_reel.PLAN:
-        print(f"{c['k']:2d} {c['kind']:6s} src {c['a']:7.2f}-{c['b']:7.2f}  reel {c['r0']:6.2f}-{c['r1']:6.2f}  ({c['b']-c['a']:.2f}s)")
-    print(f"speech {edl_reel.SPEECH_END:.2f}s + tail {edl_reel.TAIL}s = {edl_reel.TOTAL:.2f}s  ({nframes()} frames)")
+        print(f"{c['k']:2d} {c['kind']:6s} {c['r0']:6.2f}-{c['r1']:6.2f}  ({c['r1']-c['r0']:.2f}s)")
+    print(f"audio cuts: {edl_reel.audio_cuts()}  (one continuous take)")
+    print(f"speech {edl_reel.SPEECH_END:.2f}s + end card {edl_reel.END_CARD}s = {edl_reel.TOTAL:.2f}s  ({nframes()} frames)")
 
 
 def sheet(name, times, cols=4, w=360):
@@ -110,7 +111,8 @@ def audio():
     parts, labels = [], []
     for k, (a, b) in enumerate(cuts):
         d = b - a
-        parts.append(f"[0:a]atrim=start={a:.4f}:end={b:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.012,afade=t=out:st={d-0.03:.4f}:d=0.03[a{k}]")
+        fin = "afade=t=in:d=0.012," if a > 0 else ""          # a take that starts at 0.0 is left sample-exact
+        parts.append(f"[0:a]atrim=start={a:.4f}:end={b:.4f},asetpts=PTS-STARTPTS,{fin}afade=t=out:st={d-0.05:.4f}:d=0.05[a{k}]")
         labels.append(f"[a{k}]")
     fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(cuts)}:v=0:a=1,apad=whole_dur={edl_reel.TOTAL:.3f}[o]"
     out = os.path.join(OUT, "reel_voice.wav")

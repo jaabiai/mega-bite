@@ -245,18 +245,32 @@ class Logo:
         base = 560
         self.base = gfx.scale_sprite(raw, base / gfx.sprite_size(raw)[0])
         self.corner, self.corner_size = corner, corner_size
-        self.reveal = reveal            # (t_start, t_hold_end) or None
+        if reveal is None:
+            self.reveals = []
+        elif isinstance(reveal[0], (tuple, list)):
+            self.reveals = [tuple(r) for r in reveal]       # (t_start, t_hold_end[, (cx, cy, size)])
+        else:
+            self.reveals = [tuple(reveal)]          # (t_start, t_hold_end)
+        self.reveal = self.reveals[0] if self.reveals else None
         self._shadow = None
+
+    def _window(self, t):
+        """the reveal window (r0, r1) that is flying in / holding / flying out at time t, else None"""
+        for w in self.reveals:
+            if w[0] <= t <= w[1] + 0.7:
+                return w
+        return None
 
     def state(self, t):
         cx, cy = self.corner
         size = self.corner_size
-        if self.reveal:
-            r0, r1 = self.reveal
+        win = self._window(t)
+        if win:
+            r0, r1 = win[0], win[1]
             fly_in = ease_out_back(ramp(t, r0, r0 + 0.6), 1.5)
             fly_out = ease_in_out(ramp(t, r1, r1 + 0.7))
-            tx, ty, ts = self.center
-            if t < r0 + 0.6 or t < r1:
+            tx, ty, ts = win[2] if len(win) > 2 else self.center
+            if t < r1:
                 p = fly_in
                 cx, cy, size = lerp(cx, tx, p), lerp(cy, ty, p), lerp(size, ts, p)
                 if t >= r0 + 0.6:
@@ -273,9 +287,10 @@ class Logo:
             a = self.base["a"]
             sh = cv2.GaussianBlur(a, (0, 0), 14)
             self._shadow = {"pm": np.zeros_like(self.base["pm"]), "a": (sh * 0.55).astype(np.uint8)}
+        win = self._window(t)
         big = size > 200
-        if big and self.reveal:
-            r0 = self.reveal[0]
+        if big and win:
+            r0 = win[0]
             # rings radiating from the logo during the reveal
             for k in range(3):
                 age = t - (r0 + 0.55 + k * 0.28)
@@ -293,8 +308,9 @@ class Logo:
 class TitleCard(Layer):
     """small kicker + large gradient title under the logo (used for 'Welcome to Mega Byte')"""
 
-    def __init__(self, t0, t1, kicker, title, y=745):
+    def __init__(self, t0, t1, kicker, title, y=745, cx=W / 2, scale=1.0):
         self.t0, self.t1, self.kicker, self.title, self.y = t0, t1, kicker, title, y
+        self.cx, self.sc = cx, scale
         self._k = gfx.text_sprite(kicker, FONT_XBOLD, 54, fill=(230, 240, 255), stroke=5, stroke_fill=(5, 16, 44), shadow=(0, 5), shadow_blur=5)
         self._t = gfx.text_sprite(title, FONT_BLACK, 150, stroke=10, stroke_fill=(5, 16, 44), gradient=((170, 248, 255), (30, 140, 255)),
                                   shadow=(0, 9), shadow_blur=9, shadow_alpha=0.7, glow=(20, 110, 255), glow_blur=34)
@@ -305,6 +321,6 @@ class TitleCard(Layer):
         if op <= 0:
             return frame
         e = ease_out_back(ramp(a, 0, 0.5), 1.6)
-        gfx.draw_sprite(frame, self._k, W / 2, self.y - 90 + (1 - e) * 40, scale=1.0, opacity=op)
-        gfx.draw_sprite(frame, self._t, W / 2, self.y + (1 - e) * 60, scale=lerp(0.7, 1.0, e), opacity=op)
+        gfx.draw_sprite(frame, self._k, self.cx, self.y - 90 * self.sc + (1 - e) * 40, scale=self.sc, opacity=op)
+        gfx.draw_sprite(frame, self._t, self.cx, self.y + (1 - e) * 60, scale=lerp(0.7, 1.0, e) * self.sc, opacity=op)
         return frame

@@ -38,12 +38,14 @@ Drop it at `$MB_WORK/assets/result.mp4` and re-render the chunk(s) covering 219�
 "Kandille, aamayum muyalum ... ottamalsaram". Until then the screen recording's own result thumbnail is highlighted.
 
 ## Reel / Short (9:16)
+One **continuous take** of the narration (0 - 60 s, no audio cuts; it starts on the hook and ends on the sentence
+"'There Is An AI For That' ennaanu sitinte peru." followed by true silence in the recording), smooth transitions
+(zoom / push / swipe / fade), then a ~2.6 s end card: "MEGA BYTE / മെഗാബൈറ്റ് - മുഴുവൻ വീഡിയോ കാണാൻ യൂട്യൂബ് ചാനൽ സന്ദർശിക്കുക".
 ```bash
-python render_reel.py plan                 # clip list (source -> reel time)
+python render_reel.py plan                 # scene list
 python render_reel.py full --workers 4     # silent video   -> $MB_WORK/render/reel_video.mp4
-python render_reel.py audio                # original narration cut at word boundaries (level unchanged)
+python render_reel.py audio                # original narration, one cut at the end only (level unchanged)
 python render_reel.py mux out.mp4
 ```
-`edl_reel.py` picks the key moments (source times snap to word boundaries) and re-uses the long video's demo
-time-warp + highlight list; `mbedit/reel.py` holds the vertical scenes (camera follows the highlighted UI element)
-and the end card ("Full video on YouTube - MEGA BYTE", Malayalam text).
+`edl_reel.py` holds the scenes/overlays, `mbedit/reel.py` the vertical scenes, transitions and end card.
+(The first reel version stitched 15 clips together; it was replaced because the jumps felt cut-up.)

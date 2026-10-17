@@ -58,8 +58,8 @@ class ReelTH:
 class ReelBroll:
     kind = "broll"
 
-    def __init__(self, r0, r1, clip, start=0.4, zoom=(1.0, 1.1), cx=0.5):
-        self.t0, self.t1, self.clip, self.start, self.zoom, self.cx = r0, r1, clip, start, zoom, cx
+    def __init__(self, r0, r1, clip, start=0.4, zoom=(1.0, 1.1), cx=0.5, cy=0.5):
+        self.t0, self.t1, self.clip, self.start, self.zoom, self.cx, self.cy = r0, r1, clip, start, zoom, cx, cy
 
     def render(self, ctx, t):
         from .common import WORK
@@ -73,7 +73,8 @@ class ReelBroll:
         ch = H / z
         cw = ch * RW / RH
         x0 = clamp(self.cx * W - cw / 2, 0, W - cw)
-        img = gfx.crop_zoom(f, (x0, (H - ch) / 2, cw, ch), RW, RH)
+        y0 = clamp(self.cy * H - ch / 2, 0, H - ch)
+        img = gfx.crop_zoom(f, (x0, y0, cw, ch), RW, RH)
         img = grade.apply_lut(img, _broll_lut())
         return shade(gfx.darken(img, 0.85))
 
@@ -226,3 +227,63 @@ class EndCard:
         e = pop(0.85)
         gfx.draw_sprite(frame, asset("reel_fullvideo"), RW / 2, 1165 + (1 - e) * 40, scale=0.8 * lerp(0.6, 1, e), opacity=ramp(a, 0.85, 1.0))
         return frame
+
+
+# ====================================================================== smooth transitions (any frame size)
+def vtransition(kind, A, B, p):
+    """cross-scene transitions that work on 1080x1920 frames (the 16:9 ones in scenes.py assume 1920x1080)"""
+    p = clamp(p)
+    if kind == "cut" or p >= 1:
+        return B
+    h, w = A.shape[:2]
+    if kind == "fade":
+        return gfx.blend(A, B, smooth(p))
+    e = ease_in_out(p)
+    if kind == "push":                                           # vertical push with motion blur
+        sh = int(h * e)
+        out = np.empty_like(A)
+        out[:h - sh] = A[sh:]
+        out[h - sh:] = B[:sh]
+        k = int(1 + 90 * math.sin(math.pi * p))
+        return cv2.blur(out, (1, k)) if k > 2 else out
+    if kind == "zoom":                                           # punch-through: A zooms in + blurs, B settles
+        if e < 0.5:
+            f = gfx.cover_resize(A, w, h, zoom=1 + 0.45 * ease_in_out(e * 2))
+            f = cv2.GaussianBlur(f, (0, 0), 1 + 14 * (e * 2) ** 2)
+            return gfx.blend(f, np.full_like(f, 240), 0.35 * (e * 2) ** 4)
+        q = (e - 0.5) * 2
+        f = gfx.cover_resize(B, w, h, zoom=1.35 - 0.35 * ease_out(q))
+        f = cv2.GaussianBlur(f, (0, 0), max(0.1, 14 * (1 - q) ** 2))
+        return gfx.blend(f, np.full_like(f, 240), 0.35 * (1 - q) ** 4)
+    if kind == "swipe":                                          # diagonal wipe with a glowing brand-coloured edge
+        yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+        proj = yy + 0.35 * xx
+        thr = -250 + (h + 0.35 * w + 500) * e
+        d = proj - thr
+        out = np.where((d < 0)[..., None], B, A).astype(np.float32)
+        edge = np.exp(-(d / 18.0) ** 2) * 0.95 + np.exp(-(d / 90.0) ** 2) * 0.35
+        out += edge[..., None] * np.array((70, 215, 255), np.float32)[None, None, :]
+        return np.clip(out, 0, 255).astype(np.uint8)
+    raise ValueError(kind)
+
+
+# ====================================================================== end screen background
+class ReelEnd:
+    """Frozen, blurred presenter frame (slow push-in) behind the end card - used when the narration has finished."""
+    kind = "end"
+
+    def __init__(self, r0, r1, freeze_t):
+        self.t0, self.t1, self.freeze_t = r0, r1, freeze_t
+        self._img = None
+
+    def render(self, ctx, t):
+        if self._img is None:
+            f = ctx.main.graded(int(round(self.freeze_t * FPS)))
+            ch = H
+            cw = ch * RW / RH
+            img = gfx.crop_zoom(f, ((W - cw) / 2 + 40, 0, cw, ch), RW + 120, RH + 210)
+            img = cv2.GaussianBlur(img, (0, 0), 7)
+            self._img = gfx.darken(img, 0.45)
+        z = 1.0 + 0.05 * ramp(t, self.t0, self.t1)
+        out = gfx.cover_resize(self._img, RW, RH, zoom=z, cx=0.5, cy=0.5)
+        return np.ascontiguousarray(out)
