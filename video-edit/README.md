@@ -37,3 +37,14 @@ Mux: `ffmpeg -i video.mp4 -i voice.wav -c:v copy -c:a aac -b:a 256k -shortest ou
 Drop it at `$MB_WORK/assets/result.mp4` and re-render the chunk(s) covering 219–231 s:
 `edl.py` then plays it full-size (rounded player, "AI-GENERATED VIDEO" tag) while the narration says
 "Kandille, aamayum muyalum ... ottamalsaram". Until then the screen recording's own result thumbnail is highlighted.
+
+## Reel / Short (9:16)
+```bash
+python render_reel.py plan                 # clip list (source -> reel time)
+python render_reel.py full --workers 4     # silent video   -> $MB_WORK/render/reel_video.mp4
+python render_reel.py audio                # narration cut at word boundaries, -14 LUFS
+python render_reel.py mux out.mp4
+```
+`edl_reel.py` picks the key moments (source times snap to word boundaries) and re-uses the long video's demo
+time-warp + highlight list; `mbedit/reel.py` holds the vertical scenes (camera follows the highlighted UI element)
+and the end card ("Full video on YouTube - MEGA BYTE", Malayalam text).

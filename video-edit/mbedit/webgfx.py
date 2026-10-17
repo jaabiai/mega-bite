@@ -54,6 +54,12 @@ SPRITES = {
     "badge_link": pill(560, 150, "linear-gradient(180deg,#34a2ff,#1565e8)", "LINK BELOW", "arrow_down", 76, 56),
     "cursor": """<div class="wrap" style="padding:16px"><svg width="96" height="110" viewBox="0 0 24 28">
         <path d="M3 2v20l5.2-5 3.6 8.4 3-1.3-3.5-8.2H19z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div>""",
+    "reel_fullvideo": pill(800, 140, "linear-gradient(180deg,#34a2ff,#1565e8)", "FULL VIDEO ON YOUTUBE", "play", 70, 50),
+    "reel_ml": """<div class="wrap" style="padding:30px"><div style="width:960px;text-align:center;font-family:'FreeSans','Inter',sans-serif;font-weight:700;
+        color:#fff;font-size:66px;line-height:1.42;text-shadow:0 5px 12px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.9)">
+        മുഴുവൻ വീഡിയോ കാണാൻ<br>യൂട്യൂബ് ചാനൽ സന്ദർശിക്കുക</div></div>""",
+    "reel_ml_name": """<div class="wrap" style="padding:30px"><div style="font-family:'FreeSans','Inter',sans-serif;font-weight:700;
+        color:#8fe9ff;font-size:70px;text-shadow:0 5px 12px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.9)">മെഗാബൈറ്റ്</div></div>""",
     "icon_play": f'<div class="wrap" style="padding:10px"><div style="width:150px;height:150px;border-radius:75px;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px rgba(255,255,255,.9) inset">{svg("play", 90)}</div></div>',
 }
 

@@ -46,7 +46,8 @@ class Headline(Layer):
     """Big pop-in words. lines = [[(word, accent_bool), ...], ...]"""
 
     def __init__(self, t0, t1, lines, size=150, anchor="left", x=90, y=210, stagger=0.13, line_gap=0.98, shade=0.5,
-                 exit_dur=0.25, delays=None, color_accent=((140, 240, 255), (30, 140, 255))):
+                 exit_dur=0.25, delays=None, color_accent=((140, 240, 255), (30, 140, 255)), cx=None):
+        self.cx = W / 2 if cx is None else cx
         self.t0, self.t1 = t0, t1
         self.lines, self.size, self.anchor, self.x, self.y = lines, size, anchor, x, y
         self.stagger, self.line_gap, self.shade, self.exit_dur = stagger, line_gap, shade, exit_dur
@@ -81,7 +82,7 @@ class Headline(Layer):
             gap = self.size * 0.2
             vis_w = [gfx.sprite_size(s)[0] - 2 * pad for s in sprites]
             total = sum(vis_w) + gap * (len(line) - 1)
-            x = self.x if self.anchor == "left" else (self.x - total if self.anchor == "right" else W / 2 - total / 2)
+            x = self.x if self.anchor == "left" else (self.x - total if self.anchor == "right" else self.cx - total / 2)
             for s, vw in zip(sprites, vis_w):
                 ts = self.delays[k] if self.delays else self.t0 + k * self.stagger
                 k += 1
@@ -141,8 +142,9 @@ def _ripple(frame, cx, cy, age, color=(255, 255, 255), max_r=120, dur=0.6, thick
 class SubscribeCTA(Layer):
     """big red SUBSCRIBE pill -> cursor click -> SUBSCRIBED + ringing bell"""
 
-    def __init__(self, t0, t1, cx=420, cy=300, scale=1.0):
+    def __init__(self, t0, t1, cx=420, cy=300, scale=1.0, click=None):
         self.t0, self.t1, self.cx, self.cy, self.sc = t0, t1, cx, cy, scale
+        self.click = click
 
     def draw(self, frame, t):
         a = t - self.t0
@@ -152,7 +154,7 @@ class SubscribeCTA(Layer):
         op = clamp(a / 0.2) * leave
         if op <= 0:
             return frame
-        click_t = min(1.25, dur - 1.6)
+        click_t = self.click if self.click is not None else min(1.25, dur - 1.6)
         clicked = a >= click_t
         sc = self.sc * lerp(0.55, 1.0, enter) * (1 + (0.035 * math.sin(a * 7) if not clicked else 0))
         if click_t <= a < click_t + 0.14:
@@ -237,7 +239,8 @@ class Logo:
     """Channel logo: top-right watermark from the first to the last frame; flies to the centre for the
     'Welcome to Mega Byte' moment and back."""
 
-    def __init__(self, reveal=None, corner=(1822, 98), corner_size=128):
+    def __init__(self, reveal=None, corner=(1822, 98), corner_size=128, center=(W / 2, 395, 470)):
+        self.center = center
         raw = gfx.sprite_from_png(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "logo.png"))
         base = 560
         self.base = gfx.scale_sprite(raw, base / gfx.sprite_size(raw)[0])
@@ -252,7 +255,7 @@ class Logo:
             r0, r1 = self.reveal
             fly_in = ease_out_back(ramp(t, r0, r0 + 0.6), 1.5)
             fly_out = ease_in_out(ramp(t, r1, r1 + 0.7))
-            tx, ty, ts = W / 2, 395, 470
+            tx, ty, ts = self.center
             if t < r0 + 0.6 or t < r1:
                 p = fly_in
                 cx, cy, size = lerp(cx, tx, p), lerp(cy, ty, p), lerp(size, ts, p)

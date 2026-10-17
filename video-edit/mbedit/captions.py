@@ -17,6 +17,7 @@ ZONES = {
     # name: (font px, centre x, baseline y, max line width px)
     "full": dict(size=92, cx=W / 2, base=1000, max_w=1560),
     "left": dict(size=70, cx=590, base=1018, max_w=1000),
+    "reel": dict(size=84, cx=540, base=1500, max_w=940),      # 9:16 reels / shorts (kept clear of the platform UI)
 }
 
 
