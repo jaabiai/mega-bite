@@ -1,0 +1,162 @@
+1
+00:00:00,000 --> 00:00:04,500
+Ningalkku AI upayogichu free aayi niravadhi videokal generate cheyyano...
+2
+00:00:04,500 --> 00:00:08,000
+Innu atharathilulla oru website aanu njan parichayappeduthunnathu.
+3
+00:00:08,000 --> 00:00:12,000
+Appol inganeyulla useful aayittulla videokal labhikkan vendi ippol thanne channel subscribe cheytho.
+4
+00:00:12,000 --> 00:00:16,000
+Appol njan itharathilulla videokal niravadhi upload cheyyarundu.
+5
+00:00:16,000 --> 00:00:20,000
+Appol anganeyullava labhikkanayi ippol thanne subscribe cheythu vecholoo.
+6
+00:00:20,000 --> 00:00:27,000
+Appol namukku sadharanayayi labhikkunna ella platformil ninnum vyathyasthamaayittaanu namukku ithil video generate cheyyan sadhikkunnathu.
+7
+00:00:27,000 --> 00:00:32,000
+Adhava athil cheyyunna athe reethiyil thanne pakshe niravadhi videokal.
+8
+00:00:32,000 --> 00:00:36,000
+Oru thavana nammal login cheythu kazhinjal 100 videokalolam namukku cheyyan sadhikkum.
+9
+00:00:36,000 --> 00:00:42,500
+Angane niravadhi accountukal login cheythukondu ningalkku niravadhi videokal ee oru platformiloode generate cheyyam, high qualityil.
+10
+00:00:42,500 --> 00:00:49,000
+Sadharana ningal google flow-ilo athallengil mattethangilum websitilokke enganeyano generate cheyyunnathu...
+11
+00:00:49,000 --> 00:00:54,500
+Athe qualityil allengil athinekkal mikachathu ennu thanne parayam, atharathil namukku generate cheyyan sadhikkum.
+12
+00:00:54,500 --> 00:00:57,000
+Anganeyulla oru platform aanu.
+13
+00:00:57,000 --> 00:01:00,000
+Appol ithu enganeyaanu upayogikkunnathu ennu nokkam.
+14
+00:01:00,000 --> 00:01:04,500
+Welcome to Mega Byte. Puthiya oru videoyilekku ellavarkkum swagatham.
+15
+00:01:04,500 --> 00:01:10,000
+Appol ithinavashyamaya link njan descriptionil nalkiyittundu. Aa link vazhi ningalkku ithine access cheyyam.
+16
+00:01:10,000 --> 00:01:14,000
+Aa link open cheythu kazhinjal ningalkku ithe reethiyilayirikkum kanan sadhikkunnathu.
+17
+00:01:14,000 --> 00:01:17,500
+'There Is An AI For That' ennaanu sitinte peru.
+18
+00:01:17,500 --> 00:01:23,500
+Linkil click cheythu kazhinjal exact ee sitilekku thanne ethum. Ivide ninnu sign up ennulla bhagam select cheythukondu...
+19
+00:01:23,500 --> 00:01:29,000
+Ithilekku account login cheyyendathundu. Sign up cheyyendathundu, engil mathramanu namukkithu pravarthikkukayulloo.
+20
+00:01:29,000 --> 00:01:34,500
+Appol sign up ennulla bhagam nalki ningalkku ningalude google account vazhi ithilekku login cheyyan sadhikkum.
+21
+00:01:34,500 --> 00:01:38,500
+Avashyamaya google account select cheythukondu ithilekku login cheyyuka.
+22
+00:01:38,500 --> 00:01:43,500
+Login cheythu kazhinjal ningalkku ithinte interface ithe reethiyilayirikkum kanan sadhikkunnathu.
+23
+00:01:43,500 --> 00:01:49,000
+Ivide ninnu randu optionukal namukku kanan sadhikkum, Generate Image ennum mattonnu Generate Videos ennum.
+24
+00:01:49,000 --> 00:01:55,000
+Appol namukku video generate cheyyanamengil, avashyamaya topic enthaano athinte promptum...
+25
+00:01:55,000 --> 00:02:00,000
+Athupole enthengilum imageukal ningalkku generate cheyyanam ennundenkil athum ningalkku generate cheythu vekkam.
+26
+00:02:00,000 --> 00:02:08,000
+Onnukil ee oru software vazhi athallengil Gemini-yo ChatGPT-yo poleyullavayude sahayam thedikkondu promptukalum imageukalum generate cheythu vekkuka.
+27
+00:02:08,000 --> 00:02:14,000
+Njan ippol oru video aanu ivide generate cheyyan uddeshikkunnathu. Athinuvendi generate video ennulla bhagam select cheythal...
+28
+00:02:14,000 --> 00:02:17,500
+Ningalkku ithe reethiyilayirikkum kanan sadhikkunnathu.
+29
+00:02:17,500 --> 00:02:24,000
+Ivide ningalkku kanam, ithilekku free aayittu namukku daily 100 videokal vare labhikkum ennullathu, adhava 100 videos per day ennu kanikkum.
+30
+00:02:24,000 --> 00:02:30,000
+Sign up nirbandhamaanu, athupole free aayittu namukku ithine commercial usinum upayogikkan sadhikkum ennu ivide thanne kanam.
+31
+00:02:30,000 --> 00:02:36,500
+Ini ningal cheyyendathu 'Your Prompt' ennulla bhagathu ningal video generate cheyyan avashyamaya prompt paste cheythu kodukkuka.
+32
+00:02:36,500 --> 00:02:43,000
+Njan ChatGPT-ye kondu cheyyicha oru prompt aanu, oru aamayum muyalum thammilulla ottamalsaramaanu njan ivide generate cheyyan uddeshikkunnathu.
+33
+00:02:43,000 --> 00:02:49,000
+Appol athinuvendiya promptum imageum njan ChatGPT-ye kondu generate cheyyichu, prompt ivide paste cheythu koduthu.
+34
+00:02:49,000 --> 00:02:54,500
+Ini ithilekku image add cheyyanam. Athinu vendi randamathe 'Images' ennulla bhagathu ninnu nammude gallery select cheythu...
+35
+00:02:54,500 --> 00:03:00,000
+Avashyamaya photo ithilekku add cheythu kodukkam. Ore samayam namukku moonnu photokal add cheyyan sadhikkum.
+36
+00:03:00,000 --> 00:03:04,500
+Athinushesham ivide thazheyayi namukku 'Fast', 'Quality' enningane randu optionukal kanam.
+37
+00:03:04,500 --> 00:03:10,000
+Ningalkku urgent illa ennundenkil Quality select cheyyam, pettennavanam ennundenkil Fast ennulla bhagavum select cheyyam.
+38
+00:03:10,000 --> 00:03:14,000
+Ethra samayam vendi varum ennullathum ivide nalkiyittullathu ningalkku kanam.
+39
+00:03:14,000 --> 00:03:19,000
+Exact ithoru perfect aayittulla timing alla, oru ekadesha kanakkaanu. Chilappol kooduthalavam, chilappol kuravumaavam.
+40
+00:03:19,000 --> 00:03:25,000
+Enthayalum ningalkku avashyamulla option select cheyyam. Ithil ninnu ningalkku landscape venamengil angane...
+41
+00:03:25,000 --> 00:03:28,500
+Athallengil portrait venamennundenkil angane cheyyanulla option undu.
+42
+00:03:28,500 --> 00:03:36,000
+Ini ningal nalkiya prompt kurachukoodi powerful aakkanam ennundenkil, 'Enhance My Prompt' ennulla ee button enable cheythu kazhinjal...
+43
+00:03:36,000 --> 00:03:41,500
+Nammal nalkiya prompt enhance cheythukondu avashyamaya reethiyil veendum athine set cheythu nalkunnathayirikkum.
+44
+00:03:41,500 --> 00:03:46,000
+Athinushesham Generate ennulla bhagam nalki kazhinjal ningalude video generate aavan thudangunnathayirikkum.
+45
+00:03:46,000 --> 00:03:51,500
+Ivide ekadesha samayam ethra varum ennullathum ee oru bhagathayittu thanne kanan sadhikkum.
+46
+00:03:51,500 --> 00:03:56,000
+6 minute 30 second aanu ithinu samayam chodhichittullathu. Athrayum neram nammal wait cheyyanam.
+47
+00:03:56,000 --> 00:04:03,000
+Wait cheythu kazhinjal, pinneedu ningalkku athine generate aayi nalkiyathinu shesham ithe reethiyil kanukayum...
+48
+00:04:03,000 --> 00:04:07,000
+Athine ningalude deviceilekku download cheyyanulla option labhikkunnathumayirikkum.
+49
+00:04:07,000 --> 00:04:13,000
+Kandille, aamayum muyalumulla perfect aayittulla oru ottamalsaram ivide nadakkunnathinte oru video demo aanu...
+50
+00:04:13,000 --> 00:04:17,500
+Ivide ningal kandukondirikkunnathu. Ithe reethiyil ningalkku avashyamaya video ithil ninnu generate cheyyikkavunnathanu.
+51
+00:04:17,500 --> 00:04:22,500
+Appol ithaanu nammude website. Theerchayayum ellavarkkum useful aakunna oru video ayirikkum.
+52
+00:04:22,500 --> 00:04:25,500
+Appol ellavarilekkum video share cheythu kodukkuka.
+53
+00:04:25,500 --> 00:04:31,000
+Njan inganeyulla niravadhi videokal upload cheyyunnathayirikkum. Shareum commentum likeum okke cheythu nalla reethiyil support cheyyuka.
+54
+00:04:31,000 --> 00:04:37,500
+Appol enthayalum puthiyoru topicumayittu namukku veendum kandumuttam. Athuvarekkum channel subscribe cheythu kathirikkuka. Nanni, Namaskaram.

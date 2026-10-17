@@ -1,0 +1,7413 @@
+{
+ "cues": [
+  {
+   "idx": 1,
+   "srt_start": 0.0,
+   "srt_end": 4.5,
+   "text": "Ningalkku AI upayogichu free aayi niravadhi videokal generate cheyyano...",
+   "words": [
+    {
+     "w": "Ningalkku"
+    },
+    {
+     "w": "AI"
+    },
+    {
+     "w": "upayogichu"
+    },
+    {
+     "w": "free"
+    },
+    {
+     "w": "aayi"
+    },
+    {
+     "w": "niravadhi"
+    },
+    {
+     "w": "videokal"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyano..."
+    }
+   ]
+  },
+  {
+   "idx": 2,
+   "srt_start": 4.5,
+   "srt_end": 8.0,
+   "text": "Innu atharathilulla oru website aanu njan parichayappeduthunnathu.",
+   "words": [
+    {
+     "w": "Innu"
+    },
+    {
+     "w": "atharathilulla"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "website"
+    },
+    {
+     "w": "aanu"
+    },
+    {
+     "w": "njan"
+    },
+    {
+     "w": "parichayappeduthunnathu."
+    }
+   ]
+  },
+  {
+   "idx": 3,
+   "srt_start": 8.0,
+   "srt_end": 12.0,
+   "text": "Appol inganeyulla useful aayittulla videokal labhikkan vendi ippol thanne channel subscribe cheytho.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "inganeyulla"
+    },
+    {
+     "w": "useful"
+    },
+    {
+     "w": "aayittulla"
+    },
+    {
+     "w": "videokal"
+    },
+    {
+     "w": "labhikkan"
+    },
+    {
+     "w": "vendi"
+    },
+    {
+     "w": "ippol"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "channel"
+    },
+    {
+     "w": "subscribe"
+    },
+    {
+     "w": "cheytho."
+    }
+   ]
+  },
+  {
+   "idx": 4,
+   "srt_start": 12.0,
+   "srt_end": 16.0,
+   "text": "Appol njan itharathilulla videokal niravadhi upload cheyyarundu.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "njan"
+    },
+    {
+     "w": "itharathilulla"
+    },
+    {
+     "w": "videokal"
+    },
+    {
+     "w": "niravadhi"
+    },
+    {
+     "w": "upload"
+    },
+    {
+     "w": "cheyyarundu."
+    }
+   ]
+  },
+  {
+   "idx": 5,
+   "srt_start": 16.0,
+   "srt_end": 20.0,
+   "text": "Appol anganeyullava labhikkanayi ippol thanne subscribe cheythu vecholoo.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "anganeyullava"
+    },
+    {
+     "w": "labhikkanayi"
+    },
+    {
+     "w": "ippol"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "subscribe"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "vecholoo."
+    }
+   ]
+  },
+  {
+   "idx": 6,
+   "srt_start": 20.0,
+   "srt_end": 27.0,
+   "text": "Appol namukku sadharanayayi labhikkunna ella platformil ninnum vyathyasthamaayittaanu namukku ithil video generate cheyyan sadhikkunnathu.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "sadharanayayi"
+    },
+    {
+     "w": "labhikkunna"
+    },
+    {
+     "w": "ella"
+    },
+    {
+     "w": "platformil"
+    },
+    {
+     "w": "ninnum"
+    },
+    {
+     "w": "vyathyasthamaayittaanu"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "ithil"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "sadhikkunnathu."
+    }
+   ]
+  },
+  {
+   "idx": 7,
+   "srt_start": 27.0,
+   "srt_end": 32.0,
+   "text": "Adhava athil cheyyunna athe reethiyil thanne pakshe niravadhi videokal.",
+   "words": [
+    {
+     "w": "Adhava"
+    },
+    {
+     "w": "athil"
+    },
+    {
+     "w": "cheyyunna"
+    },
+    {
+     "w": "athe"
+    },
+    {
+     "w": "reethiyil"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "pakshe"
+    },
+    {
+     "w": "niravadhi"
+    },
+    {
+     "w": "videokal."
+    }
+   ]
+  },
+  {
+   "idx": 8,
+   "srt_start": 32.0,
+   "srt_end": 36.0,
+   "text": "Oru thavana nammal login cheythu kazhinjal 100 videokalolam namukku cheyyan sadhikkum.",
+   "words": [
+    {
+     "w": "Oru"
+    },
+    {
+     "w": "thavana"
+    },
+    {
+     "w": "nammal"
+    },
+    {
+     "w": "login"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kazhinjal"
+    },
+    {
+     "w": "100"
+    },
+    {
+     "w": "videokalolam"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "sadhikkum."
+    }
+   ]
+  },
+  {
+   "idx": 9,
+   "srt_start": 36.0,
+   "srt_end": 42.5,
+   "text": "Angane niravadhi accountukal login cheythukondu ningalkku niravadhi videokal ee oru platformiloode generate cheyyam, high qualityil.",
+   "words": [
+    {
+     "w": "Angane"
+    },
+    {
+     "w": "niravadhi"
+    },
+    {
+     "w": "accountukal"
+    },
+    {
+     "w": "login"
+    },
+    {
+     "w": "cheythukondu"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "niravadhi"
+    },
+    {
+     "w": "videokal"
+    },
+    {
+     "w": "ee"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "platformiloode"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyam,"
+    },
+    {
+     "w": "high"
+    },
+    {
+     "w": "qualityil."
+    }
+   ]
+  },
+  {
+   "idx": 10,
+   "srt_start": 42.5,
+   "srt_end": 49.0,
+   "text": "Sadharana ningal google flow-ilo athallengil mattethangilum websitilokke enganeyano generate cheyyunnathu...",
+   "words": [
+    {
+     "w": "Sadharana"
+    },
+    {
+     "w": "ningal"
+    },
+    {
+     "w": "google"
+    },
+    {
+     "w": "flow-ilo"
+    },
+    {
+     "w": "athallengil"
+    },
+    {
+     "w": "mattethangilum"
+    },
+    {
+     "w": "websitilokke"
+    },
+    {
+     "w": "enganeyano"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyunnathu..."
+    }
+   ]
+  },
+  {
+   "idx": 11,
+   "srt_start": 49.0,
+   "srt_end": 54.5,
+   "text": "Athe qualityil allengil athinekkal mikachathu ennu thanne parayam, atharathil namukku generate cheyyan sadhikkum.",
+   "words": [
+    {
+     "w": "Athe"
+    },
+    {
+     "w": "qualityil"
+    },
+    {
+     "w": "allengil"
+    },
+    {
+     "w": "athinekkal"
+    },
+    {
+     "w": "mikachathu"
+    },
+    {
+     "w": "ennu"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "parayam,"
+    },
+    {
+     "w": "atharathil"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "sadhikkum."
+    }
+   ]
+  },
+  {
+   "idx": 12,
+   "srt_start": 54.5,
+   "srt_end": 57.0,
+   "text": "Anganeyulla oru platform aanu.",
+   "words": [
+    {
+     "w": "Anganeyulla"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "platform"
+    },
+    {
+     "w": "aanu."
+    }
+   ]
+  },
+  {
+   "idx": 13,
+   "srt_start": 57.0,
+   "srt_end": 60.0,
+   "text": "Appol ithu enganeyaanu upayogikkunnathu ennu nokkam.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "ithu"
+    },
+    {
+     "w": "enganeyaanu"
+    },
+    {
+     "w": "upayogikkunnathu"
+    },
+    {
+     "w": "ennu"
+    },
+    {
+     "w": "nokkam."
+    }
+   ]
+  },
+  {
+   "idx": 14,
+   "srt_start": 60.0,
+   "srt_end": 64.5,
+   "text": "Welcome to Mega Byte. Puthiya oru videoyilekku ellavarkkum swagatham.",
+   "words": [
+    {
+     "w": "Welcome"
+    },
+    {
+     "w": "to"
+    },
+    {
+     "w": "Mega"
+    },
+    {
+     "w": "Byte."
+    },
+    {
+     "w": "Puthiya"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "videoyilekku"
+    },
+    {
+     "w": "ellavarkkum"
+    },
+    {
+     "w": "swagatham."
+    }
+   ]
+  },
+  {
+   "idx": 15,
+   "srt_start": 64.5,
+   "srt_end": 70.0,
+   "text": "Appol ithinavashyamaya link njan descriptionil nalkiyittundu. Aa link vazhi ningalkku ithine access cheyyam.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "ithinavashyamaya"
+    },
+    {
+     "w": "link"
+    },
+    {
+     "w": "njan"
+    },
+    {
+     "w": "descriptionil"
+    },
+    {
+     "w": "nalkiyittundu."
+    },
+    {
+     "w": "Aa"
+    },
+    {
+     "w": "link"
+    },
+    {
+     "w": "vazhi"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "ithine"
+    },
+    {
+     "w": "access"
+    },
+    {
+     "w": "cheyyam."
+    }
+   ]
+  },
+  {
+   "idx": 16,
+   "srt_start": 70.0,
+   "srt_end": 74.0,
+   "text": "Aa link open cheythu kazhinjal ningalkku ithe reethiyilayirikkum kanan sadhikkunnathu.",
+   "words": [
+    {
+     "w": "Aa"
+    },
+    {
+     "w": "link"
+    },
+    {
+     "w": "open"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kazhinjal"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "ithe"
+    },
+    {
+     "w": "reethiyilayirikkum"
+    },
+    {
+     "w": "kanan"
+    },
+    {
+     "w": "sadhikkunnathu."
+    }
+   ]
+  },
+  {
+   "idx": 17,
+   "srt_start": 74.0,
+   "srt_end": 77.5,
+   "text": "'There Is An AI For That' ennaanu sitinte peru.",
+   "words": [
+    {
+     "w": "'There"
+    },
+    {
+     "w": "Is"
+    },
+    {
+     "w": "An"
+    },
+    {
+     "w": "AI"
+    },
+    {
+     "w": "For"
+    },
+    {
+     "w": "That'"
+    },
+    {
+     "w": "ennaanu"
+    },
+    {
+     "w": "sitinte"
+    },
+    {
+     "w": "peru."
+    }
+   ]
+  },
+  {
+   "idx": 18,
+   "srt_start": 77.5,
+   "srt_end": 83.5,
+   "text": "Linkil click cheythu kazhinjal exact ee sitilekku thanne ethum. Ivide ninnu sign up ennulla bhagam select cheythukondu...",
+   "words": [
+    {
+     "w": "Linkil"
+    },
+    {
+     "w": "click"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kazhinjal"
+    },
+    {
+     "w": "exact"
+    },
+    {
+     "w": "ee"
+    },
+    {
+     "w": "sitilekku"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "ethum."
+    },
+    {
+     "w": "Ivide"
+    },
+    {
+     "w": "ninnu"
+    },
+    {
+     "w": "sign"
+    },
+    {
+     "w": "up"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagam"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheythukondu..."
+    }
+   ]
+  },
+  {
+   "idx": 19,
+   "srt_start": 83.5,
+   "srt_end": 89.0,
+   "text": "Ithilekku account login cheyyendathundu. Sign up cheyyendathundu, engil mathramanu namukkithu pravarthikkukayulloo.",
+   "words": [
+    {
+     "w": "Ithilekku"
+    },
+    {
+     "w": "account"
+    },
+    {
+     "w": "login"
+    },
+    {
+     "w": "cheyyendathundu."
+    },
+    {
+     "w": "Sign"
+    },
+    {
+     "w": "up"
+    },
+    {
+     "w": "cheyyendathundu,"
+    },
+    {
+     "w": "engil"
+    },
+    {
+     "w": "mathramanu"
+    },
+    {
+     "w": "namukkithu"
+    },
+    {
+     "w": "pravarthikkukayulloo."
+    }
+   ]
+  },
+  {
+   "idx": 20,
+   "srt_start": 89.0,
+   "srt_end": 94.5,
+   "text": "Appol sign up ennulla bhagam nalki ningalkku ningalude google account vazhi ithilekku login cheyyan sadhikkum.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "sign"
+    },
+    {
+     "w": "up"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagam"
+    },
+    {
+     "w": "nalki"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "ningalude"
+    },
+    {
+     "w": "google"
+    },
+    {
+     "w": "account"
+    },
+    {
+     "w": "vazhi"
+    },
+    {
+     "w": "ithilekku"
+    },
+    {
+     "w": "login"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "sadhikkum."
+    }
+   ]
+  },
+  {
+   "idx": 21,
+   "srt_start": 94.5,
+   "srt_end": 98.5,
+   "text": "Avashyamaya google account select cheythukondu ithilekku login cheyyuka.",
+   "words": [
+    {
+     "w": "Avashyamaya"
+    },
+    {
+     "w": "google"
+    },
+    {
+     "w": "account"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheythukondu"
+    },
+    {
+     "w": "ithilekku"
+    },
+    {
+     "w": "login"
+    },
+    {
+     "w": "cheyyuka."
+    }
+   ]
+  },
+  {
+   "idx": 22,
+   "srt_start": 98.5,
+   "srt_end": 103.5,
+   "text": "Login cheythu kazhinjal ningalkku ithinte interface ithe reethiyilayirikkum kanan sadhikkunnathu.",
+   "words": [
+    {
+     "w": "Login"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kazhinjal"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "ithinte"
+    },
+    {
+     "w": "interface"
+    },
+    {
+     "w": "ithe"
+    },
+    {
+     "w": "reethiyilayirikkum"
+    },
+    {
+     "w": "kanan"
+    },
+    {
+     "w": "sadhikkunnathu."
+    }
+   ]
+  },
+  {
+   "idx": 23,
+   "srt_start": 103.5,
+   "srt_end": 109.0,
+   "text": "Ivide ninnu randu optionukal namukku kanan sadhikkum, Generate Image ennum mattonnu Generate Videos ennum.",
+   "words": [
+    {
+     "w": "Ivide"
+    },
+    {
+     "w": "ninnu"
+    },
+    {
+     "w": "randu"
+    },
+    {
+     "w": "optionukal"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "kanan"
+    },
+    {
+     "w": "sadhikkum,"
+    },
+    {
+     "w": "Generate"
+    },
+    {
+     "w": "Image"
+    },
+    {
+     "w": "ennum"
+    },
+    {
+     "w": "mattonnu"
+    },
+    {
+     "w": "Generate"
+    },
+    {
+     "w": "Videos"
+    },
+    {
+     "w": "ennum."
+    }
+   ]
+  },
+  {
+   "idx": 24,
+   "srt_start": 109.0,
+   "srt_end": 115.0,
+   "text": "Appol namukku video generate cheyyanamengil, avashyamaya topic enthaano athinte promptum...",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyanamengil,"
+    },
+    {
+     "w": "avashyamaya"
+    },
+    {
+     "w": "topic"
+    },
+    {
+     "w": "enthaano"
+    },
+    {
+     "w": "athinte"
+    },
+    {
+     "w": "promptum..."
+    }
+   ]
+  },
+  {
+   "idx": 25,
+   "srt_start": 115.0,
+   "srt_end": 120.0,
+   "text": "Athupole enthengilum imageukal ningalkku generate cheyyanam ennundenkil athum ningalkku generate cheythu vekkam.",
+   "words": [
+    {
+     "w": "Athupole"
+    },
+    {
+     "w": "enthengilum"
+    },
+    {
+     "w": "imageukal"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyanam"
+    },
+    {
+     "w": "ennundenkil"
+    },
+    {
+     "w": "athum"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "vekkam."
+    }
+   ]
+  },
+  {
+   "idx": 26,
+   "srt_start": 120.0,
+   "srt_end": 128.0,
+   "text": "Onnukil ee oru software vazhi athallengil Gemini-yo ChatGPT-yo poleyullavayude sahayam thedikkondu promptukalum imageukalum generate cheythu vekkuka.",
+   "words": [
+    {
+     "w": "Onnukil"
+    },
+    {
+     "w": "ee"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "software"
+    },
+    {
+     "w": "vazhi"
+    },
+    {
+     "w": "athallengil"
+    },
+    {
+     "w": "Gemini-yo"
+    },
+    {
+     "w": "ChatGPT-yo"
+    },
+    {
+     "w": "poleyullavayude"
+    },
+    {
+     "w": "sahayam"
+    },
+    {
+     "w": "thedikkondu"
+    },
+    {
+     "w": "promptukalum"
+    },
+    {
+     "w": "imageukalum"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "vekkuka."
+    }
+   ]
+  },
+  {
+   "idx": 27,
+   "srt_start": 128.0,
+   "srt_end": 134.0,
+   "text": "Njan ippol oru video aanu ivide generate cheyyan uddeshikkunnathu. Athinuvendi generate video ennulla bhagam select cheythal...",
+   "words": [
+    {
+     "w": "Njan"
+    },
+    {
+     "w": "ippol"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "aanu"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "uddeshikkunnathu."
+    },
+    {
+     "w": "Athinuvendi"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagam"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheythal..."
+    }
+   ]
+  },
+  {
+   "idx": 28,
+   "srt_start": 134.0,
+   "srt_end": 137.5,
+   "text": "Ningalkku ithe reethiyilayirikkum kanan sadhikkunnathu.",
+   "words": [
+    {
+     "w": "Ningalkku"
+    },
+    {
+     "w": "ithe"
+    },
+    {
+     "w": "reethiyilayirikkum"
+    },
+    {
+     "w": "kanan"
+    },
+    {
+     "w": "sadhikkunnathu."
+    }
+   ]
+  },
+  {
+   "idx": 29,
+   "srt_start": 137.5,
+   "srt_end": 144.0,
+   "text": "Ivide ningalkku kanam, ithilekku free aayittu namukku daily 100 videokal vare labhikkum ennullathu, adhava 100 videos per day ennu kanikkum.",
+   "words": [
+    {
+     "w": "Ivide"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "kanam,"
+    },
+    {
+     "w": "ithilekku"
+    },
+    {
+     "w": "free"
+    },
+    {
+     "w": "aayittu"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "daily"
+    },
+    {
+     "w": "100"
+    },
+    {
+     "w": "videokal"
+    },
+    {
+     "w": "vare"
+    },
+    {
+     "w": "labhikkum"
+    },
+    {
+     "w": "ennullathu,"
+    },
+    {
+     "w": "adhava"
+    },
+    {
+     "w": "100"
+    },
+    {
+     "w": "videos"
+    },
+    {
+     "w": "per"
+    },
+    {
+     "w": "day"
+    },
+    {
+     "w": "ennu"
+    },
+    {
+     "w": "kanikkum."
+    }
+   ]
+  },
+  {
+   "idx": 30,
+   "srt_start": 144.0,
+   "srt_end": 150.0,
+   "text": "Sign up nirbandhamaanu, athupole free aayittu namukku ithine commercial usinum upayogikkan sadhikkum ennu ivide thanne kanam.",
+   "words": [
+    {
+     "w": "Sign"
+    },
+    {
+     "w": "up"
+    },
+    {
+     "w": "nirbandhamaanu,"
+    },
+    {
+     "w": "athupole"
+    },
+    {
+     "w": "free"
+    },
+    {
+     "w": "aayittu"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "ithine"
+    },
+    {
+     "w": "commercial"
+    },
+    {
+     "w": "usinum"
+    },
+    {
+     "w": "upayogikkan"
+    },
+    {
+     "w": "sadhikkum"
+    },
+    {
+     "w": "ennu"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "kanam."
+    }
+   ]
+  },
+  {
+   "idx": 31,
+   "srt_start": 150.0,
+   "srt_end": 156.5,
+   "text": "Ini ningal cheyyendathu 'Your Prompt' ennulla bhagathu ningal video generate cheyyan avashyamaya prompt paste cheythu kodukkuka.",
+   "words": [
+    {
+     "w": "Ini"
+    },
+    {
+     "w": "ningal"
+    },
+    {
+     "w": "cheyyendathu"
+    },
+    {
+     "w": "'Your"
+    },
+    {
+     "w": "Prompt'"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagathu"
+    },
+    {
+     "w": "ningal"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "avashyamaya"
+    },
+    {
+     "w": "prompt"
+    },
+    {
+     "w": "paste"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kodukkuka."
+    }
+   ]
+  },
+  {
+   "idx": 32,
+   "srt_start": 156.5,
+   "srt_end": 163.0,
+   "text": "Njan ChatGPT-ye kondu cheyyicha oru prompt aanu, oru aamayum muyalum thammilulla ottamalsaramaanu njan ivide generate cheyyan uddeshikkunnathu.",
+   "words": [
+    {
+     "w": "Njan"
+    },
+    {
+     "w": "ChatGPT-ye"
+    },
+    {
+     "w": "kondu"
+    },
+    {
+     "w": "cheyyicha"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "prompt"
+    },
+    {
+     "w": "aanu,"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "aamayum"
+    },
+    {
+     "w": "muyalum"
+    },
+    {
+     "w": "thammilulla"
+    },
+    {
+     "w": "ottamalsaramaanu"
+    },
+    {
+     "w": "njan"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "uddeshikkunnathu."
+    }
+   ]
+  },
+  {
+   "idx": 33,
+   "srt_start": 163.0,
+   "srt_end": 169.0,
+   "text": "Appol athinuvendiya promptum imageum njan ChatGPT-ye kondu generate cheyyichu, prompt ivide paste cheythu koduthu.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "athinuvendiya"
+    },
+    {
+     "w": "promptum"
+    },
+    {
+     "w": "imageum"
+    },
+    {
+     "w": "njan"
+    },
+    {
+     "w": "ChatGPT-ye"
+    },
+    {
+     "w": "kondu"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyichu,"
+    },
+    {
+     "w": "prompt"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "paste"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "koduthu."
+    }
+   ]
+  },
+  {
+   "idx": 34,
+   "srt_start": 169.0,
+   "srt_end": 174.5,
+   "text": "Ini ithilekku image add cheyyanam. Athinu vendi randamathe 'Images' ennulla bhagathu ninnu nammude gallery select cheythu...",
+   "words": [
+    {
+     "w": "Ini"
+    },
+    {
+     "w": "ithilekku"
+    },
+    {
+     "w": "image"
+    },
+    {
+     "w": "add"
+    },
+    {
+     "w": "cheyyanam."
+    },
+    {
+     "w": "Athinu"
+    },
+    {
+     "w": "vendi"
+    },
+    {
+     "w": "randamathe"
+    },
+    {
+     "w": "'Images'"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagathu"
+    },
+    {
+     "w": "ninnu"
+    },
+    {
+     "w": "nammude"
+    },
+    {
+     "w": "gallery"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheythu..."
+    }
+   ]
+  },
+  {
+   "idx": 35,
+   "srt_start": 174.5,
+   "srt_end": 180.0,
+   "text": "Avashyamaya photo ithilekku add cheythu kodukkam. Ore samayam namukku moonnu photokal add cheyyan sadhikkum.",
+   "words": [
+    {
+     "w": "Avashyamaya"
+    },
+    {
+     "w": "photo"
+    },
+    {
+     "w": "ithilekku"
+    },
+    {
+     "w": "add"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kodukkam."
+    },
+    {
+     "w": "Ore"
+    },
+    {
+     "w": "samayam"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "moonnu"
+    },
+    {
+     "w": "photokal"
+    },
+    {
+     "w": "add"
+    },
+    {
+     "w": "cheyyan"
+    },
+    {
+     "w": "sadhikkum."
+    }
+   ]
+  },
+  {
+   "idx": 36,
+   "srt_start": 180.0,
+   "srt_end": 184.5,
+   "text": "Athinushesham ivide thazheyayi namukku 'Fast', 'Quality' enningane randu optionukal kanam.",
+   "words": [
+    {
+     "w": "Athinushesham"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "thazheyayi"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "'Fast',"
+    },
+    {
+     "w": "'Quality'"
+    },
+    {
+     "w": "enningane"
+    },
+    {
+     "w": "randu"
+    },
+    {
+     "w": "optionukal"
+    },
+    {
+     "w": "kanam."
+    }
+   ]
+  },
+  {
+   "idx": 37,
+   "srt_start": 184.5,
+   "srt_end": 190.0,
+   "text": "Ningalkku urgent illa ennundenkil Quality select cheyyam, pettennavanam ennundenkil Fast ennulla bhagavum select cheyyam.",
+   "words": [
+    {
+     "w": "Ningalkku"
+    },
+    {
+     "w": "urgent"
+    },
+    {
+     "w": "illa"
+    },
+    {
+     "w": "ennundenkil"
+    },
+    {
+     "w": "Quality"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheyyam,"
+    },
+    {
+     "w": "pettennavanam"
+    },
+    {
+     "w": "ennundenkil"
+    },
+    {
+     "w": "Fast"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagavum"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheyyam."
+    }
+   ]
+  },
+  {
+   "idx": 38,
+   "srt_start": 190.0,
+   "srt_end": 194.0,
+   "text": "Ethra samayam vendi varum ennullathum ivide nalkiyittullathu ningalkku kanam.",
+   "words": [
+    {
+     "w": "Ethra"
+    },
+    {
+     "w": "samayam"
+    },
+    {
+     "w": "vendi"
+    },
+    {
+     "w": "varum"
+    },
+    {
+     "w": "ennullathum"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "nalkiyittullathu"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "kanam."
+    }
+   ]
+  },
+  {
+   "idx": 39,
+   "srt_start": 194.0,
+   "srt_end": 199.0,
+   "text": "Exact ithoru perfect aayittulla timing alla, oru ekadesha kanakkaanu. Chilappol kooduthalavam, chilappol kuravumaavam.",
+   "words": [
+    {
+     "w": "Exact"
+    },
+    {
+     "w": "ithoru"
+    },
+    {
+     "w": "perfect"
+    },
+    {
+     "w": "aayittulla"
+    },
+    {
+     "w": "timing"
+    },
+    {
+     "w": "alla,"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "ekadesha"
+    },
+    {
+     "w": "kanakkaanu."
+    },
+    {
+     "w": "Chilappol"
+    },
+    {
+     "w": "kooduthalavam,"
+    },
+    {
+     "w": "chilappol"
+    },
+    {
+     "w": "kuravumaavam."
+    }
+   ]
+  },
+  {
+   "idx": 40,
+   "srt_start": 199.0,
+   "srt_end": 205.0,
+   "text": "Enthayalum ningalkku avashyamulla option select cheyyam. Ithil ninnu ningalkku landscape venamengil angane...",
+   "words": [
+    {
+     "w": "Enthayalum"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "avashyamulla"
+    },
+    {
+     "w": "option"
+    },
+    {
+     "w": "select"
+    },
+    {
+     "w": "cheyyam."
+    },
+    {
+     "w": "Ithil"
+    },
+    {
+     "w": "ninnu"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "landscape"
+    },
+    {
+     "w": "venamengil"
+    },
+    {
+     "w": "angane..."
+    }
+   ]
+  },
+  {
+   "idx": 41,
+   "srt_start": 205.0,
+   "srt_end": 208.5,
+   "text": "Athallengil portrait venamennundenkil angane cheyyanulla option undu.",
+   "words": [
+    {
+     "w": "Athallengil"
+    },
+    {
+     "w": "portrait"
+    },
+    {
+     "w": "venamennundenkil"
+    },
+    {
+     "w": "angane"
+    },
+    {
+     "w": "cheyyanulla"
+    },
+    {
+     "w": "option"
+    },
+    {
+     "w": "undu."
+    }
+   ]
+  },
+  {
+   "idx": 42,
+   "srt_start": 208.5,
+   "srt_end": 216.0,
+   "text": "Ini ningal nalkiya prompt kurachukoodi powerful aakkanam ennundenkil, 'Enhance My Prompt' ennulla ee button enable cheythu kazhinjal...",
+   "words": [
+    {
+     "w": "Ini"
+    },
+    {
+     "w": "ningal"
+    },
+    {
+     "w": "nalkiya"
+    },
+    {
+     "w": "prompt"
+    },
+    {
+     "w": "kurachukoodi"
+    },
+    {
+     "w": "powerful"
+    },
+    {
+     "w": "aakkanam"
+    },
+    {
+     "w": "ennundenkil,"
+    },
+    {
+     "w": "'Enhance"
+    },
+    {
+     "w": "My"
+    },
+    {
+     "w": "Prompt'"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "ee"
+    },
+    {
+     "w": "button"
+    },
+    {
+     "w": "enable"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kazhinjal..."
+    }
+   ]
+  },
+  {
+   "idx": 43,
+   "srt_start": 216.0,
+   "srt_end": 221.5,
+   "text": "Nammal nalkiya prompt enhance cheythukondu avashyamaya reethiyil veendum athine set cheythu nalkunnathayirikkum.",
+   "words": [
+    {
+     "w": "Nammal"
+    },
+    {
+     "w": "nalkiya"
+    },
+    {
+     "w": "prompt"
+    },
+    {
+     "w": "enhance"
+    },
+    {
+     "w": "cheythukondu"
+    },
+    {
+     "w": "avashyamaya"
+    },
+    {
+     "w": "reethiyil"
+    },
+    {
+     "w": "veendum"
+    },
+    {
+     "w": "athine"
+    },
+    {
+     "w": "set"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "nalkunnathayirikkum."
+    }
+   ]
+  },
+  {
+   "idx": 44,
+   "srt_start": 221.5,
+   "srt_end": 226.0,
+   "text": "Athinushesham Generate ennulla bhagam nalki kazhinjal ningalude video generate aavan thudangunnathayirikkum.",
+   "words": [
+    {
+     "w": "Athinushesham"
+    },
+    {
+     "w": "Generate"
+    },
+    {
+     "w": "ennulla"
+    },
+    {
+     "w": "bhagam"
+    },
+    {
+     "w": "nalki"
+    },
+    {
+     "w": "kazhinjal"
+    },
+    {
+     "w": "ningalude"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "aavan"
+    },
+    {
+     "w": "thudangunnathayirikkum."
+    }
+   ]
+  },
+  {
+   "idx": 45,
+   "srt_start": 226.0,
+   "srt_end": 231.5,
+   "text": "Ivide ekadesha samayam ethra varum ennullathum ee oru bhagathayittu thanne kanan sadhikkum.",
+   "words": [
+    {
+     "w": "Ivide"
+    },
+    {
+     "w": "ekadesha"
+    },
+    {
+     "w": "samayam"
+    },
+    {
+     "w": "ethra"
+    },
+    {
+     "w": "varum"
+    },
+    {
+     "w": "ennullathum"
+    },
+    {
+     "w": "ee"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "bhagathayittu"
+    },
+    {
+     "w": "thanne"
+    },
+    {
+     "w": "kanan"
+    },
+    {
+     "w": "sadhikkum."
+    }
+   ]
+  },
+  {
+   "idx": 46,
+   "srt_start": 231.5,
+   "srt_end": 236.0,
+   "text": "6 minute 30 second aanu ithinu samayam chodhichittullathu. Athrayum neram nammal wait cheyyanam.",
+   "words": [
+    {
+     "w": "6"
+    },
+    {
+     "w": "minute"
+    },
+    {
+     "w": "30"
+    },
+    {
+     "w": "second"
+    },
+    {
+     "w": "aanu"
+    },
+    {
+     "w": "ithinu"
+    },
+    {
+     "w": "samayam"
+    },
+    {
+     "w": "chodhichittullathu."
+    },
+    {
+     "w": "Athrayum"
+    },
+    {
+     "w": "neram"
+    },
+    {
+     "w": "nammal"
+    },
+    {
+     "w": "wait"
+    },
+    {
+     "w": "cheyyanam."
+    }
+   ]
+  },
+  {
+   "idx": 47,
+   "srt_start": 236.0,
+   "srt_end": 243.0,
+   "text": "Wait cheythu kazhinjal, pinneedu ningalkku athine generate aayi nalkiyathinu shesham ithe reethiyil kanukayum...",
+   "words": [
+    {
+     "w": "Wait"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kazhinjal,"
+    },
+    {
+     "w": "pinneedu"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "athine"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "aayi"
+    },
+    {
+     "w": "nalkiyathinu"
+    },
+    {
+     "w": "shesham"
+    },
+    {
+     "w": "ithe"
+    },
+    {
+     "w": "reethiyil"
+    },
+    {
+     "w": "kanukayum..."
+    }
+   ]
+  },
+  {
+   "idx": 48,
+   "srt_start": 243.0,
+   "srt_end": 247.0,
+   "text": "Athine ningalude deviceilekku download cheyyanulla option labhikkunnathumayirikkum.",
+   "words": [
+    {
+     "w": "Athine"
+    },
+    {
+     "w": "ningalude"
+    },
+    {
+     "w": "deviceilekku"
+    },
+    {
+     "w": "download"
+    },
+    {
+     "w": "cheyyanulla"
+    },
+    {
+     "w": "option"
+    },
+    {
+     "w": "labhikkunnathumayirikkum."
+    }
+   ]
+  },
+  {
+   "idx": 49,
+   "srt_start": 247.0,
+   "srt_end": 253.0,
+   "text": "Kandille, aamayum muyalumulla perfect aayittulla oru ottamalsaram ivide nadakkunnathinte oru video demo aanu...",
+   "words": [
+    {
+     "w": "Kandille,"
+    },
+    {
+     "w": "aamayum"
+    },
+    {
+     "w": "muyalumulla"
+    },
+    {
+     "w": "perfect"
+    },
+    {
+     "w": "aayittulla"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "ottamalsaram"
+    },
+    {
+     "w": "ivide"
+    },
+    {
+     "w": "nadakkunnathinte"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "demo"
+    },
+    {
+     "w": "aanu..."
+    }
+   ]
+  },
+  {
+   "idx": 50,
+   "srt_start": 253.0,
+   "srt_end": 257.5,
+   "text": "Ivide ningal kandukondirikkunnathu. Ithe reethiyil ningalkku avashyamaya video ithil ninnu generate cheyyikkavunnathanu.",
+   "words": [
+    {
+     "w": "Ivide"
+    },
+    {
+     "w": "ningal"
+    },
+    {
+     "w": "kandukondirikkunnathu."
+    },
+    {
+     "w": "Ithe"
+    },
+    {
+     "w": "reethiyil"
+    },
+    {
+     "w": "ningalkku"
+    },
+    {
+     "w": "avashyamaya"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "ithil"
+    },
+    {
+     "w": "ninnu"
+    },
+    {
+     "w": "generate"
+    },
+    {
+     "w": "cheyyikkavunnathanu."
+    }
+   ]
+  },
+  {
+   "idx": 51,
+   "srt_start": 257.5,
+   "srt_end": 262.5,
+   "text": "Appol ithaanu nammude website. Theerchayayum ellavarkkum useful aakunna oru video ayirikkum.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "ithaanu"
+    },
+    {
+     "w": "nammude"
+    },
+    {
+     "w": "website."
+    },
+    {
+     "w": "Theerchayayum"
+    },
+    {
+     "w": "ellavarkkum"
+    },
+    {
+     "w": "useful"
+    },
+    {
+     "w": "aakunna"
+    },
+    {
+     "w": "oru"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "ayirikkum."
+    }
+   ]
+  },
+  {
+   "idx": 52,
+   "srt_start": 262.5,
+   "srt_end": 265.5,
+   "text": "Appol ellavarilekkum video share cheythu kodukkuka.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "ellavarilekkum"
+    },
+    {
+     "w": "video"
+    },
+    {
+     "w": "share"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kodukkuka."
+    }
+   ]
+  },
+  {
+   "idx": 53,
+   "srt_start": 265.5,
+   "srt_end": 271.0,
+   "text": "Njan inganeyulla niravadhi videokal upload cheyyunnathayirikkum. Shareum commentum likeum okke cheythu nalla reethiyil support cheyyuka.",
+   "words": [
+    {
+     "w": "Njan"
+    },
+    {
+     "w": "inganeyulla"
+    },
+    {
+     "w": "niravadhi"
+    },
+    {
+     "w": "videokal"
+    },
+    {
+     "w": "upload"
+    },
+    {
+     "w": "cheyyunnathayirikkum."
+    },
+    {
+     "w": "Shareum"
+    },
+    {
+     "w": "commentum"
+    },
+    {
+     "w": "likeum"
+    },
+    {
+     "w": "okke"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "nalla"
+    },
+    {
+     "w": "reethiyil"
+    },
+    {
+     "w": "support"
+    },
+    {
+     "w": "cheyyuka."
+    }
+   ]
+  },
+  {
+   "idx": 54,
+   "srt_start": 271.0,
+   "srt_end": 277.5,
+   "text": "Appol enthayalum puthiyoru topicumayittu namukku veendum kandumuttam. Athuvarekkum channel subscribe cheythu kathirikkuka. Nanni, Namaskaram.",
+   "words": [
+    {
+     "w": "Appol"
+    },
+    {
+     "w": "enthayalum"
+    },
+    {
+     "w": "puthiyoru"
+    },
+    {
+     "w": "topicumayittu"
+    },
+    {
+     "w": "namukku"
+    },
+    {
+     "w": "veendum"
+    },
+    {
+     "w": "kandumuttam."
+    },
+    {
+     "w": "Athuvarekkum"
+    },
+    {
+     "w": "channel"
+    },
+    {
+     "w": "subscribe"
+    },
+    {
+     "w": "cheythu"
+    },
+    {
+     "w": "kathirikkuka."
+    },
+    {
+     "w": "Nanni,"
+    },
+    {
+     "w": "Namaskaram."
+    }
+   ]
+  }
+ ],
+ "words": [
+  {
+   "cue": 1,
+   "wi": 0,
+   "text": "Ningalkku",
+   "start": 0.02,
+   "end": 0.32,
+   "conf": 0.6969011332839727
+  },
+  {
+   "cue": 1,
+   "wi": 1,
+   "text": "AI",
+   "start": 0.32,
+   "end": 0.38,
+   "conf": 0.13440878316760063
+  },
+  {
+   "cue": 1,
+   "wi": 2,
+   "text": "upayogichu",
+   "start": 0.54,
+   "end": 0.96,
+   "conf": 0.5125626483323685
+  },
+  {
+   "cue": 1,
+   "wi": 3,
+   "text": "free",
+   "start": 1.24,
+   "end": 1.44,
+   "conf": 0.23814435211897944
+  },
+  {
+   "cue": 1,
+   "wi": 4,
+   "text": "aayi",
+   "start": 1.46,
+   "end": 1.58,
+   "conf": 0.9626401364803314
+  },
+  {
+   "cue": 1,
+   "wi": 5,
+   "text": "niravadhi",
+   "start": 1.62,
+   "end": 2.02,
+   "conf": 0.9052106340726217
+  },
+  {
+   "cue": 1,
+   "wi": 6,
+   "text": "videokal",
+   "start": 2.06,
+   "end": 2.5,
+   "conf": 0.7924580286562559
+  },
+  {
+   "cue": 1,
+   "wi": 7,
+   "text": "generate",
+   "start": 2.52,
+   "end": 2.88,
+   "conf": 0.31738859240704187
+  },
+  {
+   "cue": 1,
+   "wi": 8,
+   "text": "cheyyano...",
+   "start": 2.88,
+   "end": 3.12,
+   "conf": 0.3866644548252225
+  },
+  {
+   "cue": 2,
+   "wi": 0,
+   "text": "Innu",
+   "start": 3.2600000000000002,
+   "end": 3.4,
+   "conf": 0.6795437708497047
+  },
+  {
+   "cue": 2,
+   "wi": 1,
+   "text": "atharathilulla",
+   "start": 3.46,
+   "end": 3.96,
+   "conf": 0.6958358573839567
+  },
+  {
+   "cue": 2,
+   "wi": 2,
+   "text": "oru",
+   "start": 3.96,
+   "end": 4.04,
+   "conf": 0.7815935214360555
+  },
+  {
+   "cue": 2,
+   "wi": 3,
+   "text": "website",
+   "start": 4.04,
+   "end": 4.38,
+   "conf": 0.3633245654938427
+  },
+  {
+   "cue": 2,
+   "wi": 4,
+   "text": "aanu",
+   "start": 4.38,
+   "end": 4.54,
+   "conf": 0.6160484845750034
+  },
+  {
+   "cue": 2,
+   "wi": 5,
+   "text": "njan",
+   "start": 4.64,
+   "end": 4.8,
+   "conf": 0.6660008980320526
+  },
+  {
+   "cue": 2,
+   "wi": 6,
+   "text": "parichayappeduthunnathu.",
+   "start": 4.84,
+   "end": 5.78,
+   "conf": 0.6686488913442388
+  },
+  {
+   "cue": 3,
+   "wi": 0,
+   "text": "Appol",
+   "start": 5.78,
+   "end": 5.94,
+   "conf": 0.23235660647042095
+  },
+  {
+   "cue": 3,
+   "wi": 1,
+   "text": "inganeyulla",
+   "start": 5.94,
+   "end": 6.26,
+   "conf": 0.4111177433574498
+  },
+  {
+   "cue": 3,
+   "wi": 2,
+   "text": "useful",
+   "start": 6.26,
+   "end": 6.48,
+   "conf": 0.33685399626847357
+  },
+  {
+   "cue": 3,
+   "wi": 3,
+   "text": "aayittulla",
+   "start": 6.48,
+   "end": 6.76,
+   "conf": 0.19333614683710038
+  },
+  {
+   "cue": 3,
+   "wi": 4,
+   "text": "videokal",
+   "start": 6.76,
+   "end": 7.0200000000000005,
+   "conf": 0.5605015563269262
+  },
+  {
+   "cue": 3,
+   "wi": 5,
+   "text": "labhikkan",
+   "start": 7.04,
+   "end": 7.32,
+   "conf": 0.672016826354795
+  },
+  {
+   "cue": 3,
+   "wi": 6,
+   "text": "vendi",
+   "start": 7.32,
+   "end": 7.58,
+   "conf": 0.509827895835042
+  },
+  {
+   "cue": 3,
+   "wi": 7,
+   "text": "ippol",
+   "start": 7.66,
+   "end": 7.84,
+   "conf": 0.42985898479819296
+  },
+  {
+   "cue": 3,
+   "wi": 8,
+   "text": "thanne",
+   "start": 7.84,
+   "end": 8.120000000000001,
+   "conf": 0.5963815329499388
+  },
+  {
+   "cue": 3,
+   "wi": 9,
+   "text": "channel",
+   "start": 8.42,
+   "end": 8.64,
+   "conf": 0.44480361929163337
+  },
+  {
+   "cue": 3,
+   "wi": 10,
+   "text": "subscribe",
+   "start": 8.68,
+   "end": 9.02,
+   "conf": 0.322877616285243
+  },
+  {
+   "cue": 3,
+   "wi": 11,
+   "text": "cheytho.",
+   "start": 9.02,
+   "end": 9.22,
+   "conf": 0.3498216602851504
+  },
+  {
+   "cue": 4,
+   "wi": 0,
+   "text": "Appol",
+   "start": 9.34,
+   "end": 9.46,
+   "conf": 0.264310956094414
+  },
+  {
+   "cue": 4,
+   "wi": 1,
+   "text": "njan",
+   "start": 9.46,
+   "end": 9.6,
+   "conf": 0.7240958438778762
+  },
+  {
+   "cue": 4,
+   "wi": 2,
+   "text": "itharathilulla",
+   "start": 9.64,
+   "end": 10.1,
+   "conf": 0.7470425840677178
+  },
+  {
+   "cue": 4,
+   "wi": 3,
+   "text": "videokal",
+   "start": 10.1,
+   "end": 10.44,
+   "conf": 0.5622262625547592
+  },
+  {
+   "cue": 4,
+   "wi": 4,
+   "text": "niravadhi",
+   "start": 10.44,
+   "end": 10.72,
+   "conf": 0.9364010956552293
+  },
+  {
+   "cue": 4,
+   "wi": 5,
+   "text": "upload",
+   "start": 10.76,
+   "end": 11.0,
+   "conf": 0.27921389065037755
+  },
+  {
+   "cue": 4,
+   "wi": 6,
+   "text": "cheyyarundu.",
+   "start": 11.040000000000001,
+   "end": 11.58,
+   "conf": 0.5850850786963003
+  },
+  {
+   "cue": 5,
+   "wi": 0,
+   "text": "Appol",
+   "start": 11.66,
+   "end": 11.84,
+   "conf": 0.2803028875030577
+  },
+  {
+   "cue": 5,
+   "wi": 1,
+   "text": "anganeyullava",
+   "start": 11.84,
+   "end": 12.280000000000001,
+   "conf": 0.5314705601105323
+  },
+  {
+   "cue": 5,
+   "wi": 2,
+   "text": "labhikkanayi",
+   "start": 12.3,
+   "end": 12.88,
+   "conf": 0.9030303359031677
+  },
+  {
+   "cue": 5,
+   "wi": 3,
+   "text": "ippol",
+   "start": 13.06,
+   "end": 13.26,
+   "conf": 0.49481267684896013
+  },
+  {
+   "cue": 5,
+   "wi": 4,
+   "text": "thanne",
+   "start": 13.280000000000001,
+   "end": 13.48,
+   "conf": 0.7378344545916965
+  },
+  {
+   "cue": 5,
+   "wi": 5,
+   "text": "subscribe",
+   "start": 13.64,
+   "end": 14.0,
+   "conf": 0.47929883125147577
+  },
+  {
+   "cue": 5,
+   "wi": 6,
+   "text": "cheythu",
+   "start": 14.040000000000001,
+   "end": 14.18,
+   "conf": 0.25759355993276195
+  },
+  {
+   "cue": 5,
+   "wi": 7,
+   "text": "vecholoo.",
+   "start": 14.18,
+   "end": 14.5,
+   "conf": 0.43939789760042913
+  },
+  {
+   "cue": 6,
+   "wi": 0,
+   "text": "Appol",
+   "start": 14.64,
+   "end": 14.76,
+   "conf": 0.322456827852875
+  },
+  {
+   "cue": 6,
+   "wi": 1,
+   "text": "namukku",
+   "start": 14.8,
+   "end": 15.040000000000001,
+   "conf": 0.6282900454742568
+  },
+  {
+   "cue": 6,
+   "wi": 2,
+   "text": "sadharanayayi",
+   "start": 15.22,
+   "end": 15.92,
+   "conf": 0.8872098212058728
+  },
+  {
+   "cue": 6,
+   "wi": 3,
+   "text": "labhikkunna",
+   "start": 16.1,
+   "end": 16.54,
+   "conf": 0.9270761880007657
+  },
+  {
+   "cue": 6,
+   "wi": 4,
+   "text": "ella",
+   "start": 16.78,
+   "end": 17.0,
+   "conf": 0.9816241711378098
+  },
+  {
+   "cue": 6,
+   "wi": 5,
+   "text": "platformil",
+   "start": 17.12,
+   "end": 17.62,
+   "conf": 0.596742887009168
+  },
+  {
+   "cue": 6,
+   "wi": 6,
+   "text": "ninnum",
+   "start": 17.62,
+   "end": 17.78,
+   "conf": 0.2499539821098248
+  },
+  {
+   "cue": 6,
+   "wi": 7,
+   "text": "vyathyasthamaayittaanu",
+   "start": 17.78,
+   "end": 18.7,
+   "conf": 0.7052457235245542
+  },
+  {
+   "cue": 6,
+   "wi": 8,
+   "text": "namukku",
+   "start": 18.740000000000002,
+   "end": 18.94,
+   "conf": 0.5605895325175619
+  },
+  {
+   "cue": 6,
+   "wi": 9,
+   "text": "ithil",
+   "start": 18.96,
+   "end": 19.14,
+   "conf": 0.5766139274928719
+  },
+  {
+   "cue": 6,
+   "wi": 10,
+   "text": "video",
+   "start": 19.5,
+   "end": 19.8,
+   "conf": 0.7924814887723187
+  },
+  {
+   "cue": 6,
+   "wi": 11,
+   "text": "generate",
+   "start": 19.84,
+   "end": 20.12,
+   "conf": 0.29936999383789953
+  },
+  {
+   "cue": 6,
+   "wi": 12,
+   "text": "cheyyan",
+   "start": 20.18,
+   "end": 20.400000000000002,
+   "conf": 0.6579704027390108
+  },
+  {
+   "cue": 6,
+   "wi": 13,
+   "text": "sadhikkunnathu.",
+   "start": 20.44,
+   "end": 20.88,
+   "conf": 0.773539656191133
+  },
+  {
+   "cue": 7,
+   "wi": 0,
+   "text": "Adhava",
+   "start": 20.88,
+   "end": 21.080000000000002,
+   "conf": 0.5463541620410979
+  },
+  {
+   "cue": 7,
+   "wi": 1,
+   "text": "athil",
+   "start": 21.1,
+   "end": 21.3,
+   "conf": 0.684870359301567
+  },
+  {
+   "cue": 7,
+   "wi": 2,
+   "text": "cheyyunna",
+   "start": 21.34,
+   "end": 21.62,
+   "conf": 0.7839924212385339
+  },
+  {
+   "cue": 7,
+   "wi": 3,
+   "text": "athe",
+   "start": 21.64,
+   "end": 21.76,
+   "conf": 0.6950800307095051
+  },
+  {
+   "cue": 7,
+   "wi": 4,
+   "text": "reethiyil",
+   "start": 21.84,
+   "end": 22.18,
+   "conf": 0.5832826507103164
+  },
+  {
+   "cue": 7,
+   "wi": 5,
+   "text": "thanne",
+   "start": 22.2,
+   "end": 22.400000000000002,
+   "conf": 0.74743757125907
+  },
+  {
+   "cue": 7,
+   "wi": 6,
+   "text": "pakshe",
+   "start": 22.7,
+   "end": 22.94,
+   "conf": 0.4643305117885272
+  },
+  {
+   "cue": 7,
+   "wi": 7,
+   "text": "niravadhi",
+   "start": 23.0,
+   "end": 23.48,
+   "conf": 0.8971137470669217
+  },
+  {
+   "cue": 7,
+   "wi": 8,
+   "text": "videokal.",
+   "start": 23.52,
+   "end": 23.900000000000002,
+   "conf": 0.7663142076489748
+  },
+  {
+   "cue": 8,
+   "wi": 0,
+   "text": "Oru",
+   "start": 23.92,
+   "end": 24.02,
+   "conf": 0.8122081756591797
+  },
+  {
+   "cue": 8,
+   "wi": 1,
+   "text": "thavana",
+   "start": 24.04,
+   "end": 24.3,
+   "conf": 0.7261378078754726
+  },
+  {
+   "cue": 8,
+   "wi": 2,
+   "text": "nammal",
+   "start": 24.3,
+   "end": 24.48,
+   "conf": 0.8322969973087311
+  },
+  {
+   "cue": 8,
+   "wi": 3,
+   "text": "login",
+   "start": 24.5,
+   "end": 24.8,
+   "conf": 0.6417471271008253
+  },
+  {
+   "cue": 8,
+   "wi": 4,
+   "text": "cheythu",
+   "start": 24.84,
+   "end": 25.04,
+   "conf": 0.46614270923341145
+  },
+  {
+   "cue": 8,
+   "wi": 5,
+   "text": "kazhinjal",
+   "start": 25.04,
+   "end": 25.38,
+   "conf": 0.5699865717404798
+  },
+  {
+   "cue": 8,
+   "wi": 6,
+   "text": "100",
+   "start": 25.900000000000002,
+   "end": 26.240000000000002,
+   "conf": 0.23379662283696234
+  },
+  {
+   "cue": 8,
+   "wi": 7,
+   "text": "videokalolam",
+   "start": 26.28,
+   "end": 26.82,
+   "conf": 0.7564887676853687
+  },
+  {
+   "cue": 8,
+   "wi": 8,
+   "text": "namukku",
+   "start": 26.84,
+   "end": 27.1,
+   "conf": 0.6511489429644176
+  },
+  {
+   "cue": 8,
+   "wi": 9,
+   "text": "cheyyan",
+   "start": 27.240000000000002,
+   "end": 27.48,
+   "conf": 0.7881901117029234
+  },
+  {
+   "cue": 8,
+   "wi": 10,
+   "text": "sadhikkum.",
+   "start": 27.5,
+   "end": 27.82,
+   "conf": 0.9017960959010654
+  },
+  {
+   "cue": 9,
+   "wi": 0,
+   "text": "Angane",
+   "start": 27.84,
+   "end": 28.04,
+   "conf": 0.38668759368980926
+  },
+  {
+   "cue": 9,
+   "wi": 1,
+   "text": "niravadhi",
+   "start": 28.060000000000002,
+   "end": 28.42,
+   "conf": 0.8583135571744707
+  },
+  {
+   "cue": 9,
+   "wi": 2,
+   "text": "accountukal",
+   "start": 28.44,
+   "end": 28.82,
+   "conf": 0.5547015932876423
+  },
+  {
+   "cue": 9,
+   "wi": 3,
+   "text": "login",
+   "start": 28.84,
+   "end": 29.12,
+   "conf": 0.6140413771383464
+  },
+  {
+   "cue": 9,
+   "wi": 4,
+   "text": "cheythukondu",
+   "start": 29.16,
+   "end": 29.560000000000002,
+   "conf": 0.5521962722492996
+  },
+  {
+   "cue": 9,
+   "wi": 5,
+   "text": "ningalkku",
+   "start": 29.560000000000002,
+   "end": 29.88,
+   "conf": 0.8244771307541264
+  },
+  {
+   "cue": 9,
+   "wi": 6,
+   "text": "niravadhi",
+   "start": 29.88,
+   "end": 30.3,
+   "conf": 0.7542471819453769
+  },
+  {
+   "cue": 9,
+   "wi": 7,
+   "text": "videokal",
+   "start": 30.78,
+   "end": 31.28,
+   "conf": 0.5953037600847892
+  },
+  {
+   "cue": 9,
+   "wi": 8,
+   "text": "ee",
+   "start": 31.28,
+   "end": 31.42,
+   "conf": 0.0024171131663024426
+  },
+  {
+   "cue": 9,
+   "wi": 9,
+   "text": "oru",
+   "start": 31.48,
+   "end": 31.580000000000002,
+   "conf": 0.7548517187436422
+  },
+  {
+   "cue": 9,
+   "wi": 10,
+   "text": "platformiloode",
+   "start": 31.62,
+   "end": 32.3,
+   "conf": 0.44634288007676204
+  },
+  {
+   "cue": 9,
+   "wi": 11,
+   "text": "generate",
+   "start": 32.64,
+   "end": 32.94,
+   "conf": 0.24070587405003607
+  },
+  {
+   "cue": 9,
+   "wi": 12,
+   "text": "cheyyam,",
+   "start": 33.1,
+   "end": 33.34,
+   "conf": 0.5133930861151644
+  },
+  {
+   "cue": 9,
+   "wi": 13,
+   "text": "high",
+   "start": 33.480000000000004,
+   "end": 33.76,
+   "conf": 0.4367051305307541
+  },
+  {
+   "cue": 9,
+   "wi": 14,
+   "text": "qualityil.",
+   "start": 33.84,
+   "end": 34.4,
+   "conf": 0.4686766843790085
+  },
+  {
+   "cue": 10,
+   "wi": 0,
+   "text": "Sadharana",
+   "start": 34.5,
+   "end": 34.9,
+   "conf": 0.7735403519537714
+  },
+  {
+   "cue": 10,
+   "wi": 1,
+   "text": "ningal",
+   "start": 34.9,
+   "end": 35.1,
+   "conf": 0.8026049435138702
+  },
+  {
+   "cue": 10,
+   "wi": 2,
+   "text": "google",
+   "start": 35.42,
+   "end": 35.68,
+   "conf": 0.2522654098283965
+  },
+  {
+   "cue": 10,
+   "wi": 3,
+   "text": "flow-ilo",
+   "start": 35.7,
+   "end": 36.08,
+   "conf": 0.6089720262295616
+  },
+  {
+   "cue": 10,
+   "wi": 4,
+   "text": "athallengil",
+   "start": 36.08,
+   "end": 36.4,
+   "conf": 0.4620613999326121
+  },
+  {
+   "cue": 10,
+   "wi": 5,
+   "text": "mattethangilum",
+   "start": 36.42,
+   "end": 36.980000000000004,
+   "conf": 0.5855544231890235
+  },
+  {
+   "cue": 10,
+   "wi": 6,
+   "text": "websitilokke",
+   "start": 37.1,
+   "end": 37.76,
+   "conf": 0.5892517367052884
+  },
+  {
+   "cue": 10,
+   "wi": 7,
+   "text": "enganeyano",
+   "start": 37.82,
+   "end": 38.26,
+   "conf": 0.795516113191843
+  },
+  {
+   "cue": 10,
+   "wi": 8,
+   "text": "generate",
+   "start": 38.480000000000004,
+   "end": 38.7,
+   "conf": 0.17352964153542416
+  },
+  {
+   "cue": 10,
+   "wi": 9,
+   "text": "cheyyunnathu...",
+   "start": 38.74,
+   "end": 39.28,
+   "conf": 0.41482256773512444
+  },
+  {
+   "cue": 11,
+   "wi": 0,
+   "text": "Athe",
+   "start": 39.28,
+   "end": 39.4,
+   "conf": 0.15127171052154154
+  },
+  {
+   "cue": 11,
+   "wi": 1,
+   "text": "qualityil",
+   "start": 39.480000000000004,
+   "end": 40.02,
+   "conf": 0.4742225407341418
+  },
+  {
+   "cue": 11,
+   "wi": 2,
+   "text": "allengil",
+   "start": 40.04,
+   "end": 40.28,
+   "conf": 0.18477707804413512
+  },
+  {
+   "cue": 11,
+   "wi": 3,
+   "text": "athinekkal",
+   "start": 40.300000000000004,
+   "end": 40.7,
+   "conf": 0.7368466265499591
+  },
+  {
+   "cue": 11,
+   "wi": 4,
+   "text": "mikachathu",
+   "start": 40.74,
+   "end": 41.18,
+   "conf": 0.6603799833159428
+  },
+  {
+   "cue": 11,
+   "wi": 5,
+   "text": "ennu",
+   "start": 41.22,
+   "end": 41.36,
+   "conf": 0.7473109923303127
+  },
+  {
+   "cue": 11,
+   "wi": 6,
+   "text": "thanne",
+   "start": 41.36,
+   "end": 41.52,
+   "conf": 0.28712804468038183
+  },
+  {
+   "cue": 11,
+   "wi": 7,
+   "text": "parayam,",
+   "start": 41.52,
+   "end": 41.84,
+   "conf": 0.804390517196485
+  },
+  {
+   "cue": 11,
+   "wi": 8,
+   "text": "atharathil",
+   "start": 41.96,
+   "end": 42.36,
+   "conf": 0.648739886644762
+  },
+  {
+   "cue": 11,
+   "wi": 9,
+   "text": "namukku",
+   "start": 42.4,
+   "end": 42.64,
+   "conf": 0.7224186190537044
+  },
+  {
+   "cue": 11,
+   "wi": 10,
+   "text": "generate",
+   "start": 42.660000000000004,
+   "end": 42.92,
+   "conf": 0.16331528178125154
+  },
+  {
+   "cue": 11,
+   "wi": 11,
+   "text": "cheyyan",
+   "start": 43.02,
+   "end": 43.24,
+   "conf": 0.2812148189571287
+  },
+  {
+   "cue": 11,
+   "wi": 12,
+   "text": "sadhikkum.",
+   "start": 43.26,
+   "end": 43.58,
+   "conf": 0.731981979476081
+  },
+  {
+   "cue": 12,
+   "wi": 0,
+   "text": "Anganeyulla",
+   "start": 43.68,
+   "end": 44.02,
+   "conf": 0.4695567517456683
+  },
+  {
+   "cue": 12,
+   "wi": 1,
+   "text": "oru",
+   "start": 44.02,
+   "end": 44.12,
+   "conf": 0.009851810599987706
+  },
+  {
+   "cue": 12,
+   "wi": 2,
+   "text": "platform",
+   "start": 44.12,
+   "end": 44.480000000000004,
+   "conf": 0.5219474479672499
+  },
+  {
+   "cue": 12,
+   "wi": 3,
+   "text": "aanu.",
+   "start": 44.480000000000004,
+   "end": 44.64,
+   "conf": 0.6200163066387177
+  },
+  {
+   "cue": 13,
+   "wi": 0,
+   "text": "Appol",
+   "start": 44.76,
+   "end": 44.92,
+   "conf": 0.11125658182427287
+  },
+  {
+   "cue": 13,
+   "wi": 1,
+   "text": "ithu",
+   "start": 44.92,
+   "end": 45.02,
+   "conf": 0.11336677146027796
+  },
+  {
+   "cue": 13,
+   "wi": 2,
+   "text": "enganeyaanu",
+   "start": 45.1,
+   "end": 45.58,
+   "conf": 0.5545412884517149
+  },
+  {
+   "cue": 13,
+   "wi": 3,
+   "text": "upayogikkunnathu",
+   "start": 45.68,
+   "end": 46.18,
+   "conf": 0.6808444377893466
+  },
+  {
+   "cue": 13,
+   "wi": 4,
+   "text": "ennu",
+   "start": 46.2,
+   "end": 46.32,
+   "conf": 0.006545602722326294
+  },
+  {
+   "cue": 13,
+   "wi": 5,
+   "text": "nokkam.",
+   "start": 46.32,
+   "end": 46.54,
+   "conf": 0.0014069033107565094
+  },
+  {
+   "cue": 14,
+   "wi": 0,
+   "text": "Welcome",
+   "start": 46.54,
+   "end": 46.82,
+   "conf": 0.2687596749331403
+  },
+  {
+   "cue": 14,
+   "wi": 1,
+   "text": "to",
+   "start": 46.94,
+   "end": 46.980000000000004,
+   "conf": 0.08973782695829868
+  },
+  {
+   "cue": 14,
+   "wi": 2,
+   "text": "Mega",
+   "start": 47.38,
+   "end": 47.62,
+   "conf": 0.6240930259227753
+  },
+  {
+   "cue": 14,
+   "wi": 3,
+   "text": "Byte.",
+   "start": 47.7,
+   "end": 47.82,
+   "conf": 0.15612738620257005
+  },
+  {
+   "cue": 14,
+   "wi": 4,
+   "text": "Puthiya",
+   "start": 48.300000000000004,
+   "end": 48.480000000000004,
+   "conf": 0.16018208994397096
+  },
+  {
+   "cue": 14,
+   "wi": 5,
+   "text": "oru",
+   "start": 48.480000000000004,
+   "end": 48.54,
+   "conf": 0.10488830706647907
+  },
+  {
+   "cue": 14,
+   "wi": 6,
+   "text": "videoyilekku",
+   "start": 48.54,
+   "end": 48.980000000000004,
+   "conf": 0.26051512306609464
+  },
+  {
+   "cue": 14,
+   "wi": 7,
+   "text": "ellavarkkum",
+   "start": 49.14,
+   "end": 49.88,
+   "conf": 0.6799259917302565
+  },
+  {
+   "cue": 14,
+   "wi": 8,
+   "text": "swagatham.",
+   "start": 49.94,
+   "end": 50.28,
+   "conf": 0.36320057581098
+  },
+  {
+   "cue": 15,
+   "wi": 0,
+   "text": "Appol",
+   "start": 50.42,
+   "end": 50.54,
+   "conf": 0.26080893256003035
+  },
+  {
+   "cue": 15,
+   "wi": 1,
+   "text": "ithinavashyamaya",
+   "start": 50.54,
+   "end": 51.18,
+   "conf": 0.8301824372756528
+  },
+  {
+   "cue": 15,
+   "wi": 2,
+   "text": "link",
+   "start": 51.22,
+   "end": 51.36,
+   "conf": 0.8796007633209229
+  },
+  {
+   "cue": 15,
+   "wi": 3,
+   "text": "njan",
+   "start": 51.36,
+   "end": 51.52,
+   "conf": 0.39561584383045556
+  },
+  {
+   "cue": 15,
+   "wi": 4,
+   "text": "descriptionil",
+   "start": 51.54,
+   "end": 51.94,
+   "conf": 0.31600329571385655
+  },
+  {
+   "cue": 15,
+   "wi": 5,
+   "text": "nalkiyittundu.",
+   "start": 51.94,
+   "end": 52.42,
+   "conf": 0.4781042664544657
+  },
+  {
+   "cue": 15,
+   "wi": 6,
+   "text": "Aa",
+   "start": 52.42,
+   "end": 52.5,
+   "conf": 0.6313350200653076
+  },
+  {
+   "cue": 15,
+   "wi": 7,
+   "text": "link",
+   "start": 52.5,
+   "end": 52.68,
+   "conf": 0.7851420640945435
+  },
+  {
+   "cue": 15,
+   "wi": 8,
+   "text": "vazhi",
+   "start": 52.76,
+   "end": 52.9,
+   "conf": 0.33467144677169924
+  },
+  {
+   "cue": 15,
+   "wi": 9,
+   "text": "ningalkku",
+   "start": 52.9,
+   "end": 53.2,
+   "conf": 0.7475403650767274
+  },
+  {
+   "cue": 15,
+   "wi": 10,
+   "text": "ithine",
+   "start": 53.2,
+   "end": 53.4,
+   "conf": 0.4497678713038719
+  },
+  {
+   "cue": 15,
+   "wi": 11,
+   "text": "access",
+   "start": 53.42,
+   "end": 53.68,
+   "conf": 0.20146812591701746
+  },
+  {
+   "cue": 15,
+   "wi": 12,
+   "text": "cheyyam.",
+   "start": 53.68,
+   "end": 53.980000000000004,
+   "conf": 0.5582013595849276
+  },
+  {
+   "cue": 16,
+   "wi": 0,
+   "text": "Aa",
+   "start": 54.14,
+   "end": 54.22,
+   "conf": 0.49720435589551926
+  },
+  {
+   "cue": 16,
+   "wi": 1,
+   "text": "link",
+   "start": 54.22,
+   "end": 54.4,
+   "conf": 0.7950156480073929
+  },
+  {
+   "cue": 16,
+   "wi": 2,
+   "text": "open",
+   "start": 54.44,
+   "end": 54.7,
+   "conf": 0.5984923173673451
+  },
+  {
+   "cue": 16,
+   "wi": 3,
+   "text": "cheythu",
+   "start": 54.72,
+   "end": 54.9,
+   "conf": 0.6018389434320852
+  },
+  {
+   "cue": 16,
+   "wi": 4,
+   "text": "kazhinjal",
+   "start": 54.9,
+   "end": 55.2,
+   "conf": 0.5448957920654922
+  },
+  {
+   "cue": 16,
+   "wi": 5,
+   "text": "ningalkku",
+   "start": 55.2,
+   "end": 55.480000000000004,
+   "conf": 0.6170080776015917
+  },
+  {
+   "cue": 16,
+   "wi": 6,
+   "text": "ithe",
+   "start": 55.5,
+   "end": 55.620000000000005,
+   "conf": 0.5005337693728507
+  },
+  {
+   "cue": 16,
+   "wi": 7,
+   "text": "reethiyilayirikkum",
+   "start": 55.660000000000004,
+   "end": 56.22,
+   "conf": 0.6586965053445764
+  },
+  {
+   "cue": 16,
+   "wi": 8,
+   "text": "kanan",
+   "start": 56.24,
+   "end": 56.56,
+   "conf": 0.8428495764732361
+  },
+  {
+   "cue": 16,
+   "wi": 9,
+   "text": "sadhikkunnathu.",
+   "start": 56.58,
+   "end": 57.08,
+   "conf": 0.788779400686378
+  },
+  {
+   "cue": 17,
+   "wi": 0,
+   "text": "'There",
+   "start": 57.36,
+   "end": 57.56,
+   "conf": 0.29671235792338846
+  },
+  {
+   "cue": 17,
+   "wi": 1,
+   "text": "Is",
+   "start": 57.58,
+   "end": 57.64,
+   "conf": 0.489038722589612
+  },
+  {
+   "cue": 17,
+   "wi": 2,
+   "text": "An",
+   "start": 57.74,
+   "end": 57.82,
+   "conf": 0.8718536794185638
+  },
+  {
+   "cue": 17,
+   "wi": 3,
+   "text": "AI",
+   "start": 57.84,
+   "end": 58.22,
+   "conf": 0.5040012244135141
+  },
+  {
+   "cue": 17,
+   "wi": 4,
+   "text": "For",
+   "start": 58.28,
+   "end": 58.480000000000004,
+   "conf": 0.49452862485001486
+  },
+  {
+   "cue": 17,
+   "wi": 5,
+   "text": "That'",
+   "start": 58.52,
+   "end": 58.78,
+   "conf": 0.20892364264000207
+  },
+  {
+   "cue": 17,
+   "wi": 6,
+   "text": "ennaanu",
+   "start": 58.78,
+   "end": 59.08,
+   "conf": 0.6105183833943946
+  },
+  {
+   "cue": 17,
+   "wi": 7,
+   "text": "sitinte",
+   "start": 59.120000000000005,
+   "end": 59.54,
+   "conf": 0.4967149794101715
+  },
+  {
+   "cue": 17,
+   "wi": 8,
+   "text": "peru.",
+   "start": 59.6,
+   "end": 59.88,
+   "conf": 0.7109188232570887
+  },
+  {
+   "cue": 18,
+   "wi": 0,
+   "text": "Linkil",
+   "start": 60.2,
+   "end": 60.44,
+   "conf": 0.7951450049877167
+  },
+  {
+   "cue": 18,
+   "wi": 1,
+   "text": "click",
+   "start": 60.5,
+   "end": 60.620000000000005,
+   "conf": 0.1687163277922082
+  },
+  {
+   "cue": 18,
+   "wi": 2,
+   "text": "cheythu",
+   "start": 60.620000000000005,
+   "end": 60.800000000000004,
+   "conf": 0.41128545791642473
+  },
+  {
+   "cue": 18,
+   "wi": 3,
+   "text": "kazhinjal",
+   "start": 60.800000000000004,
+   "end": 61.04,
+   "conf": 0.27007025376377036
+  },
+  {
+   "cue": 18,
+   "wi": 4,
+   "text": "exact",
+   "start": 61.04,
+   "end": 61.42,
+   "conf": 0.21343031832948328
+  },
+  {
+   "cue": 18,
+   "wi": 5,
+   "text": "ee",
+   "start": 61.42,
+   "end": 61.480000000000004,
+   "conf": 0.0037701884284615517
+  },
+  {
+   "cue": 18,
+   "wi": 6,
+   "text": "sitilekku",
+   "start": 61.480000000000004,
+   "end": 61.86,
+   "conf": 0.5367328793638282
+  },
+  {
+   "cue": 18,
+   "wi": 7,
+   "text": "thanne",
+   "start": 61.86,
+   "end": 62.02,
+   "conf": 0.4141395129724212
+  },
+  {
+   "cue": 18,
+   "wi": 8,
+   "text": "ethum.",
+   "start": 62.04,
+   "end": 62.26,
+   "conf": 0.0003508630477881525
+  },
+  {
+   "cue": 18,
+   "wi": 9,
+   "text": "Ivide",
+   "start": 62.5,
+   "end": 62.7,
+   "conf": 0.5578277191612869
+  },
+  {
+   "cue": 18,
+   "wi": 10,
+   "text": "ninnu",
+   "start": 62.7,
+   "end": 63.1,
+   "conf": 0.6958674646914005
+  },
+  {
+   "cue": 18,
+   "wi": 11,
+   "text": "sign",
+   "start": 63.24,
+   "end": 63.480000000000004,
+   "conf": 0.6408975357389863
+  },
+  {
+   "cue": 18,
+   "wi": 12,
+   "text": "up",
+   "start": 63.480000000000004,
+   "end": 63.54,
+   "conf": 0.494930564538663
+  },
+  {
+   "cue": 18,
+   "wi": 13,
+   "text": "ennulla",
+   "start": 63.6,
+   "end": 63.9,
+   "conf": 0.8144919552973339
+  },
+  {
+   "cue": 18,
+   "wi": 14,
+   "text": "bhagam",
+   "start": 63.9,
+   "end": 64.16,
+   "conf": 0.7616891364256541
+  },
+  {
+   "cue": 18,
+   "wi": 15,
+   "text": "select",
+   "start": 64.2,
+   "end": 64.38,
+   "conf": 0.27344352440923103
+  },
+  {
+   "cue": 18,
+   "wi": 16,
+   "text": "cheythukondu...",
+   "start": 64.4,
+   "end": 64.84,
+   "conf": 0.3574552246039578
+  },
+  {
+   "cue": 19,
+   "wi": 0,
+   "text": "Ithilekku",
+   "start": 64.84,
+   "end": 65.16,
+   "conf": 0.6210026118852612
+  },
+  {
+   "cue": 19,
+   "wi": 1,
+   "text": "account",
+   "start": 65.2,
+   "end": 65.54,
+   "conf": 0.38423367196352437
+  },
+  {
+   "cue": 19,
+   "wi": 2,
+   "text": "login",
+   "start": 65.56,
+   "end": 65.84,
+   "conf": 0.7368063358590007
+  },
+  {
+   "cue": 19,
+   "wi": 3,
+   "text": "cheyyendathundu.",
+   "start": 65.88,
+   "end": 66.32000000000001,
+   "conf": 0.4227173484202164
+  },
+  {
+   "cue": 19,
+   "wi": 4,
+   "text": "Sign",
+   "start": 66.32000000000001,
+   "end": 66.5,
+   "conf": 0.5984170239080413
+  },
+  {
+   "cue": 19,
+   "wi": 5,
+   "text": "up",
+   "start": 66.5,
+   "end": 66.58,
+   "conf": 0.3450467336224392
+  },
+  {
+   "cue": 19,
+   "wi": 6,
+   "text": "cheyyendathundu,",
+   "start": 66.6,
+   "end": 67.14,
+   "conf": 0.48345700632053196
+  },
+  {
+   "cue": 19,
+   "wi": 7,
+   "text": "engil",
+   "start": 67.16,
+   "end": 67.4,
+   "conf": 0.9547912359237671
+  },
+  {
+   "cue": 19,
+   "wi": 8,
+   "text": "mathramanu",
+   "start": 67.44,
+   "end": 67.88,
+   "conf": 0.7588479711732361
+  },
+  {
+   "cue": 19,
+   "wi": 9,
+   "text": "namukkithu",
+   "start": 67.88,
+   "end": 68.18,
+   "conf": 0.5629440680379048
+  },
+  {
+   "cue": 19,
+   "wi": 10,
+   "text": "pravarthikkukayulloo.",
+   "start": 68.18,
+   "end": 68.8,
+   "conf": 0.500031229481101
+  },
+  {
+   "cue": 20,
+   "wi": 0,
+   "text": "Appol",
+   "start": 68.8,
+   "end": 68.96000000000001,
+   "conf": 0.20040498405578547
+  },
+  {
+   "cue": 20,
+   "wi": 1,
+   "text": "sign",
+   "start": 69.0,
+   "end": 69.18,
+   "conf": 0.714650253734078
+  },
+  {
+   "cue": 20,
+   "wi": 2,
+   "text": "up",
+   "start": 69.18,
+   "end": 69.24,
+   "conf": 0.48999928820921923
+  },
+  {
+   "cue": 20,
+   "wi": 3,
+   "text": "ennulla",
+   "start": 69.3,
+   "end": 69.56,
+   "conf": 0.6090671760695321
+  },
+  {
+   "cue": 20,
+   "wi": 4,
+   "text": "bhagam",
+   "start": 69.56,
+   "end": 69.8,
+   "conf": 0.978055606285731
+  },
+  {
+   "cue": 20,
+   "wi": 5,
+   "text": "nalki",
+   "start": 69.84,
+   "end": 70.10000000000001,
+   "conf": 0.8469873607158661
+  },
+  {
+   "cue": 20,
+   "wi": 6,
+   "text": "ningalkku",
+   "start": 70.26,
+   "end": 70.60000000000001,
+   "conf": 0.8479108284744952
+  },
+  {
+   "cue": 20,
+   "wi": 7,
+   "text": "ningalude",
+   "start": 70.68,
+   "end": 71.04,
+   "conf": 0.6779757249072039
+  },
+  {
+   "cue": 20,
+   "wi": 8,
+   "text": "google",
+   "start": 71.08,
+   "end": 71.48,
+   "conf": 0.37079002197424415
+  },
+  {
+   "cue": 20,
+   "wi": 9,
+   "text": "account",
+   "start": 71.54,
+   "end": 71.82000000000001,
+   "conf": 0.5137687990171733
+  },
+  {
+   "cue": 20,
+   "wi": 10,
+   "text": "vazhi",
+   "start": 71.9,
+   "end": 72.10000000000001,
+   "conf": 0.33338603593761035
+  },
+  {
+   "cue": 20,
+   "wi": 11,
+   "text": "ithilekku",
+   "start": 72.38,
+   "end": 73.34,
+   "conf": 0.6015310925560899
+  },
+  {
+   "cue": 20,
+   "wi": 12,
+   "text": "login",
+   "start": 73.36,
+   "end": 73.60000000000001,
+   "conf": 0.738953111693263
+  },
+  {
+   "cue": 20,
+   "wi": 13,
+   "text": "cheyyan",
+   "start": 73.66,
+   "end": 73.9,
+   "conf": 0.7435834767197126
+  },
+  {
+   "cue": 20,
+   "wi": 14,
+   "text": "sadhikkum.",
+   "start": 73.92,
+   "end": 74.3,
+   "conf": 0.9274464050928751
+  },
+  {
+   "cue": 21,
+   "wi": 0,
+   "text": "Avashyamaya",
+   "start": 74.4,
+   "end": 74.88,
+   "conf": 0.9739471836523577
+  },
+  {
+   "cue": 21,
+   "wi": 1,
+   "text": "google",
+   "start": 74.92,
+   "end": 75.16,
+   "conf": 0.3755573008675128
+  },
+  {
+   "cue": 21,
+   "wi": 2,
+   "text": "account",
+   "start": 75.18,
+   "end": 75.38,
+   "conf": 0.4753937024760099
+  },
+  {
+   "cue": 21,
+   "wi": 3,
+   "text": "select",
+   "start": 75.44,
+   "end": 75.66,
+   "conf": 0.2837578696392787
+  },
+  {
+   "cue": 21,
+   "wi": 4,
+   "text": "cheythukondu",
+   "start": 75.68,
+   "end": 76.10000000000001,
+   "conf": 0.25386082098460366
+  },
+  {
+   "cue": 21,
+   "wi": 5,
+   "text": "ithilekku",
+   "start": 76.24,
+   "end": 76.58,
+   "conf": 0.4969875517158976
+  },
+  {
+   "cue": 21,
+   "wi": 6,
+   "text": "login",
+   "start": 76.60000000000001,
+   "end": 76.86,
+   "conf": 0.5438355654478073
+  },
+  {
+   "cue": 21,
+   "wi": 7,
+   "text": "cheyyuka.",
+   "start": 76.9,
+   "end": 77.2,
+   "conf": 0.3081231687392574
+  },
+  {
+   "cue": 22,
+   "wi": 0,
+   "text": "Login",
+   "start": 77.36,
+   "end": 77.60000000000001,
+   "conf": 0.727064811065793
+  },
+  {
+   "cue": 22,
+   "wi": 1,
+   "text": "cheythu",
+   "start": 77.64,
+   "end": 77.84,
+   "conf": 0.4969162999186665
+  },
+  {
+   "cue": 22,
+   "wi": 2,
+   "text": "kazhinjal",
+   "start": 77.84,
+   "end": 78.12,
+   "conf": 0.503474119778793
+  },
+  {
+   "cue": 22,
+   "wi": 3,
+   "text": "ningalkku",
+   "start": 78.12,
+   "end": 78.42,
+   "conf": 0.6750979994734129
+  },
+  {
+   "cue": 22,
+   "wi": 4,
+   "text": "ithinte",
+   "start": 78.42,
+   "end": 78.64,
+   "conf": 0.5350283243876349
+  },
+  {
+   "cue": 22,
+   "wi": 5,
+   "text": "interface",
+   "start": 78.64,
+   "end": 78.92,
+   "conf": 0.4363312403115237
+  },
+  {
+   "cue": 22,
+   "wi": 6,
+   "text": "ithe",
+   "start": 78.94,
+   "end": 79.08,
+   "conf": 0.06449836725369096
+  },
+  {
+   "cue": 22,
+   "wi": 7,
+   "text": "reethiyilayirikkum",
+   "start": 79.12,
+   "end": 79.72,
+   "conf": 0.5153029560622397
+  },
+  {
+   "cue": 22,
+   "wi": 8,
+   "text": "kanan",
+   "start": 79.74,
+   "end": 80.04,
+   "conf": 0.8425064086914062
+  },
+  {
+   "cue": 22,
+   "wi": 9,
+   "text": "sadhikkunnathu.",
+   "start": 80.06,
+   "end": 80.5,
+   "conf": 0.8113589151362248
+  },
+  {
+   "cue": 23,
+   "wi": 0,
+   "text": "Ivide",
+   "start": 80.58,
+   "end": 80.8,
+   "conf": 0.6140426867525093
+  },
+  {
+   "cue": 23,
+   "wi": 1,
+   "text": "ninnu",
+   "start": 80.84,
+   "end": 81.08,
+   "conf": 0.7462281364947557
+  },
+  {
+   "cue": 23,
+   "wi": 2,
+   "text": "randu",
+   "start": 81.56,
+   "end": 81.84,
+   "conf": 0.29412949495017526
+  },
+  {
+   "cue": 23,
+   "wi": 3,
+   "text": "optionukal",
+   "start": 81.88,
+   "end": 82.24,
+   "conf": 0.5310565400752238
+  },
+  {
+   "cue": 23,
+   "wi": 4,
+   "text": "namukku",
+   "start": 82.26,
+   "end": 82.46000000000001,
+   "conf": 0.7503214233687946
+  },
+  {
+   "cue": 23,
+   "wi": 5,
+   "text": "kanan",
+   "start": 82.48,
+   "end": 82.72,
+   "conf": 0.9497941493988037
+  },
+  {
+   "cue": 23,
+   "wi": 6,
+   "text": "sadhikkum,",
+   "start": 82.74,
+   "end": 83.06,
+   "conf": 0.9061276978916593
+  },
+  {
+   "cue": 23,
+   "wi": 7,
+   "text": "Generate",
+   "start": 83.10000000000001,
+   "end": 83.38,
+   "conf": 0.3492567110197342
+  },
+  {
+   "cue": 23,
+   "wi": 8,
+   "text": "Image",
+   "start": 83.66,
+   "end": 83.98,
+   "conf": 0.4229060813784599
+  },
+  {
+   "cue": 23,
+   "wi": 9,
+   "text": "ennum",
+   "start": 84.04,
+   "end": 84.26,
+   "conf": 0.9232861042022705
+  },
+  {
+   "cue": 23,
+   "wi": 10,
+   "text": "mattonnu",
+   "start": 84.38,
+   "end": 84.78,
+   "conf": 0.5635754310787888
+  },
+  {
+   "cue": 23,
+   "wi": 11,
+   "text": "Generate",
+   "start": 84.92,
+   "end": 85.24,
+   "conf": 0.34601950565502193
+  },
+  {
+   "cue": 23,
+   "wi": 12,
+   "text": "Videos",
+   "start": 85.54,
+   "end": 85.96000000000001,
+   "conf": 0.7037094487653425
+  },
+  {
+   "cue": 23,
+   "wi": 13,
+   "text": "ennum.",
+   "start": 86.0,
+   "end": 86.16,
+   "conf": 0.5892135351896286
+  },
+  {
+   "cue": 24,
+   "wi": 0,
+   "text": "Appol",
+   "start": 86.22,
+   "end": 86.34,
+   "conf": 0.34299921597121286
+  },
+  {
+   "cue": 24,
+   "wi": 1,
+   "text": "namukku",
+   "start": 86.36,
+   "end": 86.60000000000001,
+   "conf": 0.7400442955217191
+  },
+  {
+   "cue": 24,
+   "wi": 2,
+   "text": "video",
+   "start": 86.64,
+   "end": 86.92,
+   "conf": 0.792359683761606
+  },
+  {
+   "cue": 24,
+   "wi": 3,
+   "text": "generate",
+   "start": 86.94,
+   "end": 87.24,
+   "conf": 0.31457695269546093
+  },
+  {
+   "cue": 24,
+   "wi": 4,
+   "text": "cheyyanamengil,",
+   "start": 87.34,
+   "end": 87.88,
+   "conf": 0.7964553415243115
+  },
+  {
+   "cue": 24,
+   "wi": 5,
+   "text": "avashyamaya",
+   "start": 87.96000000000001,
+   "end": 88.46000000000001,
+   "conf": 0.9749666994268243
+  },
+  {
+   "cue": 24,
+   "wi": 6,
+   "text": "topic",
+   "start": 88.60000000000001,
+   "end": 88.94,
+   "conf": 0.6974805832433049
+  },
+  {
+   "cue": 24,
+   "wi": 7,
+   "text": "enthaano",
+   "start": 88.94,
+   "end": 89.3,
+   "conf": 0.7256226448807865
+  },
+  {
+   "cue": 24,
+   "wi": 8,
+   "text": "athinte",
+   "start": 89.5,
+   "end": 89.84,
+   "conf": 0.6505811116460661
+  },
+  {
+   "cue": 24,
+   "wi": 9,
+   "text": "promptum...",
+   "start": 90.18,
+   "end": 90.66,
+   "conf": 0.5828364038607106
+  },
+  {
+   "cue": 25,
+   "wi": 0,
+   "text": "Athupole",
+   "start": 90.74,
+   "end": 91.08,
+   "conf": 0.5928144256258747
+  },
+  {
+   "cue": 25,
+   "wi": 1,
+   "text": "enthengilum",
+   "start": 91.12,
+   "end": 91.5,
+   "conf": 0.7092838523147459
+  },
+  {
+   "cue": 25,
+   "wi": 2,
+   "text": "imageukal",
+   "start": 92.08,
+   "end": 92.5,
+   "conf": 0.4795611080612111
+  },
+  {
+   "cue": 25,
+   "wi": 3,
+   "text": "ningalkku",
+   "start": 92.5,
+   "end": 92.78,
+   "conf": 0.6266542971134186
+  },
+  {
+   "cue": 25,
+   "wi": 4,
+   "text": "generate",
+   "start": 92.78,
+   "end": 93.06,
+   "conf": 0.22322194146454422
+  },
+  {
+   "cue": 25,
+   "wi": 5,
+   "text": "cheyyanam",
+   "start": 93.18,
+   "end": 93.52,
+   "conf": 0.4146290963011173
+  },
+  {
+   "cue": 25,
+   "wi": 6,
+   "text": "ennundenkil",
+   "start": 93.54,
+   "end": 94.14,
+   "conf": 0.7265999786640432
+  },
+  {
+   "cue": 25,
+   "wi": 7,
+   "text": "athum",
+   "start": 94.14,
+   "end": 94.74,
+   "conf": 0.6954869939945638
+  },
+  {
+   "cue": 25,
+   "wi": 8,
+   "text": "ningalkku",
+   "start": 94.76,
+   "end": 95.18,
+   "conf": 0.7943607272787226
+  },
+  {
+   "cue": 25,
+   "wi": 9,
+   "text": "generate",
+   "start": 95.32000000000001,
+   "end": 95.62,
+   "conf": 0.13361378033005167
+  },
+  {
+   "cue": 25,
+   "wi": 10,
+   "text": "cheythu",
+   "start": 95.76,
+   "end": 95.96000000000001,
+   "conf": 0.3754595105295136
+  },
+  {
+   "cue": 25,
+   "wi": 11,
+   "text": "vekkam.",
+   "start": 95.96000000000001,
+   "end": 96.22,
+   "conf": 0.568556290701963
+  },
+  {
+   "cue": 26,
+   "wi": 0,
+   "text": "Onnukil",
+   "start": 96.22,
+   "end": 96.54,
+   "conf": 0.7967470948185239
+  },
+  {
+   "cue": 26,
+   "wi": 1,
+   "text": "ee",
+   "start": 96.64,
+   "end": 96.72,
+   "conf": 0.04614802682772279
+  },
+  {
+   "cue": 26,
+   "wi": 2,
+   "text": "oru",
+   "start": 96.82000000000001,
+   "end": 97.08,
+   "conf": 0.07888783467933536
+  },
+  {
+   "cue": 26,
+   "wi": 3,
+   "text": "software",
+   "start": 97.08,
+   "end": 97.46000000000001,
+   "conf": 0.29761776512896176
+  },
+  {
+   "cue": 26,
+   "wi": 4,
+   "text": "vazhi",
+   "start": 97.46000000000001,
+   "end": 97.64,
+   "conf": 0.3451842140269946
+  },
+  {
+   "cue": 26,
+   "wi": 5,
+   "text": "athallengil",
+   "start": 97.78,
+   "end": 98.58,
+   "conf": 0.7861784313155856
+  },
+  {
+   "cue": 26,
+   "wi": 6,
+   "text": "Gemini-yo",
+   "start": 98.64,
+   "end": 99.08,
+   "conf": 0.5899635082569148
+  },
+  {
+   "cue": 26,
+   "wi": 7,
+   "text": "ChatGPT-yo",
+   "start": 99.62,
+   "end": 100.2,
+   "conf": 0.3334302594626529
+  },
+  {
+   "cue": 26,
+   "wi": 8,
+   "text": "poleyullavayude",
+   "start": 100.2,
+   "end": 100.68,
+   "conf": 0.4302620011847466
+  },
+  {
+   "cue": 26,
+   "wi": 9,
+   "text": "sahayam",
+   "start": 100.72,
+   "end": 101.08,
+   "conf": 0.9778005651065281
+  },
+  {
+   "cue": 26,
+   "wi": 10,
+   "text": "thedikkondu",
+   "start": 101.12,
+   "end": 102.36,
+   "conf": 0.4814368813485172
+  },
+  {
+   "cue": 26,
+   "wi": 11,
+   "text": "promptukalum",
+   "start": 102.60000000000001,
+   "end": 103.16,
+   "conf": 0.7233487501119574
+  },
+  {
+   "cue": 26,
+   "wi": 12,
+   "text": "imageukalum",
+   "start": 103.38,
+   "end": 103.88,
+   "conf": 0.7175765640179386
+  },
+  {
+   "cue": 26,
+   "wi": 13,
+   "text": "generate",
+   "start": 103.92,
+   "end": 104.2,
+   "conf": 0.22039542267975776
+  },
+  {
+   "cue": 26,
+   "wi": 14,
+   "text": "cheythu",
+   "start": 104.36,
+   "end": 104.56,
+   "conf": 0.48822924128242967
+  },
+  {
+   "cue": 26,
+   "wi": 15,
+   "text": "vekkuka.",
+   "start": 104.56,
+   "end": 104.86,
+   "conf": 0.7824095828192574
+  },
+  {
+   "cue": 27,
+   "wi": 0,
+   "text": "Njan",
+   "start": 104.94,
+   "end": 105.10000000000001,
+   "conf": 0.7315803731607957
+  },
+  {
+   "cue": 27,
+   "wi": 1,
+   "text": "ippol",
+   "start": 105.12,
+   "end": 105.26,
+   "conf": 0.7272759640298319
+  },
+  {
+   "cue": 27,
+   "wi": 2,
+   "text": "oru",
+   "start": 105.28,
+   "end": 105.4,
+   "conf": 0.9481604695320129
+  },
+  {
+   "cue": 27,
+   "wi": 3,
+   "text": "video",
+   "start": 105.60000000000001,
+   "end": 105.9,
+   "conf": 0.5827722626971081
+  },
+  {
+   "cue": 27,
+   "wi": 4,
+   "text": "aanu",
+   "start": 105.92,
+   "end": 106.08,
+   "conf": 0.6751680193992797
+  },
+  {
+   "cue": 27,
+   "wi": 5,
+   "text": "ivide",
+   "start": 106.08,
+   "end": 106.26,
+   "conf": 0.699316376412753
+  },
+  {
+   "cue": 27,
+   "wi": 6,
+   "text": "generate",
+   "start": 106.34,
+   "end": 106.60000000000001,
+   "conf": 0.19584576205397752
+  },
+  {
+   "cue": 27,
+   "wi": 7,
+   "text": "cheyyan",
+   "start": 106.7,
+   "end": 106.92,
+   "conf": 0.3045636107479887
+  },
+  {
+   "cue": 27,
+   "wi": 8,
+   "text": "uddeshikkunnathu.",
+   "start": 106.94,
+   "end": 107.4,
+   "conf": 0.6333143100127927
+  },
+  {
+   "cue": 27,
+   "wi": 9,
+   "text": "Athinuvendi",
+   "start": 107.4,
+   "end": 107.8,
+   "conf": 0.5105538188310509
+  },
+  {
+   "cue": 27,
+   "wi": 10,
+   "text": "generate",
+   "start": 108.18,
+   "end": 108.62,
+   "conf": 0.28996250637283083
+  },
+  {
+   "cue": 27,
+   "wi": 11,
+   "text": "video",
+   "start": 108.62,
+   "end": 108.84,
+   "conf": 0.7230781884980388
+  },
+  {
+   "cue": 27,
+   "wi": 12,
+   "text": "ennulla",
+   "start": 108.86,
+   "end": 109.10000000000001,
+   "conf": 0.5074485036893748
+  },
+  {
+   "cue": 27,
+   "wi": 13,
+   "text": "bhagam",
+   "start": 109.10000000000001,
+   "end": 109.34,
+   "conf": 0.9705530305703481
+  },
+  {
+   "cue": 27,
+   "wi": 14,
+   "text": "select",
+   "start": 109.36,
+   "end": 109.60000000000001,
+   "conf": 0.2502512751768033
+  },
+  {
+   "cue": 27,
+   "wi": 15,
+   "text": "cheythal...",
+   "start": 109.60000000000001,
+   "end": 109.9,
+   "conf": 0.33590590922540287
+  },
+  {
+   "cue": 28,
+   "wi": 0,
+   "text": "Ningalkku",
+   "start": 109.9,
+   "end": 110.76,
+   "conf": 0.7285421358214484
+  },
+  {
+   "cue": 28,
+   "wi": 1,
+   "text": "ithe",
+   "start": 110.82000000000001,
+   "end": 110.94,
+   "conf": 0.7045677062124014
+  },
+  {
+   "cue": 28,
+   "wi": 2,
+   "text": "reethiyilayirikkum",
+   "start": 111.02,
+   "end": 111.68,
+   "conf": 0.7073330312155627
+  },
+  {
+   "cue": 28,
+   "wi": 3,
+   "text": "kanan",
+   "start": 111.74000000000001,
+   "end": 112.02,
+   "conf": 0.7797487676143646
+  },
+  {
+   "cue": 28,
+   "wi": 4,
+   "text": "sadhikkunnathu.",
+   "start": 112.04,
+   "end": 112.54,
+   "conf": 0.7672680798670106
+  },
+  {
+   "cue": 29,
+   "wi": 0,
+   "text": "Ivide",
+   "start": 112.92,
+   "end": 113.10000000000001,
+   "conf": 0.7918393567204476
+  },
+  {
+   "cue": 29,
+   "wi": 1,
+   "text": "ningalkku",
+   "start": 113.14,
+   "end": 113.44,
+   "conf": 0.6918650898668501
+  },
+  {
+   "cue": 29,
+   "wi": 2,
+   "text": "kanam,",
+   "start": 113.44,
+   "end": 113.76,
+   "conf": 0.9679894089698792
+  },
+  {
+   "cue": 29,
+   "wi": 3,
+   "text": "ithilekku",
+   "start": 113.8,
+   "end": 114.16,
+   "conf": 0.5262997894460568
+  },
+  {
+   "cue": 29,
+   "wi": 4,
+   "text": "free",
+   "start": 114.34,
+   "end": 114.58,
+   "conf": 0.24316289727903495
+  },
+  {
+   "cue": 29,
+   "wi": 5,
+   "text": "aayittu",
+   "start": 114.60000000000001,
+   "end": 114.88,
+   "conf": 0.5343998635986021
+  },
+  {
+   "cue": 29,
+   "wi": 6,
+   "text": "namukku",
+   "start": 114.9,
+   "end": 115.14,
+   "conf": 0.6105912677677614
+  },
+  {
+   "cue": 29,
+   "wi": 7,
+   "text": "daily",
+   "start": 115.54,
+   "end": 115.86,
+   "conf": 0.6075319504598156
+  },
+  {
+   "cue": 29,
+   "wi": 8,
+   "text": "100",
+   "start": 116.04,
+   "end": 116.54,
+   "conf": 0.19161870477255433
+  },
+  {
+   "cue": 29,
+   "wi": 9,
+   "text": "videokal",
+   "start": 116.76,
+   "end": 117.22,
+   "conf": 0.8436443962855265
+  },
+  {
+   "cue": 29,
+   "wi": 10,
+   "text": "vare",
+   "start": 117.34,
+   "end": 117.5,
+   "conf": 0.6509970724582672
+  },
+  {
+   "cue": 29,
+   "wi": 11,
+   "text": "labhikkum",
+   "start": 118.04,
+   "end": 118.36,
+   "conf": 0.8421862920125326
+  },
+  {
+   "cue": 29,
+   "wi": 12,
+   "text": "ennullathu,",
+   "start": 118.36,
+   "end": 118.72,
+   "conf": 0.5582178091979586
+  },
+  {
+   "cue": 29,
+   "wi": 13,
+   "text": "adhava",
+   "start": 118.74000000000001,
+   "end": 118.86,
+   "conf": 0.20593416665603095
+  },
+  {
+   "cue": 29,
+   "wi": 14,
+   "text": "100",
+   "start": 118.96000000000001,
+   "end": 119.36,
+   "conf": 0.27980963803461883
+  },
+  {
+   "cue": 29,
+   "wi": 15,
+   "text": "videos",
+   "start": 119.38,
+   "end": 119.74000000000001,
+   "conf": 0.8075542946656545
+  },
+  {
+   "cue": 29,
+   "wi": 16,
+   "text": "per",
+   "start": 119.8,
+   "end": 119.94,
+   "conf": 0.696689968307813
+  },
+  {
+   "cue": 29,
+   "wi": 17,
+   "text": "day",
+   "start": 120.06,
+   "end": 120.14,
+   "conf": 0.14215224981307983
+  },
+  {
+   "cue": 29,
+   "wi": 18,
+   "text": "ennu",
+   "start": 120.26,
+   "end": 120.4,
+   "conf": 0.7083377675153315
+  },
+  {
+   "cue": 29,
+   "wi": 19,
+   "text": "kanikkum.",
+   "start": 120.42,
+   "end": 120.8,
+   "conf": 0.9462436959147453
+  },
+  {
+   "cue": 30,
+   "wi": 0,
+   "text": "Sign",
+   "start": 120.92,
+   "end": 121.16,
+   "conf": 0.687530782158774
+  },
+  {
+   "cue": 30,
+   "wi": 1,
+   "text": "up",
+   "start": 121.2,
+   "end": 121.28,
+   "conf": 0.4916054195491597
+  },
+  {
+   "cue": 30,
+   "wi": 2,
+   "text": "nirbandhamaanu,",
+   "start": 121.52,
+   "end": 122.16,
+   "conf": 0.8331616230009656
+  },
+  {
+   "cue": 30,
+   "wi": 3,
+   "text": "athupole",
+   "start": 122.22,
+   "end": 122.58,
+   "conf": 0.807512985204994
+  },
+  {
+   "cue": 30,
+   "wi": 4,
+   "text": "free",
+   "start": 122.76,
+   "end": 122.98,
+   "conf": 0.2473298038530629
+  },
+  {
+   "cue": 30,
+   "wi": 5,
+   "text": "aayittu",
+   "start": 123.12,
+   "end": 123.4,
+   "conf": 0.7968368876193251
+  },
+  {
+   "cue": 30,
+   "wi": 6,
+   "text": "namukku",
+   "start": 123.42,
+   "end": 123.60000000000001,
+   "conf": 0.5901636987941207
+  },
+  {
+   "cue": 30,
+   "wi": 7,
+   "text": "ithine",
+   "start": 123.60000000000001,
+   "end": 123.76,
+   "conf": 0.5063815341272857
+  },
+  {
+   "cue": 30,
+   "wi": 8,
+   "text": "commercial",
+   "start": 123.8,
+   "end": 124.26,
+   "conf": 0.39800232397392393
+  },
+  {
+   "cue": 30,
+   "wi": 9,
+   "text": "usinum",
+   "start": 124.34,
+   "end": 124.66,
+   "conf": 0.8810976048310598
+  },
+  {
+   "cue": 30,
+   "wi": 10,
+   "text": "upayogikkan",
+   "start": 124.8,
+   "end": 125.28,
+   "conf": 0.8716698017987338
+  },
+  {
+   "cue": 30,
+   "wi": 11,
+   "text": "sadhikkum",
+   "start": 125.32000000000001,
+   "end": 125.68,
+   "conf": 0.924128082063463
+  },
+  {
+   "cue": 30,
+   "wi": 12,
+   "text": "ennu",
+   "start": 125.72,
+   "end": 125.84,
+   "conf": 0.6989066803944297
+  },
+  {
+   "cue": 30,
+   "wi": 13,
+   "text": "ivide",
+   "start": 125.84,
+   "end": 126.08,
+   "conf": 0.633617521636188
+  },
+  {
+   "cue": 30,
+   "wi": 14,
+   "text": "thanne",
+   "start": 126.12,
+   "end": 126.9,
+   "conf": 0.4617495614390161
+  },
+  {
+   "cue": 30,
+   "wi": 15,
+   "text": "kanam.",
+   "start": 126.9,
+   "end": 127.22,
+   "conf": 0.8458765029907227
+  },
+  {
+   "cue": 31,
+   "wi": 0,
+   "text": "Ini",
+   "start": 127.3,
+   "end": 127.4,
+   "conf": 0.5503974755605062
+  },
+  {
+   "cue": 31,
+   "wi": 1,
+   "text": "ningal",
+   "start": 127.42,
+   "end": 127.58,
+   "conf": 0.7678617052733898
+  },
+  {
+   "cue": 31,
+   "wi": 2,
+   "text": "cheyyendathu",
+   "start": 127.64,
+   "end": 129.08,
+   "conf": 0.536146235477645
+  },
+  {
+   "cue": 31,
+   "wi": 3,
+   "text": "'Your",
+   "start": 129.12,
+   "end": 129.26,
+   "conf": 0.2778640522155911
+  },
+  {
+   "cue": 31,
+   "wi": 4,
+   "text": "Prompt'",
+   "start": 129.28,
+   "end": 129.64000000000001,
+   "conf": 0.5318770523493489
+  },
+  {
+   "cue": 31,
+   "wi": 5,
+   "text": "ennulla",
+   "start": 129.68,
+   "end": 129.92000000000002,
+   "conf": 0.5454303382762841
+  },
+  {
+   "cue": 31,
+   "wi": 6,
+   "text": "bhagathu",
+   "start": 129.92000000000002,
+   "end": 130.22,
+   "conf": 0.7405875814038154
+  },
+  {
+   "cue": 31,
+   "wi": 7,
+   "text": "ningal",
+   "start": 130.26,
+   "end": 130.44,
+   "conf": 0.9270009795824686
+  },
+  {
+   "cue": 31,
+   "wi": 8,
+   "text": "video",
+   "start": 130.66,
+   "end": 131.26,
+   "conf": 0.3516183633197215
+  },
+  {
+   "cue": 31,
+   "wi": 9,
+   "text": "generate",
+   "start": 131.56,
+   "end": 132.8,
+   "conf": 0.31245611992198974
+  },
+  {
+   "cue": 31,
+   "wi": 10,
+   "text": "cheyyan",
+   "start": 132.8,
+   "end": 133.02,
+   "conf": 0.5733072392447086
+  },
+  {
+   "cue": 31,
+   "wi": 11,
+   "text": "avashyamaya",
+   "start": 133.1,
+   "end": 133.54,
+   "conf": 0.9286419695073908
+  },
+  {
+   "cue": 31,
+   "wi": 12,
+   "text": "prompt",
+   "start": 133.58,
+   "end": 134.04,
+   "conf": 0.6836428948057195
+  },
+  {
+   "cue": 31,
+   "wi": 13,
+   "text": "paste",
+   "start": 134.04,
+   "end": 135.02,
+   "conf": 0.4856254389567766
+  },
+  {
+   "cue": 31,
+   "wi": 14,
+   "text": "cheythu",
+   "start": 135.14000000000001,
+   "end": 135.32,
+   "conf": 0.16036742184743552
+  },
+  {
+   "cue": 31,
+   "wi": 15,
+   "text": "kodukkuka.",
+   "start": 135.32,
+   "end": 135.64000000000001,
+   "conf": 0.31261638396730024
+  },
+  {
+   "cue": 32,
+   "wi": 0,
+   "text": "Njan",
+   "start": 135.68,
+   "end": 135.86,
+   "conf": 0.7232744861873925
+  },
+  {
+   "cue": 32,
+   "wi": 1,
+   "text": "ChatGPT-ye",
+   "start": 136.06,
+   "end": 136.78,
+   "conf": 0.4047468297907876
+  },
+  {
+   "cue": 32,
+   "wi": 2,
+   "text": "kondu",
+   "start": 136.84,
+   "end": 137.1,
+   "conf": 0.5327017483767122
+  },
+  {
+   "cue": 32,
+   "wi": 3,
+   "text": "cheyyicha",
+   "start": 137.32,
+   "end": 137.66,
+   "conf": 0.6012036890638733
+  },
+  {
+   "cue": 32,
+   "wi": 4,
+   "text": "oru",
+   "start": 137.70000000000002,
+   "end": 137.8,
+   "conf": 0.8273262977600098
+  },
+  {
+   "cue": 32,
+   "wi": 5,
+   "text": "prompt",
+   "start": 137.8,
+   "end": 138.16,
+   "conf": 0.5599212851375341
+  },
+  {
+   "cue": 32,
+   "wi": 6,
+   "text": "aanu,",
+   "start": 138.18,
+   "end": 138.32,
+   "conf": 0.7344967839053425
+  },
+  {
+   "cue": 32,
+   "wi": 7,
+   "text": "oru",
+   "start": 138.44,
+   "end": 138.54,
+   "conf": 0.9057361086209615
+  },
+  {
+   "cue": 32,
+   "wi": 8,
+   "text": "aamayum",
+   "start": 138.6,
+   "end": 138.96,
+   "conf": 0.9535545536449977
+  },
+  {
+   "cue": 32,
+   "wi": 9,
+   "text": "muyalum",
+   "start": 138.98,
+   "end": 139.28,
+   "conf": 0.6793378080640521
+  },
+  {
+   "cue": 32,
+   "wi": 10,
+   "text": "thammilulla",
+   "start": 139.32,
+   "end": 139.76,
+   "conf": 0.8397256577895447
+  },
+  {
+   "cue": 32,
+   "wi": 11,
+   "text": "ottamalsaramaanu",
+   "start": 139.96,
+   "end": 140.70000000000002,
+   "conf": 0.7657899451442063
+  },
+  {
+   "cue": 32,
+   "wi": 12,
+   "text": "njan",
+   "start": 140.72,
+   "end": 140.92000000000002,
+   "conf": 0.5263594614516478
+  },
+  {
+   "cue": 32,
+   "wi": 13,
+   "text": "ivide",
+   "start": 140.94,
+   "end": 141.20000000000002,
+   "conf": 0.6975258962251246
+  },
+  {
+   "cue": 32,
+   "wi": 14,
+   "text": "generate",
+   "start": 141.42000000000002,
+   "end": 141.76,
+   "conf": 0.28308313140951213
+  },
+  {
+   "cue": 32,
+   "wi": 15,
+   "text": "cheyyan",
+   "start": 141.76,
+   "end": 142.0,
+   "conf": 0.43723114757865134
+  },
+  {
+   "cue": 32,
+   "wi": 16,
+   "text": "uddeshikkunnathu.",
+   "start": 142.02,
+   "end": 142.54,
+   "conf": 0.8393153591005102
+  },
+  {
+   "cue": 33,
+   "wi": 0,
+   "text": "Appol",
+   "start": 142.56,
+   "end": 142.68,
+   "conf": 0.04874357727094321
+  },
+  {
+   "cue": 33,
+   "wi": 1,
+   "text": "athinuvendiya",
+   "start": 142.68,
+   "end": 143.16,
+   "conf": 0.5017021319721467
+  },
+  {
+   "cue": 33,
+   "wi": 2,
+   "text": "promptum",
+   "start": 143.18,
+   "end": 143.62,
+   "conf": 0.6016156848054379
+  },
+  {
+   "cue": 33,
+   "wi": 3,
+   "text": "imageum",
+   "start": 144.08,
+   "end": 144.44,
+   "conf": 0.601434850399268
+  },
+  {
+   "cue": 33,
+   "wi": 4,
+   "text": "njan",
+   "start": 144.56,
+   "end": 144.72,
+   "conf": 0.6760428176066853
+  },
+  {
+   "cue": 33,
+   "wi": 5,
+   "text": "ChatGPT-ye",
+   "start": 144.74,
+   "end": 145.36,
+   "conf": 0.2730608759965334
+  },
+  {
+   "cue": 33,
+   "wi": 6,
+   "text": "kondu",
+   "start": 145.36,
+   "end": 145.64000000000001,
+   "conf": 0.22384928474202753
+  },
+  {
+   "cue": 33,
+   "wi": 7,
+   "text": "generate",
+   "start": 145.84,
+   "end": 146.24,
+   "conf": 0.2460644742968725
+  },
+  {
+   "cue": 33,
+   "wi": 8,
+   "text": "cheyyichu,",
+   "start": 146.26,
+   "end": 146.56,
+   "conf": 0.5402056151651777
+  },
+  {
+   "cue": 33,
+   "wi": 9,
+   "text": "prompt",
+   "start": 146.66,
+   "end": 147.02,
+   "conf": 0.5714027732610703
+  },
+  {
+   "cue": 33,
+   "wi": 10,
+   "text": "ivide",
+   "start": 147.02,
+   "end": 147.18,
+   "conf": 0.6119864122010767
+  },
+  {
+   "cue": 33,
+   "wi": 11,
+   "text": "paste",
+   "start": 147.20000000000002,
+   "end": 147.4,
+   "conf": 0.2766800983430585
+  },
+  {
+   "cue": 33,
+   "wi": 12,
+   "text": "cheythu",
+   "start": 147.42000000000002,
+   "end": 147.6,
+   "conf": 0.2612092683765305
+  },
+  {
+   "cue": 33,
+   "wi": 13,
+   "text": "koduthu.",
+   "start": 147.6,
+   "end": 147.82,
+   "conf": 0.22420122674001114
+  },
+  {
+   "cue": 34,
+   "wi": 0,
+   "text": "Ini",
+   "start": 147.94,
+   "end": 148.06,
+   "conf": 0.4299071977535884
+  },
+  {
+   "cue": 34,
+   "wi": 1,
+   "text": "ithilekku",
+   "start": 148.12,
+   "end": 148.48,
+   "conf": 0.6862100892596774
+  },
+  {
+   "cue": 34,
+   "wi": 2,
+   "text": "image",
+   "start": 148.54,
+   "end": 148.72,
+   "conf": 0.47309591213197566
+  },
+  {
+   "cue": 34,
+   "wi": 3,
+   "text": "add",
+   "start": 148.86,
+   "end": 149.02,
+   "conf": 0.27575135479370755
+  },
+  {
+   "cue": 34,
+   "wi": 4,
+   "text": "cheyyanam.",
+   "start": 149.04,
+   "end": 149.6,
+   "conf": 0.42052756743376246
+  },
+  {
+   "cue": 34,
+   "wi": 5,
+   "text": "Athinu",
+   "start": 149.74,
+   "end": 150.20000000000002,
+   "conf": 0.4508094520618518
+  },
+  {
+   "cue": 34,
+   "wi": 6,
+   "text": "vendi",
+   "start": 150.22,
+   "end": 150.44,
+   "conf": 0.5808837959542871
+  },
+  {
+   "cue": 34,
+   "wi": 7,
+   "text": "randamathe",
+   "start": 150.44,
+   "end": 150.94,
+   "conf": 0.5516021344417823
+  },
+  {
+   "cue": 34,
+   "wi": 8,
+   "text": "'Images'",
+   "start": 151.42000000000002,
+   "end": 151.76,
+   "conf": 0.46990027604139567
+  },
+  {
+   "cue": 34,
+   "wi": 9,
+   "text": "ennulla",
+   "start": 151.8,
+   "end": 152.08,
+   "conf": 0.7565874223198209
+  },
+  {
+   "cue": 34,
+   "wi": 10,
+   "text": "bhagathu",
+   "start": 152.08,
+   "end": 152.38,
+   "conf": 0.7284199252694634
+  },
+  {
+   "cue": 34,
+   "wi": 11,
+   "text": "ninnu",
+   "start": 152.42000000000002,
+   "end": 152.6,
+   "conf": 0.8377177119255066
+  },
+  {
+   "cue": 34,
+   "wi": 12,
+   "text": "nammude",
+   "start": 152.82,
+   "end": 153.16,
+   "conf": 0.8467459267579086
+  },
+  {
+   "cue": 34,
+   "wi": 13,
+   "text": "gallery",
+   "start": 153.36,
+   "end": 153.74,
+   "conf": 0.5621340059276138
+  },
+  {
+   "cue": 34,
+   "wi": 14,
+   "text": "select",
+   "start": 153.8,
+   "end": 154.06,
+   "conf": 0.24565588627107596
+  },
+  {
+   "cue": 34,
+   "wi": 15,
+   "text": "cheythu...",
+   "start": 154.1,
+   "end": 154.32,
+   "conf": 0.22137989871303684
+  },
+  {
+   "cue": 35,
+   "wi": 0,
+   "text": "Avashyamaya",
+   "start": 154.6,
+   "end": 155.04,
+   "conf": 0.9499983787536621
+  },
+  {
+   "cue": 35,
+   "wi": 1,
+   "text": "photo",
+   "start": 155.06,
+   "end": 155.36,
+   "conf": 0.9712430000305176
+  },
+  {
+   "cue": 35,
+   "wi": 2,
+   "text": "ithilekku",
+   "start": 155.42000000000002,
+   "end": 155.74,
+   "conf": 0.5712402533713935
+  },
+  {
+   "cue": 35,
+   "wi": 3,
+   "text": "add",
+   "start": 156.12,
+   "end": 156.22,
+   "conf": 0.22656966062883535
+  },
+  {
+   "cue": 35,
+   "wi": 4,
+   "text": "cheythu",
+   "start": 156.24,
+   "end": 156.48,
+   "conf": 0.35048784310388975
+  },
+  {
+   "cue": 35,
+   "wi": 5,
+   "text": "kodukkam.",
+   "start": 156.48,
+   "end": 156.78,
+   "conf": 0.5775873018938
+  },
+  {
+   "cue": 35,
+   "wi": 6,
+   "text": "Ore",
+   "start": 156.82,
+   "end": 156.92000000000002,
+   "conf": 0.655739730844895
+  },
+  {
+   "cue": 35,
+   "wi": 7,
+   "text": "samayam",
+   "start": 156.96,
+   "end": 157.16,
+   "conf": 0.6255016328234758
+  },
+  {
+   "cue": 35,
+   "wi": 8,
+   "text": "namukku",
+   "start": 157.16,
+   "end": 157.36,
+   "conf": 0.6485380040747779
+  },
+  {
+   "cue": 35,
+   "wi": 9,
+   "text": "moonnu",
+   "start": 157.4,
+   "end": 157.88,
+   "conf": 0.2225433238587963
+  },
+  {
+   "cue": 35,
+   "wi": 10,
+   "text": "photokal",
+   "start": 157.9,
+   "end": 158.34,
+   "conf": 0.8930943310260773
+  },
+  {
+   "cue": 35,
+   "wi": 11,
+   "text": "add",
+   "start": 158.34,
+   "end": 158.52,
+   "conf": 0.18308351778735718
+  },
+  {
+   "cue": 35,
+   "wi": 12,
+   "text": "cheyyan",
+   "start": 158.54,
+   "end": 158.78,
+   "conf": 0.6608402136189397
+  },
+  {
+   "cue": 35,
+   "wi": 13,
+   "text": "sadhikkum.",
+   "start": 158.82,
+   "end": 159.18,
+   "conf": 0.8472769326633878
+  },
+  {
+   "cue": 36,
+   "wi": 0,
+   "text": "Athinushesham",
+   "start": 159.28,
+   "end": 159.72,
+   "conf": 0.740185881270848
+  },
+  {
+   "cue": 36,
+   "wi": 1,
+   "text": "ivide",
+   "start": 159.74,
+   "end": 159.92000000000002,
+   "conf": 0.7874531310168095
+  },
+  {
+   "cue": 36,
+   "wi": 2,
+   "text": "thazheyayi",
+   "start": 159.94,
+   "end": 160.28,
+   "conf": 0.3356609716670846
+  },
+  {
+   "cue": 36,
+   "wi": 3,
+   "text": "namukku",
+   "start": 160.28,
+   "end": 160.5,
+   "conf": 0.6797168566180127
+  },
+  {
+   "cue": 36,
+   "wi": 4,
+   "text": "'Fast',",
+   "start": 160.54,
+   "end": 160.9,
+   "conf": 0.34085129199229414
+  },
+  {
+   "cue": 36,
+   "wi": 5,
+   "text": "'Quality'",
+   "start": 161.16,
+   "end": 161.52,
+   "conf": 0.35343667542266693
+  },
+  {
+   "cue": 36,
+   "wi": 6,
+   "text": "enningane",
+   "start": 161.52,
+   "end": 161.86,
+   "conf": 0.5384698931334747
+  },
+  {
+   "cue": 36,
+   "wi": 7,
+   "text": "randu",
+   "start": 161.9,
+   "end": 162.18,
+   "conf": 0.5448105610907078
+  },
+  {
+   "cue": 36,
+   "wi": 8,
+   "text": "optionukal",
+   "start": 162.20000000000002,
+   "end": 162.54,
+   "conf": 0.5825854291524593
+  },
+  {
+   "cue": 36,
+   "wi": 9,
+   "text": "kanam.",
+   "start": 162.64000000000001,
+   "end": 162.92000000000002,
+   "conf": 0.9033382177352905
+  },
+  {
+   "cue": 37,
+   "wi": 0,
+   "text": "Ningalkku",
+   "start": 163.0,
+   "end": 163.36,
+   "conf": 0.8561952103757196
+  },
+  {
+   "cue": 37,
+   "wi": 1,
+   "text": "urgent",
+   "start": 163.56,
+   "end": 163.86,
+   "conf": 0.3198071096424731
+  },
+  {
+   "cue": 37,
+   "wi": 2,
+   "text": "illa",
+   "start": 163.92000000000002,
+   "end": 164.06,
+   "conf": 0.9079272300004959
+  },
+  {
+   "cue": 37,
+   "wi": 3,
+   "text": "ennundenkil",
+   "start": 164.12,
+   "end": 164.52,
+   "conf": 0.7252965361641889
+  },
+  {
+   "cue": 37,
+   "wi": 4,
+   "text": "Quality",
+   "start": 164.58,
+   "end": 164.96,
+   "conf": 0.4947535388977745
+  },
+  {
+   "cue": 37,
+   "wi": 5,
+   "text": "select",
+   "start": 165.42000000000002,
+   "end": 165.64000000000001,
+   "conf": 0.21361727880018103
+  },
+  {
+   "cue": 37,
+   "wi": 6,
+   "text": "cheyyam,",
+   "start": 165.66,
+   "end": 165.88,
+   "conf": 0.40784145812358474
+  },
+  {
+   "cue": 37,
+   "wi": 7,
+   "text": "pettennavanam",
+   "start": 165.9,
+   "end": 166.46,
+   "conf": 0.8131202673181318
+  },
+  {
+   "cue": 37,
+   "wi": 8,
+   "text": "ennundenkil",
+   "start": 166.46,
+   "end": 166.88,
+   "conf": 0.8434826358835298
+  },
+  {
+   "cue": 37,
+   "wi": 9,
+   "text": "Fast",
+   "start": 166.92000000000002,
+   "end": 167.26,
+   "conf": 0.3760117438941961
+  },
+  {
+   "cue": 37,
+   "wi": 10,
+   "text": "ennulla",
+   "start": 167.26,
+   "end": 167.54,
+   "conf": 0.5909006313553878
+  },
+  {
+   "cue": 37,
+   "wi": 11,
+   "text": "bhagavum",
+   "start": 167.54,
+   "end": 167.86,
+   "conf": 0.7672260161489248
+  },
+  {
+   "cue": 37,
+   "wi": 12,
+   "text": "select",
+   "start": 168.0,
+   "end": 168.22,
+   "conf": 0.30787071569648106
+  },
+  {
+   "cue": 37,
+   "wi": 13,
+   "text": "cheyyam.",
+   "start": 168.24,
+   "end": 168.5,
+   "conf": 0.34758398463288487
+  },
+  {
+   "cue": 38,
+   "wi": 0,
+   "text": "Ethra",
+   "start": 168.64000000000001,
+   "end": 168.82,
+   "conf": 0.6628781411971432
+  },
+  {
+   "cue": 38,
+   "wi": 1,
+   "text": "samayam",
+   "start": 168.88,
+   "end": 169.20000000000002,
+   "conf": 0.9725952999932426
+  },
+  {
+   "cue": 38,
+   "wi": 2,
+   "text": "vendi",
+   "start": 169.24,
+   "end": 169.58,
+   "conf": 0.7499514169991016
+  },
+  {
+   "cue": 38,
+   "wi": 3,
+   "text": "varum",
+   "start": 169.58,
+   "end": 169.8,
+   "conf": 0.9630742311477661
+  },
+  {
+   "cue": 38,
+   "wi": 4,
+   "text": "ennullathum",
+   "start": 169.84,
+   "end": 170.24,
+   "conf": 0.7322525868763808
+  },
+  {
+   "cue": 38,
+   "wi": 5,
+   "text": "ivide",
+   "start": 170.28,
+   "end": 170.5,
+   "conf": 0.7628605039790273
+  },
+  {
+   "cue": 38,
+   "wi": 6,
+   "text": "nalkiyittullathu",
+   "start": 170.54,
+   "end": 171.12,
+   "conf": 0.6065507386811078
+  },
+  {
+   "cue": 38,
+   "wi": 7,
+   "text": "ningalkku",
+   "start": 171.12,
+   "end": 171.44,
+   "conf": 0.6523327901959419
+  },
+  {
+   "cue": 38,
+   "wi": 8,
+   "text": "kanam.",
+   "start": 171.44,
+   "end": 171.72,
+   "conf": 0.4561644732952118
+  },
+  {
+   "cue": 39,
+   "wi": 0,
+   "text": "Exact",
+   "start": 171.84,
+   "end": 172.28,
+   "conf": 0.07999052880331874
+  },
+  {
+   "cue": 39,
+   "wi": 1,
+   "text": "ithoru",
+   "start": 172.28,
+   "end": 172.46,
+   "conf": 0.08226360495609697
+  },
+  {
+   "cue": 39,
+   "wi": 2,
+   "text": "perfect",
+   "start": 172.58,
+   "end": 172.92000000000002,
+   "conf": 0.3802897553791159
+  },
+  {
+   "cue": 39,
+   "wi": 3,
+   "text": "aayittulla",
+   "start": 172.92000000000002,
+   "end": 173.20000000000002,
+   "conf": 0.19990692883729935
+  },
+  {
+   "cue": 39,
+   "wi": 4,
+   "text": "timing",
+   "start": 173.26,
+   "end": 173.52,
+   "conf": 0.7915149827798208
+  },
+  {
+   "cue": 39,
+   "wi": 5,
+   "text": "alla,",
+   "start": 173.52,
+   "end": 173.68,
+   "conf": 0.8377466797828674
+  },
+  {
+   "cue": 39,
+   "wi": 6,
+   "text": "oru",
+   "start": 173.78,
+   "end": 173.9,
+   "conf": 0.820130983988444
+  },
+  {
+   "cue": 39,
+   "wi": 7,
+   "text": "ekadesha",
+   "start": 174.24,
+   "end": 174.56,
+   "conf": 0.8654099069535732
+  },
+  {
+   "cue": 39,
+   "wi": 8,
+   "text": "kanakkaanu.",
+   "start": 174.62,
+   "end": 175.06,
+   "conf": 0.8066726103425026
+  },
+  {
+   "cue": 39,
+   "wi": 9,
+   "text": "Chilappol",
+   "start": 175.20000000000002,
+   "end": 175.54,
+   "conf": 0.6198808192663515
+  },
+  {
+   "cue": 39,
+   "wi": 10,
+   "text": "kooduthalavam,",
+   "start": 175.68,
+   "end": 176.26,
+   "conf": 0.45133672937271724
+  },
+  {
+   "cue": 39,
+   "wi": 11,
+   "text": "chilappol",
+   "start": 176.44,
+   "end": 176.76,
+   "conf": 0.7412852621637285
+  },
+  {
+   "cue": 39,
+   "wi": 12,
+   "text": "kuravumaavam.",
+   "start": 177.06,
+   "end": 177.64000000000001,
+   "conf": 0.892990251382192
+  },
+  {
+   "cue": 40,
+   "wi": 0,
+   "text": "Enthayalum",
+   "start": 177.72,
+   "end": 178.12,
+   "conf": 0.7861299513519043
+  },
+  {
+   "cue": 40,
+   "wi": 1,
+   "text": "ningalkku",
+   "start": 178.26,
+   "end": 178.58,
+   "conf": 0.8071030866768625
+  },
+  {
+   "cue": 40,
+   "wi": 2,
+   "text": "avashyamulla",
+   "start": 178.64000000000001,
+   "end": 179.1,
+   "conf": 0.9666079779465994
+  },
+  {
+   "cue": 40,
+   "wi": 3,
+   "text": "option",
+   "start": 179.14000000000001,
+   "end": 179.4,
+   "conf": 0.4008609533969623
+  },
+  {
+   "cue": 40,
+   "wi": 4,
+   "text": "select",
+   "start": 179.44,
+   "end": 179.64000000000001,
+   "conf": 0.219905221851756
+  },
+  {
+   "cue": 40,
+   "wi": 5,
+   "text": "cheyyam.",
+   "start": 179.66,
+   "end": 179.88,
+   "conf": 0.23978555072764202
+  },
+  {
+   "cue": 40,
+   "wi": 6,
+   "text": "Ithil",
+   "start": 179.88,
+   "end": 180.06,
+   "conf": 0.6852440394461154
+  },
+  {
+   "cue": 40,
+   "wi": 7,
+   "text": "ninnu",
+   "start": 180.08,
+   "end": 180.20000000000002,
+   "conf": 0.35821911226958036
+  },
+  {
+   "cue": 40,
+   "wi": 8,
+   "text": "ningalkku",
+   "start": 180.20000000000002,
+   "end": 180.54,
+   "conf": 0.8512378103203244
+  },
+  {
+   "cue": 40,
+   "wi": 9,
+   "text": "landscape",
+   "start": 180.54,
+   "end": 181.02,
+   "conf": 0.5405743898202976
+  },
+  {
+   "cue": 40,
+   "wi": 10,
+   "text": "venamengil",
+   "start": 181.02,
+   "end": 181.42000000000002,
+   "conf": 0.8691597878932953
+  },
+  {
+   "cue": 40,
+   "wi": 11,
+   "text": "angane...",
+   "start": 181.46,
+   "end": 181.68,
+   "conf": 0.9129158655802408
+  },
+  {
+   "cue": 41,
+   "wi": 0,
+   "text": "Athallengil",
+   "start": 182.06,
+   "end": 182.42000000000002,
+   "conf": 0.6916191373284991
+  },
+  {
+   "cue": 41,
+   "wi": 1,
+   "text": "portrait",
+   "start": 182.46,
+   "end": 182.9,
+   "conf": 0.40571276121772826
+  },
+  {
+   "cue": 41,
+   "wi": 2,
+   "text": "venamennundenkil",
+   "start": 182.9,
+   "end": 183.48,
+   "conf": 0.7791511030809488
+  },
+  {
+   "cue": 41,
+   "wi": 3,
+   "text": "angane",
+   "start": 183.52,
+   "end": 183.74,
+   "conf": 0.8584900498390198
+  },
+  {
+   "cue": 41,
+   "wi": 4,
+   "text": "cheyyanulla",
+   "start": 183.78,
+   "end": 184.12,
+   "conf": 0.6317265213864712
+  },
+  {
+   "cue": 41,
+   "wi": 5,
+   "text": "option",
+   "start": 184.14000000000001,
+   "end": 184.34,
+   "conf": 0.39236311945508834
+  },
+  {
+   "cue": 41,
+   "wi": 6,
+   "text": "undu.",
+   "start": 184.34,
+   "end": 184.52,
+   "conf": 0.41061140636520577
+  },
+  {
+   "cue": 42,
+   "wi": 0,
+   "text": "Ini",
+   "start": 184.54,
+   "end": 184.66,
+   "conf": 0.4943139875928561
+  },
+  {
+   "cue": 42,
+   "wi": 1,
+   "text": "ningal",
+   "start": 184.68,
+   "end": 184.88,
+   "conf": 0.9134496251742045
+  },
+  {
+   "cue": 42,
+   "wi": 2,
+   "text": "nalkiya",
+   "start": 184.96,
+   "end": 185.28,
+   "conf": 0.9035991770880563
+  },
+  {
+   "cue": 42,
+   "wi": 3,
+   "text": "prompt",
+   "start": 185.32,
+   "end": 185.72,
+   "conf": 0.5626327328694364
+  },
+  {
+   "cue": 42,
+   "wi": 4,
+   "text": "kurachukoodi",
+   "start": 185.74,
+   "end": 186.26,
+   "conf": 0.5574775688219233
+  },
+  {
+   "cue": 42,
+   "wi": 5,
+   "text": "powerful",
+   "start": 186.42000000000002,
+   "end": 186.84,
+   "conf": 0.385174058337725
+  },
+  {
+   "cue": 42,
+   "wi": 6,
+   "text": "aakkanam",
+   "start": 186.84,
+   "end": 187.14000000000001,
+   "conf": 0.911786749958992
+  },
+  {
+   "cue": 42,
+   "wi": 7,
+   "text": "ennundenkil,",
+   "start": 187.14000000000001,
+   "end": 187.58,
+   "conf": 0.829307047946548
+  },
+  {
+   "cue": 42,
+   "wi": 8,
+   "text": "'Enhance",
+   "start": 187.70000000000002,
+   "end": 188.22,
+   "conf": 0.6908954646538145
+  },
+  {
+   "cue": 42,
+   "wi": 9,
+   "text": "My",
+   "start": 188.22,
+   "end": 188.32,
+   "conf": 0.46986332535743713
+  },
+  {
+   "cue": 42,
+   "wi": 10,
+   "text": "Prompt'",
+   "start": 188.36,
+   "end": 188.74,
+   "conf": 0.4945279990012447
+  },
+  {
+   "cue": 42,
+   "wi": 11,
+   "text": "ennulla",
+   "start": 188.78,
+   "end": 189.04,
+   "conf": 0.7635298328740256
+  },
+  {
+   "cue": 42,
+   "wi": 12,
+   "text": "ee",
+   "start": 189.08,
+   "end": 189.16,
+   "conf": 0.00013409494567895308
+  },
+  {
+   "cue": 42,
+   "wi": 13,
+   "text": "button",
+   "start": 189.16,
+   "end": 189.48,
+   "conf": 0.589348932797293
+  },
+  {
+   "cue": 42,
+   "wi": 14,
+   "text": "enable",
+   "start": 189.5,
+   "end": 189.82,
+   "conf": 0.5063988810870796
+  },
+  {
+   "cue": 42,
+   "wi": 15,
+   "text": "cheythu",
+   "start": 189.84,
+   "end": 190.04,
+   "conf": 0.5877469739623068
+  },
+  {
+   "cue": 42,
+   "wi": 16,
+   "text": "kazhinjal...",
+   "start": 190.04,
+   "end": 190.4,
+   "conf": 0.5854380105540018
+  },
+  {
+   "cue": 43,
+   "wi": 0,
+   "text": "Nammal",
+   "start": 190.52,
+   "end": 190.8,
+   "conf": 0.9823470115661621
+  },
+  {
+   "cue": 43,
+   "wi": 1,
+   "text": "nalkiya",
+   "start": 190.84,
+   "end": 191.16,
+   "conf": 0.906416688646589
+  },
+  {
+   "cue": 43,
+   "wi": 2,
+   "text": "prompt",
+   "start": 191.16,
+   "end": 191.48000000000002,
+   "conf": 0.5175751087566217
+  },
+  {
+   "cue": 43,
+   "wi": 3,
+   "text": "enhance",
+   "start": 191.52,
+   "end": 191.86,
+   "conf": 0.6476684407597142
+  },
+  {
+   "cue": 43,
+   "wi": 4,
+   "text": "cheythukondu",
+   "start": 191.86,
+   "end": 192.26,
+   "conf": 0.4781558644778367
+  },
+  {
+   "cue": 43,
+   "wi": 5,
+   "text": "avashyamaya",
+   "start": 192.28,
+   "end": 192.64000000000001,
+   "conf": 0.8773427171611481
+  },
+  {
+   "cue": 43,
+   "wi": 6,
+   "text": "reethiyil",
+   "start": 192.66,
+   "end": 192.96,
+   "conf": 0.505162892345753
+  },
+  {
+   "cue": 43,
+   "wi": 7,
+   "text": "veendum",
+   "start": 193.0,
+   "end": 193.38,
+   "conf": 0.4351052149764395
+  },
+  {
+   "cue": 43,
+   "wi": 8,
+   "text": "athine",
+   "start": 193.38,
+   "end": 193.6,
+   "conf": 0.5603025269908054
+  },
+  {
+   "cue": 43,
+   "wi": 9,
+   "text": "set",
+   "start": 193.78,
+   "end": 193.9,
+   "conf": 0.6445326984394342
+  },
+  {
+   "cue": 43,
+   "wi": 10,
+   "text": "cheythu",
+   "start": 193.92000000000002,
+   "end": 194.20000000000002,
+   "conf": 0.2462386379241122
+  },
+  {
+   "cue": 43,
+   "wi": 11,
+   "text": "nalkunnathayirikkum.",
+   "start": 194.20000000000002,
+   "end": 194.92000000000002,
+   "conf": 0.8819697228824034
+  },
+  {
+   "cue": 44,
+   "wi": 0,
+   "text": "Athinushesham",
+   "start": 195.22,
+   "end": 195.78,
+   "conf": 0.6826023229111272
+  },
+  {
+   "cue": 44,
+   "wi": 1,
+   "text": "Generate",
+   "start": 195.9,
+   "end": 196.20000000000002,
+   "conf": 0.3569615009066638
+  },
+  {
+   "cue": 44,
+   "wi": 2,
+   "text": "ennulla",
+   "start": 196.34,
+   "end": 196.62,
+   "conf": 0.6192553966705289
+  },
+  {
+   "cue": 44,
+   "wi": 3,
+   "text": "bhagam",
+   "start": 196.62,
+   "end": 196.88,
+   "conf": 0.9094134271144867
+  },
+  {
+   "cue": 44,
+   "wi": 4,
+   "text": "nalki",
+   "start": 196.9,
+   "end": 197.12,
+   "conf": 0.8269643545150757
+  },
+  {
+   "cue": 44,
+   "wi": 5,
+   "text": "kazhinjal",
+   "start": 197.16,
+   "end": 197.54,
+   "conf": 0.5428519183895004
+  },
+  {
+   "cue": 44,
+   "wi": 6,
+   "text": "ningalude",
+   "start": 197.54,
+   "end": 197.88,
+   "conf": 0.7619652492511604
+  },
+  {
+   "cue": 44,
+   "wi": 7,
+   "text": "video",
+   "start": 197.88,
+   "end": 198.18,
+   "conf": 0.49927206949796527
+  },
+  {
+   "cue": 44,
+   "wi": 8,
+   "text": "generate",
+   "start": 198.74,
+   "end": 199.0,
+   "conf": 0.346831662990553
+  },
+  {
+   "cue": 44,
+   "wi": 9,
+   "text": "aavan",
+   "start": 199.12,
+   "end": 199.3,
+   "conf": 0.5199938118457794
+  },
+  {
+   "cue": 44,
+   "wi": 10,
+   "text": "thudangunnathayirikkum.",
+   "start": 199.32,
+   "end": 200.0,
+   "conf": 0.5529883651920087
+  },
+  {
+   "cue": 45,
+   "wi": 0,
+   "text": "Ivide",
+   "start": 200.14000000000001,
+   "end": 200.48000000000002,
+   "conf": 0.7870394029450836
+  },
+  {
+   "cue": 45,
+   "wi": 1,
+   "text": "ekadesha",
+   "start": 200.5,
+   "end": 200.86,
+   "conf": 0.9101267457008362
+  },
+  {
+   "cue": 45,
+   "wi": 2,
+   "text": "samayam",
+   "start": 200.92000000000002,
+   "end": 201.28,
+   "conf": 0.9947475961276463
+  },
+  {
+   "cue": 45,
+   "wi": 3,
+   "text": "ethra",
+   "start": 201.34,
+   "end": 201.56,
+   "conf": 0.7922264801687561
+  },
+  {
+   "cue": 45,
+   "wi": 4,
+   "text": "varum",
+   "start": 201.58,
+   "end": 201.8,
+   "conf": 0.9667119264602662
+  },
+  {
+   "cue": 45,
+   "wi": 5,
+   "text": "ennullathum",
+   "start": 201.84,
+   "end": 202.24,
+   "conf": 0.8667576222363674
+  },
+  {
+   "cue": 45,
+   "wi": 6,
+   "text": "ee",
+   "start": 202.32,
+   "end": 202.38,
+   "conf": 0.00020310694526415318
+  },
+  {
+   "cue": 45,
+   "wi": 7,
+   "text": "oru",
+   "start": 202.46,
+   "end": 202.56,
+   "conf": 0.9316902359326681
+  },
+  {
+   "cue": 45,
+   "wi": 8,
+   "text": "bhagathayittu",
+   "start": 202.6,
+   "end": 203.22,
+   "conf": 0.6714227001827496
+  },
+  {
+   "cue": 45,
+   "wi": 9,
+   "text": "thanne",
+   "start": 203.22,
+   "end": 203.44,
+   "conf": 0.7103111431642901
+  },
+  {
+   "cue": 45,
+   "wi": 10,
+   "text": "kanan",
+   "start": 203.6,
+   "end": 203.9,
+   "conf": 0.932369327545166
+  },
+  {
+   "cue": 45,
+   "wi": 11,
+   "text": "sadhikkum.",
+   "start": 203.94,
+   "end": 204.26,
+   "conf": 0.8094552887810601
+  },
+  {
+   "cue": 46,
+   "wi": 0,
+   "text": "6",
+   "start": 204.42000000000002,
+   "end": 204.66,
+   "conf": 0.06577777303755283
+  },
+  {
+   "cue": 46,
+   "wi": 1,
+   "text": "minute",
+   "start": 205.06,
+   "end": 205.4,
+   "conf": 0.17599266052517729
+  },
+  {
+   "cue": 46,
+   "wi": 2,
+   "text": "30",
+   "start": 205.4,
+   "end": 205.64000000000001,
+   "conf": 0.06698386169591686
+  },
+  {
+   "cue": 46,
+   "wi": 3,
+   "text": "second",
+   "start": 205.68,
+   "end": 206.02,
+   "conf": 0.433714847744947
+  },
+  {
+   "cue": 46,
+   "wi": 4,
+   "text": "aanu",
+   "start": 206.04,
+   "end": 206.24,
+   "conf": 0.5989419200923294
+  },
+  {
+   "cue": 46,
+   "wi": 5,
+   "text": "ithinu",
+   "start": 206.36,
+   "end": 206.58,
+   "conf": 0.5163067003595643
+  },
+  {
+   "cue": 46,
+   "wi": 6,
+   "text": "samayam",
+   "start": 206.84,
+   "end": 207.26,
+   "conf": 0.9337293761117118
+  },
+  {
+   "cue": 46,
+   "wi": 7,
+   "text": "chodhichittullathu.",
+   "start": 207.3,
+   "end": 208.0,
+   "conf": 0.4461802003469681
+  },
+  {
+   "cue": 46,
+   "wi": 8,
+   "text": "Athrayum",
+   "start": 208.26,
+   "end": 208.66,
+   "conf": 0.6312022388083278
+  },
+  {
+   "cue": 46,
+   "wi": 9,
+   "text": "neram",
+   "start": 208.70000000000002,
+   "end": 208.96,
+   "conf": 0.7469554960727691
+  },
+  {
+   "cue": 46,
+   "wi": 10,
+   "text": "nammal",
+   "start": 208.98000000000002,
+   "end": 209.12,
+   "conf": 0.21025997454610965
+  },
+  {
+   "cue": 46,
+   "wi": 11,
+   "text": "wait",
+   "start": 209.22,
+   "end": 209.38,
+   "conf": 0.1261559555241547
+  },
+  {
+   "cue": 46,
+   "wi": 12,
+   "text": "cheyyanam.",
+   "start": 209.4,
+   "end": 209.72,
+   "conf": 0.1561014507832523
+  },
+  {
+   "cue": 47,
+   "wi": 0,
+   "text": "Wait",
+   "start": 210.1,
+   "end": 210.24,
+   "conf": 0.0055243039705601404
+  },
+  {
+   "cue": 47,
+   "wi": 1,
+   "text": "cheythu",
+   "start": 210.26,
+   "end": 210.54,
+   "conf": 0.20576834932268998
+  },
+  {
+   "cue": 47,
+   "wi": 2,
+   "text": "kazhinjal,",
+   "start": 210.54,
+   "end": 210.9,
+   "conf": 0.31506961959793345
+  },
+  {
+   "cue": 47,
+   "wi": 3,
+   "text": "pinneedu",
+   "start": 211.1,
+   "end": 211.42000000000002,
+   "conf": 0.4738734822749393
+  },
+  {
+   "cue": 47,
+   "wi": 4,
+   "text": "ningalkku",
+   "start": 211.44,
+   "end": 211.76,
+   "conf": 0.7180468927124619
+  },
+  {
+   "cue": 47,
+   "wi": 5,
+   "text": "athine",
+   "start": 211.76,
+   "end": 211.98000000000002,
+   "conf": 0.7347742115768293
+  },
+  {
+   "cue": 47,
+   "wi": 6,
+   "text": "generate",
+   "start": 212.20000000000002,
+   "end": 212.52,
+   "conf": 0.28414251241702004
+  },
+  {
+   "cue": 47,
+   "wi": 7,
+   "text": "aayi",
+   "start": 212.68,
+   "end": 212.78,
+   "conf": 0.9142276346683502
+  },
+  {
+   "cue": 47,
+   "wi": 8,
+   "text": "nalkiyathinu",
+   "start": 212.8,
+   "end": 213.22,
+   "conf": 0.5839597369777039
+  },
+  {
+   "cue": 47,
+   "wi": 9,
+   "text": "shesham",
+   "start": 213.26,
+   "end": 213.56,
+   "conf": 0.8532691671186642
+  },
+  {
+   "cue": 47,
+   "wi": 10,
+   "text": "ithe",
+   "start": 213.68,
+   "end": 213.8,
+   "conf": 0.6790206145815318
+  },
+  {
+   "cue": 47,
+   "wi": 11,
+   "text": "reethiyil",
+   "start": 213.88,
+   "end": 214.3,
+   "conf": 0.6441859419121303
+  },
+  {
+   "cue": 47,
+   "wi": 12,
+   "text": "kanukayum...",
+   "start": 214.4,
+   "end": 214.88,
+   "conf": 0.9903795255555047
+  },
+  {
+   "cue": 48,
+   "wi": 0,
+   "text": "Athine",
+   "start": 215.02,
+   "end": 215.22,
+   "conf": 0.5319209872868669
+  },
+  {
+   "cue": 48,
+   "wi": 1,
+   "text": "ningalude",
+   "start": 215.22,
+   "end": 215.66,
+   "conf": 0.7503951061508916
+  },
+  {
+   "cue": 48,
+   "wi": 2,
+   "text": "deviceilekku",
+   "start": 215.66,
+   "end": 216.24,
+   "conf": 0.599127749861888
+  },
+  {
+   "cue": 48,
+   "wi": 3,
+   "text": "download",
+   "start": 216.58,
+   "end": 217.0,
+   "conf": 0.3888136535497324
+  },
+  {
+   "cue": 48,
+   "wi": 4,
+   "text": "cheyyanulla",
+   "start": 217.04,
+   "end": 217.54,
+   "conf": 0.8405083964661654
+  },
+  {
+   "cue": 48,
+   "wi": 5,
+   "text": "option",
+   "start": 217.6,
+   "end": 217.9,
+   "conf": 0.39939364150632173
+  },
+  {
+   "cue": 48,
+   "wi": 6,
+   "text": "labhikkunnathumayirikkum.",
+   "start": 218.0,
+   "end": 218.96,
+   "conf": 0.8119265593471331
+  },
+  {
+   "cue": 49,
+   "wi": 0,
+   "text": "Kandille,",
+   "start": 219.1,
+   "end": 219.4,
+   "conf": 0.6149107892269967
+  },
+  {
+   "cue": 49,
+   "wi": 1,
+   "text": "aamayum",
+   "start": 219.78,
+   "end": 220.08,
+   "conf": 0.6970001405903271
+  },
+  {
+   "cue": 49,
+   "wi": 2,
+   "text": "muyalumulla",
+   "start": 220.1,
+   "end": 220.64000000000001,
+   "conf": 0.6135568434626542
+  },
+  {
+   "cue": 49,
+   "wi": 3,
+   "text": "perfect",
+   "start": 220.70000000000002,
+   "end": 221.08,
+   "conf": 0.42741174516933306
+  },
+  {
+   "cue": 49,
+   "wi": 4,
+   "text": "aayittulla",
+   "start": 221.08,
+   "end": 221.4,
+   "conf": 0.40025460049510003
+  },
+  {
+   "cue": 49,
+   "wi": 5,
+   "text": "oru",
+   "start": 221.4,
+   "end": 221.46,
+   "conf": 0.42904475952188176
+  },
+  {
+   "cue": 49,
+   "wi": 6,
+   "text": "ottamalsaram",
+   "start": 221.48000000000002,
+   "end": 221.96,
+   "conf": 0.8480302865306536
+  },
+  {
+   "cue": 49,
+   "wi": 7,
+   "text": "ivide",
+   "start": 221.98000000000002,
+   "end": 222.16,
+   "conf": 0.5256823316216469
+  },
+  {
+   "cue": 49,
+   "wi": 8,
+   "text": "nadakkunnathinte",
+   "start": 222.18,
+   "end": 222.76,
+   "conf": 0.74553735320751
+  },
+  {
+   "cue": 49,
+   "wi": 9,
+   "text": "oru",
+   "start": 222.78,
+   "end": 222.84,
+   "conf": 0.12395427074322167
+  },
+  {
+   "cue": 49,
+   "wi": 10,
+   "text": "video",
+   "start": 222.86,
+   "end": 223.20000000000002,
+   "conf": 0.7898538312176242
+  },
+  {
+   "cue": 49,
+   "wi": 11,
+   "text": "demo",
+   "start": 223.3,
+   "end": 223.5,
+   "conf": 0.7219178206287324
+  },
+  {
+   "cue": 49,
+   "wi": 12,
+   "text": "aanu...",
+   "start": 223.6,
+   "end": 223.74,
+   "conf": 0.7150978550998843
+  },
+  {
+   "cue": 50,
+   "wi": 0,
+   "text": "Ivide",
+   "start": 223.76,
+   "end": 223.96,
+   "conf": 0.629129637312144
+  },
+  {
+   "cue": 50,
+   "wi": 1,
+   "text": "ningal",
+   "start": 223.98000000000002,
+   "end": 224.20000000000002,
+   "conf": 0.8556122779846191
+  },
+  {
+   "cue": 50,
+   "wi": 2,
+   "text": "kandukondirikkunnathu.",
+   "start": 224.20000000000002,
+   "end": 225.12,
+   "conf": 0.6574683830894217
+  },
+  {
+   "cue": 50,
+   "wi": 3,
+   "text": "Ithe",
+   "start": 225.14000000000001,
+   "end": 225.26,
+   "conf": 0.27982365782372653
+  },
+  {
+   "cue": 50,
+   "wi": 4,
+   "text": "reethiyil",
+   "start": 225.38,
+   "end": 225.82,
+   "conf": 0.324646942395096
+  },
+  {
+   "cue": 50,
+   "wi": 5,
+   "text": "ningalkku",
+   "start": 225.96,
+   "end": 226.34,
+   "conf": 0.7851820490840409
+  },
+  {
+   "cue": 50,
+   "wi": 6,
+   "text": "avashyamaya",
+   "start": 226.44,
+   "end": 227.0,
+   "conf": 0.9295529289679094
+  },
+  {
+   "cue": 50,
+   "wi": 7,
+   "text": "video",
+   "start": 227.04,
+   "end": 227.36,
+   "conf": 0.7709667560760863
+  },
+  {
+   "cue": 50,
+   "wi": 8,
+   "text": "ithil",
+   "start": 228.02,
+   "end": 228.20000000000002,
+   "conf": 0.6538138639880344
+  },
+  {
+   "cue": 50,
+   "wi": 9,
+   "text": "ninnu",
+   "start": 228.24,
+   "end": 228.46,
+   "conf": 0.6736170392483473
+  },
+  {
+   "cue": 50,
+   "wi": 10,
+   "text": "generate",
+   "start": 228.76,
+   "end": 229.0,
+   "conf": 0.220845818395901
+  },
+  {
+   "cue": 50,
+   "wi": 11,
+   "text": "cheyyikkavunnathanu.",
+   "start": 229.72,
+   "end": 230.5,
+   "conf": 0.7430052122646501
+  },
+  {
+   "cue": 51,
+   "wi": 0,
+   "text": "Appol",
+   "start": 230.74,
+   "end": 230.86,
+   "conf": 0.3326891702890862
+  },
+  {
+   "cue": 51,
+   "wi": 1,
+   "text": "ithaanu",
+   "start": 230.86,
+   "end": 231.12,
+   "conf": 0.6378823017169323
+  },
+  {
+   "cue": 51,
+   "wi": 2,
+   "text": "nammude",
+   "start": 231.12,
+   "end": 231.36,
+   "conf": 0.8152076543270336
+  },
+  {
+   "cue": 51,
+   "wi": 3,
+   "text": "website.",
+   "start": 231.36,
+   "end": 231.78,
+   "conf": 0.51316974092541
+  },
+  {
+   "cue": 51,
+   "wi": 4,
+   "text": "Theerchayayum",
+   "start": 231.9,
+   "end": 232.4,
+   "conf": 0.537979750793266
+  },
+  {
+   "cue": 51,
+   "wi": 5,
+   "text": "ellavarkkum",
+   "start": 232.4,
+   "end": 232.84,
+   "conf": 0.9412183328108354
+  },
+  {
+   "cue": 51,
+   "wi": 6,
+   "text": "useful",
+   "start": 232.92000000000002,
+   "end": 233.20000000000002,
+   "conf": 0.5759413999815782
+  },
+  {
+   "cue": 51,
+   "wi": 7,
+   "text": "aakunna",
+   "start": 233.3,
+   "end": 233.52,
+   "conf": 0.9862072723252433
+  },
+  {
+   "cue": 51,
+   "wi": 8,
+   "text": "oru",
+   "start": 233.54,
+   "end": 233.62,
+   "conf": 0.8929203351338705
+  },
+  {
+   "cue": 51,
+   "wi": 9,
+   "text": "video",
+   "start": 233.62,
+   "end": 233.86,
+   "conf": 0.613982136757113
+  },
+  {
+   "cue": 51,
+   "wi": 10,
+   "text": "ayirikkum.",
+   "start": 233.88,
+   "end": 234.22,
+   "conf": 0.9319900141821967
+  },
+  {
+   "cue": 52,
+   "wi": 0,
+   "text": "Appol",
+   "start": 234.46,
+   "end": 234.58,
+   "conf": 0.14050955859129316
+  },
+  {
+   "cue": 52,
+   "wi": 1,
+   "text": "ellavarilekkum",
+   "start": 234.58,
+   "end": 235.22,
+   "conf": 0.8514561681742114
+  },
+  {
+   "cue": 52,
+   "wi": 2,
+   "text": "video",
+   "start": 235.26,
+   "end": 235.52,
+   "conf": 0.6849485096230638
+  },
+  {
+   "cue": 52,
+   "wi": 3,
+   "text": "share",
+   "start": 235.54,
+   "end": 235.72,
+   "conf": 0.5236224591848441
+  },
+  {
+   "cue": 52,
+   "wi": 4,
+   "text": "cheythu",
+   "start": 235.72,
+   "end": 235.88,
+   "conf": 0.18547483825347758
+  },
+  {
+   "cue": 52,
+   "wi": 5,
+   "text": "kodukkuka.",
+   "start": 235.88,
+   "end": 236.18,
+   "conf": 0.36177889035186833
+  },
+  {
+   "cue": 53,
+   "wi": 0,
+   "text": "Njan",
+   "start": 236.34,
+   "end": 236.44,
+   "conf": 0.5385024350362073
+  },
+  {
+   "cue": 53,
+   "wi": 1,
+   "text": "inganeyulla",
+   "start": 236.44,
+   "end": 236.92000000000002,
+   "conf": 0.7420042614367875
+  },
+  {
+   "cue": 53,
+   "wi": 2,
+   "text": "niravadhi",
+   "start": 237.16,
+   "end": 237.5,
+   "conf": 0.77858481142256
+  },
+  {
+   "cue": 53,
+   "wi": 3,
+   "text": "videokal",
+   "start": 237.5,
+   "end": 237.86,
+   "conf": 0.7838563515470014
+  },
+  {
+   "cue": 53,
+   "wi": 4,
+   "text": "upload",
+   "start": 237.86,
+   "end": 238.12,
+   "conf": 0.3863846699532587
+  },
+  {
+   "cue": 53,
+   "wi": 5,
+   "text": "cheyyunnathayirikkum.",
+   "start": 238.18,
+   "end": 238.84,
+   "conf": 0.8002253537062416
+  },
+  {
+   "cue": 53,
+   "wi": 6,
+   "text": "Shareum",
+   "start": 239.02,
+   "end": 239.38,
+   "conf": 0.5518074694181061
+  },
+  {
+   "cue": 53,
+   "wi": 7,
+   "text": "commentum",
+   "start": 239.46,
+   "end": 239.84,
+   "conf": 0.4270951070615815
+  },
+  {
+   "cue": 53,
+   "wi": 8,
+   "text": "likeum",
+   "start": 239.9,
+   "end": 240.20000000000002,
+   "conf": 0.6451944424309962
+  },
+  {
+   "cue": 53,
+   "wi": 9,
+   "text": "okke",
+   "start": 240.20000000000002,
+   "end": 240.34,
+   "conf": 0.6400021237786859
+  },
+  {
+   "cue": 53,
+   "wi": 10,
+   "text": "cheythu",
+   "start": 240.38,
+   "end": 240.58,
+   "conf": 0.4004854386387576
+  },
+  {
+   "cue": 53,
+   "wi": 11,
+   "text": "nalla",
+   "start": 240.62,
+   "end": 240.8,
+   "conf": 0.946567702293396
+  },
+  {
+   "cue": 53,
+   "wi": 12,
+   "text": "reethiyil",
+   "start": 240.84,
+   "end": 241.1,
+   "conf": 0.42923966333425295
+  },
+  {
+   "cue": 53,
+   "wi": 13,
+   "text": "support",
+   "start": 241.14000000000001,
+   "end": 241.38,
+   "conf": 0.5574104976175087
+  },
+  {
+   "cue": 53,
+   "wi": 14,
+   "text": "cheyyuka.",
+   "start": 241.4,
+   "end": 241.68,
+   "conf": 0.1924031500784622
+  },
+  {
+   "cue": 54,
+   "wi": 0,
+   "text": "Appol",
+   "start": 241.70000000000002,
+   "end": 242.02,
+   "conf": 0.10076182596385479
+  },
+  {
+   "cue": 54,
+   "wi": 1,
+   "text": "enthayalum",
+   "start": 242.02,
+   "end": 242.22,
+   "conf": 0.14773557261141831
+  },
+  {
+   "cue": 54,
+   "wi": 2,
+   "text": "puthiyoru",
+   "start": 242.22,
+   "end": 242.44,
+   "conf": 0.3805231432585667
+  },
+  {
+   "cue": 54,
+   "wi": 3,
+   "text": "topicumayittu",
+   "start": 242.46,
+   "end": 242.88,
+   "conf": 0.33438696961205167
+  },
+  {
+   "cue": 54,
+   "wi": 4,
+   "text": "namukku",
+   "start": 242.88,
+   "end": 243.04,
+   "conf": 0.47331609204411507
+  },
+  {
+   "cue": 54,
+   "wi": 5,
+   "text": "veendum",
+   "start": 243.04,
+   "end": 243.28,
+   "conf": 0.28254846980728743
+  },
+  {
+   "cue": 54,
+   "wi": 6,
+   "text": "kandumuttam.",
+   "start": 243.28,
+   "end": 243.66,
+   "conf": 0.38860469735597936
+  },
+  {
+   "cue": 54,
+   "wi": 7,
+   "text": "Athuvarekkum",
+   "start": 243.70000000000002,
+   "end": 244.08,
+   "conf": 0.7180614842606398
+  },
+  {
+   "cue": 54,
+   "wi": 8,
+   "text": "channel",
+   "start": 244.1,
+   "end": 244.3,
+   "conf": 0.2930155244352396
+  },
+  {
+   "cue": 54,
+   "wi": 9,
+   "text": "subscribe",
+   "start": 244.32,
+   "end": 244.74,
+   "conf": 0.544986128765029
+  },
+  {
+   "cue": 54,
+   "wi": 10,
+   "text": "cheythu",
+   "start": 244.74,
+   "end": 244.94,
+   "conf": 0.3841356953796224
+  },
+  {
+   "cue": 54,
+   "wi": 11,
+   "text": "kathirikkuka.",
+   "start": 245.44,
+   "end": 245.96,
+   "conf": 0.7723413222362675
+  },
+  {
+   "cue": 54,
+   "wi": 12,
+   "text": "Nanni,",
+   "start": 246.22,
+   "end": 246.5,
+   "conf": 0.501454907655716
+  },
+  {
+   "cue": 54,
+   "wi": 13,
+   "text": "Namaskaram.",
+   "start": 246.78,
+   "end": 247.3,
+   "conf": 0.5560926258563995
+  }
+ ],
+ "stride_ms": 20
+}
