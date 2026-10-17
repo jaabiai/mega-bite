@@ -48,7 +48,7 @@ def plan():
     import edl_reel
     for c in edl_reel.PLAN:
         print(f"{c['k']:2d} {c['kind']:6s} {c['r0']:6.2f}-{c['r1']:6.2f}  ({c['r1']-c['r0']:.2f}s)")
-    print(f"audio cuts: {edl_reel.audio_cuts()}  (one continuous take)")
+    print(f"audio spans kept: {edl_reel.audio_cuts()}  (removed {edl_reel.CUT_A}-{edl_reel.CUT_B} s, one edit inside silence)  gain +{edl_reel.GAIN_DB} dB")
     print(f"speech {edl_reel.SPEECH_END:.2f}s + end card {edl_reel.END_CARD}s = {edl_reel.TOTAL:.2f}s  ({nframes()} frames)")
 
 
@@ -103,22 +103,27 @@ def full(workers=4):
 
 
 def audio():
-    """Narration cut from the ORIGINAL recording at word boundaries - no EQ, denoise, compression or loudness change,
-    so every syllable has exactly the original level (only 12-30 ms fades at the cut points to avoid clicks)."""
+    """Original narration (source 0-60 s) with ONE invisible edit - the repeated 'subscribe' sentence is removed at two room-tone
+    silences - then a plain gain (+GAIN_DB) with a transparent peak limiter. No EQ, denoise or compression, so it is never
+    quieter than the original recording."""
     import edl_reel
     src = os.path.join(WORK, "work", "main.mp4")
     cuts = edl_reel.audio_cuts()
     parts, labels = [], []
     for k, (a, b) in enumerate(cuts):
         d = b - a
-        fin = "afade=t=in:d=0.012," if a > 0 else ""          # a take that starts at 0.0 is left sample-exact
+        fin = "afade=t=in:d=0.008," if a > 0 else ""            # a take that starts at 0.0 is left sample-exact
         parts.append(f"[0:a]atrim=start={a:.4f}:end={b:.4f},asetpts=PTS-STARTPTS,{fin}afade=t=out:st={d-0.05:.4f}:d=0.05[a{k}]")
         labels.append(f"[a{k}]")
-    fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(cuts)}:v=0:a=1,apad=whole_dur={edl_reel.TOTAL:.3f}[o]"
+    # the last span ends in silence (fade-out above); the earlier span ends in room tone -> short fade only
+    parts[0] = parts[0].replace(f"afade=t=out:st={cuts[0][1]-cuts[0][0]-0.05:.4f}:d=0.05", f"afade=t=out:st={cuts[0][1]-cuts[0][0]-0.008:.4f}:d=0.008")
+    g = edl_reel.GAIN_DB
+    fc = (";".join(parts) + ";" + "".join(labels) + f"concat=n={len(cuts)}:v=0:a=1,volume={g}dB,"
+          f"alimiter=limit=0.891:attack=3:release=70:level=disabled:latency=1,apad=whole_dur={edl_reel.TOTAL:.3f}[o]")
     out = os.path.join(OUT, "reel_voice.wav")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-filter_complex", fc, "-map", "[o]", "-t", f"{edl_reel.TOTAL:.3f}",
                     "-ar", "48000", "-c:a", "pcm_s16le", out], check=True)
-    print("audio ->", out)
+    print("audio ->", out, f"(+{g} dB, limiter -1 dBFS)")
 
 
 def mux(out):

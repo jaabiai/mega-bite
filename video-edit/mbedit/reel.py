@@ -38,11 +38,14 @@ def pop_factor(t, r0, amount=0.07, dur=0.32):
 class ReelTH:
     kind = "th"
 
-    def __init__(self, r0, r1, src0, zoom=(1.0, 1.06), cx=0.5, cy=0.5):
+    def __init__(self, r0, r1, src0, zoom=(1.0, 1.06), cx=0.5, cy=0.5, hold_src=None):
         self.t0, self.t1, self.src0, self.zoom, self.cx, self.cy = r0, r1, src0, zoom, cx, cy
+        self.hold_src = hold_src
 
     def render(self, ctx, t):
         ts = self.src0 + (t - self.t0)
+        if self.hold_src is not None:
+            ts = min(ts, self.hold_src)
         f = ctx.main.graded(int(round(ts * FPS)))
         z = lerp(self.zoom[0], self.zoom[1], ramp(t, self.t0, self.t1)) * pop_factor(t, self.t0)
         ch = H / z

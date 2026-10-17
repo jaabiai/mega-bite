@@ -142,9 +142,10 @@ def _ripple(frame, cx, cy, age, color=(255, 255, 255), max_r=120, dur=0.6, thick
 class SubscribeCTA(Layer):
     """big red SUBSCRIBE pill -> cursor click -> SUBSCRIBED + ringing bell"""
 
-    def __init__(self, t0, t1, cx=420, cy=300, scale=1.0, click=None):
+    def __init__(self, t0, t1, cx=420, cy=300, scale=1.0, click=None, normal="cta_subscribe", done="cta_subscribed"):
         self.t0, self.t1, self.cx, self.cy, self.sc = t0, t1, cx, cy, scale
         self.click = click
+        self.normal, self.done = normal, done
 
     def draw(self, frame, t):
         a = t - self.t0
@@ -161,7 +162,7 @@ class SubscribeCTA(Layer):
             sc *= 1 - 0.07 * math.sin((a - click_t) / 0.14 * math.pi)
         sc *= 1 - 0.1 * (1 - leave)
         cy = self.cy + (1 - enter) * 50
-        spr = asset("cta_subscribed" if clicked else "cta_subscribe")
+        spr = asset(self.done if clicked else self.normal)
         # soft glow behind
         gfx.draw_sprite(frame, spr, self.cx, cy, scale=sc, opacity=op)
         w, h = gfx.sprite_size(spr)
@@ -323,4 +324,20 @@ class TitleCard(Layer):
         e = ease_out_back(ramp(a, 0, 0.5), 1.6)
         gfx.draw_sprite(frame, self._k, self.cx, self.y - 90 * self.sc + (1 - e) * 40, scale=self.sc, opacity=op)
         gfx.draw_sprite(frame, self._t, self.cx, self.y + (1 - e) * 60, scale=lerp(0.7, 1.0, e) * self.sc, opacity=op)
+        return frame
+
+
+class SpriteCard(Layer):
+    """a pre-rendered sprite (e.g. Malayalam message) that pops in, floats slightly and fades out"""
+
+    def __init__(self, name, t0, t1, cx, cy, scale=1.0):
+        self.name, self.t0, self.t1, self.cx, self.cy, self.sc = name, t0, t1, cx, cy, scale
+
+    def draw(self, frame, t):
+        a = t - self.t0
+        op = clamp(a / 0.2) * (1 - ramp(t, self.t1 - 0.3, self.t1))
+        if op <= 0:
+            return frame
+        e = ease_out_back(ramp(a, 0, 0.45), 1.7)
+        gfx.draw_sprite(frame, asset(self.name), self.cx, self.cy + (1 - e) * 36 + 3 * math.sin(a * 2.4), scale=self.sc * lerp(0.82, 1.0, e), opacity=op)
         return frame

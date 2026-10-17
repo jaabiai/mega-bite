@@ -38,14 +38,18 @@ Drop it at `$MB_WORK/assets/result.mp4` and re-render the chunk(s) covering 219�
 "Kandille, aamayum muyalum ... ottamalsaram". Until then the screen recording's own result thumbnail is highlighted.
 
 ## Reel / Short (9:16)
-One **continuous take** of the narration (0 - 60 s, no audio cuts; it starts on the hook and ends on the sentence
-"'There Is An AI For That' ennaanu sitinte peru." followed by true silence in the recording), smooth transitions
-(zoom / push / swipe / fade), then a ~2.6 s end card: "MEGA BYTE / മെഗാബൈറ്റ് - മുഴുവൻ വീഡിയോ കാണാൻ യൂട്യൂബ് ചാനൽ സന്ദർശിക്കുക".
+One take of the narration (source 0 - 60 s) with **one invisible edit**: the repeated "subscribe" sentence (source 11.66 - 14.52 s) is
+removed - both splice points sit in true room-tone silence (-55 dBFS) and the B-roll change lands on the splice. The follow message
+"ഇതുപോലുള്ള കൂടുതൽ വീഡിയോകൾ ലഭിക്കാനായി ഇപ്പോൾ തന്നെ ഫോളോ ചെയ്യുക" is shown on screen at the single subscribe moment (the
+narration is the creator's own voice, so a new spoken line needs a new recording). Smooth transitions (zoom / push / swipe / fade),
+then a ~2.6 s end card: "MEGA BYTE / മെഗാബൈറ്റ് - മുഴുവൻ വീഡിയോ കാണാൻ യൂട്യൂബ് ചാനൽ സന്ദർശിക്കുക".
+
+Audio: the original narration, never quieter than the recording: plain gain `GAIN_DB` (+4 dB, ~ -11 LUFS) with a transparent
+peak limiter at -1 dBFS - no EQ / denoise / compression.
 ```bash
-python render_reel.py plan                 # scene list
+python render_reel.py plan                 # scene list + kept audio spans
 python render_reel.py full --workers 4     # silent video   -> $MB_WORK/render/reel_video.mp4
-python render_reel.py audio                # original narration, one cut at the end only (level unchanged)
+python render_reel.py audio                # narration (one splice) + gain + limiter
 python render_reel.py mux out.mp4
 ```
-`edl_reel.py` holds the scenes/overlays, `mbedit/reel.py` the vertical scenes, transitions and end card.
-(The first reel version stitched 15 clips together; it was replaced because the jumps felt cut-up.)
+`edl_reel.py` holds the scenes/overlays (written in source time, mapped with `S()`), `mbedit/reel.py` the vertical scenes, transitions and end card.

@@ -18,6 +18,7 @@ ICONS = {
     "comment": "M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z",
     "share": "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z",
     "check": "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z",
+    "plus": "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z",
     "play": "M8 5v14l11-7z",
     "arrow_down": "M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z",
     "link": "M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z",
@@ -47,6 +48,11 @@ SPRITES = {
     # name: html body
     "cta_subscribe": pill(660, 180, "linear-gradient(180deg,#ff5252,#d50000)", "SUBSCRIBE", "bell", 84, 76),
     "cta_subscribed": pill(660, 180, "linear-gradient(180deg,#5b6170,#343845)", "SUBSCRIBED", "check", 84, 70),
+    "cta_follow": pill(620, 170, "linear-gradient(180deg,#ff5252,#d50000)", "FOLLOW", "plus", 84, 78),
+    "cta_following": pill(700, 170, "linear-gradient(180deg,#5b6170,#343845)", "FOLLOWING", "check", 84, 70),
+    "reel_follow_ml": """<div class="wrap" style="padding:26px"><div style="width:900px;text-align:center;font-family:'FreeSans','Inter',sans-serif;font-weight:700;
+        color:#fff;font-size:50px;line-height:1.32;text-shadow:0 5px 12px rgba(0,0,0,.85),0 0 3px rgba(0,0,0,.95)">
+        ഇതുപോലുള്ള കൂടുതൽ വീഡിയോകൾ<br>ലഭിക്കാനായി ഇപ്പോൾ തന്നെ<br><span style="color:#ff6b6b;font-size:66px">ഫോളോ ചെയ്യുക</span></div></div>""",
     "cta_like": pill(520, 160, "linear-gradient(180deg,#34a2ff,#1565e8)", "LIKE", "like", 84, 72),
     "cta_comment": pill(620, 160, "linear-gradient(180deg,#9a7bff,#5a3df0)", "COMMENT", "comment", 76, 66),
     "cta_share": pill(520, 160, "linear-gradient(180deg,#27d79a,#0aa57a)", "SHARE", "share", 76, 72),
