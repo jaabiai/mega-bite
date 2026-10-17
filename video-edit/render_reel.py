@@ -102,8 +102,10 @@ def full(workers=4):
 
 
 def audio():
+    """Narration cut from the ORIGINAL recording at word boundaries - no EQ, denoise, compression or loudness change,
+    so every syllable has exactly the original level (only 12-30 ms fades at the cut points to avoid clicks)."""
     import edl_reel
-    src = os.path.join(OUT, "voice.wav")                    # cleaned narration (tools/audio.sh)
+    src = os.path.join(WORK, "work", "main.mp4")
     cuts = edl_reel.audio_cuts()
     parts, labels = [], []
     for k, (a, b) in enumerate(cuts):
@@ -111,23 +113,16 @@ def audio():
         parts.append(f"[0:a]atrim=start={a:.4f}:end={b:.4f},asetpts=PTS-STARTPTS,afade=t=in:d=0.012,afade=t=out:st={d-0.03:.4f}:d=0.03[a{k}]")
         labels.append(f"[a{k}]")
     fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(cuts)}:v=0:a=1,apad=whole_dur={edl_reel.TOTAL:.3f}[o]"
-    raw = os.path.join(OUT, "reel_voice_raw.wav")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-filter_complex", fc, "-map", "[o]", "-t", f"{edl_reel.TOTAL:.3f}", "-ar", "48000", raw], check=True)
-    # loudness to -14 LUFS (two pass, linear)
-    j = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", raw, "-af", "loudnorm=I=-14:TP=-1.5:LRA=9:print_format=json", "-f", "null", "-"],
-                       capture_output=True, text=True).stderr
-    import json
-    m = json.loads(j[j.rindex("{"):j.rindex("}") + 1])
-    af = (f"loudnorm=I=-14:TP=-1.5:LRA=9:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:"
-          f"measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,alimiter=limit=0.84:level=false")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", raw, "-af", af, "-ar", "48000", "-t", f"{edl_reel.TOTAL:.3f}", os.path.join(OUT, "reel_voice.wav")], check=True)
-    print("audio ->", os.path.join(OUT, "reel_voice.wav"), "measured", m["input_i"], "LUFS before norm")
+    out = os.path.join(OUT, "reel_voice.wav")
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-filter_complex", fc, "-map", "[o]", "-t", f"{edl_reel.TOTAL:.3f}",
+                    "-ar", "48000", "-c:a", "pcm_s16le", out], check=True)
+    print("audio ->", out)
 
 
 def mux(out):
     import edl_reel
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(OUT, "reel_video.mp4"), "-i", os.path.join(OUT, "reel_voice.wav"),
-                    "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k", "-ar", "48000",
+                    "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "320k", "-ar", "48000",
                     "-t", f"{edl_reel.TOTAL:.3f}", "-movflags", "+faststart", out], check=True)
     print("final ->", out)
 

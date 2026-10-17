@@ -16,7 +16,7 @@ Everything is code: change `edl.py`, re-render.
 | Screen-record demo | HDR→SDR tone-mapped, audio removed, time-warped so every tap happens when it is narrated; phone + zoom card + spotlight + highlight ring + tap ripple (`DEMO_SEGS`, `DEMO_STEPS` in `edl.py`) |
 | Privacy | Other Google accounts / e-mails and the private photo library in the recording are blurred (`PRIVACY` in `edl.py`) |
 | Transitions | zoom / push / swipe / fade between shots (`TRANS_BY_T0`) |
-| Voice | Original narration only (screen-record audio dropped). Gentle clean-up + loudness -14 LUFS (`tools/audio.sh`) |
+| Voice | Original narration only (screen-record audio dropped), **untouched**: the long video copies the original AAC stream bit-exact, the reel is cut from it at word boundaries with no EQ/denoise/compression/loudness change (same level as the original, verified 0.00 dB). `tools/audio.sh` (clean-up + -14 LUFS) exists but is intentionally not used |
 
 ## Re-render
 ```bash
@@ -24,9 +24,8 @@ export MB_WORK=<folder with work/main.mp4, work/screen_sdr.mp4, work/matte.mkv, 
 python render.py preview 52.8 105        # JPEG stills
 python render.py sheet mysheet 1 5 9     # contact sheet
 python render.py full --workers 4        # video only  -> $MB_WORK/render/video.mp4
-tools/audio.sh $MB_WORK/work/main.mp4 $MB_WORK/render/voice.wav
 ```
-Mux: `ffmpeg -i video.mp4 -i voice.wav -c:v copy -c:a aac -b:a 256k -shortest out.mp4`
+Mux (original audio, bit-exact): `ffmpeg -i video.mp4 -i $MB_WORK/work/main.mp4 -map 0:v -map 1:a -c:v copy -c:a copy -t 247.6 out.mp4`
 
 ## Pipeline helpers
 * `tools/rvm_matte.py` – person matte for the whole main video (ffv1 gray)
@@ -42,7 +41,7 @@ Drop it at `$MB_WORK/assets/result.mp4` and re-render the chunk(s) covering 219�
 ```bash
 python render_reel.py plan                 # clip list (source -> reel time)
 python render_reel.py full --workers 4     # silent video   -> $MB_WORK/render/reel_video.mp4
-python render_reel.py audio                # narration cut at word boundaries, -14 LUFS
+python render_reel.py audio                # original narration cut at word boundaries (level unchanged)
 python render_reel.py mux out.mp4
 ```
 `edl_reel.py` picks the key moments (source times snap to word boundaries) and re-uses the long video's demo
