@@ -54,3 +54,8 @@ python render_reel.py audio loud           # (or: max) narration (one splice) + 
 python render_reel.py mux out.mp4 loud
 ```
 `edl_reel.py` holds the scenes/overlays (written in source time, mapped with `S()`), `mbedit/reel.py` the vertical scenes, transitions and end card.
+
+## Background music
+Mixkit free-licence tracks (see `data/music_credits.md` for exact tracks + licence note): Coffee or Tea (hook/intro + reel), Vastness (walkthrough),
+Fashion 01 (result/outro) with 5 s equal-power crossfades on topic changes. The music is sidechain-ducked by the voice (~17-19 dB below it while speaking),
+the voice itself is never turned down. `python render_bgm.py long` / `python render_bgm.py reel loud|max`.
