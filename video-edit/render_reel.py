@@ -48,7 +48,7 @@ def plan():
     import edl_reel
     for c in edl_reel.PLAN:
         print(f"{c['k']:2d} {c['kind']:6s} {c['r0']:6.2f}-{c['r1']:6.2f}  ({c['r1']-c['r0']:.2f}s)")
-    print(f"audio spans kept: {edl_reel.audio_cuts()}  (removed {edl_reel.CUT_A}-{edl_reel.CUT_B} s, one edit inside silence)  gain +{edl_reel.GAIN_DB} dB")
+    print(f"audio spans kept: {edl_reel.audio_cuts()}  (removed {edl_reel.CUT_A}-{edl_reel.CUT_B} s, one edit inside silence)  presets {list(edl_reel.VOICES)}")
     print(f"speech {edl_reel.SPEECH_END:.2f}s + end card {edl_reel.END_CARD}s = {edl_reel.TOTAL:.2f}s  ({nframes()} frames)")
 
 
@@ -102,33 +102,35 @@ def full(workers=4):
     print("done ->", os.path.join(OUT, "reel_video.mp4"))
 
 
-def audio():
+
+
+def audio(voice="loud"):
     """Original narration (source 0-60 s) with ONE invisible edit - the repeated 'subscribe' sentence is removed at two room-tone
-    silences - then a plain gain (+GAIN_DB) with a transparent peak limiter. No EQ, denoise or compression, so it is never
-    quieter than the original recording."""
+    silences - then a plain make-up gain (edl_reel.VOICES) and a peak limiter. No EQ / denoise / compression: speech and background
+    rise together, so nothing sounds dirtier, only louder."""
     import edl_reel
+    v = edl_reel.VOICES[voice]
     src = os.path.join(WORK, "work", "main.mp4")
     cuts = edl_reel.audio_cuts()
     parts, labels = [], []
     for k, (a, b) in enumerate(cuts):
         d = b - a
         fin = "afade=t=in:d=0.008," if a > 0 else ""            # a take that starts at 0.0 is left sample-exact
-        parts.append(f"[0:a]atrim=start={a:.4f}:end={b:.4f},asetpts=PTS-STARTPTS,{fin}afade=t=out:st={d-0.05:.4f}:d=0.05[a{k}]")
+        fout = (f"afade=t=out:st={d-0.008:.4f}:d=0.008" if k < len(cuts) - 1 else f"afade=t=out:st={d-0.05:.4f}:d=0.05")
+        parts.append(f"[0:a]atrim=start={a:.4f}:end={b:.4f},asetpts=PTS-STARTPTS,{fin}{fout}[a{k}]")
         labels.append(f"[a{k}]")
-    # the last span ends in silence (fade-out above); the earlier span ends in room tone -> short fade only
-    parts[0] = parts[0].replace(f"afade=t=out:st={cuts[0][1]-cuts[0][0]-0.05:.4f}:d=0.05", f"afade=t=out:st={cuts[0][1]-cuts[0][0]-0.008:.4f}:d=0.008")
-    g = edl_reel.GAIN_DB
-    fc = (";".join(parts) + ";" + "".join(labels) + f"concat=n={len(cuts)}:v=0:a=1,volume={g}dB,"
-          f"alimiter=limit=0.891:attack=3:release=70:level=disabled:latency=1,apad=whole_dur={edl_reel.TOTAL:.3f}[o]")
-    out = os.path.join(OUT, "reel_voice.wav")
+    limit = f"alimiter=limit={v['ceiling']}:attack=5:release=60:level=disabled:latency=1"     # ceiling leaves room for the AAC encode
+    chain = f"volume={v['gain']}dB," + ("asoftclip=type=tanh:threshold=0.9," if v["softclip"] else "") + limit
+    fc = ";".join(parts) + ";" + "".join(labels) + f"concat=n={len(cuts)}:v=0:a=1,{chain},apad=whole_dur={edl_reel.TOTAL:.3f}[o]"
+    out = os.path.join(OUT, f"reel_voice_{voice}.wav")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-filter_complex", fc, "-map", "[o]", "-t", f"{edl_reel.TOTAL:.3f}",
                     "-ar", "48000", "-c:a", "pcm_s16le", out], check=True)
-    print("audio ->", out, f"(+{g} dB, limiter -1 dBFS)")
+    print(f"audio -> {out}  (+{v['gain']} dB, softclip={v['softclip']})")
 
 
-def mux(out):
+def mux(out, voice="loud"):
     import edl_reel
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(OUT, "reel_video.mp4"), "-i", os.path.join(OUT, "reel_voice.wav"),
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", os.path.join(OUT, "reel_video.mp4"), "-i", os.path.join(OUT, f"reel_voice_{voice}.wav"),
                     "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "320k", "-ar", "48000",
                     "-t", f"{edl_reel.TOTAL:.3f}", "-movflags", "+faststart", out], check=True)
     print("final ->", out)
@@ -143,6 +145,6 @@ if __name__ == "__main__":
     elif cmd == "full":
         full(int(sys.argv[sys.argv.index("--workers") + 1]) if "--workers" in sys.argv else 4)
     elif cmd == "audio":
-        audio()
+        audio(sys.argv[2] if len(sys.argv) > 2 else "loud")
     elif cmd == "mux":
-        mux(sys.argv[2])
+        mux(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "loud")

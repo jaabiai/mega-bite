@@ -44,12 +44,13 @@ removed - both splice points sit in true room-tone silence (-55 dBFS) and the B-
 narration is the creator's own voice, so a new spoken line needs a new recording). Smooth transitions (zoom / push / swipe / fade),
 then a ~2.6 s end card: "MEGA BYTE / മെഗാബൈറ്റ് - മുഴുവൻ വീഡിയോ കാണാൻ യൂട്യൂബ് ചാനൽ സന്ദർശിക്കുക".
 
-Audio: the original narration, never quieter than the recording: plain gain `GAIN_DB` (+4 dB, ~ -11 LUFS) with a transparent
-peak limiter at -1 dBFS - no EQ / denoise / compression.
+Audio: the original narration (one splice) made much louder with a plain make-up gain + peak limiter - no EQ / denoise / compression,
+so speech and background rise together. Two presets in `edl_reel.VOICES`: `loud` (+8 dB: speech +6.7 dB over the original, -8.9 LUFS, clean)
+and `max` (+10 dB with soft peak shaping: speech +8.3 dB, -7.3 LUFS). The original recording is -14.6 LUFS; ceilings leave room for the AAC encode (0 clipped samples).
 ```bash
 python render_reel.py plan                 # scene list + kept audio spans
 python render_reel.py full --workers 4     # silent video   -> $MB_WORK/render/reel_video.mp4
-python render_reel.py audio                # narration (one splice) + gain + limiter
-python render_reel.py mux out.mp4
+python render_reel.py audio loud           # (or: max) narration (one splice) + gain + limiter
+python render_reel.py mux out.mp4 loud
 ```
 `edl_reel.py` holds the scenes/overlays (written in source time, mapped with `S()`), `mbedit/reel.py` the vertical scenes, transitions and end card.

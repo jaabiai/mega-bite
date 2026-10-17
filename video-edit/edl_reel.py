@@ -21,7 +21,11 @@ SHIFT = CUT_B - CUT_A              # 2.86 s
 SPEECH_END_SRC = 60.0              # last word ends 59.88; true silence 59.95-60.20
 AUDIO_END_SRC = 60.08
 END_CARD = 2.6
-GAIN_DB = 4.0                      # louder than the original by this much (peak limiter only, no compression)
+# voice loudness presets (plain make-up gain + peak limiter; the original recording is -14.6 LUFS)
+VOICES = {
+    "loud": dict(gain=8.0, softclip=False, ceiling=0.841),    # clean: speech ~ +6.7 dB over the original (ceiling -1.5 dBFS)
+    "max":  dict(gain=10.0, softclip=True, ceiling=0.794),    # very loud: speech ~ +8.4 dB over the original, soft peak shaping (ceiling -2 dBFS)
+}
 
 
 def S(t):
