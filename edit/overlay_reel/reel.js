@@ -198,6 +198,12 @@
     }
     if (!act) return;
     const p = act.p;
+    if (!act.fitted) {                      // shrink the page if its longest word would overflow the caption box
+      act.fitted = true;
+      let mx = 0; p.words.forEach((w) => { ctx.font = '700 64px Poppins'; mx = Math.max(mx, ctx.measureText(w.t).width); });
+      const k = Math.min(1, (860 / 1.18) / (mx + 8));
+      if (k < 1) act.c.querySelector('.line').style.fontSize = Math.floor(64 * k) + 'px';
+    }
     const fin = eo((t - p.t0) / 0.16), fout = 1 - eo((t - (p.t1 - 0.12)) / 0.12);
     act.c.style.opacity = Math.min(fin, fout);
     act.c.style.transform = `translateY(${(1 - fin) * 18}px)`;

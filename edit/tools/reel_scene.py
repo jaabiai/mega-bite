@@ -81,9 +81,9 @@ def make_background():
 
 
 class ReelScene(ss.Scene):
-    def __init__(self):
-        self.sp = spec()
-        self.name = "reel_S2"
+    def __init__(self, sp=None, name="reel_S2"):
+        self.sp = sp if sp is not None else spec()
+        self.name = name
         self.t0, self.t1 = self.sp["t0"], self.sp["t1"]
         self.N = int(round((self.t1 - self.t0) * ss.FPS))
         self.layers = ss.Layers()
@@ -127,13 +127,53 @@ class ReelScene(ss.Scene):
             t = self.t0 + n / ss.FPS
             i, r = self.seg_at(t)
             if i != cur:
-                gen, cur = self.decode_seg(i), i
+                gen, cur = self.decode_seg_from(i, t), i
             src = next(gen)
             enc.stdin.write(self.compose(src, None, t, r).tobytes())
             if n % 150 == 0:
-                print(f"reel_S2: {n}/{self.N}", flush=True)
+                print(f"{self.name}: {n}/{self.N}", flush=True)
         enc.stdin.close()
         enc.wait()
+
+    def frames(self):
+        """generator of finished RGB frames (so a caller can add effects before encoding)"""
+        cur, gen = -1, None
+        for n in range(self.N):
+            t = self.t0 + n / ss.FPS
+            i, r = self.seg_at(t)
+            if i != cur:
+                gen, cur = self.decode_seg_from(i, t), i
+            yield self.compose(next(gen), None, t, r)
+
+    def decode_seg_from(self, i, t_start):
+        """like decode_seg, but starts at main time t_start inside segment i (windowed renders)"""
+        import subprocess
+        a, b, r0, sp = self.sp["segs"][i]
+        ts = min(max(t_start, a), b)
+        r_start = r0 + (ts - a) * sp
+        n = max(int(round((b - ts) * ss.FPS)), 1)
+        vf = "scale=990:2151:flags=area"
+        vf = (f"setpts=PTS/{sp},fps=30," if abs(sp - 1) > 1e-6 else "fps=30,") + vf
+        p = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", f"{r_start:.4f}", "-i", ss.SCREEN, "-frames:v", str(n + 2),
+                              "-vf", vf, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
+        fs = 990 * 2151 * 3
+        last = None
+        while True:
+            buf = p.stdout.read(fs)
+            if len(buf) < fs:
+                break
+            last = np.frombuffer(buf, np.uint8).reshape(2151, 990, 3)
+            yield last
+        while True:
+            yield last
+
+
+def window_scene(name, m0, m1, camera, focus_extra=()):
+    """vertical scene for the main-timeline window [m0, m1] of recording scene `name` ('S1' or 'S2')"""
+    sp = copy.deepcopy(getattr(scenes, name))
+    sp["t0"], sp["t1"], sp["camera"], sp["pip"] = m0, m1, camera, False
+    sp["focus"] = list(sp.get("focus", [])) + list(focus_extra)
+    return ReelScene(sp, f"reel_{name}")
 
     def frame_at(self, t):
         i, r = self.seg_at(t)

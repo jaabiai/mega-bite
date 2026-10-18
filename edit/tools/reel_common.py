@@ -61,17 +61,20 @@ def blurred_fill(src, x_center, y_center, crop_h):
     return big * 0.40 + NAVY * 0.10
 
 
-def vertical_frame(src, x_center, zoom=1.0, y_center=None, grain_idx=0, dark=1.0):
-    """landscape source (any size) -> finished 1080x1920 frame (uint8 RGB)"""
+def vertical_frame(src, x_center, zoom=1.0, y_center=None, grain_idx=0, dark=1.0, fg_dy=0):
+    """landscape source (any size) -> finished 1080x1920 frame (uint8 RGB).
+    fg_dy moves the picture up (<0) / down (>0), e.g. to lift a phone that sits at the bottom of the shot."""
     h = src.shape[0]
     yc = h / 2 if y_center is None else y_center
     crop_h = h / zoom
     fg = crop_scale(src, x_center, yc, crop_h, CW, FG_H).astype(np.float32)
-    # blur layer: use a wider/higher crop so the fill is not just a magnified copy of the fg
     bg = blurred_fill(src, x_center, yc, min(crop_h * 1.0, h))
     out = bg.copy()
-    reg = out[FG_Y:FG_Y + FG_H]
-    reg[:] = reg * (1 - FEATHER) + fg * FEATHER
+    y0 = FG_Y + int(fg_dy)
+    a0, a1 = max(y0, 0), min(y0 + FG_H, CH)
+    reg = out[a0:a1]
+    fe = FEATHER[a0 - y0:a1 - y0]
+    reg[:] = reg * (1 - fe) + fg[a0 - y0:a1 - y0] * fe
     out = out * (1 - GRAD) + NAVY * GRAD
     out *= VIG
     out += _GRAIN[grain_idx % len(_GRAIN)][..., None]

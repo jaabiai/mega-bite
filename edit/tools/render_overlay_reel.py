@@ -12,6 +12,8 @@ from playwright.async_api import async_playwright
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 EDIT = os.path.dirname(HERE)
+OVERLAY_DIR = os.environ.get("REEL_OVERLAY", "overlay_reel")
+TIMELINE = os.environ.get("REEL_TIMELINE", "reel_timeline.json")
 CHROME = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 FPS = 30
 
@@ -20,8 +22,8 @@ async def open_page(pw):
     browser = await pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox", "--disable-gpu", "--font-render-hinting=none",
                                                                       "--allow-file-access-from-files"])
     page = await browser.new_page(viewport={"width": 1080, "height": 1920})
-    await page.goto(f"file://{EDIT}/overlay_reel/index.html")
-    tl = json.load(open(f"{EDIT}/data/reel_timeline.json"))
+    await page.goto(f"file://{EDIT}/{OVERLAY_DIR}/index.html")
+    tl = json.load(open(f"{EDIT}/data/{TIMELINE}"))
     # make sure every face/weight is loaded before anything is measured
     await page.evaluate("""() => Promise.all(['800 100px Sora','700 60px Poppins','600 30px Poppins','500 30px Poppins','800 60px Poppins']
         .map(f => document.fonts.load(f)))""")
