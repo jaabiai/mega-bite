@@ -23,7 +23,7 @@ CUTS = [
     dict(id=4401,  t0=119.67, t1=122.88, src_in=3.2, cx=0.50, zoom=(1.00, 1.12), chain=True,  note="surrounding noise"),
     dict(id=39790, t0=122.88, t1=129.05, src_in=0.8, cx=0.30, zoom=(1.00, 1.12), chain=False, note="afraid they hear the place"),
     dict(id=4269,  t0=154.90, t1=158.55, src_in=0.8, cx=0.50, zoom=(1.00, 1.10), chain=True,  note="crowd"),
-    dict(id=4390,  t0=158.55, t1=162.20, src_in=0.8, cx=0.50, zoom=(1.00, 1.10), chain=True,  note="busy station"),
+    dict(id=4332,  t0=158.55, t1=162.20, src_in=0.8, cx=0.60, zoom=(1.00, 1.10), chain=True,  note="rainy Times Square at night"),
     dict(id=39791, t0=162.20, t1=165.75, src_in=2.0, cx=0.50, zoom=(1.00, 1.08), chain=False, portrait=True, note="clear call"),
 ]
 XFADE = 0.22

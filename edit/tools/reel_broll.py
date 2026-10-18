@@ -18,11 +18,6 @@ GRADE = ("eq=contrast=1.07:saturation=1.06:gamma=0.98,"
          "colorbalance=rs=-0.02:bs=0.035:rm=0.02:bm=-0.015:rh=0.03:bh=-0.03")
 
 
-GRADE_SOFT = ("eq=contrast=0.92:saturation=0.92:brightness=-0.035,"
-              "curves=master='0/0 0.5/0.47 0.8/0.72 1/0.86',"
-              "colorbalance=rs=-0.02:bs=0.035:rm=0.02:bm=-0.015")
-
-
 def render(c, src_dir, out):
     dur = (c["t1"] - c["t0"]) + (CHAIN_PAD if c["chain"] else 0.0)
     n = int(round(dur * FPS))
@@ -34,7 +29,7 @@ def render(c, src_dir, out):
     # decode at a size that keeps the push-in sharp: landscape -> 2400x1350 work frame, portrait -> native
     ww, wh = (sw, sh) if portrait else (2400, 1350)
     dec = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", f"{c['src_in']:.3f}", "-i", path, "-frames:v", str(n),
-                            "-vf", f"fps={FPS},{GRADE_SOFT if c['id'] == 4390 else GRADE},scale={ww}:{wh}:flags=lanczos", "-f", "rawvideo",
+                            "-vf", f"fps={FPS},{GRADE},scale={ww}:{wh}:flags=lanczos", "-f", "rawvideo",
                             "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
     enc = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", "1080x1920",
                             "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "13",
