@@ -2,8 +2,7 @@
 
 * music sits ~17 dB under the speech and swells a few dB in the pauses (speech-activity from the aligned words)
 * SFX are mixed above the music, below the voice
-* where voice+music would clip, the MUSIC/SFX dip for a few ms - the voice itself is never turned down
-  (the master ceiling is -1 dBFS so AAC encoding cannot clip)
+* a transparent master limiter (-1 dBFS ceiling, 4 ms ramps) keeps the sum from clipping after AAC encoding
 * the screen-recording audio is never used anywhere in this pipeline
 
 usage: mix_audio.py <voice_loud.wav> <music_bed.wav> <sfx.wav> <words.json> <out.wav>
@@ -52,23 +51,6 @@ def lookahead_limiter(x, ceiling=0.97, hold=0.005, smooth=0.004):
     return (1.0 - np.maximum(rs, 0)).astype(np.float32)
 
 
-def duck_others(voice, others, ceiling=0.891, hold=0.006, smooth=0.005):
-    """per-sample scale (0..1) for music+sfx so that voice+others never exceeds `ceiling`; the voice is untouched"""
-    s = np.ones(voice.shape, np.float32)
-    mag_o = np.abs(others)
-    same = np.sign(voice) == np.sign(others)
-    over = same & (np.abs(voice) + mag_o > ceiling)
-    with np.errstate(divide="ignore", invalid="ignore"):
-        need = np.where(over, np.clip((ceiling - np.abs(voice)) / np.maximum(mag_o, 1e-9), 0, 1), 1.0)
-    sc = need.min(axis=1)
-    w = int(hold * SR)
-    sh = ndimage.minimum_filter1d(sc, size=2 * w + 1, mode="nearest")
-    k = np.hanning(2 * int(smooth * SR) + 1).astype(np.float32)
-    k /= k.sum()
-    sm = signal.fftconvolve(sh, k, mode="same").astype(np.float32)
-    return np.minimum(1.0, np.maximum(sm, 0)) * 1.0
-
-
 def main(voice_p, music_p, sfx_p, words_p, out_p):
     voice, sr = sf.read(voice_p, dtype="float32")
     assert sr == SR and voice.ndim == 2
@@ -94,16 +76,13 @@ def main(voice_p, music_p, sfx_p, words_p, out_p):
     sfx_gain = 10 ** (-8.0 / 20) / max(np.abs(sfx).max(), 1e-9)
 
     others = music * gain_m[:, None] + sfx * sfx_gain
-    dk = duck_others(voice, others)
-    mix = voice + others * dk[:, None]
-    gr = lookahead_limiter(mix, ceiling=0.891)       # -1 dBFS master ceiling
+    mix = voice + others
+    gr = lookahead_limiter(mix, ceiling=0.891)       # -1 dBFS master ceiling (smooth 4 ms ramps)
     out = mix * gr[:, None]
     red_db = -20 * np.log10(np.maximum(gr, 1e-6))
-    dk_db = -20 * np.log10(np.maximum(dk, 1e-6))
     print(f"voice speech RMS {20 * np.log10(v_rms):.1f} dBFS | music target {20 * np.log10(target_speech):.1f} dBFS")
-    print(f"music/SFX dip: max {dk_db.max():.1f} dB, >1 dB on {100 * (dk_db > 1).mean():.3f}% of samples")
-    print(f"voice guard : max {red_db.max():.3f} dB on {100 * (red_db > 0.01).mean():.4f}% of samples")
-    print("pre-guard peak", np.abs(mix).max(), "post", np.abs(out).max())
+    print(f"master limiter: max {red_db.max():.2f} dB, >0.5 dB on {100 * (red_db > 0.5).mean():.4f}% of samples")
+    print("pre-limiter peak", np.abs(mix).max(), "post", np.abs(out).max())
     sf.write(out_p, out, SR, subtype="PCM_24")
 
 
