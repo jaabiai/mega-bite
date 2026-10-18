@@ -51,7 +51,7 @@ def lookahead_limiter(x, ceiling=0.97, hold=0.005, smooth=0.004):
     return (1.0 - np.maximum(rs, 0)).astype(np.float32)
 
 
-def main(voice_p, music_p, sfx_p, words_p, out_p):
+def main(voice_p, music_p, sfx_p, words_p, out_p, boost_t=27.4):
     voice, sr = sf.read(voice_p, dtype="float32")
     assert sr == SR and voice.ndim == 2
     n = len(voice)
@@ -71,8 +71,8 @@ def main(voice_p, music_p, sfx_p, words_p, out_p):
     gain_m = base * (10 ** (swell_db / 20 * (1 - act)))
     # "Welcome to Mega Byte" drop and the finale get a little extra weight
     t = np.arange(n) / SR
-    boost = 1 + 0.42 * np.clip(1 - np.abs(t - 27.4) / 2.4, 0, 1)
-    gain_m = gain_m * boost
+    if boost_t >= 0:
+        gain_m = gain_m * (1 + 0.42 * np.clip(1 - np.abs(t - boost_t) / 2.4, 0, 1))
     sfx_gain = 10 ** (-8.0 / 20) / max(np.abs(sfx).max(), 1e-9)
 
     others = music * gain_m[:, None] + sfx * sfx_gain
@@ -87,4 +87,4 @@ def main(voice_p, music_p, sfx_p, words_p, out_p):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:6])
+    main(*sys.argv[1:6], *([float(sys.argv[6])] if len(sys.argv) > 6 else []))

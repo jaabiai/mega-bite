@@ -30,6 +30,7 @@ WIN_W, WIN_H = 394, 856
 WIN_X, WIN_Y = 763, 30
 PIP_W, PIP_H = 480, 270
 PIP_X, PIP_Y = 1300, 70
+UI = 1.0  # size multiplier for tap ripples / swipe finger (the 9:16 reel uses a larger viewport)
 
 SCRATCH = os.environ.get("SCRATCH", "/tmp/claude-0/-home-user-mega-bite/f59bda35-f4bb-5fe4-b000-af77d2d4ed63/scratchpad")
 SCREEN = f"{SCRATCH}/screen/screen_sdr30.mp4"
@@ -246,6 +247,8 @@ class Scene:
             pulse = 0.5 + 0.5 * math.sin((t - a) * 2 * math.pi / 1.1)
             wx0, wy0 = to_win(x0 - pad, y0 - pad)
             wx1, wy1 = to_win(x1 + pad, y1 + pad)
+            if wy1 < 0 or wy0 > H or wx1 < 0 or wx0 > W:     # highlighted element is scrolled out of the viewport
+                continue
             rad = min(f.get("radius", 40) * s * 1.4 + 6, (wx1 - wx0) / 2, (wy1 - wy0) / 2)
             d = rrect_sdf(_XX, _YY, wx0 - pulse * 3, wy0 - pulse * 3, wx1 + pulse * 3, wy1 + pulse * 3, rad + pulse * 3)
             inside = np.clip(0.5 - d / 16, 0, 1)
@@ -270,15 +273,15 @@ class Scene:
             cx, cy = to_win(tp["x"], tp["y"])
             if not (-120 < cx < W + 120 and -120 < cy < H + 120):
                 continue
-            x0, x1 = int(max(cx - 130, 0)), int(min(cx + 130, W))
-            y0, y1 = int(max(cy - 130, 0)), int(min(cy + 130, H))
+            x0, x1 = int(max(cx - 130 * UI, 0)), int(min(cx + 130 * UI, W))
+            y0, y1 = int(max(cy - 130 * UI, 0)), int(min(cy + 130 * UI, H))
             if x1 <= x0 or y1 <= y0:
                 continue
             dist = np.hypot(_XX[y0:y1, x0:x1] - cx, _YY[y0:y1, x0:x1] - cy)
             u = min(max(age, 0) / 0.7, 1.0)
-            rr = 16 + 86 * ease_out(u)
-            ring = np.clip(1 - np.abs(dist - rr) / 3.2, 0, 1) * (1 - u) ** 1.4
-            dot_r = 9 * (1 - smooth(max(age, 0) / 0.30))
+            rr = (16 + 86 * ease_out(u)) * UI
+            ring = np.clip(1 - np.abs(dist - rr) / (3.2 * UI), 0, 1) * (1 - u) ** 1.4
+            dot_r = 9 * UI * (1 - smooth(max(age, 0) / 0.30))
             dot = np.clip((dot_r - dist) / 1.5 + 0.5, 0, 1) * (1 - smooth(max(age, 0) / 0.40))
             halo = np.exp(-(dist / (rr + 10)) ** 2) * 0.10 * (1 - u)
             reg = img[y0:y1, x0:x1]
@@ -295,9 +298,9 @@ class Scene:
                 uu = ease_io(max((t - sw["t0"]) / (sw["t1"] - sw["t0"]) - j * 0.035, 0))
                 fx = sw["x0"] + (sw["x1"] - sw["x0"]) * uu
                 cx, cy = to_win(fx, sw["y"])
-                rad = 32 * (1 - 0.06 * j)
-                x0, x1 = int(max(cx - 60, 0)), int(min(cx + 60, W))
-                y0, y1 = int(max(cy - 60, 0)), int(min(cy + 60, H))
+                rad = 32 * UI * (1 - 0.06 * j)
+                x0, x1 = int(max(cx - 60 * UI, 0)), int(min(cx + 60 * UI, W))
+                y0, y1 = int(max(cy - 60 * UI, 0)), int(min(cy + 60 * UI, H))
                 if x1 <= x0 or y1 <= y0:
                     continue
                 dist = np.hypot(_XX[y0:y1, x0:x1] - cx, _YY[y0:y1, x0:x1] - cy)

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mega Byte reel overlay</title>
+<style>
+@font-face{font-family:Sora;font-weight:800;src:url(../assets/fonts/Sora-800.ttf)}
+@font-face{font-family:Sora;font-weight:700;src:url(../assets/fonts/Sora-700.ttf)}
+@font-face{font-family:Poppins;font-weight:500;src:url(../assets/fonts/Poppins-500.ttf)}
+@font-face{font-family:Poppins;font-weight:600;src:url(../assets/fonts/Poppins-600.ttf)}
+@font-face{font-family:Poppins;font-weight:700;src:url(../assets/fonts/Poppins-700.ttf)}
+@font-face{font-family:Poppins;font-weight:800;src:url(../assets/fonts/Poppins-800.ttf)}
+
+/* "Sunset Amber" theme (same as the long video) */
+:root{--amber:#FFB21F;--amber-hi:#FFD35A;--orange:#FF7A1A;--magenta:#FF2E7E;--cream:#FFF6E8;
+  --grad:linear-gradient(95deg,#FFD35A 0%,#FF9A1F 48%,#FF3D7F 100%)}
+html,body{margin:0;padding:0;background:transparent;width:1080px;height:1920px;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1080px;height:1920px;font-family:Poppins,sans-serif;color:var(--cream)}
+.abs{position:absolute}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+/* top safe zone: progress + logo, then the title block from y=236 */
+#prog{position:absolute;left:40px;top:98px;width:1000px;height:6px;border-radius:3px;background:rgba(255,255,255,.16);overflow:hidden}
+#progfill{height:100%;width:0;background:var(--grad);border-radius:3px}
+#logo{position:absolute;left:36px;top:118px;width:92px;height:92px;filter:drop-shadow(0 0 14px rgba(40,120,255,.5)) drop-shadow(0 4px 10px rgba(0,0,0,.55))}
+
+.title{left:56px;top:236px;width:968px}
+.kicker{font:700 27px/1 Poppins,sans-serif;letter-spacing:.22em;color:var(--amber);display:flex;align-items:center;gap:14px;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.kicker:before{content:"";display:block;width:44px;height:4px;border-radius:2px;background:var(--grad)}
+.big{font-family:Sora,sans-serif;font-weight:800;letter-spacing:-1px;line-height:1.02;white-space:nowrap;text-transform:uppercase;margin-top:14px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.6))}
+.big.w{color:#fff}
+.sub{font:500 30px/1.3 Poppins,sans-serif;color:rgba(255,246,232,.92);margin-top:12px;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.bar{height:5px;width:100%;border-radius:3px;background:var(--grad);margin-top:16px;transform-origin:left center}
+
+/* step dots */
+.dots{margin-left:auto;display:flex;gap:8px}
+.dots i{display:block;width:46px;height:8px;border-radius:4px;background:rgba(255,255,255,.22)}
+
+/* ON card check */
+.chk{display:inline-flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:50%;background:var(--grad);color:#1c1109;margin-right:22px;vertical-align:middle;box-shadow:0 10px 30px rgba(255,120,30,.45)}
+.chk svg{width:52px;height:52px}
+
+/* recap pill */
+.pill{display:inline-block;margin-top:16px;padding:22px 34px 24px 34px;border-radius:30px;background:rgba(10,12,18,.66);border:1.5px solid rgba(255,255,255,.18);box-shadow:0 12px 34px rgba(0,0,0,.45);position:relative;overflow:hidden}
+.pill:before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--grad)}
+.pill div{font:600 33px/1.45 Poppins,sans-serif;margin-left:8px;white-space:nowrap}
+
+/* waveform */
+.wave{display:flex;align-items:center;gap:7px;height:44px;margin-left:auto}
+.wave i{display:block;width:8px;border-radius:4px;background:var(--grad)}
+
+/* captions */
+#captions{position:absolute;left:100px;width:860px;top:1290px;height:230px;text-align:center}
+.cap{position:absolute;left:0;right:0;top:0;bottom:0;display:none;align-items:center;justify-content:center}
+.cap .line{font:700 64px/1.22 Poppins,sans-serif;letter-spacing:.2px}
+.cap .w{display:inline-block;margin:0 .22em;will-change:transform,opacity,filter;paint-order:stroke fill;-webkit-text-stroke:6px rgba(6,7,12,.6);text-shadow:0 4px 16px rgba(0,0,0,.65)}
+
+/* end card */
+.endcard{left:0;top:0;width:1080px;height:1920px}
+.endcard .scrim{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(5,6,12,.30) 0%,rgba(5,6,12,.78) 80%)}
+.endcard .t{position:absolute;left:0;right:0;text-align:center;font:800 104px/1.02 Sora,sans-serif;letter-spacing:-2px;text-shadow:0 8px 28px rgba(0,0,0,.6)}
+.endcard .small{position:absolute;left:0;right:0;text-align:center;top:1196px;font:600 30px/1 Poppins;letter-spacing:.3em;color:var(--amber-hi);text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.ring{position:absolute;border-radius:50%;border:5px solid var(--amber);opacity:0}
+.sub-btn{position:absolute;display:flex;align-items:center;gap:20px;height:124px;border-radius:70px;padding:0 48px 0 34px;font:800 48px/1 Sora,sans-serif;letter-spacing:.04em;box-shadow:0 16px 44px rgba(0,0,0,.5);color:#fff}
+.btn{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(10,12,18,.74);border:3px solid rgba(255,255,255,.28);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="layer"></div>
+  <div id="captions"></div>
+  <div id="prog"><div id="progfill"></div></div>
+  <img id="logo" src="../assets/logo_megabyte.png">
+</div>
+<script src="reel.js"></script>
+</body>
+</html>
