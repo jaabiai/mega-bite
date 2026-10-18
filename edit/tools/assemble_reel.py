@@ -17,12 +17,32 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 import reel_plan as rp  # noqa: E402
 
 
+def make_scrim(path):
+    """static top/bottom scrim: keeps titles and captions readable over bright B-roll"""
+    import numpy as np
+    from PIL import Image
+    y = np.arange(1920, dtype=np.float32)
+
+    def sstep(a, b):
+        u = np.clip((y - a) / (b - a), 0, 1)
+        return u * u * (3 - 2 * u)
+
+    a = 0.64 * (1 - sstep(180, 580)) + 0.58 * sstep(1260, 1500)
+    img = np.zeros((1920, 1080, 4), np.uint8)
+    img[..., :3] = (4, 5, 10)
+    img[..., 3] = (np.clip(a, 0, 0.8)[:, None] * 255).astype(np.uint8)
+    Image.fromarray(img, "RGBA").save(path)
+
+
 def main(scratch, out, proxy=False):
     W, H = (360, 640) if proxy else (1080, 1920)
     R = rp.r
     inputs = [f"{scratch}/reel/speaker.mp4", f"{scratch}/reel/demo.mp4"]
     inputs += [f"{scratch}/reel/cuts/rcut_{c['id']}.mp4" for c in rp.CUTS]
-    ov_i = len(inputs)
+    scrim = f"{scratch}/reel/scrim.png"
+    make_scrim(scrim)
+    scrim_i = len(inputs)
+    ov_i = scrim_i + 1
     au_i = ov_i + 1
     f = [f"[0:v]scale={W}:{H},format=yuv420p,setsar=1[v0]"]
     cur = "v0"
@@ -44,12 +64,15 @@ def main(scratch, out, proxy=False):
         n += 1
         f.append(f"[{cur}][c{i}]overlay=eof_action=pass:enable='between(t,{t0},{t0 + dur:.3f})'[v{n}]")
         cur = f"v{n}"
+    f.append(f"[{scrim_i}:v]format=rgba,scale={W}:{H}[scr]")
+    f.append(f"[{cur}][scr]overlay=0:0:format=auto:shortest=0[vs]")
     f.append(f"[{ov_i}:v]format=rgba,scale={W}:{H}[ovl]")
-    f.append(f"[{cur}][ovl]overlay=0:0:format=auto:eof_action=pass,format=yuv420p[vout]")
+    f.append(f"[vs][ovl]overlay=0:0:format=auto:eof_action=pass,format=yuv420p[vout]")
 
     cmd = ["ffmpeg", "-v", "error", "-stats", "-y"]
     for p in inputs:
         cmd += ["-i", p]
+    cmd += ["-loop", "1", "-framerate", "30", "-i", scrim]
     cmd += ["-framerate", "30", "-start_number", "0", "-i", f"{scratch}/reel/ov/%06d.png"]
     cmd += ["-i", f"{scratch}/reel/audio_final/reel_audio.wav"]
     cmd += ["-filter_complex", ";".join(f), "-map", "[vout]", "-map", f"{au_i}:a", "-t", f"{rp.N_FRAMES / 30:.4f}"]
