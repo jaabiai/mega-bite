@@ -1,0 +1,4485 @@
+{
+ "duration": 263.0386875,
+ "words": [
+  {
+   "cue": 1,
+   "text": "iPhone",
+   "start": 0.24,
+   "end": 0.46,
+   "score": -1.209
+  },
+  {
+   "cue": 1,
+   "text": "upayogikkunnavarkku",
+   "start": 0.46,
+   "end": 1.06,
+   "score": -0.35
+  },
+  {
+   "cue": 1,
+   "text": "moonnu",
+   "start": 1.34,
+   "end": 1.68,
+   "score": -3.55
+  },
+  {
+   "cue": 1,
+   "text": "kidilan",
+   "start": 1.74,
+   "end": 2.06,
+   "score": -0.611
+  },
+  {
+   "cue": 1,
+   "text": "feature-ukalaanu",
+   "start": 2.12,
+   "end": 2.72,
+   "score": -3.539
+  },
+  {
+   "cue": 1,
+   "text": "innathe",
+   "start": 2.74,
+   "end": 2.94,
+   "score": -1.446
+  },
+  {
+   "cue": 1,
+   "text": "videoyiloode",
+   "start": 2.94,
+   "end": 3.36,
+   "score": -3.297
+  },
+  {
+   "cue": 1,
+   "text": "parichayappaduthunnathu.",
+   "start": 3.5,
+   "end": 4.38,
+   "score": -1.85
+  },
+  {
+   "cue": 2,
+   "text": "Appo",
+   "start": 4.4,
+   "end": 4.52,
+   "score": -1.892
+  },
+  {
+   "cue": 2,
+   "text": "video",
+   "start": 4.54,
+   "end": 4.8,
+   "score": -1.439
+  },
+  {
+   "cue": 2,
+   "text": "skip",
+   "start": 4.82,
+   "end": 5.02,
+   "score": -0.088
+  },
+  {
+   "cue": 2,
+   "text": "cheyyathe",
+   "start": 5.06,
+   "end": 5.4,
+   "score": -2.366
+  },
+  {
+   "cue": 2,
+   "text": "muzhuvanayittu",
+   "start": 5.54,
+   "end": 6.12,
+   "score": -1.867
+  },
+  {
+   "cue": 2,
+   "text": "kaanuka.",
+   "start": 6.16,
+   "end": 6.44,
+   "score": -0.093
+  },
+  {
+   "cue": 3,
+   "text": "Theerchayayum",
+   "start": 6.64,
+   "end": 7.12,
+   "score": -1.558
+  },
+  {
+   "cue": 3,
+   "text": "iPhone",
+   "start": 7.2,
+   "end": 7.44,
+   "score": -1.335
+  },
+  {
+   "cue": 3,
+   "text": "upayogikkunna",
+   "start": 7.46,
+   "end": 7.9,
+   "score": -0.115
+  },
+  {
+   "cue": 3,
+   "text": "oro",
+   "start": 8.02,
+   "end": 8.26,
+   "score": -0.121
+  },
+  {
+   "cue": 3,
+   "text": "aalukalkkum",
+   "start": 8.44,
+   "end": 8.92,
+   "score": -0.083
+  },
+  {
+   "cue": 3,
+   "text": "ee",
+   "start": 9.22,
+   "end": 9.28,
+   "score": -7.837
+  },
+  {
+   "cue": 3,
+   "text": "video",
+   "start": 9.32,
+   "end": 9.58,
+   "score": -1.402
+  },
+  {
+   "cue": 3,
+   "text": "useful",
+   "start": 9.66,
+   "end": 9.84,
+   "score": -2.938
+  },
+  {
+   "cue": 3,
+   "text": "aayirikkum.",
+   "start": 9.92,
+   "end": 10.24,
+   "score": -1.013
+  },
+  {
+   "cue": 4,
+   "text": "Ithil",
+   "start": 10.34,
+   "end": 10.5,
+   "score": -3.95
+  },
+  {
+   "cue": 4,
+   "text": "parayunna",
+   "start": 10.54,
+   "end": 10.9,
+   "score": -0.052
+  },
+  {
+   "cue": 4,
+   "text": "feature-ukal",
+   "start": 10.94,
+   "end": 11.32,
+   "score": -4.938
+  },
+  {
+   "cue": 4,
+   "text": "inno",
+   "start": 11.82,
+   "end": 12.0,
+   "score": -0.033
+  },
+  {
+   "cue": 4,
+   "text": "innaleyo",
+   "start": 12.08,
+   "end": 12.36,
+   "score": -1.131
+  },
+  {
+   "cue": 4,
+   "text": "vanna",
+   "start": 12.36,
+   "end": 12.54,
+   "score": -0.018
+  },
+  {
+   "cue": 4,
+   "text": "feature-ukalonnumalla,",
+   "start": 12.56,
+   "end": 13.26,
+   "score": -3.57
+  },
+  {
+   "cue": 4,
+   "text": "iOS",
+   "start": 13.38,
+   "end": 13.52,
+   "score": -1.649
+  },
+  {
+   "cue": 4,
+   "text": "27",
+   "start": 13.52,
+   "end": 14.2,
+   "score": 0.0
+  },
+  {
+   "cue": 4,
+   "text": "vannappol",
+   "start": 14.2,
+   "end": 14.5,
+   "score": -1.054
+  },
+  {
+   "cue": 4,
+   "text": "thudangiya",
+   "start": 14.54,
+   "end": 14.9,
+   "score": -1.86
+  },
+  {
+   "cue": 4,
+   "text": "feature-ukalaanu.",
+   "start": 15.12,
+   "end": 15.8,
+   "score": -3.569
+  },
+  {
+   "cue": 5,
+   "text": "Appol",
+   "start": 15.88,
+   "end": 16.06,
+   "score": -3.245
+  },
+  {
+   "cue": 5,
+   "text": "ariyathavarkku",
+   "start": 16.1,
+   "end": 16.78,
+   "score": -0.645
+  },
+  {
+   "cue": 5,
+   "text": "vendi",
+   "start": 16.8,
+   "end": 17.16,
+   "score": -0.555
+  },
+  {
+   "cue": 5,
+   "text": "avarilekku",
+   "start": 17.32,
+   "end": 17.7,
+   "score": -0.34
+  },
+  {
+   "cue": 5,
+   "text": "ethikkuka",
+   "start": 17.72,
+   "end": 17.98,
+   "score": -2.503
+  },
+  {
+   "cue": 5,
+   "text": "ennulla",
+   "start": 18.04,
+   "end": 18.3,
+   "score": -1.245
+  },
+  {
+   "cue": 5,
+   "text": "uddeshyathodukoodeyaanu",
+   "start": 18.3,
+   "end": 19.1,
+   "score": -3.049
+  },
+  {
+   "cue": 5,
+   "text": "ee",
+   "start": 19.2,
+   "end": 19.28,
+   "score": -7.355
+  },
+  {
+   "cue": 5,
+   "text": "video",
+   "start": 19.3,
+   "end": 19.54,
+   "score": -1.29
+  },
+  {
+   "cue": 5,
+   "text": "cheyyunnathu.",
+   "start": 19.6,
+   "end": 19.98,
+   "score": -2.591
+  },
+  {
+   "cue": 6,
+   "text": "Appo",
+   "start": 20.24,
+   "end": 20.34,
+   "score": -6.479
+  },
+  {
+   "cue": 6,
+   "text": "enthayalum",
+   "start": 20.34,
+   "end": 20.7,
+   "score": -0.985
+  },
+  {
+   "cue": 6,
+   "text": "kazhivathum",
+   "start": 20.82,
+   "end": 21.16,
+   "score": -5.321
+  },
+  {
+   "cue": 6,
+   "text": "paramavadhi",
+   "start": 21.16,
+   "end": 21.52,
+   "score": -1.628
+  },
+  {
+   "cue": 6,
+   "text": "ellavarilekkum",
+   "start": 21.56,
+   "end": 22.22,
+   "score": -0.068
+  },
+  {
+   "cue": 6,
+   "text": "share",
+   "start": 22.4,
+   "end": 22.66,
+   "score": -0.789
+  },
+  {
+   "cue": 6,
+   "text": "cheythu",
+   "start": 22.66,
+   "end": 22.8,
+   "score": -4.267
+  },
+  {
+   "cue": 6,
+   "text": "kodukkuka.",
+   "start": 22.8,
+   "end": 23.14,
+   "score": -1.261
+  },
+  {
+   "cue": 7,
+   "text": "Appo",
+   "start": 23.34,
+   "end": 23.46,
+   "score": -3.511
+  },
+  {
+   "cue": 7,
+   "text": "enthellaamanu",
+   "start": 23.48,
+   "end": 23.94,
+   "score": -3.058
+  },
+  {
+   "cue": 7,
+   "text": "ee",
+   "start": 24.2,
+   "end": 24.28,
+   "score": -8.738
+  },
+  {
+   "cue": 7,
+   "text": "feature-ukal",
+   "start": 24.3,
+   "end": 24.74,
+   "score": -4.836
+  },
+  {
+   "cue": 7,
+   "text": "ennu",
+   "start": 24.74,
+   "end": 24.86,
+   "score": -1.046
+  },
+  {
+   "cue": 7,
+   "text": "nokkam.",
+   "start": 24.86,
+   "end": 25.12,
+   "score": -1.222
+  },
+  {
+   "cue": 8,
+   "text": "Welcome",
+   "start": 25.32,
+   "end": 25.62,
+   "score": -4.605
+  },
+  {
+   "cue": 8,
+   "text": "to",
+   "start": 25.76,
+   "end": 25.8,
+   "score": -3.552
+  },
+  {
+   "cue": 8,
+   "text": "Mega",
+   "start": 26.24,
+   "end": 26.46,
+   "score": -0.771
+  },
+  {
+   "cue": 8,
+   "text": "Byte.",
+   "start": 26.54,
+   "end": 26.64,
+   "score": -3.623
+  },
+  {
+   "cue": 9,
+   "text": "Puthiya",
+   "start": 27.0,
+   "end": 27.16,
+   "score": -2.582
+  },
+  {
+   "cue": 9,
+   "text": "oru",
+   "start": 27.16,
+   "end": 27.24,
+   "score": -3.303
+  },
+  {
+   "cue": 9,
+   "text": "videoyilekku",
+   "start": 27.24,
+   "end": 27.7,
+   "score": -1.608
+  },
+  {
+   "cue": 9,
+   "text": "ellavarkkum",
+   "start": 28.1,
+   "end": 28.82,
+   "score": -0.035
+  },
+  {
+   "cue": 9,
+   "text": "swaagatham.",
+   "start": 28.88,
+   "end": 29.26,
+   "score": -1.789
+  },
+  {
+   "cue": 10,
+   "text": "Appo",
+   "start": 29.6,
+   "end": 29.72,
+   "score": -2.023
+  },
+  {
+   "cue": 10,
+   "text": "ee",
+   "start": 29.72,
+   "end": 29.78,
+   "score": -2.483
+  },
+  {
+   "cue": 10,
+   "text": "feature-ukal",
+   "start": 29.82,
+   "end": 30.26,
+   "score": -4.7
+  },
+  {
+   "cue": 10,
+   "text": "nammude",
+   "start": 30.26,
+   "end": 30.5,
+   "score": -1.42
+  },
+  {
+   "cue": 10,
+   "text": "phoninte",
+   "start": 30.64,
+   "end": 31.0,
+   "score": -1.122
+  },
+  {
+   "cue": 10,
+   "text": "screen",
+   "start": 31.02,
+   "end": 31.3,
+   "score": -2.344
+  },
+  {
+   "cue": 10,
+   "text": "demo-yiloode",
+   "start": 31.46,
+   "end": 31.94,
+   "score": -2.053
+  },
+  {
+   "cue": 10,
+   "text": "namukkannu",
+   "start": 31.96,
+   "end": 32.3,
+   "score": -0.505
+  },
+  {
+   "cue": 10,
+   "text": "parichayappadam.",
+   "start": 32.44,
+   "end": 33.02,
+   "score": -1.118
+  },
+  {
+   "cue": 11,
+   "text": "Ettavum",
+   "start": 33.22,
+   "end": 33.52,
+   "score": -2.008
+  },
+  {
+   "cue": 11,
+   "text": "aadyamayi",
+   "start": 33.54,
+   "end": 33.96,
+   "score": -0.071
+  },
+  {
+   "cue": 11,
+   "text": "valare",
+   "start": 33.98,
+   "end": 34.2,
+   "score": -0.102
+  },
+  {
+   "cue": 11,
+   "text": "useful",
+   "start": 34.28,
+   "end": 34.64,
+   "score": -1.907
+  },
+  {
+   "cue": 11,
+   "text": "aayittulla",
+   "start": 34.68,
+   "end": 34.98,
+   "score": -1.637
+  },
+  {
+   "cue": 11,
+   "text": "oru",
+   "start": 34.98,
+   "end": 35.06,
+   "score": -0.14
+  },
+  {
+   "cue": 11,
+   "text": "feature",
+   "start": 35.06,
+   "end": 35.34,
+   "score": -7.133
+  },
+  {
+   "cue": 11,
+   "text": "aanu.",
+   "start": 35.36,
+   "end": 35.5,
+   "score": -1.586
+  },
+  {
+   "cue": 12,
+   "text": "Athava",
+   "start": 35.54,
+   "end": 35.74,
+   "score": -0.439
+  },
+  {
+   "cue": 12,
+   "text": "ningalkku",
+   "start": 35.8,
+   "end": 36.12,
+   "score": -1.44
+  },
+  {
+   "cue": 12,
+   "text": "aarengilum",
+   "start": 36.12,
+   "end": 36.52,
+   "score": -0.084
+  },
+  {
+   "cue": 12,
+   "text": "miss",
+   "start": 36.88,
+   "end": 37.02,
+   "score": -0.8
+  },
+  {
+   "cue": 12,
+   "text": "call",
+   "start": 37.08,
+   "end": 37.26,
+   "score": -3.72
+  },
+  {
+   "cue": 12,
+   "text": "nalki",
+   "start": 37.28,
+   "end": 37.5,
+   "score": -0.077
+  },
+  {
+   "cue": 12,
+   "text": "athallengil",
+   "start": 37.54,
+   "end": 38.0,
+   "score": -0.602
+  },
+  {
+   "cue": 12,
+   "text": "pinneedu",
+   "start": 38.2,
+   "end": 38.48,
+   "score": -2.898
+  },
+  {
+   "cue": 12,
+   "text": "eppozhengilum",
+   "start": 38.48,
+   "end": 38.96,
+   "score": -1.898
+  },
+  {
+   "cue": 12,
+   "text": "call",
+   "start": 39.02,
+   "end": 39.26,
+   "score": -4.431
+  },
+  {
+   "cue": 12,
+   "text": "back",
+   "start": 39.32,
+   "end": 39.5,
+   "score": -2.578
+  },
+  {
+   "cue": 12,
+   "text": "cheyyanam",
+   "start": 39.56,
+   "end": 39.92,
+   "score": -1.037
+  },
+  {
+   "cue": 12,
+   "text": "ennulla",
+   "start": 39.98,
+   "end": 40.28,
+   "score": -0.168
+  },
+  {
+   "cue": 12,
+   "text": "oru",
+   "start": 40.28,
+   "end": 40.38,
+   "score": -0.039
+  },
+  {
+   "cue": 12,
+   "text": "aavashyam",
+   "start": 40.7,
+   "end": 41.06,
+   "score": -0.007
+  },
+  {
+   "cue": 12,
+   "text": "ningalkku",
+   "start": 41.08,
+   "end": 41.44,
+   "score": -0.367
+  },
+  {
+   "cue": 12,
+   "text": "vannu.",
+   "start": 41.46,
+   "end": 41.68,
+   "score": -0.029
+  },
+  {
+   "cue": 13,
+   "text": "Udaharanathinu",
+   "start": 41.88,
+   "end": 42.44,
+   "score": -1.145
+  },
+  {
+   "cue": 13,
+   "text": "njan",
+   "start": 42.56,
+   "end": 42.72,
+   "score": -3.065
+  },
+  {
+   "cue": 13,
+   "text": "ivide",
+   "start": 42.74,
+   "end": 42.9,
+   "score": -1.103
+  },
+  {
+   "cue": 13,
+   "text": "kaanikkunna",
+   "start": 42.96,
+   "end": 43.38,
+   "score": -0.006
+  },
+  {
+   "cue": 13,
+   "text": "ee",
+   "start": 43.48,
+   "end": 43.56,
+   "score": -8.033
+  },
+  {
+   "cue": 13,
+   "text": "oru",
+   "start": 43.6,
+   "end": 43.7,
+   "score": -0.018
+  },
+  {
+   "cue": 13,
+   "text": "contact-inu",
+   "start": 43.72,
+   "end": 44.26,
+   "score": -2.977
+  },
+  {
+   "cue": 13,
+   "text": "enikku",
+   "start": 44.44,
+   "end": 44.7,
+   "score": -0.731
+  },
+  {
+   "cue": 13,
+   "text": "oru",
+   "start": 45.0,
+   "end": 45.12,
+   "score": -0.043
+  },
+  {
+   "cue": 13,
+   "text": "miss",
+   "start": 45.14,
+   "end": 45.28,
+   "score": -1.136
+  },
+  {
+   "cue": 13,
+   "text": "call",
+   "start": 45.3,
+   "end": 45.48,
+   "score": -3.571
+  },
+  {
+   "cue": 13,
+   "text": "vannirikkukayaanu.",
+   "start": 45.5,
+   "end": 46.12,
+   "score": -0.429
+  },
+  {
+   "cue": 14,
+   "text": "Ente",
+   "start": 46.3,
+   "end": 46.56,
+   "score": -1.897
+  },
+  {
+   "cue": 14,
+   "text": "free",
+   "start": 46.8,
+   "end": 46.98,
+   "score": -5.864
+  },
+  {
+   "cue": 14,
+   "text": "time-il",
+   "start": 47.08,
+   "end": 47.38,
+   "score": -1.905
+  },
+  {
+   "cue": 14,
+   "text": "ivarkku",
+   "start": 47.56,
+   "end": 47.86,
+   "score": -0.374
+  },
+  {
+   "cue": 14,
+   "text": "thirichu",
+   "start": 48.02,
+   "end": 48.32,
+   "score": -2.177
+  },
+  {
+   "cue": 14,
+   "text": "vilikkanam",
+   "start": 48.34,
+   "end": 48.74,
+   "score": -0.077
+  },
+  {
+   "cue": 14,
+   "text": "ennulla",
+   "start": 48.84,
+   "end": 49.1,
+   "score": -0.394
+  },
+  {
+   "cue": 14,
+   "text": "oru",
+   "start": 49.1,
+   "end": 49.2,
+   "score": -0.192
+  },
+  {
+   "cue": 14,
+   "text": "reminder",
+   "start": 49.3,
+   "end": 49.84,
+   "score": -1.824
+  },
+  {
+   "cue": 14,
+   "text": "set",
+   "start": 49.86,
+   "end": 50.1,
+   "score": -2.08
+  },
+  {
+   "cue": 14,
+   "text": "cheyyanam.",
+   "start": 50.12,
+   "end": 50.4,
+   "score": -1.229
+  },
+  {
+   "cue": 15,
+   "text": "Athinuvendi",
+   "start": 50.44,
+   "end": 50.9,
+   "score": -1.249
+  },
+  {
+   "cue": 15,
+   "text": "ningalkku",
+   "start": 50.92,
+   "end": 51.3,
+   "score": -0.582
+  },
+  {
+   "cue": 15,
+   "text": "ethu",
+   "start": 51.52,
+   "end": 51.64,
+   "score": -2.267
+  },
+  {
+   "cue": 15,
+   "text": "call-aano",
+   "start": 51.66,
+   "end": 52.04,
+   "score": -3.049
+  },
+  {
+   "cue": 15,
+   "text": "vendathu",
+   "start": 52.06,
+   "end": 52.4,
+   "score": -3.224
+  },
+  {
+   "cue": 15,
+   "text": "athinu",
+   "start": 52.8,
+   "end": 53.0,
+   "score": -1.586
+  },
+  {
+   "cue": 15,
+   "text": "nere",
+   "start": 53.04,
+   "end": 53.28,
+   "score": -0.26
+  },
+  {
+   "cue": 15,
+   "text": "ithe",
+   "start": 53.32,
+   "end": 53.42,
+   "score": -1.299
+  },
+  {
+   "cue": 15,
+   "text": "reethiyil",
+   "start": 53.52,
+   "end": 53.9,
+   "score": -0.904
+  },
+  {
+   "cue": 15,
+   "text": "idathuvashaththekk",
+   "start": 54.02,
+   "end": 54.68,
+   "score": -2.126
+  },
+  {
+   "cue": 15,
+   "text": "swipe",
+   "start": 54.74,
+   "end": 55.0,
+   "score": -3.116
+  },
+  {
+   "cue": 15,
+   "text": "cheythu",
+   "start": 55.0,
+   "end": 55.22,
+   "score": -4.162
+  },
+  {
+   "cue": 15,
+   "text": "kazhinjal...",
+   "start": 55.22,
+   "end": 55.58,
+   "score": -4.243
+  },
+  {
+   "cue": 16,
+   "text": "Ivideyaayi",
+   "start": 55.7,
+   "end": 56.08,
+   "score": -0.781
+  },
+  {
+   "cue": 16,
+   "text": "namukku",
+   "start": 56.1,
+   "end": 56.34,
+   "score": -0.74
+  },
+  {
+   "cue": 16,
+   "text": "oru",
+   "start": 56.36,
+   "end": 56.48,
+   "score": -0.024
+  },
+  {
+   "cue": 16,
+   "text": "clock",
+   "start": 56.68,
+   "end": 57.0,
+   "score": -3.168
+  },
+  {
+   "cue": 16,
+   "text": "icon",
+   "start": 57.08,
+   "end": 57.3,
+   "score": -3.955
+  },
+  {
+   "cue": 16,
+   "text": "kaanaan",
+   "start": 57.32,
+   "end": 57.6,
+   "score": -0.291
+  },
+  {
+   "cue": 16,
+   "text": "sadhikkum.",
+   "start": 57.62,
+   "end": 57.98,
+   "score": -0.076
+  },
+  {
+   "cue": 17,
+   "text": "Just",
+   "start": 58.04,
+   "end": 58.26,
+   "score": -3.572
+  },
+  {
+   "cue": 17,
+   "text": "athil",
+   "start": 58.28,
+   "end": 58.5,
+   "score": -1.217
+  },
+  {
+   "cue": 17,
+   "text": "select",
+   "start": 58.52,
+   "end": 58.78,
+   "score": -4.023
+  },
+  {
+   "cue": 17,
+   "text": "cheythu",
+   "start": 58.8,
+   "end": 58.96,
+   "score": -2.526
+  },
+  {
+   "cue": 17,
+   "text": "kazhinjal",
+   "start": 58.96,
+   "end": 59.32,
+   "score": -3.687
+  },
+  {
+   "cue": 17,
+   "text": "ningalkku",
+   "start": 59.44,
+   "end": 59.82,
+   "score": -0.595
+  },
+  {
+   "cue": 17,
+   "text": "eathengilum",
+   "start": 60.1,
+   "end": 60.56,
+   "score": -0.909
+  },
+  {
+   "cue": 17,
+   "text": "oru",
+   "start": 60.6,
+   "end": 60.72,
+   "score": -0.028
+  },
+  {
+   "cue": 17,
+   "text": "samayam",
+   "start": 61.04,
+   "end": 61.34,
+   "score": -0.064
+  },
+  {
+   "cue": 17,
+   "text": "select",
+   "start": 61.4,
+   "end": 61.66,
+   "score": -3.43
+  },
+  {
+   "cue": 17,
+   "text": "cheythu...",
+   "start": 61.7,
+   "end": 61.94,
+   "score": -2.581
+  },
+  {
+   "cue": 18,
+   "text": "Athinu",
+   "start": 62.16,
+   "end": 62.4,
+   "score": -2.086
+  },
+  {
+   "cue": 18,
+   "text": "reminder",
+   "start": 62.7,
+   "end": 63.1,
+   "score": -2.485
+  },
+  {
+   "cue": 18,
+   "text": "set",
+   "start": 63.12,
+   "end": 63.28,
+   "score": -3.1
+  },
+  {
+   "cue": 18,
+   "text": "cheyyan",
+   "start": 63.34,
+   "end": 63.62,
+   "score": -1.902
+  },
+  {
+   "cue": 18,
+   "text": "sadhikkum.",
+   "start": 63.64,
+   "end": 64.02,
+   "score": -0.019
+  },
+  {
+   "cue": 19,
+   "text": "Ningalkku",
+   "start": 64.1,
+   "end": 64.42,
+   "score": -0.368
+  },
+  {
+   "cue": 19,
+   "text": "custom",
+   "start": 64.42,
+   "end": 64.72,
+   "score": -4.45
+  },
+  {
+   "cue": 19,
+   "text": "aayittu",
+   "start": 64.72,
+   "end": 64.98,
+   "score": -0.996
+  },
+  {
+   "cue": 19,
+   "text": "venamengil",
+   "start": 64.98,
+   "end": 65.4,
+   "score": -0.281
+  },
+  {
+   "cue": 19,
+   "text": "ithe",
+   "start": 65.58,
+   "end": 65.7,
+   "score": -1.642
+  },
+  {
+   "cue": 19,
+   "text": "reethiyil",
+   "start": 65.76,
+   "end": 66.14,
+   "score": -1.827
+  },
+  {
+   "cue": 19,
+   "text": "ettavum",
+   "start": 66.32,
+   "end": 66.64,
+   "score": -2.11
+  },
+  {
+   "cue": 19,
+   "text": "avasaanathilulla",
+   "start": 66.68,
+   "end": 67.42,
+   "score": -0.864
+  },
+  {
+   "cue": 19,
+   "text": "'Remind",
+   "start": 67.44,
+   "end": 67.84,
+   "score": -3.376
+  },
+  {
+   "cue": 19,
+   "text": "Me",
+   "start": 67.88,
+   "end": 67.92,
+   "score": -6.306
+  },
+  {
+   "cue": 19,
+   "text": "Later'",
+   "start": 67.98,
+   "end": 68.56,
+   "score": -4.133
+  },
+  {
+   "cue": 19,
+   "text": "ennulla",
+   "start": 68.56,
+   "end": 68.92,
+   "score": -0.126
+  },
+  {
+   "cue": 19,
+   "text": "aa",
+   "start": 69.0,
+   "end": 69.08,
+   "score": -0.052
+  },
+  {
+   "cue": 19,
+   "text": "option",
+   "start": 69.14,
+   "end": 69.38,
+   "score": -4.568
+  },
+  {
+   "cue": 19,
+   "text": "select",
+   "start": 69.42,
+   "end": 69.66,
+   "score": -3.355
+  },
+  {
+   "cue": 19,
+   "text": "cheythu",
+   "start": 69.68,
+   "end": 69.86,
+   "score": -3.716
+  },
+  {
+   "cue": 19,
+   "text": "kazhinjal...",
+   "start": 69.86,
+   "end": 70.2,
+   "score": -3.449
+  },
+  {
+   "cue": 20,
+   "text": "Ivide",
+   "start": 70.22,
+   "end": 70.36,
+   "score": -3.725
+  },
+  {
+   "cue": 20,
+   "text": "ninnu",
+   "start": 70.36,
+   "end": 70.52,
+   "score": -3.638
+  },
+  {
+   "cue": 20,
+   "text": "ningalkku",
+   "start": 70.52,
+   "end": 70.88,
+   "score": -0.687
+  },
+  {
+   "cue": 20,
+   "text": "ethu",
+   "start": 71.1,
+   "end": 71.26,
+   "score": -3.534
+  },
+  {
+   "cue": 20,
+   "text": "samayathaanu",
+   "start": 71.26,
+   "end": 71.74,
+   "score": -0.87
+  },
+  {
+   "cue": 20,
+   "text": "vendathu",
+   "start": 71.74,
+   "end": 72.06,
+   "score": -2.643
+  },
+  {
+   "cue": 20,
+   "text": "ennullathu",
+   "start": 72.12,
+   "end": 72.48,
+   "score": -2.048
+  },
+  {
+   "cue": 20,
+   "text": "set",
+   "start": 72.66,
+   "end": 72.76,
+   "score": -2.267
+  },
+  {
+   "cue": 20,
+   "text": "cheyyan",
+   "start": 72.78,
+   "end": 73.18,
+   "score": -2.408
+  },
+  {
+   "cue": 20,
+   "text": "sadhikkum;",
+   "start": 73.2,
+   "end": 73.56,
+   "score": -0.044
+  },
+  {
+   "cue": 20,
+   "text": "date",
+   "start": 73.78,
+   "end": 73.9,
+   "score": -2.825
+  },
+  {
+   "cue": 20,
+   "text": "athupole",
+   "start": 74.2,
+   "end": 74.56,
+   "score": -0.957
+  },
+  {
+   "cue": 20,
+   "text": "time.",
+   "start": 74.58,
+   "end": 75.0,
+   "score": -3.02
+  },
+  {
+   "cue": 21,
+   "text": "Ini",
+   "start": 75.1,
+   "end": 75.24,
+   "score": -0.192
+  },
+  {
+   "cue": 21,
+   "text": "urgent",
+   "start": 75.38,
+   "end": 75.74,
+   "score": -4.626
+  },
+  {
+   "cue": 21,
+   "text": "aanu",
+   "start": 75.76,
+   "end": 75.94,
+   "score": -1.405
+  },
+  {
+   "cue": 21,
+   "text": "ennundenkil",
+   "start": 75.98,
+   "end": 76.44,
+   "score": -0.606
+  },
+  {
+   "cue": 21,
+   "text": "aa",
+   "start": 76.44,
+   "end": 76.62,
+   "score": -0.015
+  },
+  {
+   "cue": 21,
+   "text": "oru",
+   "start": 76.68,
+   "end": 76.76,
+   "score": -1.384
+  },
+  {
+   "cue": 21,
+   "text": "notification-um",
+   "start": 76.78,
+   "end": 77.44,
+   "score": -3.254
+  },
+  {
+   "cue": 21,
+   "text": "enable",
+   "start": 77.44,
+   "end": 77.76,
+   "score": -2.433
+  },
+  {
+   "cue": 21,
+   "text": "cheythu",
+   "start": 77.78,
+   "end": 78.0,
+   "score": -2.311
+  },
+  {
+   "cue": 21,
+   "text": "vechu",
+   "start": 78.02,
+   "end": 78.22,
+   "score": -2.395
+  },
+  {
+   "cue": 21,
+   "text": "kazhinjal",
+   "start": 78.22,
+   "end": 78.6,
+   "score": -3.186
+  },
+  {
+   "cue": 21,
+   "text": "theerchayaayum",
+   "start": 78.7,
+   "end": 79.32,
+   "score": -1.394
+  },
+  {
+   "cue": 21,
+   "text": "phone",
+   "start": 79.46,
+   "end": 79.78,
+   "score": -2.177
+  },
+  {
+   "cue": 21,
+   "text": "oru",
+   "start": 79.78,
+   "end": 79.86,
+   "score": -1.924
+  },
+  {
+   "cue": 21,
+   "text": "alarm",
+   "start": 80.02,
+   "end": 80.42,
+   "score": -0.023
+  },
+  {
+   "cue": 21,
+   "text": "reethiyil",
+   "start": 80.48,
+   "end": 80.84,
+   "score": -0.835
+  },
+  {
+   "cue": 21,
+   "text": "ningalkku",
+   "start": 80.88,
+   "end": 81.24,
+   "score": -0.71
+  },
+  {
+   "cue": 21,
+   "text": "buzzer",
+   "start": 81.38,
+   "end": 81.6,
+   "score": -5.733
+  },
+  {
+   "cue": 21,
+   "text": "cheyyunnathaayirikkum.",
+   "start": 81.68,
+   "end": 82.42,
+   "score": -0.849
+  },
+  {
+   "cue": 22,
+   "text": "Anganeyulla",
+   "start": 82.52,
+   "end": 82.96,
+   "score": -0.336
+  },
+  {
+   "cue": 22,
+   "text": "ethu",
+   "start": 83.06,
+   "end": 83.28,
+   "score": -3.846
+  },
+  {
+   "cue": 22,
+   "text": "aavashyamaano",
+   "start": 83.3,
+   "end": 83.76,
+   "score": -0.943
+  },
+  {
+   "cue": 22,
+   "text": "vendathu",
+   "start": 83.8,
+   "end": 84.14,
+   "score": -2.752
+  },
+  {
+   "cue": 22,
+   "text": "ennullathu",
+   "start": 84.18,
+   "end": 84.52,
+   "score": -2.041
+  },
+  {
+   "cue": 22,
+   "text": "ivide",
+   "start": 84.52,
+   "end": 84.72,
+   "score": -1.603
+  },
+  {
+   "cue": 22,
+   "text": "ninnu",
+   "start": 84.74,
+   "end": 84.88,
+   "score": -3.68
+  },
+  {
+   "cue": 22,
+   "text": "oronnoronnayi",
+   "start": 84.92,
+   "end": 85.6,
+   "score": -0.928
+  },
+  {
+   "cue": 22,
+   "text": "set",
+   "start": 85.82,
+   "end": 86.08,
+   "score": -2.786
+  },
+  {
+   "cue": 22,
+   "text": "cheyyam.",
+   "start": 86.1,
+   "end": 86.4,
+   "score": -2.02
+  },
+  {
+   "cue": 23,
+   "text": "Puthiya",
+   "start": 86.52,
+   "end": 86.8,
+   "score": -0.585
+  },
+  {
+   "cue": 23,
+   "text": "list",
+   "start": 86.94,
+   "end": 87.24,
+   "score": -1.567
+  },
+  {
+   "cue": 23,
+   "text": "add",
+   "start": 87.26,
+   "end": 87.38,
+   "score": -0.748
+  },
+  {
+   "cue": 23,
+   "text": "cheyyanamengil",
+   "start": 87.44,
+   "end": 87.96,
+   "score": -0.891
+  },
+  {
+   "cue": 23,
+   "text": "athilekkum",
+   "start": 88.1,
+   "end": 88.52,
+   "score": -0.557
+  },
+  {
+   "cue": 23,
+   "text": "add",
+   "start": 88.74,
+   "end": 88.86,
+   "score": -2.722
+  },
+  {
+   "cue": 23,
+   "text": "cheythu",
+   "start": 88.92,
+   "end": 89.1,
+   "score": -2.523
+  },
+  {
+   "cue": 23,
+   "text": "kodukkam.",
+   "start": 89.1,
+   "end": 89.46,
+   "score": -1.44
+  },
+  {
+   "cue": 24,
+   "text": "Pinneedu",
+   "start": 89.54,
+   "end": 89.84,
+   "score": -1.023
+  },
+  {
+   "cue": 24,
+   "text": "ningal",
+   "start": 89.84,
+   "end": 90.02,
+   "score": -0.256
+  },
+  {
+   "cue": 24,
+   "text": "reminder",
+   "start": 90.18,
+   "end": 90.56,
+   "score": -3.222
+  },
+  {
+   "cue": 24,
+   "text": "cheythathinu",
+   "start": 90.6,
+   "end": 91.04,
+   "score": -2.228
+  },
+  {
+   "cue": 24,
+   "text": "aa",
+   "start": 91.28,
+   "end": 91.38,
+   "score": -0.012
+  },
+  {
+   "cue": 24,
+   "text": "samayathu",
+   "start": 91.42,
+   "end": 91.76,
+   "score": -1.308
+  },
+  {
+   "cue": 24,
+   "text": "ningalkku",
+   "start": 91.76,
+   "end": 92.1,
+   "score": -0.495
+  },
+  {
+   "cue": 24,
+   "text": "notification",
+   "start": 92.22,
+   "end": 92.84,
+   "score": -2.604
+  },
+  {
+   "cue": 24,
+   "text": "labhikkum.",
+   "start": 92.86,
+   "end": 93.18,
+   "score": -0.125
+  },
+  {
+   "cue": 25,
+   "text": "Ini",
+   "start": 93.38,
+   "end": 93.5,
+   "score": -0.336
+  },
+  {
+   "cue": 25,
+   "text": "athine",
+   "start": 93.56,
+   "end": 93.76,
+   "score": -1.542
+  },
+  {
+   "cue": 25,
+   "text": "eppozhengilum",
+   "start": 93.94,
+   "end": 94.48,
+   "score": -1.97
+  },
+  {
+   "cue": 25,
+   "text": "reminder",
+   "start": 94.54,
+   "end": 94.96,
+   "score": -2.861
+  },
+  {
+   "cue": 25,
+   "text": "cheyyendathilla,",
+   "start": 94.96,
+   "end": 95.54,
+   "score": -1.692
+  },
+  {
+   "cue": 25,
+   "text": "ningalathu",
+   "start": 95.56,
+   "end": 95.94,
+   "score": -1.937
+  },
+  {
+   "cue": 25,
+   "text": "cheythittundu",
+   "start": 96.0,
+   "end": 96.56,
+   "score": -2.866
+  },
+  {
+   "cue": 25,
+   "text": "engil...",
+   "start": 96.6,
+   "end": 96.84,
+   "score": -0.33
+  },
+  {
+   "cue": 26,
+   "text": "Athe",
+   "start": 97.02,
+   "end": 97.2,
+   "score": -1.744
+  },
+  {
+   "cue": 26,
+   "text": "contact-inu",
+   "start": 97.38,
+   "end": 97.9,
+   "score": -2.307
+  },
+  {
+   "cue": 26,
+   "text": "nere",
+   "start": 97.92,
+   "end": 98.14,
+   "score": -0.229
+  },
+  {
+   "cue": 26,
+   "text": "onnukoodi",
+   "start": 98.28,
+   "end": 98.76,
+   "score": -3.114
+  },
+  {
+   "cue": 26,
+   "text": "idathuvashaththekk",
+   "start": 99.08,
+   "end": 99.8,
+   "score": -2.57
+  },
+  {
+   "cue": 26,
+   "text": "swipe",
+   "start": 99.98,
+   "end": 100.24,
+   "score": -3.807
+  },
+  {
+   "cue": 26,
+   "text": "cheythu",
+   "start": 100.24,
+   "end": 100.5,
+   "score": -3.091
+  },
+  {
+   "cue": 26,
+   "text": "veendum",
+   "start": 100.62,
+   "end": 100.94,
+   "score": -3.268
+  },
+  {
+   "cue": 26,
+   "text": "athe",
+   "start": 100.98,
+   "end": 101.1,
+   "score": -1.538
+  },
+  {
+   "cue": 26,
+   "text": "clock",
+   "start": 101.18,
+   "end": 101.58,
+   "score": -3.034
+  },
+  {
+   "cue": 26,
+   "text": "icon-il",
+   "start": 101.58,
+   "end": 101.76,
+   "score": -2.991
+  },
+  {
+   "cue": 26,
+   "text": "select",
+   "start": 101.78,
+   "end": 102.04,
+   "score": -2.993
+  },
+  {
+   "cue": 26,
+   "text": "cheythu",
+   "start": 102.04,
+   "end": 102.22,
+   "score": -3.126
+  },
+  {
+   "cue": 26,
+   "text": "kazhinjal...",
+   "start": 102.22,
+   "end": 102.58,
+   "score": -3.252
+  },
+  {
+   "cue": 27,
+   "text": "Ivide",
+   "start": 102.72,
+   "end": 102.96,
+   "score": -1.338
+  },
+  {
+   "cue": 27,
+   "text": "ninnu",
+   "start": 103.0,
+   "end": 103.66,
+   "score": -0.298
+  },
+  {
+   "cue": 27,
+   "text": "aa",
+   "start": 103.74,
+   "end": 103.82,
+   "score": -0.387
+  },
+  {
+   "cue": 27,
+   "text": "reminder",
+   "start": 103.88,
+   "end": 104.26,
+   "score": -2.252
+  },
+  {
+   "cue": 27,
+   "text": "edit",
+   "start": 104.28,
+   "end": 104.52,
+   "score": -1.364
+  },
+  {
+   "cue": 27,
+   "text": "cheyyano",
+   "start": 104.6,
+   "end": 104.92,
+   "score": -1.555
+  },
+  {
+   "cue": 27,
+   "text": "athallengil",
+   "start": 105.0,
+   "end": 105.46,
+   "score": -1.431
+  },
+  {
+   "cue": 27,
+   "text": "aa",
+   "start": 105.48,
+   "end": 105.68,
+   "score": -0.099
+  },
+  {
+   "cue": 27,
+   "text": "reminder",
+   "start": 105.88,
+   "end": 106.26,
+   "score": -2.362
+  },
+  {
+   "cue": 27,
+   "text": "complete",
+   "start": 106.28,
+   "end": 106.68,
+   "score": -3.788
+  },
+  {
+   "cue": 27,
+   "text": "aayittundu",
+   "start": 106.68,
+   "end": 107.08,
+   "score": -1.2
+  },
+  {
+   "cue": 27,
+   "text": "ennu",
+   "start": 107.14,
+   "end": 107.32,
+   "score": -1.258
+  },
+  {
+   "cue": 27,
+   "text": "mark",
+   "start": 107.54,
+   "end": 107.82,
+   "score": -0.088
+  },
+  {
+   "cue": 27,
+   "text": "cheyyano",
+   "start": 107.9,
+   "end": 108.26,
+   "score": -2.054
+  },
+  {
+   "cue": 27,
+   "text": "sadhikkum.",
+   "start": 108.34,
+   "end": 108.72,
+   "score": -0.346
+  },
+  {
+   "cue": 28,
+   "text": "Valare",
+   "start": 108.82,
+   "end": 109.1,
+   "score": -2.622
+  },
+  {
+   "cue": 28,
+   "text": "useful",
+   "start": 109.14,
+   "end": 109.34,
+   "score": -2.226
+  },
+  {
+   "cue": 28,
+   "text": "aayittullathalle?",
+   "start": 109.36,
+   "end": 109.9,
+   "score": -1.407
+  },
+  {
+   "cue": 29,
+   "text": "Ishttappettittundenkil",
+   "start": 110.22,
+   "end": 110.98,
+   "score": -1.364
+  },
+  {
+   "cue": 29,
+   "text": "like",
+   "start": 111.26,
+   "end": 111.46,
+   "score": -2.273
+  },
+  {
+   "cue": 29,
+   "text": "cheyyan",
+   "start": 111.48,
+   "end": 111.66,
+   "score": -3.248
+  },
+  {
+   "cue": 29,
+   "text": "madikkeruthe.",
+   "start": 111.7,
+   "end": 112.14,
+   "score": -2.254
+  },
+  {
+   "cue": 30,
+   "text": "Ini",
+   "start": 112.7,
+   "end": 112.82,
+   "score": -0.119
+  },
+  {
+   "cue": 30,
+   "text": "aduthathum",
+   "start": 112.86,
+   "end": 113.2,
+   "score": -2.234
+  },
+  {
+   "cue": 30,
+   "text": "valare",
+   "start": 113.44,
+   "end": 113.7,
+   "score": -0.03
+  },
+  {
+   "cue": 30,
+   "text": "pradhanappetta",
+   "start": 113.76,
+   "end": 114.34,
+   "score": -0.045
+  },
+  {
+   "cue": 30,
+   "text": "onnanu.",
+   "start": 114.36,
+   "end": 114.62,
+   "score": -2.236
+  },
+  {
+   "cue": 31,
+   "text": "Athava",
+   "start": 114.98,
+   "end": 115.22,
+   "score": -1.082
+  },
+  {
+   "cue": 31,
+   "text": "ningal",
+   "start": 115.24,
+   "end": 115.44,
+   "score": -0.385
+  },
+  {
+   "cue": 31,
+   "text": "evideyengilum",
+   "start": 115.56,
+   "end": 116.1,
+   "score": -0.466
+  },
+  {
+   "cue": 31,
+   "text": "eathengilum",
+   "start": 116.34,
+   "end": 116.74,
+   "score": -1.452
+  },
+  {
+   "cue": 31,
+   "text": "oru",
+   "start": 116.78,
+   "end": 116.88,
+   "score": -0.169
+  },
+  {
+   "cue": 31,
+   "text": "sthalathu",
+   "start": 116.92,
+   "end": 117.36,
+   "score": -1.379
+  },
+  {
+   "cue": 31,
+   "text": "ningal",
+   "start": 117.52,
+   "end": 117.72,
+   "score": -0.281
+  },
+  {
+   "cue": 31,
+   "text": "nilkkumbol",
+   "start": 117.8,
+   "end": 118.3,
+   "score": -0.976
+  },
+  {
+   "cue": 31,
+   "text": "ningalkku",
+   "start": 118.3,
+   "end": 118.6,
+   "score": -1.695
+  },
+  {
+   "cue": 31,
+   "text": "oru",
+   "start": 118.6,
+   "end": 118.68,
+   "score": -0.156
+  },
+  {
+   "cue": 31,
+   "text": "call",
+   "start": 118.7,
+   "end": 118.92,
+   "score": -3.572
+  },
+  {
+   "cue": 31,
+   "text": "varikayanenkil...",
+   "start": 118.96,
+   "end": 119.56,
+   "score": -0.088
+  },
+  {
+   "cue": 32,
+   "text": "Athinulla",
+   "start": 119.72,
+   "end": 120.1,
+   "score": -1.756
+  },
+  {
+   "cue": 32,
+   "text": "surrounding-ilulla",
+   "start": 120.14,
+   "end": 121.04,
+   "score": -0.8
+  },
+  {
+   "cue": 32,
+   "text": "noise",
+   "start": 121.26,
+   "end": 121.8,
+   "score": -1.733
+  },
+  {
+   "cue": 32,
+   "text": "ningale",
+   "start": 121.96,
+   "end": 122.22,
+   "score": -0.408
+  },
+  {
+   "cue": 32,
+   "text": "shallyappeduthunnu,",
+   "start": 122.24,
+   "end": 122.86,
+   "score": -1.193
+  },
+  {
+   "cue": 33,
+   "text": "Athallengil",
+   "start": 122.92,
+   "end": 123.3,
+   "score": -1.054
+  },
+  {
+   "cue": 33,
+   "text": "background-ile",
+   "start": 123.38,
+   "end": 123.96,
+   "score": -1.897
+  },
+  {
+   "cue": 33,
+   "text": "shabdam",
+   "start": 123.98,
+   "end": 124.28,
+   "score": -0.018
+  },
+  {
+   "cue": 33,
+   "text": "avar",
+   "start": 124.32,
+   "end": 124.42,
+   "score": -0.008
+  },
+  {
+   "cue": 33,
+   "text": "kettu",
+   "start": 124.5,
+   "end": 124.8,
+   "score": -0.586
+  },
+  {
+   "cue": 33,
+   "text": "kazhinjal",
+   "start": 124.8,
+   "end": 125.12,
+   "score": -4.404
+  },
+  {
+   "cue": 33,
+   "text": "ningal",
+   "start": 125.16,
+   "end": 125.4,
+   "score": -0.448
+  },
+  {
+   "cue": 33,
+   "text": "evideyanu",
+   "start": 125.42,
+   "end": 125.8,
+   "score": -1.507
+  },
+  {
+   "cue": 33,
+   "text": "nilkkunnathu",
+   "start": 125.82,
+   "end": 126.36,
+   "score": -0.968
+  },
+  {
+   "cue": 33,
+   "text": "ennullathu",
+   "start": 126.46,
+   "end": 126.84,
+   "score": -2.068
+  },
+  {
+   "cue": 33,
+   "text": "avar",
+   "start": 127.02,
+   "end": 127.2,
+   "score": -0.028
+  },
+  {
+   "cue": 33,
+   "text": "manassilakkum",
+   "start": 127.26,
+   "end": 127.8,
+   "score": -0.014
+  },
+  {
+   "cue": 33,
+   "text": "ennulla",
+   "start": 127.82,
+   "end": 128.12,
+   "score": -0.315
+  },
+  {
+   "cue": 33,
+   "text": "pedi",
+   "start": 128.12,
+   "end": 128.34,
+   "score": -1.056
+  },
+  {
+   "cue": 33,
+   "text": "ningalkkundenkil...",
+   "start": 128.36,
+   "end": 129.04,
+   "score": -0.834
+  },
+  {
+   "cue": 34,
+   "text": "Athinum",
+   "start": 129.22,
+   "end": 129.56,
+   "score": -1.095
+  },
+  {
+   "cue": 34,
+   "text": "ivide",
+   "start": 129.68,
+   "end": 129.88,
+   "score": -1.61
+  },
+  {
+   "cue": 34,
+   "text": "oru",
+   "start": 129.94,
+   "end": 130.04,
+   "score": -0.256
+  },
+  {
+   "cue": 34,
+   "text": "solution",
+   "start": 130.08,
+   "end": 130.46,
+   "score": -2.782
+  },
+  {
+   "cue": 34,
+   "text": "undu.",
+   "start": 130.48,
+   "end": 130.8,
+   "score": -3.472
+  },
+  {
+   "cue": 34,
+   "text": "Valare",
+   "start": 130.8,
+   "end": 131.04,
+   "score": -1.307
+  },
+  {
+   "cue": 34,
+   "text": "simple",
+   "start": 131.08,
+   "end": 131.34,
+   "score": -1.356
+  },
+  {
+   "cue": 34,
+   "text": "aanu.",
+   "start": 131.34,
+   "end": 131.52,
+   "score": -0.972
+  },
+  {
+   "cue": 35,
+   "text": "Ningalude",
+   "start": 131.6,
+   "end": 131.94,
+   "score": -1.475
+  },
+  {
+   "cue": 35,
+   "text": "phoninte",
+   "start": 131.94,
+   "end": 132.34,
+   "score": -1.294
+  },
+  {
+   "cue": 35,
+   "text": "Settings-ilekku",
+   "start": 132.46,
+   "end": 133.06,
+   "score": -1.439
+  },
+  {
+   "cue": 35,
+   "text": "povuka.",
+   "start": 133.06,
+   "end": 133.34,
+   "score": -0.658
+  },
+  {
+   "cue": 36,
+   "text": "Settings-il",
+   "start": 133.46,
+   "end": 133.9,
+   "score": -1.969
+  },
+  {
+   "cue": 36,
+   "text": "ninnum",
+   "start": 133.94,
+   "end": 134.16,
+   "score": -1.112
+  },
+  {
+   "cue": 36,
+   "text": "Accessibility",
+   "start": 134.48,
+   "end": 135.14,
+   "score": -0.997
+  },
+  {
+   "cue": 36,
+   "text": "ennulla",
+   "start": 135.14,
+   "end": 135.48,
+   "score": -0.032
+  },
+  {
+   "cue": 36,
+   "text": "option",
+   "start": 135.56,
+   "end": 135.8,
+   "score": -4.554
+  },
+  {
+   "cue": 36,
+   "text": "select",
+   "start": 135.86,
+   "end": 136.14,
+   "score": -3.243
+  },
+  {
+   "cue": 36,
+   "text": "cheyyuka.",
+   "start": 136.16,
+   "end": 136.42,
+   "score": -2.597
+  },
+  {
+   "cue": 37,
+   "text": "Athil",
+   "start": 136.62,
+   "end": 136.78,
+   "score": -3.18
+  },
+  {
+   "cue": 37,
+   "text": "ninnu",
+   "start": 136.8,
+   "end": 136.96,
+   "score": -0.528
+  },
+  {
+   "cue": 37,
+   "text": "kurachu",
+   "start": 136.98,
+   "end": 137.24,
+   "score": -2.227
+  },
+  {
+   "cue": 37,
+   "text": "thaazhekk",
+   "start": 137.28,
+   "end": 137.68,
+   "score": -3.272
+  },
+  {
+   "cue": 37,
+   "text": "scroll",
+   "start": 137.9,
+   "end": 138.18,
+   "score": -1.11
+  },
+  {
+   "cue": 37,
+   "text": "cheythu",
+   "start": 138.22,
+   "end": 138.42,
+   "score": -2.031
+  },
+  {
+   "cue": 37,
+   "text": "poyi",
+   "start": 138.44,
+   "end": 138.64,
+   "score": -0.556
+  },
+  {
+   "cue": 37,
+   "text": "kazhinjal",
+   "start": 138.64,
+   "end": 139.04,
+   "score": -4.047
+  },
+  {
+   "cue": 37,
+   "text": "ningalkku",
+   "start": 139.14,
+   "end": 139.48,
+   "score": -0.403
+  },
+  {
+   "cue": 37,
+   "text": "ivideyaayi",
+   "start": 139.5,
+   "end": 139.96,
+   "score": -0.82
+  },
+  {
+   "cue": 37,
+   "text": "'Audio",
+   "start": 140.2,
+   "end": 140.6,
+   "score": -3.558
+  },
+  {
+   "cue": 37,
+   "text": "&",
+   "start": 140.84,
+   "end": 140.98,
+   "score": -3.435
+  },
+  {
+   "cue": 37,
+   "text": "Visual'",
+   "start": 141.02,
+   "end": 141.44,
+   "score": -2.782
+  },
+  {
+   "cue": 37,
+   "text": "ennulla",
+   "start": 141.5,
+   "end": 141.8,
+   "score": -0.139
+  },
+  {
+   "cue": 37,
+   "text": "oru",
+   "start": 141.8,
+   "end": 141.88,
+   "score": -0.479
+  },
+  {
+   "cue": 37,
+   "text": "option",
+   "start": 142.22,
+   "end": 142.46,
+   "score": -4.56
+  },
+  {
+   "cue": 37,
+   "text": "labhikkunnathayirikkum.",
+   "start": 142.5,
+   "end": 143.26,
+   "score": -0.562
+  },
+  {
+   "cue": 38,
+   "text": "Athu",
+   "start": 143.42,
+   "end": 143.56,
+   "score": -2.609
+  },
+  {
+   "cue": 38,
+   "text": "select",
+   "start": 143.6,
+   "end": 143.88,
+   "score": -3.59
+  },
+  {
+   "cue": 38,
+   "text": "cheyyuka.",
+   "start": 143.88,
+   "end": 144.16,
+   "score": -3.22
+  },
+  {
+   "cue": 39,
+   "text": "Athu",
+   "start": 144.34,
+   "end": 144.48,
+   "score": -4.626
+  },
+  {
+   "cue": 39,
+   "text": "select",
+   "start": 144.5,
+   "end": 144.8,
+   "score": -2.633
+  },
+  {
+   "cue": 39,
+   "text": "cheythu",
+   "start": 144.8,
+   "end": 144.98,
+   "score": -3.681
+  },
+  {
+   "cue": 39,
+   "text": "kazhinju",
+   "start": 144.98,
+   "end": 145.28,
+   "score": -4.273
+  },
+  {
+   "cue": 39,
+   "text": "kurachonnu",
+   "start": 145.42,
+   "end": 145.84,
+   "score": -1.318
+  },
+  {
+   "cue": 39,
+   "text": "thaazhekk",
+   "start": 145.98,
+   "end": 146.34,
+   "score": -3.314
+  },
+  {
+   "cue": 39,
+   "text": "ponthichu",
+   "start": 146.36,
+   "end": 146.62,
+   "score": -2.676
+  },
+  {
+   "cue": 39,
+   "text": "kazhinjal",
+   "start": 146.64,
+   "end": 147.0,
+   "score": -3.72
+  },
+  {
+   "cue": 39,
+   "text": "ivideyaayi",
+   "start": 147.12,
+   "end": 147.46,
+   "score": -0.955
+  },
+  {
+   "cue": 39,
+   "text": "'Voice",
+   "start": 147.8,
+   "end": 148.42,
+   "score": -4.434
+  },
+  {
+   "cue": 39,
+   "text": "Isolation'",
+   "start": 148.48,
+   "end": 148.98,
+   "score": -3.655
+  },
+  {
+   "cue": 39,
+   "text": "ennulla",
+   "start": 149.0,
+   "end": 149.28,
+   "score": -0.529
+  },
+  {
+   "cue": 39,
+   "text": "oru",
+   "start": 149.28,
+   "end": 149.36,
+   "score": -0.128
+  },
+  {
+   "cue": 39,
+   "text": "option",
+   "start": 149.56,
+   "end": 149.74,
+   "score": -5.597
+  },
+  {
+   "cue": 39,
+   "text": "ningalkku",
+   "start": 149.76,
+   "end": 150.06,
+   "score": -0.556
+  },
+  {
+   "cue": 39,
+   "text": "kaanan",
+   "start": 150.06,
+   "end": 150.3,
+   "score": -0.769
+  },
+  {
+   "cue": 39,
+   "text": "sadhikkum.",
+   "start": 150.32,
+   "end": 150.68,
+   "score": -0.372
+  },
+  {
+   "cue": 40,
+   "text": "Athinu",
+   "start": 150.84,
+   "end": 151.08,
+   "score": -1.544
+  },
+  {
+   "cue": 40,
+   "text": "nereyulla",
+   "start": 151.12,
+   "end": 151.64,
+   "score": -0.339
+  },
+  {
+   "cue": 40,
+   "text": "button",
+   "start": 151.64,
+   "end": 151.92,
+   "score": -3.105
+  },
+  {
+   "cue": 40,
+   "text": "enable",
+   "start": 152.0,
+   "end": 152.34,
+   "score": -1.898
+  },
+  {
+   "cue": 40,
+   "text": "cheythu",
+   "start": 152.38,
+   "end": 152.6,
+   "score": -3.572
+  },
+  {
+   "cue": 40,
+   "text": "kazhinjal",
+   "start": 152.6,
+   "end": 153.0,
+   "score": -3.216
+  },
+  {
+   "cue": 40,
+   "text": "ningal",
+   "start": 153.06,
+   "end": 153.26,
+   "score": -0.456
+  },
+  {
+   "cue": 40,
+   "text": "itharathilulla",
+   "start": 153.32,
+   "end": 153.9,
+   "score": -1.171
+  },
+  {
+   "cue": 40,
+   "text": "crowd-ilo",
+   "start": 153.92,
+   "end": 154.3,
+   "score": -2.301
+  },
+  {
+   "cue": 40,
+   "text": "athallengil...",
+   "start": 154.34,
+   "end": 154.72,
+   "score": -1.227
+  },
+  {
+   "cue": 41,
+   "text": "Eathengilum",
+   "start": 154.78,
+   "end": 155.18,
+   "score": -1.124
+  },
+  {
+   "cue": 41,
+   "text": "program-ilokke",
+   "start": 155.36,
+   "end": 156.0,
+   "score": -0.373
+  },
+  {
+   "cue": 41,
+   "text": "nilkkukayanenkil,",
+   "start": 156.04,
+   "end": 156.76,
+   "score": -0.044
+  },
+  {
+   "cue": 41,
+   "text": "mattevideyengilumokke",
+   "start": 156.8,
+   "end": 157.46,
+   "score": -3.154
+  },
+  {
+   "cue": 41,
+   "text": "poyittullathaanu",
+   "start": 157.48,
+   "end": 158.26,
+   "score": -1.205
+  },
+  {
+   "cue": 41,
+   "text": "engil...",
+   "start": 158.32,
+   "end": 158.58,
+   "score": -0.027
+  },
+  {
+   "cue": 42,
+   "text": "Aa",
+   "start": 158.6,
+   "end": 158.76,
+   "score": -0.021
+  },
+  {
+   "cue": 42,
+   "text": "oru",
+   "start": 158.96,
+   "end": 159.1,
+   "score": -0.011
+  },
+  {
+   "cue": 42,
+   "text": "surrounding-ilulla",
+   "start": 159.26,
+   "end": 160.04,
+   "score": -1.119
+  },
+  {
+   "cue": 42,
+   "text": "shabdam",
+   "start": 160.04,
+   "end": 160.34,
+   "score": -0.041
+  },
+  {
+   "cue": 42,
+   "text": "poorrnnamayi",
+   "start": 160.44,
+   "end": 161.04,
+   "score": -1.972
+  },
+  {
+   "cue": 42,
+   "text": "isolate",
+   "start": 161.22,
+   "end": 161.46,
+   "score": -2.143
+  },
+  {
+   "cue": 42,
+   "text": "cheythu",
+   "start": 161.62,
+   "end": 161.88,
+   "score": -3.106
+  },
+  {
+   "cue": 42,
+   "text": "ningal",
+   "start": 162.22,
+   "end": 162.54,
+   "score": -0.304
+  },
+  {
+   "cue": 42,
+   "text": "parayunna",
+   "start": 162.62,
+   "end": 162.96,
+   "score": -0.018
+  },
+  {
+   "cue": 42,
+   "text": "shabdam",
+   "start": 163.0,
+   "end": 163.34,
+   "score": -0.017
+  },
+  {
+   "cue": 42,
+   "text": "mathram",
+   "start": 163.4,
+   "end": 163.8,
+   "score": -1.522
+  },
+  {
+   "cue": 42,
+   "text": "call",
+   "start": 163.92,
+   "end": 164.1,
+   "score": -4.077
+  },
+  {
+   "cue": 42,
+   "text": "receive",
+   "start": 164.18,
+   "end": 164.46,
+   "score": -2.484
+  },
+  {
+   "cue": 42,
+   "text": "cheyyunna",
+   "start": 164.5,
+   "end": 164.78,
+   "score": -1.175
+  },
+  {
+   "cue": 42,
+   "text": "aalukalkku",
+   "start": 164.8,
+   "end": 165.18,
+   "score": -1.09
+  },
+  {
+   "cue": 42,
+   "text": "kelkkum.",
+   "start": 165.22,
+   "end": 165.58,
+   "score": -0.024
+  },
+  {
+   "cue": 43,
+   "text": "Atharathil",
+   "start": 165.8,
+   "end": 166.22,
+   "score": -1.488
+  },
+  {
+   "cue": 43,
+   "text": "namukku",
+   "start": 166.28,
+   "end": 166.56,
+   "score": -0.585
+  },
+  {
+   "cue": 43,
+   "text": "set",
+   "start": 166.66,
+   "end": 166.76,
+   "score": -2.795
+  },
+  {
+   "cue": 43,
+   "text": "cheyyan",
+   "start": 166.8,
+   "end": 167.06,
+   "score": -5.666
+  },
+  {
+   "cue": 43,
+   "text": "sadhikkunna",
+   "start": 167.12,
+   "end": 167.52,
+   "score": -0.491
+  },
+  {
+   "cue": 43,
+   "text": "oru",
+   "start": 167.54,
+   "end": 167.64,
+   "score": -0.224
+  },
+  {
+   "cue": 43,
+   "text": "kidilan",
+   "start": 167.68,
+   "end": 168.08,
+   "score": -0.221
+  },
+  {
+   "cue": 43,
+   "text": "option",
+   "start": 168.3,
+   "end": 168.56,
+   "score": -4.583
+  },
+  {
+   "cue": 43,
+   "text": "aanithu.",
+   "start": 168.56,
+   "end": 168.84,
+   "score": -2.084
+  },
+  {
+   "cue": 44,
+   "text": "Aavashyamullavarkku",
+   "start": 169.18,
+   "end": 169.9,
+   "score": -0.342
+  },
+  {
+   "cue": 44,
+   "text": "set",
+   "start": 170.12,
+   "end": 170.32,
+   "score": -1.98
+  },
+  {
+   "cue": 44,
+   "text": "cheyyam.",
+   "start": 170.34,
+   "end": 170.56,
+   "score": -4.091
+  },
+  {
+   "cue": 45,
+   "text": "Moonnamathathu",
+   "start": 170.76,
+   "end": 171.22,
+   "score": -2.446
+  },
+  {
+   "cue": 45,
+   "text": "mattoru",
+   "start": 171.5,
+   "end": 171.82,
+   "score": -2.57
+  },
+  {
+   "cue": 45,
+   "text": "kidilan",
+   "start": 171.82,
+   "end": 172.16,
+   "score": -0.464
+  },
+  {
+   "cue": 45,
+   "text": "option",
+   "start": 172.18,
+   "end": 172.42,
+   "score": -4.138
+  },
+  {
+   "cue": 45,
+   "text": "aanu.",
+   "start": 172.44,
+   "end": 172.6,
+   "score": -0.91
+  },
+  {
+   "cue": 46,
+   "text": "Athava",
+   "start": 173.02,
+   "end": 173.2,
+   "score": -2.122
+  },
+  {
+   "cue": 46,
+   "text": "ningalude",
+   "start": 173.38,
+   "end": 173.7,
+   "score": -1.464
+  },
+  {
+   "cue": 46,
+   "text": "iPhone-ilekku",
+   "start": 173.74,
+   "end": 174.34,
+   "score": -1.22
+  },
+  {
+   "cue": 46,
+   "text": "aarengilum",
+   "start": 174.62,
+   "end": 175.06,
+   "score": -0.068
+  },
+  {
+   "cue": 46,
+   "text": "call",
+   "start": 175.12,
+   "end": 175.32,
+   "score": -3.691
+  },
+  {
+   "cue": 46,
+   "text": "cheythu",
+   "start": 175.4,
+   "end": 175.62,
+   "score": -2.913
+  },
+  {
+   "cue": 46,
+   "text": "hold",
+   "start": 175.72,
+   "end": 176.04,
+   "score": -0.259
+  },
+  {
+   "cue": 46,
+   "text": "cheythu",
+   "start": 176.1,
+   "end": 176.32,
+   "score": -3.603
+  },
+  {
+   "cue": 46,
+   "text": "vechirikkukayaanu",
+   "start": 176.32,
+   "end": 176.94,
+   "score": -1.249
+  },
+  {
+   "cue": 46,
+   "text": "engil",
+   "start": 177.0,
+   "end": 177.24,
+   "score": -0.266
+  },
+  {
+   "cue": 46,
+   "text": "aa",
+   "start": 177.26,
+   "end": 177.52,
+   "score": -0.365
+  },
+  {
+   "cue": 46,
+   "text": "hold-ine",
+   "start": 177.64,
+   "end": 178.08,
+   "score": -0.638
+  },
+  {
+   "cue": 46,
+   "text": "ningal",
+   "start": 178.1,
+   "end": 178.34,
+   "score": -0.302
+  },
+  {
+   "cue": 46,
+   "text": "avar",
+   "start": 178.36,
+   "end": 178.66,
+   "score": -0.124
+  },
+  {
+   "cue": 46,
+   "text": "unhold",
+   "start": 178.68,
+   "end": 179.2,
+   "score": -0.522
+  },
+  {
+   "cue": 46,
+   "text": "cheyyunnathu",
+   "start": 179.28,
+   "end": 179.66,
+   "score": -2.065
+  },
+  {
+   "cue": 46,
+   "text": "vare",
+   "start": 179.68,
+   "end": 179.86,
+   "score": -0.682
+  },
+  {
+   "cue": 46,
+   "text": "kaathirikkendathilla.",
+   "start": 180.1,
+   "end": 180.94,
+   "score": -1.11
+  },
+  {
+   "cue": 47,
+   "text": "Namukku",
+   "start": 181.06,
+   "end": 181.3,
+   "score": -0.6
+  },
+  {
+   "cue": 47,
+   "text": "valare",
+   "start": 181.3,
+   "end": 181.54,
+   "score": -0.052
+  },
+  {
+   "cue": 47,
+   "text": "pettennu",
+   "start": 181.6,
+   "end": 181.94,
+   "score": -0.51
+  },
+  {
+   "cue": 47,
+   "text": "thanne",
+   "start": 181.96,
+   "end": 182.14,
+   "score": -1.861
+  },
+  {
+   "cue": 47,
+   "text": "aa",
+   "start": 182.26,
+   "end": 182.34,
+   "score": -0.048
+  },
+  {
+   "cue": 47,
+   "text": "hold",
+   "start": 182.42,
+   "end": 182.76,
+   "score": -0.671
+  },
+  {
+   "cue": 47,
+   "text": "cheythathine",
+   "start": 182.8,
+   "end": 183.22,
+   "score": -2.858
+  },
+  {
+   "cue": 47,
+   "text": "pause",
+   "start": 183.44,
+   "end": 183.76,
+   "score": -1.003
+  },
+  {
+   "cue": 47,
+   "text": "cheythukondu",
+   "start": 183.76,
+   "end": 184.24,
+   "score": -2.753
+  },
+  {
+   "cue": 47,
+   "text": "aa",
+   "start": 184.42,
+   "end": 184.5,
+   "score": -1.239
+  },
+  {
+   "cue": 47,
+   "text": "oru",
+   "start": 184.5,
+   "end": 184.6,
+   "score": -0.266
+  },
+  {
+   "cue": 47,
+   "text": "call",
+   "start": 184.64,
+   "end": 184.8,
+   "score": -3.952
+  },
+  {
+   "cue": 47,
+   "text": "veendum",
+   "start": 184.82,
+   "end": 185.1,
+   "score": -2.696
+  },
+  {
+   "cue": 47,
+   "text": "thirichu",
+   "start": 185.12,
+   "end": 185.4,
+   "score": -2.668
+  },
+  {
+   "cue": 47,
+   "text": "varunna",
+   "start": 185.42,
+   "end": 185.66,
+   "score": -0.073
+  },
+  {
+   "cue": 47,
+   "text": "samayathu,",
+   "start": 185.68,
+   "end": 185.92,
+   "score": -1.821
+  },
+  {
+   "cue": 48,
+   "text": "Athava",
+   "start": 185.92,
+   "end": 186.12,
+   "score": -0.973
+  },
+  {
+   "cue": 48,
+   "text": "unhold",
+   "start": 186.34,
+   "end": 186.8,
+   "score": -2.01
+  },
+  {
+   "cue": 48,
+   "text": "cheyyunna",
+   "start": 186.84,
+   "end": 187.1,
+   "score": -1.976
+  },
+  {
+   "cue": 48,
+   "text": "samayathu",
+   "start": 187.12,
+   "end": 187.46,
+   "score": -0.964
+  },
+  {
+   "cue": 48,
+   "text": "namukku",
+   "start": 187.48,
+   "end": 187.76,
+   "score": -0.751
+  },
+  {
+   "cue": 48,
+   "text": "athinte",
+   "start": 187.84,
+   "end": 188.1,
+   "score": -2.459
+  },
+  {
+   "cue": 48,
+   "text": "notification",
+   "start": 188.16,
+   "end": 188.76,
+   "score": -3.994
+  },
+  {
+   "cue": 48,
+   "text": "labhikkukayum...",
+   "start": 188.8,
+   "end": 189.3,
+   "score": -0.705
+  },
+  {
+   "cue": 49,
+   "text": "Pinneedu",
+   "start": 189.48,
+   "end": 189.82,
+   "score": -2.8
+  },
+  {
+   "cue": 49,
+   "text": "athu",
+   "start": 189.88,
+   "end": 190.04,
+   "score": -3.336
+  },
+  {
+   "cue": 49,
+   "text": "namukku",
+   "start": 190.04,
+   "end": 190.24,
+   "score": -0.691
+  },
+  {
+   "cue": 49,
+   "text": "eduthu",
+   "start": 190.28,
+   "end": 190.5,
+   "score": -3.662
+  },
+  {
+   "cue": 49,
+   "text": "samsaarichaal",
+   "start": 190.62,
+   "end": 191.22,
+   "score": -0.753
+  },
+  {
+   "cue": 49,
+   "text": "mathravum",
+   "start": 191.3,
+   "end": 191.68,
+   "score": -1.47
+  },
+  {
+   "cue": 49,
+   "text": "mathiyaakum.",
+   "start": 191.72,
+   "end": 192.1,
+   "score": -0.187
+  },
+  {
+   "cue": 50,
+   "text": "Atharathilulla",
+   "start": 192.28,
+   "end": 192.86,
+   "score": -1.378
+  },
+  {
+   "cue": 50,
+   "text": "oru",
+   "start": 192.88,
+   "end": 192.96,
+   "score": -0.128
+  },
+  {
+   "cue": 50,
+   "text": "feature",
+   "start": 193.1,
+   "end": 193.38,
+   "score": -7.74
+  },
+  {
+   "cue": 50,
+   "text": "aanu.",
+   "start": 193.38,
+   "end": 193.56,
+   "score": -1.31
+  },
+  {
+   "cue": 50,
+   "text": "Ithu",
+   "start": 193.68,
+   "end": 193.76,
+   "score": -3.736
+  },
+  {
+   "cue": 50,
+   "text": "valare",
+   "start": 193.76,
+   "end": 193.98,
+   "score": -0.085
+  },
+  {
+   "cue": 50,
+   "text": "useful",
+   "start": 194.06,
+   "end": 194.36,
+   "score": -2.137
+  },
+  {
+   "cue": 50,
+   "text": "aakunna",
+   "start": 194.44,
+   "end": 194.74,
+   "score": -0.072
+  },
+  {
+   "cue": 50,
+   "text": "oru",
+   "start": 194.84,
+   "end": 194.96,
+   "score": -0.011
+  },
+  {
+   "cue": 50,
+   "text": "feature",
+   "start": 194.98,
+   "end": 195.24,
+   "score": -8.349
+  },
+  {
+   "cue": 50,
+   "text": "aanu.",
+   "start": 195.24,
+   "end": 195.4,
+   "score": -0.971
+  },
+  {
+   "cue": 51,
+   "text": "Njan",
+   "start": 195.42,
+   "end": 195.56,
+   "score": -3.412
+  },
+  {
+   "cue": 51,
+   "text": "ippo",
+   "start": 195.58,
+   "end": 195.7,
+   "score": -0.025
+  },
+  {
+   "cue": 51,
+   "text": "ente",
+   "start": 195.84,
+   "end": 195.98,
+   "score": -5.036
+  },
+  {
+   "cue": 51,
+   "text": "ee",
+   "start": 196.0,
+   "end": 196.1,
+   "score": -1.535
+  },
+  {
+   "cue": 51,
+   "text": "oru",
+   "start": 196.18,
+   "end": 196.28,
+   "score": -0.022
+  },
+  {
+   "cue": 51,
+   "text": "phonil",
+   "start": 196.3,
+   "end": 196.6,
+   "score": -0.051
+  },
+  {
+   "cue": 51,
+   "text": "ninnu",
+   "start": 196.62,
+   "end": 196.82,
+   "score": -1.041
+  },
+  {
+   "cue": 51,
+   "text": "ente",
+   "start": 197.08,
+   "end": 197.24,
+   "score": -2.174
+  },
+  {
+   "cue": 51,
+   "text": "iPhone-ilekku",
+   "start": 197.32,
+   "end": 197.86,
+   "score": -1.246
+  },
+  {
+   "cue": 51,
+   "text": "call",
+   "start": 198.1,
+   "end": 198.3,
+   "score": -4.01
+  },
+  {
+   "cue": 51,
+   "text": "cheyyukayanu.",
+   "start": 198.38,
+   "end": 198.9,
+   "score": -1.434
+  },
+  {
+   "cue": 52,
+   "text": "Ee",
+   "start": 199.88,
+   "end": 199.94,
+   "score": -7.928
+  },
+  {
+   "cue": 52,
+   "text": "phonilekku",
+   "start": 200.02,
+   "end": 200.52,
+   "score": -6.11
+  },
+  {
+   "cue": 52,
+   "text": "njan",
+   "start": 201.12,
+   "end": 201.28,
+   "score": -5.376
+  },
+  {
+   "cue": 52,
+   "text": "call",
+   "start": 201.28,
+   "end": 201.58,
+   "score": -6.946
+  },
+  {
+   "cue": 52,
+   "text": "cheythu.",
+   "start": 201.64,
+   "end": 201.88,
+   "score": -8.282
+  },
+  {
+   "cue": 52,
+   "text": "Aa",
+   "start": 202.86,
+   "end": 202.94,
+   "score": -0.366
+  },
+  {
+   "cue": 52,
+   "text": "call",
+   "start": 203.0,
+   "end": 203.22,
+   "score": -3.703
+  },
+  {
+   "cue": 52,
+   "text": "ivide",
+   "start": 203.22,
+   "end": 203.42,
+   "score": -1.383
+  },
+  {
+   "cue": 52,
+   "text": "attend",
+   "start": 203.66,
+   "end": 203.94,
+   "score": -3.422
+  },
+  {
+   "cue": 52,
+   "text": "cheythu",
+   "start": 203.96,
+   "end": 204.18,
+   "score": -4.292
+  },
+  {
+   "cue": 52,
+   "text": "koduthu.",
+   "start": 204.18,
+   "end": 204.46,
+   "score": -3.032
+  },
+  {
+   "cue": 53,
+   "text": "Ee",
+   "start": 204.62,
+   "end": 204.68,
+   "score": -6.013
+  },
+  {
+   "cue": 53,
+   "text": "phonile",
+   "start": 204.76,
+   "end": 205.14,
+   "score": -0.224
+  },
+  {
+   "cue": 53,
+   "text": "call-ine",
+   "start": 205.4,
+   "end": 205.76,
+   "score": -3.016
+  },
+  {
+   "cue": 53,
+   "text": "njan",
+   "start": 205.76,
+   "end": 205.92,
+   "score": -2.63
+  },
+  {
+   "cue": 53,
+   "text": "hold",
+   "start": 206.02,
+   "end": 206.3,
+   "score": -0.681
+  },
+  {
+   "cue": 53,
+   "text": "cheythu",
+   "start": 206.38,
+   "end": 206.58,
+   "score": -3.449
+  },
+  {
+   "cue": 53,
+   "text": "vekkunnu.",
+   "start": 206.58,
+   "end": 206.9,
+   "score": -0.144
+  },
+  {
+   "cue": 54,
+   "text": "Hold",
+   "start": 207.06,
+   "end": 207.3,
+   "score": -0.766
+  },
+  {
+   "cue": 54,
+   "text": "cheythappol",
+   "start": 207.36,
+   "end": 207.72,
+   "score": -1.903
+  },
+  {
+   "cue": 54,
+   "text": "hold",
+   "start": 208.06,
+   "end": 208.4,
+   "score": -0.755
+  },
+  {
+   "cue": 54,
+   "text": "vanna",
+   "start": 208.42,
+   "end": 208.62,
+   "score": -0.095
+  },
+  {
+   "cue": 54,
+   "text": "aa",
+   "start": 208.64,
+   "end": 208.7,
+   "score": -1.93
+  },
+  {
+   "cue": 54,
+   "text": "oru",
+   "start": 208.7,
+   "end": 208.78,
+   "score": -0.15
+  },
+  {
+   "cue": 54,
+   "text": "notification",
+   "start": 208.78,
+   "end": 209.36,
+   "score": -3.748
+  },
+  {
+   "cue": 54,
+   "text": "ningalkku",
+   "start": 209.38,
+   "end": 209.68,
+   "score": -0.546
+  },
+  {
+   "cue": 54,
+   "text": "kelkkan",
+   "start": 209.72,
+   "end": 210.04,
+   "score": -0.185
+  },
+  {
+   "cue": 54,
+   "text": "sadhikkum.",
+   "start": 210.08,
+   "end": 210.42,
+   "score": -0.721
+  },
+  {
+   "cue": 55,
+   "text": "Appo",
+   "start": 212.84,
+   "end": 212.94,
+   "score": -1.359
+  },
+  {
+   "cue": 55,
+   "text": "namukku",
+   "start": 212.98,
+   "end": 213.28,
+   "score": -0.464
+  },
+  {
+   "cue": 55,
+   "text": "cheyyanullathu",
+   "start": 213.3,
+   "end": 213.8,
+   "score": -2.043
+  },
+  {
+   "cue": 55,
+   "text": "ivide",
+   "start": 214.02,
+   "end": 214.24,
+   "score": -1.728
+  },
+  {
+   "cue": 55,
+   "text": "kaanunna",
+   "start": 214.28,
+   "end": 214.64,
+   "score": -0.058
+  },
+  {
+   "cue": 55,
+   "text": "More",
+   "start": 214.82,
+   "end": 215.1,
+   "score": -1.656
+  },
+  {
+   "cue": 55,
+   "text": "ennulla",
+   "start": 215.12,
+   "end": 215.4,
+   "score": -0.135
+  },
+  {
+   "cue": 55,
+   "text": "option",
+   "start": 215.42,
+   "end": 215.62,
+   "score": -4.794
+  },
+  {
+   "cue": 55,
+   "text": "select",
+   "start": 215.64,
+   "end": 215.88,
+   "score": -2.688
+  },
+  {
+   "cue": 55,
+   "text": "cheythu",
+   "start": 215.9,
+   "end": 216.06,
+   "score": -2.755
+  },
+  {
+   "cue": 55,
+   "text": "kazhinjal...",
+   "start": 216.06,
+   "end": 216.42,
+   "score": -3.508
+  },
+  {
+   "cue": 56,
+   "text": "Ivideyaayi",
+   "start": 216.6,
+   "end": 217.04,
+   "score": -0.858
+  },
+  {
+   "cue": 56,
+   "text": "'Hold",
+   "start": 217.18,
+   "end": 217.52,
+   "score": -2.316
+  },
+  {
+   "cue": 56,
+   "text": "Assist'",
+   "start": 217.62,
+   "end": 218.12,
+   "score": -3.408
+  },
+  {
+   "cue": 56,
+   "text": "ennulla",
+   "start": 218.16,
+   "end": 218.46,
+   "score": -0.428
+  },
+  {
+   "cue": 56,
+   "text": "oru",
+   "start": 218.46,
+   "end": 218.52,
+   "score": -2.654
+  },
+  {
+   "cue": 56,
+   "text": "option",
+   "start": 218.56,
+   "end": 218.76,
+   "score": -3.713
+  },
+  {
+   "cue": 56,
+   "text": "undu.",
+   "start": 218.78,
+   "end": 218.96,
+   "score": -3.431
+  },
+  {
+   "cue": 56,
+   "text": "Athu",
+   "start": 219.2,
+   "end": 219.36,
+   "score": -3.022
+  },
+  {
+   "cue": 56,
+   "text": "select",
+   "start": 219.4,
+   "end": 219.66,
+   "score": -3.73
+  },
+  {
+   "cue": 56,
+   "text": "cheythu",
+   "start": 219.68,
+   "end": 219.86,
+   "score": -4.37
+  },
+  {
+   "cue": 56,
+   "text": "kazhinjal...",
+   "start": 219.86,
+   "end": 220.22,
+   "score": -3.894
+  },
+  {
+   "cue": 57,
+   "text": "Aa",
+   "start": 220.22,
+   "end": 220.46,
+   "score": -1.135
+  },
+  {
+   "cue": 57,
+   "text": "call",
+   "start": 220.6,
+   "end": 220.84,
+   "score": -3.464
+  },
+  {
+   "cue": 57,
+   "text": "ithe",
+   "start": 221.12,
+   "end": 221.24,
+   "score": -1.728
+  },
+  {
+   "cue": 57,
+   "text": "reethiyil",
+   "start": 221.3,
+   "end": 221.7,
+   "score": -1.852
+  },
+  {
+   "cue": 57,
+   "text": "assist",
+   "start": 222.1,
+   "end": 222.4,
+   "score": -1.794
+  },
+  {
+   "cue": 57,
+   "text": "aavukayum,",
+   "start": 222.46,
+   "end": 222.88,
+   "score": -0.229
+  },
+  {
+   "cue": 58,
+   "text": "Pinneedithu",
+   "start": 222.98,
+   "end": 223.46,
+   "score": -2.042
+  },
+  {
+   "cue": 58,
+   "text": "hold",
+   "start": 223.68,
+   "end": 223.96,
+   "score": -0.169
+  },
+  {
+   "cue": 58,
+   "text": "ozhivakkunna",
+   "start": 224.12,
+   "end": 224.66,
+   "score": -1.724
+  },
+  {
+   "cue": 58,
+   "text": "samayathu",
+   "start": 224.68,
+   "end": 225.08,
+   "score": -1.179
+  },
+  {
+   "cue": 58,
+   "text": "ithe",
+   "start": 226.56,
+   "end": 226.7,
+   "score": -4.594
+  },
+  {
+   "cue": 58,
+   "text": "reethiyil",
+   "start": 226.78,
+   "end": 227.16,
+   "score": -4.104
+  },
+  {
+   "cue": 58,
+   "text": "ring",
+   "start": 227.64,
+   "end": 227.86,
+   "score": -3.071
+  },
+  {
+   "cue": 58,
+   "text": "cheyyukayum",
+   "start": 227.94,
+   "end": 228.42,
+   "score": -3.009
+  },
+  {
+   "cue": 58,
+   "text": "cheyyum.",
+   "start": 228.48,
+   "end": 228.72,
+   "score": -2.869
+  },
+  {
+   "cue": 59,
+   "text": "Hold",
+   "start": 229.18,
+   "end": 229.38,
+   "score": -0.909
+  },
+  {
+   "cue": 59,
+   "text": "ozhivakkiyappol",
+   "start": 229.42,
+   "end": 230.06,
+   "score": -2.865
+  },
+  {
+   "cue": 59,
+   "text": "namukku",
+   "start": 230.14,
+   "end": 230.4,
+   "score": -0.804
+  },
+  {
+   "cue": 59,
+   "text": "ring",
+   "start": 230.44,
+   "end": 230.6,
+   "score": -0.354
+  },
+  {
+   "cue": 59,
+   "text": "cheyyukayum",
+   "start": 230.68,
+   "end": 231.06,
+   "score": -1.606
+  },
+  {
+   "cue": 59,
+   "text": "pinneedu",
+   "start": 231.28,
+   "end": 231.58,
+   "score": -1.489
+  },
+  {
+   "cue": 59,
+   "text": "namukku",
+   "start": 231.6,
+   "end": 231.88,
+   "score": -1.989
+  },
+  {
+   "cue": 59,
+   "text": "accept",
+   "start": 232.12,
+   "end": 232.36,
+   "score": -3.292
+  },
+  {
+   "cue": 59,
+   "text": "cheythu",
+   "start": 232.48,
+   "end": 232.72,
+   "score": -3.023
+  },
+  {
+   "cue": 59,
+   "text": "pinneedu",
+   "start": 232.9,
+   "end": 233.3,
+   "score": -1.52
+  },
+  {
+   "cue": 59,
+   "text": "samsaarikkayum",
+   "start": 233.5,
+   "end": 234.14,
+   "score": -0.07
+  },
+  {
+   "cue": 59,
+   "text": "cheyyam.",
+   "start": 234.2,
+   "end": 234.46,
+   "score": -1.884
+  },
+  {
+   "cue": 60,
+   "text": "Kandille?",
+   "start": 234.66,
+   "end": 234.92,
+   "score": -2.706
+  },
+  {
+   "cue": 60,
+   "text": "Ithum",
+   "start": 235.28,
+   "end": 235.44,
+   "score": -1.108
+  },
+  {
+   "cue": 60,
+   "text": "valare",
+   "start": 235.46,
+   "end": 235.7,
+   "score": -0.04
+  },
+  {
+   "cue": 60,
+   "text": "useful",
+   "start": 235.78,
+   "end": 236.04,
+   "score": -2.034
+  },
+  {
+   "cue": 60,
+   "text": "aayittulla",
+   "start": 236.04,
+   "end": 236.38,
+   "score": -0.88
+  },
+  {
+   "cue": 60,
+   "text": "feature",
+   "start": 236.38,
+   "end": 236.62,
+   "score": -5.74
+  },
+  {
+   "cue": 60,
+   "text": "alle?",
+   "start": 236.62,
+   "end": 236.74,
+   "score": -1.119
+  },
+  {
+   "cue": 61,
+   "text": "Appo",
+   "start": 237.0,
+   "end": 237.14,
+   "score": -1.035
+  },
+  {
+   "cue": 61,
+   "text": "ivide",
+   "start": 237.16,
+   "end": 237.34,
+   "score": -1.682
+  },
+  {
+   "cue": 61,
+   "text": "paranja",
+   "start": 237.38,
+   "end": 237.64,
+   "score": -1.814
+  },
+  {
+   "cue": 61,
+   "text": "moonnu",
+   "start": 237.82,
+   "end": 238.26,
+   "score": -4.358
+  },
+  {
+   "cue": 61,
+   "text": "option-ukalum",
+   "start": 238.34,
+   "end": 238.84,
+   "score": -2.039
+  },
+  {
+   "cue": 61,
+   "text": "valare",
+   "start": 238.9,
+   "end": 239.2,
+   "score": -0.045
+  },
+  {
+   "cue": 61,
+   "text": "useful",
+   "start": 239.3,
+   "end": 239.6,
+   "score": -2.318
+  },
+  {
+   "cue": 61,
+   "text": "aayittullathanu",
+   "start": 239.62,
+   "end": 240.18,
+   "score": -1.666
+  },
+  {
+   "cue": 61,
+   "text": "athiloru",
+   "start": 240.24,
+   "end": 240.44,
+   "score": -2.309
+  },
+  {
+   "cue": 61,
+   "text": "samshayavum",
+   "start": 240.48,
+   "end": 240.84,
+   "score": -0.772
+  },
+  {
+   "cue": 61,
+   "text": "illa.",
+   "start": 240.86,
+   "end": 241.0,
+   "score": -0.012
+  },
+  {
+   "cue": 62,
+   "text": "Appo",
+   "start": 241.18,
+   "end": 241.3,
+   "score": -4.777
+  },
+  {
+   "cue": 62,
+   "text": "enthayalum",
+   "start": 241.3,
+   "end": 241.56,
+   "score": -2.944
+  },
+  {
+   "cue": 62,
+   "text": "njan",
+   "start": 241.62,
+   "end": 241.78,
+   "score": -3.415
+  },
+  {
+   "cue": 62,
+   "text": "itharam",
+   "start": 241.78,
+   "end": 241.92,
+   "score": -6.239
+  },
+  {
+   "cue": 62,
+   "text": "nirantharam",
+   "start": 241.92,
+   "end": 242.28,
+   "score": -0.447
+  },
+  {
+   "cue": 62,
+   "text": "itharathilulla",
+   "start": 242.36,
+   "end": 242.86,
+   "score": -1.072
+  },
+  {
+   "cue": 62,
+   "text": "videokal",
+   "start": 242.86,
+   "end": 243.24,
+   "score": -0.959
+  },
+  {
+   "cue": 62,
+   "text": "nammude",
+   "start": 243.36,
+   "end": 243.6,
+   "score": -1.304
+  },
+  {
+   "cue": 62,
+   "text": "channel-iloode",
+   "start": 243.64,
+   "end": 244.08,
+   "score": -3.861
+  },
+  {
+   "cue": 62,
+   "text": "upload",
+   "start": 244.16,
+   "end": 244.42,
+   "score": -3.835
+  },
+  {
+   "cue": 62,
+   "text": "cheyyunnathaayirikkum.",
+   "start": 244.44,
+   "end": 245.18,
+   "score": -1.043
+  },
+  {
+   "cue": 63,
+   "text": "Athukondu",
+   "start": 245.46,
+   "end": 245.82,
+   "score": -3.179
+  },
+  {
+   "cue": 63,
+   "text": "madikkkathe",
+   "start": 245.92,
+   "end": 246.32,
+   "score": -1.767
+  },
+  {
+   "cue": 63,
+   "text": "channel",
+   "start": 246.36,
+   "end": 246.6,
+   "score": -3.332
+  },
+  {
+   "cue": 63,
+   "text": "subscribe",
+   "start": 246.62,
+   "end": 247.0,
+   "score": -2.577
+  },
+  {
+   "cue": 63,
+   "text": "cheythu",
+   "start": 247.0,
+   "end": 247.24,
+   "score": -3.792
+  },
+  {
+   "cue": 63,
+   "text": "support",
+   "start": 247.46,
+   "end": 247.84,
+   "score": -1.588
+  },
+  {
+   "cue": 63,
+   "text": "cheyyuka.",
+   "start": 247.86,
+   "end": 248.08,
+   "score": -1.512
+  },
+  {
+   "cue": 64,
+   "text": "Video",
+   "start": 248.28,
+   "end": 248.54,
+   "score": -1.747
+  },
+  {
+   "cue": 64,
+   "text": "ishttappettu",
+   "start": 248.58,
+   "end": 248.96,
+   "score": -1.022
+  },
+  {
+   "cue": 64,
+   "text": "kazhinjal",
+   "start": 248.96,
+   "end": 249.32,
+   "score": -3.778
+  },
+  {
+   "cue": 64,
+   "text": "like-um",
+   "start": 249.46,
+   "end": 249.8,
+   "score": -1.498
+  },
+  {
+   "cue": 64,
+   "text": "comment-um",
+   "start": 249.86,
+   "end": 250.24,
+   "score": -1.651
+  },
+  {
+   "cue": 64,
+   "text": "share-um",
+   "start": 250.26,
+   "end": 250.52,
+   "score": -2.308
+  },
+  {
+   "cue": 64,
+   "text": "anganeyulla",
+   "start": 250.52,
+   "end": 250.92,
+   "score": -1.343
+  },
+  {
+   "cue": 64,
+   "text": "yaathonnum",
+   "start": 250.94,
+   "end": 251.38,
+   "score": -0.546
+  },
+  {
+   "cue": 64,
+   "text": "cheyyan",
+   "start": 251.7,
+   "end": 251.98,
+   "score": -1.702
+  },
+  {
+   "cue": 64,
+   "text": "madikkeruthe.",
+   "start": 252.02,
+   "end": 252.68,
+   "score": -1.968
+  },
+  {
+   "cue": 65,
+   "text": "Athokkeyaanu",
+   "start": 252.68,
+   "end": 253.14,
+   "score": -1.633
+  },
+  {
+   "cue": 65,
+   "text": "enikku",
+   "start": 253.24,
+   "end": 253.48,
+   "score": -0.435
+  },
+  {
+   "cue": 65,
+   "text": "veendum",
+   "start": 253.62,
+   "end": 253.96,
+   "score": -2.373
+  },
+  {
+   "cue": 65,
+   "text": "videokal",
+   "start": 253.98,
+   "end": 254.4,
+   "score": -1.27
+  },
+  {
+   "cue": 65,
+   "text": "cheyyan",
+   "start": 254.44,
+   "end": 254.7,
+   "score": -1.672
+  },
+  {
+   "cue": 65,
+   "text": "vendi",
+   "start": 254.72,
+   "end": 255.04,
+   "score": -1.538
+  },
+  {
+   "cue": 65,
+   "text": "labhikkunna",
+   "start": 255.24,
+   "end": 255.7,
+   "score": -0.065
+  },
+  {
+   "cue": 65,
+   "text": "prajodhanam.",
+   "start": 255.8,
+   "end": 256.28,
+   "score": -0.883
+  },
+  {
+   "cue": 66,
+   "text": "Appo",
+   "start": 256.42,
+   "end": 256.52,
+   "score": -4.317
+  },
+  {
+   "cue": 66,
+   "text": "enthayalum",
+   "start": 256.52,
+   "end": 256.76,
+   "score": -2.876
+  },
+  {
+   "cue": 66,
+   "text": "puthiya",
+   "start": 256.82,
+   "end": 257.0,
+   "score": -1.692
+  },
+  {
+   "cue": 66,
+   "text": "oru",
+   "start": 257.0,
+   "end": 257.06,
+   "score": -3.372
+  },
+  {
+   "cue": 66,
+   "text": "topic-umayittu",
+   "start": 257.1,
+   "end": 257.58,
+   "score": -1.977
+  },
+  {
+   "cue": 66,
+   "text": "namukku",
+   "start": 257.58,
+   "end": 257.82,
+   "score": -1.161
+  },
+  {
+   "cue": 66,
+   "text": "veendum",
+   "start": 257.96,
+   "end": 258.2,
+   "score": -4.899
+  },
+  {
+   "cue": 66,
+   "text": "kandumuuttaam.",
+   "start": 258.2,
+   "end": 258.68,
+   "score": -1.57
+  },
+  {
+   "cue": 67,
+   "text": "Athuvarekkum",
+   "start": 258.74,
+   "end": 259.18,
+   "score": -1.179
+  },
+  {
+   "cue": 67,
+   "text": "channel",
+   "start": 259.28,
+   "end": 259.54,
+   "score": -4.179
+  },
+  {
+   "cue": 67,
+   "text": "subscribe",
+   "start": 259.54,
+   "end": 259.94,
+   "score": -2.703
+  },
+  {
+   "cue": 67,
+   "text": "cheythu",
+   "start": 259.94,
+   "end": 260.16,
+   "score": -4.289
+  },
+  {
+   "cue": 67,
+   "text": "kaathirikkuka.",
+   "start": 260.66,
+   "end": 261.22,
+   "score": -0.478
+  },
+  {
+   "cue": 67,
+   "text": "Nanni,",
+   "start": 261.58,
+   "end": 261.9,
+   "score": -0.034
+  },
+  {
+   "cue": 67,
+   "text": "Namaskaram.",
+   "start": 262.22,
+   "end": 262.74,
+   "score": -0.006
+  }
+ ]
+}

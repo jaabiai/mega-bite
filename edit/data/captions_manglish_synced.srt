@@ -1,0 +1,527 @@
+1
+00:00:00,140 --> 00:00:02,640
+iPhone upayogikkunnavarkku moonnu kidilan feature-ukalaanu
+
+2
+00:00:02,640 --> 00:00:04,300
+innathe videoyiloode parichayappaduthunnathu.
+
+3
+00:00:04,300 --> 00:00:06,540
+Appo video skip cheyyathe muzhuvanayittu kaanuka.
+
+4
+00:00:06,540 --> 00:00:08,340
+Theerchayayum iPhone upayogikkunna oro
+
+5
+00:00:08,340 --> 00:00:10,240
+aalukalkkum ee video useful aayirikkum.
+
+6
+00:00:10,240 --> 00:00:12,260
+Ithil parayunna feature-ukal inno innaleyo
+
+7
+00:00:12,260 --> 00:00:13,280
+vanna feature-ukalonnumalla,
+
+8
+00:00:13,280 --> 00:00:15,780
+iOS 27 vannappol thudangiya feature-ukalaanu.
+
+9
+00:00:15,780 --> 00:00:17,940
+Appol ariyathavarkku vendi avarilekku ethikkuka
+
+10
+00:00:17,940 --> 00:00:20,140
+ennulla uddeshyathodukoodeyaanu ee video cheyyunnathu.
+
+11
+00:00:20,140 --> 00:00:21,460
+Appo enthayalum kazhivathum paramavadhi
+
+12
+00:00:21,460 --> 00:00:23,240
+ellavarilekkum share cheythu kodukkuka.
+
+13
+00:00:23,240 --> 00:00:25,220
+Appo enthellaamanu ee feature-ukal ennu nokkam.
+
+14
+00:00:25,220 --> 00:00:26,900
+Welcome to Mega Byte.
+
+15
+00:00:26,900 --> 00:00:29,500
+Puthiya oru videoyilekku ellavarkkum swaagatham.
+
+16
+00:00:29,500 --> 00:00:31,360
+Appo ee feature-ukal nammude phoninte screen
+
+17
+00:00:31,360 --> 00:00:33,120
+demo-yiloode namukkannu parichayappadam.
+
+18
+00:00:33,120 --> 00:00:34,580
+Ettavum aadyamayi valare useful
+
+19
+00:00:34,580 --> 00:00:35,440
+aayittulla oru feature aanu.
+
+20
+00:00:35,440 --> 00:00:37,440
+Athava ningalkku aarengilum miss call nalki
+
+21
+00:00:37,440 --> 00:00:39,460
+athallengil pinneedu eppozhengilum call back
+
+22
+00:00:39,460 --> 00:00:41,780
+cheyyanam ennulla oru aavashyam ningalkku vannu.
+
+23
+00:00:41,780 --> 00:00:43,620
+Udaharanathinu njan ivide kaanikkunna ee oru
+
+24
+00:00:43,620 --> 00:00:46,200
+contact-inu enikku oru miss call vannirikkukayaanu.
+
+25
+00:00:46,200 --> 00:00:48,740
+Ente free time-il ivarkku thirichu vilikkanam
+
+26
+00:00:48,740 --> 00:00:50,340
+ennulla oru reminder set cheyyanam.
+
+27
+00:00:50,340 --> 00:00:51,960
+Athinuvendi ningalkku ethu call-aano
+
+28
+00:00:51,960 --> 00:00:53,920
+vendathu athinu nere ithe reethiyil
+
+29
+00:00:53,920 --> 00:00:55,600
+idathuvashaththekk swipe cheythu kazhinjal...
+
+30
+00:00:55,600 --> 00:00:57,940
+Ivideyaayi namukku oru clock icon kaanaan sadhikkum.
+
+31
+00:00:57,940 --> 00:01:00,000
+Just athil select cheythu kazhinjal ningalkku
+
+32
+00:01:00,000 --> 00:01:02,060
+eathengilum oru samayam select cheythu...
+
+33
+00:01:02,060 --> 00:01:04,000
+Athinu reminder set cheyyan sadhikkum.
+
+34
+00:01:04,000 --> 00:01:06,220
+Ningalkku custom aayittu venamengil ithe reethiyil
+
+35
+00:01:06,220 --> 00:01:08,460
+ettavum avasaanathilulla 'Remind Me Later'
+
+36
+00:01:08,460 --> 00:01:10,120
+ennulla aa option select cheythu kazhinjal...
+
+37
+00:01:10,120 --> 00:01:12,020
+Ivide ninnu ningalkku ethu samayathaanu vendathu
+
+38
+00:01:12,020 --> 00:01:15,000
+ennullathu set cheyyan sadhikkum; date athupole time.
+
+39
+00:01:15,000 --> 00:01:17,340
+Ini urgent aanu ennundenkil aa oru notification-um
+
+40
+00:01:17,340 --> 00:01:19,920
+enable cheythu vechu kazhinjal theerchayaayum phone oru
+
+41
+00:01:19,920 --> 00:01:22,420
+alarm reethiyil ningalkku buzzer cheyyunnathaayirikkum.
+
+42
+00:01:22,420 --> 00:01:24,080
+Anganeyulla ethu aavashyamaano vendathu
+
+43
+00:01:24,080 --> 00:01:26,420
+ennullathu ivide ninnu oronnoronnayi set cheyyam.
+
+44
+00:01:26,420 --> 00:01:28,000
+Puthiya list add cheyyanamengil
+
+45
+00:01:28,000 --> 00:01:29,440
+athilekkum add cheythu kodukkam.
+
+46
+00:01:29,440 --> 00:01:31,320
+Pinneedu ningal reminder cheythathinu aa
+
+47
+00:01:31,320 --> 00:01:33,280
+samayathu ningalkku notification labhikkum.
+
+48
+00:01:33,280 --> 00:01:35,460
+Ini athine eppozhengilum reminder cheyyendathilla,
+
+49
+00:01:35,460 --> 00:01:36,920
+ningalathu cheythittundu engil...
+
+50
+00:01:36,920 --> 00:01:38,980
+Athe contact-inu nere onnukoodi
+
+51
+00:01:38,980 --> 00:01:41,080
+idathuvashaththekk swipe cheythu veendum athe
+
+52
+00:01:41,080 --> 00:01:42,620
+clock icon-il select cheythu kazhinjal...
+
+53
+00:01:42,620 --> 00:01:44,900
+Ivide ninnu aa reminder edit cheyyano
+
+54
+00:01:44,900 --> 00:01:46,580
+athallengil aa reminder complete
+
+55
+00:01:46,580 --> 00:01:48,720
+aayittundu ennu mark cheyyano sadhikkum.
+
+56
+00:01:48,720 --> 00:01:50,120
+Valare useful aayittullathalle?
+
+57
+00:01:50,120 --> 00:01:52,590
+Ishttappettittundenkil like cheyyan madikkeruthe.
+
+58
+00:01:52,600 --> 00:01:54,880
+Ini aduthathum valare pradhanappetta onnanu.
+
+59
+00:01:54,880 --> 00:01:57,420
+Athava ningal evideyengilum eathengilum oru sthalathu
+
+60
+00:01:57,420 --> 00:01:59,620
+ningal nilkkumbol ningalkku oru call varikayanenkil...
+
+61
+00:01:59,620 --> 00:02:02,820
+Athinulla surrounding-ilulla noise ningale shallyappeduthunnu,
+
+62
+00:02:02,820 --> 00:02:04,400
+Athallengil background-ile shabdam avar
+
+63
+00:02:04,400 --> 00:02:06,920
+kettu kazhinjal ningal evideyanu nilkkunnathu ennullathu
+
+64
+00:02:06,920 --> 00:02:09,120
+avar manassilakkum ennulla pedi ningalkkundenkil...
+
+65
+00:02:09,120 --> 00:02:10,700
+Athinum ivide oru solution undu.
+
+66
+00:02:10,700 --> 00:02:11,500
+Valare simple aanu.
+
+67
+00:02:11,500 --> 00:02:13,360
+Ningalude phoninte Settings-ilekku povuka.
+
+68
+00:02:13,360 --> 00:02:15,040
+Settings-il ninnum Accessibility
+
+69
+00:02:15,040 --> 00:02:16,520
+ennulla option select cheyyuka.
+
+70
+00:02:16,520 --> 00:02:18,340
+Athil ninnu kurachu thaazhekk scroll cheythu
+
+71
+00:02:18,340 --> 00:02:20,920
+poyi kazhinjal ningalkku ivideyaayi 'Audio &
+
+72
+00:02:20,920 --> 00:02:23,320
+Visual' ennulla oru option labhikkunnathayirikkum.
+
+73
+00:02:23,320 --> 00:02:24,240
+Athu select cheyyuka.
+
+74
+00:02:24,240 --> 00:02:26,260
+Athu select cheythu kazhinju kurachonnu thaazhekk
+
+75
+00:02:26,260 --> 00:02:28,900
+ponthichu kazhinjal ivideyaayi 'Voice Isolation'
+
+76
+00:02:28,900 --> 00:02:30,740
+ennulla oru option ningalkku kaanan sadhikkum.
+
+77
+00:02:30,740 --> 00:02:32,960
+Athinu nereyulla button enable cheythu kazhinjal
+
+78
+00:02:32,960 --> 00:02:34,680
+ningal itharathilulla crowd-ilo athallengil...
+
+79
+00:02:34,680 --> 00:02:36,700
+Eathengilum program-ilokke nilkkukayanenkil,
+
+80
+00:02:36,700 --> 00:02:38,500
+mattevideyengilumokke poyittullathaanu engil...
+
+81
+00:02:38,500 --> 00:02:41,120
+Aa oru surrounding-ilulla shabdam poorrnnamayi
+
+82
+00:02:41,120 --> 00:02:43,820
+isolate cheythu ningal parayunna shabdam mathram
+
+83
+00:02:43,820 --> 00:02:45,700
+call receive cheyyunna aalukalkku kelkkum.
+
+84
+00:02:45,700 --> 00:02:47,020
+Atharathil namukku set cheyyan
+
+85
+00:02:47,020 --> 00:02:49,080
+sadhikkunna oru kidilan option aanithu.
+
+86
+00:02:49,080 --> 00:02:50,660
+Aavashyamullavarkku set cheyyam.
+
+87
+00:02:50,660 --> 00:02:52,920
+Moonnamathathu mattoru kidilan option aanu.
+
+88
+00:02:52,920 --> 00:02:55,620
+Athava ningalude iPhone-ilekku aarengilum call cheythu
+
+89
+00:02:55,620 --> 00:02:58,260
+hold cheythu vechirikkukayaanu engil aa hold-ine ningal
+
+90
+00:02:58,260 --> 00:03:00,960
+avar unhold cheyyunnathu vare kaathirikkendathilla.
+
+91
+00:03:00,960 --> 00:03:03,340
+Namukku valare pettennu thanne aa hold cheythathine
+
+92
+00:03:03,340 --> 00:03:05,320
+pause cheythukondu aa oru call veendum thirichu
+
+93
+00:03:05,320 --> 00:03:07,380
+varunna samayathu, Athava unhold cheyyunna samayathu
+
+94
+00:03:07,380 --> 00:03:09,380
+namukku athinte notification labhikkukayum...
+
+95
+00:03:09,380 --> 00:03:10,520
+Pinneedu athu namukku eduthu
+
+96
+00:03:10,520 --> 00:03:12,180
+samsaarichaal mathravum mathiyaakum.
+
+97
+00:03:12,180 --> 00:03:13,580
+Atharathilulla oru feature aanu.
+
+98
+00:03:13,580 --> 00:03:15,320
+Ithu valare useful aakunna oru feature aanu.
+
+99
+00:03:15,320 --> 00:03:16,980
+Njan ippo ente ee oru phonil ninnu
+
+100
+00:03:16,980 --> 00:03:19,350
+ente iPhone-ilekku call cheyyukayanu.
+
+101
+00:03:19,780 --> 00:03:22,330
+Ee phonilekku njan call cheythu.
+
+102
+00:03:22,760 --> 00:03:24,520
+Aa call ivide attend cheythu koduthu.
+
+103
+00:03:24,520 --> 00:03:26,960
+Ee phonile call-ine njan hold cheythu vekkunnu.
+
+104
+00:03:26,960 --> 00:03:28,680
+Hold cheythappol hold vanna aa oru
+
+105
+00:03:28,680 --> 00:03:30,870
+notification ningalkku kelkkan sadhikkum.
+
+106
+00:03:32,740 --> 00:03:34,720
+Appo namukku cheyyanullathu ivide kaanunna
+
+107
+00:03:34,720 --> 00:03:36,500
+More ennulla option select cheythu kazhinjal...
+
+108
+00:03:36,500 --> 00:03:39,100
+Ivideyaayi 'Hold Assist' ennulla oru option undu.
+
+109
+00:03:39,100 --> 00:03:40,120
+Athu select cheythu kazhinjal...
+
+110
+00:03:40,120 --> 00:03:42,880
+Aa call ithe reethiyil assist aavukayum,
+
+111
+00:03:42,880 --> 00:03:45,530
+Pinneedithu hold ozhivakkunna samayathu
+
+112
+00:03:46,460 --> 00:03:49,080
+ithe reethiyil ring cheyyukayum cheyyum.
+
+113
+00:03:49,080 --> 00:03:50,580
+Hold ozhivakkiyappol namukku ring
+
+114
+00:03:50,580 --> 00:03:52,380
+cheyyukayum pinneedu namukku accept
+
+115
+00:03:52,380 --> 00:03:54,560
+cheythu pinneedu samsaarikkayum cheyyam.
+
+116
+00:03:54,560 --> 00:03:55,180
+Kandille?
+
+117
+00:03:55,180 --> 00:03:56,900
+Ithum valare useful aayittulla feature alle?
+
+118
+00:03:56,900 --> 00:03:59,200
+Appo ivide paranja moonnu option-ukalum valare
+
+119
+00:03:59,200 --> 00:04:01,080
+useful aayittullathanu athiloru samshayavum illa.
+
+120
+00:04:01,080 --> 00:04:02,260
+Appo enthayalum njan itharam nirantharam
+
+121
+00:04:02,260 --> 00:04:03,540
+itharathilulla videokal nammude
+
+122
+00:04:03,540 --> 00:04:05,360
+channel-iloode upload cheyyunnathaayirikkum.
+
+123
+00:04:05,360 --> 00:04:06,520
+Athukondu madikkkathe channel
+
+124
+00:04:06,520 --> 00:04:08,180
+subscribe cheythu support cheyyuka.
+
+125
+00:04:08,180 --> 00:04:10,160
+Video ishttappettu kazhinjal like-um comment-um
+
+126
+00:04:10,160 --> 00:04:12,580
+share-um anganeyulla yaathonnum cheyyan madikkeruthe.
+
+127
+00:04:12,580 --> 00:04:14,340
+Athokkeyaanu enikku veendum videokal
+
+128
+00:04:14,340 --> 00:04:16,320
+cheyyan vendi labhikkunna prajodhanam.
+
+129
+00:04:16,320 --> 00:04:17,480
+Appo enthayalum puthiya oru topic-umayittu
+
+130
+00:04:17,480 --> 00:04:18,640
+namukku veendum kandumuuttaam.
+
+131
+00:04:18,640 --> 00:04:21,480
+Athuvarekkum channel subscribe cheythu kaathirikkuka.
+
+132
+00:04:21,480 --> 00:04:23,033
+Nanni, Namaskaram.

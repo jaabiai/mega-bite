@@ -1,0 +1,267 @@
+1
+00:00:00,000 --> 00:00:05,200
+iPhone upayogikkunnavarkku moonnu kidilan feature-ukalaanu innathe videoyiloode parichayappaduthunnathu.
+
+2
+00:00:05,200 --> 00:00:07,800
+Appo video skip cheyyathe muzhuvanayittu kaanuka.
+
+3
+00:00:07,800 --> 00:00:12,200
+Theerchayayum iPhone upayogikkunna oro aalukalkkum ee video useful aayirikkum.
+
+4
+00:00:12,200 --> 00:00:18,200
+Ithil parayunna feature-ukal inno innaleyo vanna feature-ukalonnumalla, iOS 27 vannappol thudangiya feature-ukalaanu.
+
+5
+00:00:18,200 --> 00:00:24,200
+Appol ariyathavarkku vendi avarilekku ethikkuka ennulla uddeshyathodukoodeyaanu ee video cheyyunnathu.
+
+6
+00:00:24,200 --> 00:00:27,800
+Appo enthayalum kazhivathum paramavadhi ellavarilekkum share cheythu kodukkuka.
+
+7
+00:00:27,800 --> 00:00:30,200
+Appo enthellaamanu ee feature-ukal ennu nokkam.
+
+8
+00:00:30,200 --> 00:00:33,000
+Welcome to Mega Byte.
+
+9
+00:00:33,000 --> 00:00:36,400
+Puthiya oru videoyilekku ellavarkkum swaagatham.
+
+10
+00:00:36,400 --> 00:00:41,200
+Appo ee feature-ukal nammude phoninte screen demo-yiloode namukkannu parichayappadam.
+
+11
+00:00:41,200 --> 00:00:44,500
+Ettavum aadyamayi valare useful aayittulla oru feature aanu.
+
+12
+00:00:44,500 --> 00:00:50,800
+Athava ningalkku aarengilum miss call nalki athallengil pinneedu eppozhengilum call back cheyyanam ennulla oru aavashyam ningalkku vannu.
+
+13
+00:00:50,800 --> 00:00:55,200
+Udaharanathinu njan ivide kaanikkunna ee oru contact-inu enikku oru miss call vannirikkukayaanu.
+
+14
+00:00:55,200 --> 00:01:00,500
+Ente free time-il ivarkku thirichu vilikkanam ennulla oru reminder set cheyyanam.
+
+15
+00:01:00,500 --> 00:01:06,200
+Athinuvendi ningalkku ethu call-aano vendathu athinu nere ithe reethiyil idathuvashaththekk swipe cheythu kazhinjal...
+
+16
+00:01:06,200 --> 00:01:09,800
+Ivideyaayi namukku oru clock icon kaanaan sadhikkum.
+
+17
+00:01:09,800 --> 00:01:14,200
+Just athil select cheythu kazhinjal ningalkku eathengilum oru samayam select cheythu...
+
+18
+00:01:14,200 --> 00:01:17,200
+Athinu reminder set cheyyan sadhikkum.
+
+19
+00:01:17,200 --> 00:01:23,800
+Ningalkku custom aayittu venamengil ithe reethiyil ettavum avasaanathilulla 'Remind Me Later' ennulla aa option select cheythu kazhinjal...
+
+20
+00:01:23,800 --> 00:01:29,200
+Ivide ninnu ningalkku ethu samayathaanu vendathu ennullathu set cheyyan sadhikkum; date athupole time.
+
+21
+00:01:29,200 --> 00:01:36,000
+Ini urgent aanu ennundenkil aa oru notification-um enable cheythu vechu kazhinjal theerchayaayum phone oru alarm reethiyil ningalkku buzzer cheyyunnathaayirikkum.
+
+22
+00:01:36,000 --> 00:01:40,000
+Anganeyulla ethu aavashyamaano vendathu ennullathu ivide ninnu oronnoronnayi set cheyyam.
+
+23
+00:01:40,000 --> 00:01:44,000
+Puthiya list add cheyyanamengil athilekkum add cheythu kodukkam.
+
+24
+00:01:44,000 --> 00:01:49,000
+Pinneedu ningal reminder cheythathinu aa samayathu ningalkku notification labhikkum.
+
+25
+00:01:49,000 --> 00:01:54,800
+Ini athine eppozhengilum reminder cheyyendathilla, ningalathu cheythittundu engil...
+
+26
+00:01:54,800 --> 00:02:01,800
+Athe contact-inu nere onnukoodi idathuvashaththekk swipe cheythu veendum athe clock icon-il select cheythu kazhinjal...
+
+27
+00:02:01,800 --> 00:02:08,000
+Ivide ninnu aa reminder edit cheyyano athallengil aa reminder complete aayittundu ennu mark cheyyano sadhikkum.
+
+28
+00:02:08,000 --> 00:02:10,200
+Valare useful aayittullathalle?
+
+29
+00:02:10,200 --> 00:02:12,800
+Ishttappettittundenkil like cheyyan madikkeruthe.
+
+30
+00:02:12,800 --> 00:02:15,500
+Ini aduthathum valare pradhanappetta onnanu.
+
+31
+00:02:15,500 --> 00:02:20,500
+Athava ningal evideyengilum eathengilum oru sthalathu ningal nilkkumbol ningalkku oru call varikayanenkil...
+
+32
+00:02:20,500 --> 00:02:24,000
+Athinulla surrounding-ilulla noise ningale shallyappeduthunnu,
+
+33
+00:02:24,000 --> 00:02:30,500
+Athallengil background-ile shabdam avar kettu kazhinjal ningal evideyanu nilkkunnathu ennullathu avar manassilakkum ennulla pedi ningalkkundenkil...
+
+34
+00:02:30,500 --> 00:02:33,800
+Athinum ivide oru solution undu. Valare simple aanu.
+
+35
+00:02:33,800 --> 00:02:36,500
+Ningalude phoninte Settings-ilekku povuka.
+
+36
+00:02:36,500 --> 00:02:40,000
+Settings-il ninnum Accessibility ennulla option select cheyyuka.
+
+37
+00:02:40,000 --> 00:02:46,800
+Athil ninnu kurachu thaazhekk scroll cheythu poyi kazhinjal ningalkku ivideyaayi 'Audio & Visual' ennulla oru option labhikkunnathayirikkum.
+
+38
+00:02:46,800 --> 00:02:48,800
+Athu select cheyyuka.
+
+39
+00:02:48,800 --> 00:02:56,000
+Athu select cheythu kazhinju kurachonnu thaazhekk ponthichu kazhinjal ivideyaayi 'Voice Isolation' ennulla oru option ningalkku kaanan sadhikkum.
+
+40
+00:02:56,000 --> 00:03:00,800
+Athinu nereyulla button enable cheythu kazhinjal ningal itharathilulla crowd-ilo athallengil...
+
+41
+00:03:00,800 --> 00:03:06,200
+Eathengilum program-ilokke nilkkukayanenkil, mattevideyengilumokke poyittullathaanu engil...
+
+42
+00:03:06,200 --> 00:03:13,800
+Aa oru surrounding-ilulla shabdam poorrnnamayi isolate cheythu ningal parayunna shabdam mathram call receive cheyyunna aalukalkku kelkkum.
+
+43
+00:03:13,800 --> 00:03:17,500
+Atharathil namukku set cheyyan sadhikkunna oru kidilan option aanithu.
+
+44
+00:03:17,500 --> 00:03:20,000
+Aavashyamullavarkku set cheyyam.
+
+45
+00:03:20,000 --> 00:03:23,800
+Moonnamathathu mattoru kidilan option aanu.
+
+46
+00:03:23,800 --> 00:03:31,000
+Athava ningalude iPhone-ilekku aarengilum call cheythu hold cheythu vechirikkukayaanu engil aa hold-ine ningal avar unhold cheyyunnathu vare kaathirikkendathilla.
+
+47
+00:03:31,000 --> 00:03:37,200
+Namukku valare pettennu thanne aa hold cheythathine pause cheythukondu aa oru call veendum thirichu varunna samayathu,
+
+48
+00:03:37,200 --> 00:03:42,200
+Athava unhold cheyyunna samayathu namukku athinte notification labhikkukayum...
+
+49
+00:03:42,200 --> 00:03:46,800
+Pinneedu athu namukku eduthu samsaarichaal mathravum mathiyaakum.
+
+50
+00:03:46,800 --> 00:03:52,200
+Atharathilulla oru feature aanu. Ithu valare useful aakunna oru feature aanu.
+
+51
+00:03:52,200 --> 00:03:57,200
+Njan ippo ente ee oru phonil ninnu ente iPhone-ilekku call cheyyukayanu.
+
+52
+00:03:57,200 --> 00:04:02,800
+Ee phonilekku njan call cheythu. Aa call ivide attend cheythu koduthu.
+
+53
+00:04:02,800 --> 00:04:07,500
+Ee phonile call-ine njan hold cheythu vekkunnu.
+
+54
+00:04:07,500 --> 00:04:14,200
+Hold cheythappol hold vanna aa oru notification ningalkku kelkkan sadhikkum.
+
+55
+00:04:14,200 --> 00:04:20,800
+Appo namukku cheyyanullathu ivide kaanunna More ennulla option select cheythu kazhinjal...
+
+56
+00:04:20,800 --> 00:04:27,500
+Ivideyaayi 'Hold Assist' ennulla oru option undu. Athu select cheythu kazhinjal...
+
+57
+00:04:27,500 --> 00:04:31,800
+Aa call ithe reethiyil assist aavukayum,
+
+58
+00:04:31,800 --> 00:04:38,500
+Pinneedithu hold ozhivakkunna samayathu ithe reethiyil ring cheyyukayum cheyyum.
+
+59
+00:04:38,500 --> 00:04:47,500
+Hold ozhivakkiyappol namukku ring cheyyukayum pinneedu namukku accept cheythu pinneedu samsaarikkayum cheyyam.
+
+60
+00:04:47,500 --> 00:04:50,500
+Kandille? Ithum valare useful aayittulla feature alle?
+
+61
+00:04:50,500 --> 00:04:56,500
+Appo ivide paranja moonnu option-ukalum valare useful aayittullathanu athiloru samshayavum illa.
+
+62
+00:04:56,500 --> 00:05:02,500
+Appo enthayalum njan itharam nirantharam itharathilulla videokal nammude channel-iloode upload cheyyunnathaayirikkum.
+
+63
+00:05:02,500 --> 00:05:06,800
+Athukondu madikkkathe channel subscribe cheythu support cheyyuka.
+
+64
+00:05:06,800 --> 00:05:12,200
+Video ishttappettu kazhinjal like-um comment-um share-um anganeyulla yaathonnum cheyyan madikkeruthe.
+
+65
+00:05:12,200 --> 00:05:17,200
+Athokkeyaanu enikku veendum videokal cheyyan vendi labhikkunna prajodhanam.
+
+66
+00:05:17,200 --> 00:05:21,500
+Appo enthayalum puthiya oru topic-umayittu namukku veendum kandumuuttaam.
+
+67
+00:05:21,500 --> 00:05:27,500
+Athuvarekkum channel subscribe cheythu kaathirikkuka. Nanni, Namaskaram.
