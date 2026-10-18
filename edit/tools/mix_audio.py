@@ -1,12 +1,12 @@
-"""Final audio: the ORIGINAL voice track (bit-exact decode, unity gain, never attenuated) + synthesised music + SFX.
+"""Final audio: the voice track from the main video (made louder by voice_loudness.py, never quieter) + synthesised music + SFX.
 
 * music sits ~17 dB under the speech and swells a few dB in the pauses (speech-activity from the aligned words)
 * SFX are mixed above the music, below the voice
 * where voice+music would clip, the MUSIC/SFX dip for a few ms - the voice itself is never turned down
-  (a final 0.995 guard only touches samples that are already at full scale in the original recording)
+  (the master ceiling is -1 dBFS so AAC encoding cannot clip)
 * the screen-recording audio is never used anywhere in this pipeline
 
-usage: mix_audio.py <voice.wav> <music_bed.wav> <sfx.wav> <words.json> <out.wav>
+usage: mix_audio.py <voice_loud.wav> <music_bed.wav> <sfx.wav> <words.json> <out.wav>
 """
 import json
 import sys
@@ -52,7 +52,7 @@ def lookahead_limiter(x, ceiling=0.97, hold=0.005, smooth=0.004):
     return (1.0 - np.maximum(rs, 0)).astype(np.float32)
 
 
-def duck_others(voice, others, ceiling=0.995, hold=0.006, smooth=0.005):
+def duck_others(voice, others, ceiling=0.891, hold=0.006, smooth=0.005):
     """per-sample scale (0..1) for music+sfx so that voice+others never exceeds `ceiling`; the voice is untouched"""
     s = np.ones(voice.shape, np.float32)
     mag_o = np.abs(others)
@@ -96,7 +96,7 @@ def main(voice_p, music_p, sfx_p, words_p, out_p):
     others = music * gain_m[:, None] + sfx * sfx_gain
     dk = duck_others(voice, others)
     mix = voice + others * dk[:, None]
-    gr = lookahead_limiter(mix, ceiling=0.995)       # only samples already at full scale in the recording
+    gr = lookahead_limiter(mix, ceiling=0.891)       # -1 dBFS master ceiling
     out = mix * gr[:, None]
     red_db = -20 * np.log10(np.maximum(gr, 1e-6))
     dk_db = -20 * np.log10(np.maximum(dk, 1e-6))
