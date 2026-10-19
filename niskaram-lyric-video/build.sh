@@ -8,6 +8,7 @@ steps=("${@:-all}")
 has() { for s in "${steps[@]}"; do [[ "$s" == all || "$s" == "$1" ]] && return 0; done; return 1; }
 
 python3 -I tools/prep.py                    # SRT -> timeline.json (lyrics are offset by project.json:song_offset)
+python3 -I tools/analyze_song.py            # musical onsets: cuts snap to strong accents
 has footage  && python3 -I tools/fetch_footage.py
 has shots    && { python3 -I tools/make_lut.py; python3 -I tools/make_shots.py --jobs "${JOBS:-4}"; }
 has overlays && node tools/render_overlays.mjs "$WORK" "${JOBS:-3}"

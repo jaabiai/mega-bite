@@ -10,7 +10,11 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | Song | `inputs/song.mp3`, starts at 23 s so its first beat lands exactly as the adhan fades (24.0 s) |
 | Lyrics | Left lower-third, Anek Malayalam ExtraBold; Arabic lines switch automatically to Naskh |
 | Logo | Miraya Studio badge as a quiet corner bug for the whole film, large on the end card |
-| Length | 5 min 31 s |
+| Length | 5 min 31 s (master ≈ 435 MB, ~10 Mbit/s; kept out of git — see `.gitignore`) |
+
+![title](docs/preview_title.jpg)
+![lyrics](docs/preview_lyrics.jpg)
+![end card](docs/preview_endcard.jpg)
 
 ## Timeline
 
@@ -43,7 +47,7 @@ Lines that are mainly Arabic script are set in Arabic (right-to-left, Noto Naskh
 ## Re-render
 
 ```bash
-./build.sh all                 # footage → shots → overlays → audio → base → final   (~45 min on 4 cores)
+./build.sh all                 # footage → shots → overlays → audio → base → final   (~50 min on 4 cores)
 ./build.sh overlays final      # new lyrics / credits only (~10 min)
 WORK=/scratch ./build.sh shots # keep the ~3 GB of intermediates somewhere else
 ```
@@ -58,8 +62,12 @@ Requirements: ffmpeg ≥ 6 (libx264, libass not needed), Node 18+ with Playwrigh
 | `tools/*.py` / `tools/render_overlays.mjs` | footage download, shot building, LUT, audio mix, compositing |
 | `fonts/` | Anek Malayalam, Noto Naskh Arabic, Aref Ruqaa, Cinzel, Cormorant Garamond (SIL OFL) |
 
+## Swapping footage
+
+Each shot in `edl.json` is `{id, in, t, tr, trd, z0, z1, cy, ...}`. To use your own clip put it at `$WORK/src/<id>.mp4` (any resolution/fps; it is cropped to 2.39:1 automatically) and give the shot that `id`. `in` is the in-point in seconds, `cy` shifts the 2.39:1 crop vertically (0 = top … 1 = bottom), `z0 → z1` is the slow push/pull. Then `./build.sh shots base final`.
+
 ## Notes
 
 * Title spelling: the brief wrote `حي عل الصلاة`; the title uses the standard `حَيَّ عَلَى الصَّلَاةِ`.
-* Footage licence: Mixkit clips are free for commercial and non-commercial use under the Mixkit Stock Video Free License, no attribution required. The end card still credits Mixkit. Please re-check the licence label on the Mixkit page of each clip before monetising.
+* **Footage licence – please read before uploading.** All footage is from Mixkit. Only **11 of the 52 clips** (the stars/moon/dusk time-lapses, three mosque exteriors and the texture overlays) are under the *Mixkit Stock Video Free License* (free for commercial use). The other **41 clips – including the drone mosque shots, the Quran and the prayer footage – are under the *Mixkit Restricted License*: the clip page offers them "for personal use only"**. If the channel is monetised you need either the Envato licence for those clips or replacement footage. Per-clip status and links: [`docs/FOOTAGE_CREDITS.md`](docs/FOOTAGE_CREDITS.md). Swapping is a one-line change per shot (below).
 * The song audio is untouched except for gain-neutral summing with the adhan and a −0.3 dB safety limiter; programme loudness is about −13.8 LUFS.
