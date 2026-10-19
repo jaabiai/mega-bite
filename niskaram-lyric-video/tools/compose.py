@@ -43,6 +43,34 @@ def build_audio(tl, pitch_cents=None, out_name='audio.wav'):
     run(['ffmpeg', '-v', 'error', '-y', '-i', ROOT / 'inputs' / 'adhan_intro.m4a', '-i', ROOT / 'inputs' / 'song.mp3',
          '-filter_complex', fg, '-map', '[out]', '-t', f'{total:.3f}', '-c:a', 'pcm_s16le', WORK / out_name])
 
+# ---------------------------------------------------------------- loudness master
+def measure_lufs(wav, af=''):
+    """Integrated loudness (LUFS) and true peak (dBTP) of `wav` after the filter chain `af` (EBU R128 via ffmpeg)."""
+    chain = (af + ',' if af else '') + 'ebur128=peak=true:framelog=quiet'
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', str(wav), '-af', chain, '-f', 'null', '-'], capture_output=True, text=True)
+    txt = r.stderr[r.stderr.rindex('Summary:'):]
+    import re
+    return float(re.search(r'I:\s+(-?[\d.]+) LUFS', txt).group(1)), float(re.search(r'Peak:\s+(-?[\d.]+) dBFS', txt).group(1))
+
+def master_audio(src, dst, tl):
+    """Make the mix louder than the supplied song: gentle compression, make-up gain found by iteration so that the
+    integrated loudness hits `target_lufs`, then a look-ahead limiter at `ceiling_db` (headroom for the AAC encode)."""
+    m = tl.get('master')
+    if not m:
+        return src
+    ceil = 10 ** (m['ceiling_db'] / 20)
+    def chain(g):
+        return (f"highpass=f=22,acompressor=threshold={10 ** (m['comp_threshold_db'] / 20):.4f}:ratio={m['comp_ratio']}:attack=18:release=220:knee=3:makeup=1,"
+                f"volume={g:.2f}dB,alimiter=limit={ceil:.4f}:attack=4:release=70:level=0")
+    g = 4.0
+    for _ in range(6):
+        lufs, tp = measure_lufs(src, chain(g))
+        print(f'  master: gain {g:+.2f} dB -> {lufs:.2f} LUFS, true peak {tp:.2f} dBTP', flush=True)
+        if abs(lufs - m['target_lufs']) < 0.1: break
+        g += m['target_lufs'] - lufs
+    run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', chain(g), '-c:a', 'pcm_s16le', dst])
+    return dst
+
 # ---------------------------------------------------------------- base picture
 def build_base(tl, edl):
     spans = shot_spans(edl['shots'], tl['total_duration'])
@@ -146,7 +174,7 @@ def build_final(tl, out_name):
          '-i', base,
          '-f', 'concat', '-safe', '0', '-i', lst,
          '-framerate', FPS, '-loop', '1', '-t', f'{total:.3f}', '-i', bug,
-         '-i', WORK / 'audio.wav',
+         '-i', (WORK / 'audio_master.wav') if (WORK / 'audio_master.wav').exists() else (WORK / 'audio.wav'),
          '-filter_complex', fg, '-map', '[vout]', '-map', '3:a', '-t', f'{length:.3f}',
          '-c:v', 'libx264', '-preset', 'slow', '-crf', os.environ.get('CRF', '18'), '-profile:v', 'high', '-pix_fmt', 'yuv420p',
          '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709',
@@ -158,7 +186,15 @@ def main():
     tl, edl = load_timeline(), load_edl()
     if what in ('audio', 'all'):
         build_audio(tl)
-        if os.environ.get('ALT_AUDIO'): build_audio(tl, pitch_cents=0, out_name='audio_original_pitch.wav')
+        master_audio(WORK / 'audio.wav', WORK / 'audio_master.wav', tl)
+        if os.environ.get('ALT_AUDIO'):
+            build_audio(tl, pitch_cents=0, out_name='audio_original_pitch.wav')
+            master_audio(WORK / 'audio_original_pitch.wav', WORK / 'audio_original_pitch_master.wav', tl)
+    if what == 'remux':      # remux IN.mp4 OUT.mp4 [audio.wav]  -> same picture, different audio, no re-encode of the video
+        src, out = sys.argv[2], sys.argv[3]
+        wav = sys.argv[4] if len(sys.argv) > 4 else str(WORK / 'audio_master.wav')
+        run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-i', wav, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k',
+             '-ar', '48000', '-movflags', '+faststart', '-t', f"{tl['total_duration']:.3f}", out])
     if what in ('base', 'all'): build_base(tl, edl)
     if what in ('final', 'all'): build_final(tl, os.environ.get('OUT_NAME', 'niskaram_haya_alas_salah_lyric_video_2.39x1.mp4'))
 

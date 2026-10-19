@@ -28,6 +28,10 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | 0:23.6 – 5:10 | 54 lyric lines (first line sung at song time 14.4 s). |
 | 4:59 – 5:17 | End credits, then the full logo card ("Thank you for watching"). |
 
+## Loudness
+
+The supplied song is −14.1 LUFS (peak −2.5 dBFS); the first cuts of the film kept that level. The delivered audio is mastered **−9.1 LUFS integrated, −1.3 dBTP after the AAC encode** (about +5 dB louder than the original): `project.json → master` (gentle 2.4:1 compressor, make-up gain found by iteration so the integrated loudness hits `target_lufs`, look-ahead limiter at `ceiling_db`). Loudness range drops from 5.2 to 2.2 LU. Set `master` to `null` to get the unmastered mix back. Re-master an existing video without re-encoding it: `python3 tools/compose.py remux IN.mp4 OUT.mp4`.
+
 ## Adhan decision (analysis)
 
 You asked me to analyse whether the adhan belongs in front of the humming. Measured on the supplied files (`tools` + the numbers below, pitch-class histograms of voice and music):
