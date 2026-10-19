@@ -21,27 +21,45 @@ FPS = 30
 CHAPTERS = ["", "MISS CALL REMINDER", "VOICE ISOLATION", "HOLD ASSIST", ""]
 FEATURES = [("01", "MISS CALL REMINDER"), ("02", "VOICE ISOLATION"), ("03", "HOLD ASSIST")]
 
-EXCERPTS = [
-    dict(id="hook",  cues=[1],             chapter=0),
-    dict(id="f1",    cues=[15, 16, 17, 18], chapter=1),
-    dict(id="f2a",   cues=[31, 32],        chapter=2),
-    dict(id="f2b",   cues=[42],            chapter=2),
-    dict(id="f3a",   cues=[46],            chapter=3),
-    dict(id="f3b",   cues=[59],            chapter=3),
-    dict(id="recap", cues=[61],            chapter=4),
-    dict(id="cta",   cues=[63],            chapter=4),
-]
+EXCERPT_SETS = {
+    # v2: every feature as a short demo walk-through
+    "reel2": [
+        dict(id="hook",  cues=[1],             chapter=0),
+        dict(id="f1",    cues=[15, 16, 17, 18], chapter=1),
+        dict(id="f2a",   cues=[31, 32],        chapter=2),
+        dict(id="f2b",   cues=[42],            chapter=2),
+        dict(id="f3a",   cues=[46],            chapter=3),
+        dict(id="f3b",   cues=[59],            chapter=3),
+        dict(id="recap", cues=[61],            chapter=4),
+        dict(id="cta",   cues=[63],            chapter=4),
+    ],
+    # v3: the lines where he announces each feature ("first ...", "next ...", "third ...") + one result line, no demo
+    "reel3": [
+        dict(id="hook",  cues=[1],             chapter=0),
+        dict(id="f1a",   cues=[11, 12],        chapter=1),
+        dict(id="f1b",   cues=[24],            chapter=1),
+        dict(id="f2a",   cues=[30, 31],        chapter=2),
+        dict(id="f2b",   cues=[34],            chapter=2),
+        dict(id="f2c",   cues=[42],            chapter=2),
+        dict(id="f3a",   cues=[45, 46],        chapter=3),
+        dict(id="f3b",   cues=[59],            chapter=3),
+        dict(id="recap", cues=[61],            chapter=4),
+        dict(id="cta",   cues=[63],            chapter=4),
+    ],
+}
+TAG = os.environ.get("REEL_TAG", "reel2")      # which reel the tools work on: data/<TAG>_*.json, scratch/<TAG>/...
+EXCERPTS = EXCERPT_SETS[TAG]
 
 # gap (seconds) between the last word of one excerpt and the first word of the next
 GAP_CHAPTER = 0.46
 GAP_SAME = 0.34
 TAIL = 1.25          # end-card tail after the last word
 XF = 9               # frames of the push-in dissolve
-LAYOUT_FILE = f"{HERE}/data/reel2_layout.json"
+LAYOUT_FILE = f"{HERE}/data/{TAG}_layout.json"
 
 
 def load_cuts():
-    return json.load(open(f"{HERE}/data/reel2_cuts.json"))
+    return json.load(open(f"{HERE}/data/{TAG}_cuts.json"))
 
 
 def build_layout():

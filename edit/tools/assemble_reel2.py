@@ -21,11 +21,11 @@ import reel2_plan as P  # noqa: E402
 
 def main(scratch, out, proxy=False):
     W, H = (360, 640) if proxy else (1080, 1920)
-    shots = json.load(open(f"{EDIT}/data/reel2_shots.json"))
+    shots = json.load(open(f"{EDIT}/data/{P.TAG}_shots.json"))
     L = P.load_layout()
     n_frames = L["n_frames"]
-    inputs = [f"{scratch}/reel2/shots/{s['id']}.mp4" for s in shots]
-    scrim = f"{scratch}/reel2/scrim.png"
+    inputs = [f"{scratch}/{P.TAG}/shots/{s['id']}.mp4" for s in shots]
+    scrim = f"{scratch}/{P.TAG}/scrim.png"
     make_scrim(scrim)
     scrim_i = len(inputs)
     ov_i = scrim_i + 1
@@ -56,8 +56,8 @@ def main(scratch, out, proxy=False):
     for p in inputs:
         cmd += ["-i", p]
     cmd += ["-loop", "1", "-framerate", "30", "-i", scrim]
-    cmd += ["-framerate", "30", "-start_number", "0", "-i", f"{scratch}/reel2/ov/%06d.png"]
-    cmd += ["-i", f"{scratch}/reel2/audio_final/reel2_audio.wav"]
+    cmd += ["-framerate", "30", "-start_number", "0", "-i", f"{scratch}/{P.TAG}/ov/%06d.png"]
+    cmd += ["-i", f"{scratch}/{P.TAG}/audio_final/reel2_audio.wav"]
     cmd += ["-filter_complex", ";".join(f), "-map", "[vout]", "-map", f"{au_i}:a", "-t", f"{n_frames / 30:.4f}"]
     if proxy:
         cmd += ["-c:v", "libx264", "-preset", "ultrafast", "-crf", "30", "-c:a", "aac", "-b:a", "128k"]

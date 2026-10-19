@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 import reel_common as rc  # noqa: E402
 
 FPS = 30
+TAG = os.environ.get("REEL_TAG", "reel2")
 W, H = 1080, 1920
 GRADE = ("eq=contrast=1.07:saturation=1.06:gamma=0.98,"
          "curves=master='0/0 0.18/0.155 0.5/0.51 0.84/0.86 1/0.97',"
@@ -156,11 +157,11 @@ RENDER = {"spk": render_footage, "orig": render_footage, "broll": render_broll, 
 
 def main(scratch, shots_json, *ids):
     shots = json.load(open(shots_json))
-    os.makedirs(f"{scratch}/reel2/shots", exist_ok=True)
+    os.makedirs(f"{scratch}/{TAG}/shots", exist_ok=True)
     for s in shots:
         if ids and s["id"] not in ids:
             continue
-        out = f"{scratch}/reel2/shots/{s['id']}.mp4"
+        out = f"{scratch}/{TAG}/shots/{s['id']}.mp4"
         RENDER[s["kind"]](s, scratch, out)
         print("done", s["id"], total_frames(s), "frames", flush=True)
 

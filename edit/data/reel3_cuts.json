@@ -1,0 +1,82 @@
+{
+ "hook": {
+  "s0": 3840,
+  "s1": 208224,
+  "min_db_start": -61.6,
+  "min_db_end": -70.5,
+  "first_word": 0.24,
+  "last_word_end": 4.38
+ },
+ "f1a": {
+  "s0": 1589088,
+  "s1": 2006111,
+  "min_db_start": -66.7,
+  "min_db_end": -75.6,
+  "first_word": 33.22,
+  "last_word_end": 41.68
+ },
+ "f1b": {
+  "s0": 4296384,
+  "s1": 4475040,
+  "min_db_start": -76.3,
+  "min_db_end": -57.4,
+  "first_word": 89.54,
+  "last_word_end": 93.18
+ },
+ "f2a": {
+  "s0": 5400384,
+  "s1": 5742432,
+  "min_db_start": -84.7,
+  "min_db_end": -51.7,
+  "first_word": 112.7,
+  "last_word_end": 119.56
+ },
+ "f2b": {
+  "s0": 6200543,
+  "s1": 6317472,
+  "min_db_start": -59.6,
+  "min_db_end": -32.4,
+  "first_word": 129.22,
+  "last_word_end": 131.52
+ },
+ "f2c": {
+  "s0": 7614432,
+  "s1": 7949856,
+  "min_db_start": -51.1,
+  "min_db_end": -62.0,
+  "first_word": 158.6,
+  "last_word_end": 165.58
+ },
+ "f3a": {
+  "s0": 8185824,
+  "s1": 8688672,
+  "min_db_start": -49.1,
+  "min_db_end": -64.9,
+  "first_word": 170.76,
+  "last_word_end": 180.94
+ },
+ "f3b": {
+  "s0": 10989120,
+  "s1": 11258784,
+  "min_db_start": -79.4,
+  "min_db_end": -83.6,
+  "first_word": 229.18,
+  "last_word_end": 234.46
+ },
+ "recap": {
+  "s0": 11372832,
+  "s1": 11573472,
+  "min_db_start": -62.5,
+  "min_db_end": -71.6,
+  "first_word": 237.0,
+  "last_word_end": 241.0
+ },
+ "cta": {
+  "s0": 11777664,
+  "s1": 11915424,
+  "min_db_start": -64.8,
+  "min_db_end": -74.4,
+  "first_word": 245.46,
+  "last_word_end": 248.08
+ }
+}

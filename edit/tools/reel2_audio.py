@@ -69,14 +69,14 @@ def main(scratch, out):
         v[e["A"]:e["A"] + len(seg)] += seg
     m0 = int(MUSIC_START * SR)
     m = fade(music[m0:m0 + n], n_in=int(0.10 * SR), n_out=int(2.2 * SR), power=1.5)
-    sfx = build_sfx(n, json.load(open(f"{EDIT}/data/reel2_sfx.json")))
+    sfx = build_sfx(n, json.load(open(f"{EDIT}/data/{P.TAG}_sfx.json")))
     sfx = sfx / max(np.abs(sfx).max(), 1e-9) * 0.89
-    d = f"{scratch}/reel2/audio"
+    d = f"{scratch}/{P.TAG}/audio"
     os.makedirs(d, exist_ok=True)
     sf.write(f"{d}/voice.wav", v, SR, subtype="FLOAT")
     sf.write(f"{d}/music.wav", m, SR, subtype="FLOAT")
     sf.write(f"{d}/sfx.wav", sfx, SR, subtype="FLOAT")
-    mix_audio.main(f"{d}/voice.wav", f"{d}/music.wav", f"{d}/sfx.wav", f"{EDIT}/data/reel2_words.json", out,
+    mix_audio.main(f"{d}/voice.wav", f"{d}/music.wav", f"{d}/sfx.wav", f"{EDIT}/data/{P.TAG}_words.json", out,
                    boost_t=2.4)
 
 

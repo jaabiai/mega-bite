@@ -20,3 +20,15 @@ music_synth.py ─► music_bed.wav + sfx.wav ─► mix_audio.py (voice untouch
 
 Audio rule: the voice from `Main Video .mp4` is mixed at unity gain; music/SFX are added below it and duck for a few ms
 when voice+music would clip. Screen-recording audio is never used.
+
+## Reels (9:16)
+The reel tools pick their excerpt set with `REEL_TAG` (`reel2` = demo walk-through, `reel3` = "first / next / third" announcement cut):
+
+```
+export REEL_TAG=reel3
+python tools/reel2_cuts.py <main_orig.wav> <matte_full.mkv> data/reel3_cuts.json <headx.npy>   # cut points on the quietest dips
+python reel2_plan.py && python reel3_build.py                                                  # layout -> shots / overlay events / sfx
+REEL_OVERLAY=overlay_reel2 REEL_TIMELINE=reel3_timeline.json python tools/render_overlay_reel.py render 0 1792 <scratch>/reel3/ov
+python tools/reel2_shots.py <scratch> data/reel3_shots.json ; python tools/reel2_audio.py <scratch> <scratch>/reel3/audio_final/reel2_audio.wav
+python tools/assemble_reel2.py <scratch> MegaByte_Reel_Announce3.mp4
+```

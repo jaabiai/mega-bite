@@ -1,0 +1,685 @@
+{
+ "duration": 59.733333333333334,
+ "words": [
+  {
+   "text": "iPhone",
+   "start": 0.173,
+   "end": 0.393
+  },
+  {
+   "text": "upayogikkunnavarkku",
+   "start": 0.393,
+   "end": 0.993
+  },
+  {
+   "text": "moonnu",
+   "start": 1.273,
+   "end": 1.613
+  },
+  {
+   "text": "kidilan",
+   "start": 1.673,
+   "end": 1.993
+  },
+  {
+   "text": "feature-ukalaanu",
+   "start": 2.053,
+   "end": 2.653
+  },
+  {
+   "text": "innathe",
+   "start": 2.673,
+   "end": 2.873
+  },
+  {
+   "text": "videoyiloode",
+   "start": 2.873,
+   "end": 3.293
+  },
+  {
+   "text": "parichayappaduthunnathu.",
+   "start": 3.433,
+   "end": 4.313
+  },
+  {
+   "text": "Ettavum",
+   "start": 4.787,
+   "end": 5.087
+  },
+  {
+   "text": "aadyamayi",
+   "start": 5.107,
+   "end": 5.527
+  },
+  {
+   "text": "valare",
+   "start": 5.547,
+   "end": 5.767
+  },
+  {
+   "text": "useful",
+   "start": 5.847,
+   "end": 6.207
+  },
+  {
+   "text": "aayittulla",
+   "start": 6.247,
+   "end": 6.547
+  },
+  {
+   "text": "oru",
+   "start": 6.547,
+   "end": 6.627
+  },
+  {
+   "text": "feature",
+   "start": 6.627,
+   "end": 6.907
+  },
+  {
+   "text": "aanu.",
+   "start": 6.927,
+   "end": 7.067
+  },
+  {
+   "text": "Athava",
+   "start": 7.107,
+   "end": 7.307
+  },
+  {
+   "text": "ningalkku",
+   "start": 7.367,
+   "end": 7.687
+  },
+  {
+   "text": "aarengilum",
+   "start": 7.687,
+   "end": 8.087
+  },
+  {
+   "text": "miss",
+   "start": 8.447,
+   "end": 8.587
+  },
+  {
+   "text": "call",
+   "start": 8.647,
+   "end": 8.827
+  },
+  {
+   "text": "nalki",
+   "start": 8.847,
+   "end": 9.067
+  },
+  {
+   "text": "athallengil",
+   "start": 9.107,
+   "end": 9.567
+  },
+  {
+   "text": "pinneedu",
+   "start": 9.767,
+   "end": 10.047
+  },
+  {
+   "text": "eppozhengilum",
+   "start": 10.047,
+   "end": 10.527
+  },
+  {
+   "text": "call",
+   "start": 10.587,
+   "end": 10.827
+  },
+  {
+   "text": "back",
+   "start": 10.887,
+   "end": 11.067
+  },
+  {
+   "text": "cheyyanam",
+   "start": 11.127,
+   "end": 11.487
+  },
+  {
+   "text": "ennulla",
+   "start": 11.547,
+   "end": 11.847
+  },
+  {
+   "text": "oru",
+   "start": 11.847,
+   "end": 11.947
+  },
+  {
+   "text": "aavashyam",
+   "start": 12.267,
+   "end": 12.627
+  },
+  {
+   "text": "ningalkku",
+   "start": 12.647,
+   "end": 13.007
+  },
+  {
+   "text": "vannu.",
+   "start": 13.027,
+   "end": 13.247
+  },
+  {
+   "text": "Pinneedu",
+   "start": 13.607,
+   "end": 13.907
+  },
+  {
+   "text": "ningal",
+   "start": 13.907,
+   "end": 14.087
+  },
+  {
+   "text": "reminder",
+   "start": 14.247,
+   "end": 14.627
+  },
+  {
+   "text": "cheythathinu",
+   "start": 14.667,
+   "end": 15.107
+  },
+  {
+   "text": "aa",
+   "start": 15.347,
+   "end": 15.447
+  },
+  {
+   "text": "samayathu",
+   "start": 15.487,
+   "end": 15.827
+  },
+  {
+   "text": "ningalkku",
+   "start": 15.827,
+   "end": 16.167
+  },
+  {
+   "text": "notification",
+   "start": 16.287,
+   "end": 16.907
+  },
+  {
+   "text": "labhikkum.",
+   "start": 16.927,
+   "end": 17.247
+  },
+  {
+   "text": "Ini",
+   "start": 17.733,
+   "end": 17.853
+  },
+  {
+   "text": "aduthathum",
+   "start": 17.893,
+   "end": 18.233
+  },
+  {
+   "text": "valare",
+   "start": 18.473,
+   "end": 18.733
+  },
+  {
+   "text": "pradhanappetta",
+   "start": 18.793,
+   "end": 19.373
+  },
+  {
+   "text": "onnanu.",
+   "start": 19.393,
+   "end": 19.653
+  },
+  {
+   "text": "Athava",
+   "start": 20.013,
+   "end": 20.253
+  },
+  {
+   "text": "ningal",
+   "start": 20.273,
+   "end": 20.473
+  },
+  {
+   "text": "evideyengilum",
+   "start": 20.593,
+   "end": 21.133
+  },
+  {
+   "text": "eathengilum",
+   "start": 21.373,
+   "end": 21.773
+  },
+  {
+   "text": "oru",
+   "start": 21.813,
+   "end": 21.913
+  },
+  {
+   "text": "sthalathu",
+   "start": 21.953,
+   "end": 22.393
+  },
+  {
+   "text": "ningal",
+   "start": 22.553,
+   "end": 22.753
+  },
+  {
+   "text": "nilkkumbol",
+   "start": 22.833,
+   "end": 23.333
+  },
+  {
+   "text": "ningalkku",
+   "start": 23.333,
+   "end": 23.633
+  },
+  {
+   "text": "oru",
+   "start": 23.633,
+   "end": 23.713
+  },
+  {
+   "text": "call",
+   "start": 23.733,
+   "end": 23.953
+  },
+  {
+   "text": "varikayanenkil...",
+   "start": 23.993,
+   "end": 24.593
+  },
+  {
+   "text": "Athinum",
+   "start": 24.953,
+   "end": 25.293
+  },
+  {
+   "text": "ivide",
+   "start": 25.413,
+   "end": 25.613
+  },
+  {
+   "text": "oru",
+   "start": 25.673,
+   "end": 25.773
+  },
+  {
+   "text": "solution",
+   "start": 25.813,
+   "end": 26.193
+  },
+  {
+   "text": "undu.",
+   "start": 26.213,
+   "end": 26.533
+  },
+  {
+   "text": "Valare",
+   "start": 26.533,
+   "end": 26.773
+  },
+  {
+   "text": "simple",
+   "start": 26.813,
+   "end": 27.073
+  },
+  {
+   "text": "aanu.",
+   "start": 27.073,
+   "end": 27.253
+  },
+  {
+   "text": "Aa",
+   "start": 27.6,
+   "end": 27.76
+  },
+  {
+   "text": "oru",
+   "start": 27.96,
+   "end": 28.1
+  },
+  {
+   "text": "surrounding-ilulla",
+   "start": 28.26,
+   "end": 29.04
+  },
+  {
+   "text": "shabdam",
+   "start": 29.04,
+   "end": 29.34
+  },
+  {
+   "text": "poorrnnamayi",
+   "start": 29.44,
+   "end": 30.04
+  },
+  {
+   "text": "isolate",
+   "start": 30.22,
+   "end": 30.46
+  },
+  {
+   "text": "cheythu",
+   "start": 30.62,
+   "end": 30.88
+  },
+  {
+   "text": "ningal",
+   "start": 31.22,
+   "end": 31.54
+  },
+  {
+   "text": "parayunna",
+   "start": 31.62,
+   "end": 31.96
+  },
+  {
+   "text": "shabdam",
+   "start": 32.0,
+   "end": 32.34
+  },
+  {
+   "text": "mathram",
+   "start": 32.4,
+   "end": 32.8
+  },
+  {
+   "text": "call",
+   "start": 32.92,
+   "end": 33.1
+  },
+  {
+   "text": "receive",
+   "start": 33.18,
+   "end": 33.46
+  },
+  {
+   "text": "cheyyunna",
+   "start": 33.5,
+   "end": 33.78
+  },
+  {
+   "text": "aalukalkku",
+   "start": 33.8,
+   "end": 34.18
+  },
+  {
+   "text": "kelkkum.",
+   "start": 34.22,
+   "end": 34.58
+  },
+  {
+   "text": "Moonnamathathu",
+   "start": 35.06,
+   "end": 35.52
+  },
+  {
+   "text": "mattoru",
+   "start": 35.8,
+   "end": 36.12
+  },
+  {
+   "text": "kidilan",
+   "start": 36.12,
+   "end": 36.46
+  },
+  {
+   "text": "option",
+   "start": 36.48,
+   "end": 36.72
+  },
+  {
+   "text": "aanu.",
+   "start": 36.74,
+   "end": 36.9
+  },
+  {
+   "text": "Athava",
+   "start": 37.32,
+   "end": 37.5
+  },
+  {
+   "text": "ningalude",
+   "start": 37.68,
+   "end": 38.0
+  },
+  {
+   "text": "iPhone-ilekku",
+   "start": 38.04,
+   "end": 38.64
+  },
+  {
+   "text": "aarengilum",
+   "start": 38.92,
+   "end": 39.36
+  },
+  {
+   "text": "call",
+   "start": 39.42,
+   "end": 39.62
+  },
+  {
+   "text": "cheythu",
+   "start": 39.7,
+   "end": 39.92
+  },
+  {
+   "text": "hold",
+   "start": 40.02,
+   "end": 40.34
+  },
+  {
+   "text": "cheythu",
+   "start": 40.4,
+   "end": 40.62
+  },
+  {
+   "text": "vechirikkukayaanu",
+   "start": 40.62,
+   "end": 41.24
+  },
+  {
+   "text": "engil",
+   "start": 41.3,
+   "end": 41.54
+  },
+  {
+   "text": "aa",
+   "start": 41.56,
+   "end": 41.82
+  },
+  {
+   "text": "hold-ine",
+   "start": 41.94,
+   "end": 42.38
+  },
+  {
+   "text": "ningal",
+   "start": 42.4,
+   "end": 42.64
+  },
+  {
+   "text": "avar",
+   "start": 42.66,
+   "end": 42.96
+  },
+  {
+   "text": "unhold",
+   "start": 42.98,
+   "end": 43.5
+  },
+  {
+   "text": "cheyyunnathu",
+   "start": 43.58,
+   "end": 43.96
+  },
+  {
+   "text": "vare",
+   "start": 43.98,
+   "end": 44.16
+  },
+  {
+   "text": "kaathirikkendathilla.",
+   "start": 44.4,
+   "end": 45.24
+  },
+  {
+   "text": "Hold",
+   "start": 45.58,
+   "end": 45.78
+  },
+  {
+   "text": "ozhivakkiyappol",
+   "start": 45.82,
+   "end": 46.46
+  },
+  {
+   "text": "namukku",
+   "start": 46.54,
+   "end": 46.8
+  },
+  {
+   "text": "ring",
+   "start": 46.84,
+   "end": 47.0
+  },
+  {
+   "text": "cheyyukayum",
+   "start": 47.08,
+   "end": 47.46
+  },
+  {
+   "text": "pinneedu",
+   "start": 47.68,
+   "end": 47.98
+  },
+  {
+   "text": "namukku",
+   "start": 48.0,
+   "end": 48.28
+  },
+  {
+   "text": "accept",
+   "start": 48.52,
+   "end": 48.76
+  },
+  {
+   "text": "cheythu",
+   "start": 48.88,
+   "end": 49.12
+  },
+  {
+   "text": "pinneedu",
+   "start": 49.3,
+   "end": 49.7
+  },
+  {
+   "text": "samsaarikkayum",
+   "start": 49.9,
+   "end": 50.54
+  },
+  {
+   "text": "cheyyam.",
+   "start": 50.6,
+   "end": 50.86
+  },
+  {
+   "text": "Appo",
+   "start": 51.333,
+   "end": 51.473
+  },
+  {
+   "text": "ivide",
+   "start": 51.493,
+   "end": 51.673
+  },
+  {
+   "text": "paranja",
+   "start": 51.713,
+   "end": 51.973
+  },
+  {
+   "text": "moonnu",
+   "start": 52.153,
+   "end": 52.593
+  },
+  {
+   "text": "option-ukalum",
+   "start": 52.673,
+   "end": 53.173
+  },
+  {
+   "text": "valare",
+   "start": 53.233,
+   "end": 53.533
+  },
+  {
+   "text": "useful",
+   "start": 53.633,
+   "end": 53.933
+  },
+  {
+   "text": "aayittullathanu",
+   "start": 53.953,
+   "end": 54.513
+  },
+  {
+   "text": "athiloru",
+   "start": 54.573,
+   "end": 54.773
+  },
+  {
+   "text": "samshayavum",
+   "start": 54.813,
+   "end": 55.173
+  },
+  {
+   "text": "illa.",
+   "start": 55.193,
+   "end": 55.333
+  },
+  {
+   "text": "Athukondu",
+   "start": 55.693,
+   "end": 56.053
+  },
+  {
+   "text": "madikkkathe",
+   "start": 56.153,
+   "end": 56.553
+  },
+  {
+   "text": "channel",
+   "start": 56.593,
+   "end": 56.833
+  },
+  {
+   "text": "subscribe",
+   "start": 56.853,
+   "end": 57.233
+  },
+  {
+   "text": "cheythu",
+   "start": 57.233,
+   "end": 57.473
+  },
+  {
+   "text": "support",
+   "start": 57.693,
+   "end": 58.073
+  },
+  {
+   "text": "cheyyuka.",
+   "start": 58.093,
+   "end": 58.313
+  }
+ ]
+}
