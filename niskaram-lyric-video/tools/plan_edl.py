@@ -90,13 +90,14 @@ def main():
         dict(id=4124, t=0.0, tr='none', trd=0.0, z0=1.0, z1=1.10, note='intro: stars, the call of the adhan', **{'in': 0.0}),
         dict(id=4312, t=4.9, tr='fade', trd=1.2, z0=1.0, z1=1.10, note='intro: mosque at night', **{'in': 0.0}),
         dict(id=4166, t=round(T['start'], 2), tr='fadewhite', trd=1.1, z0=1.04, z1=1.0, note='title card: moon over the sea', **{'in': 2.0}),
+        dict(id=9736, t=round(T['end'], 2), tr='fade', trd=1.4, z0=1.0, z1=1.06, note='humming: sun rising above the clouds', **{'in': 2.0}),
     ]
     for i, c in enumerate(cues, start=1):
         cid, a, note = LINES[i - 1 + 1] if False else LINES[i]
         shots.append(dict(id=cid, t=round(c['start'], 3), tr=SECTION_STARTS.get(i, 'fade'), trd=1.3 if i in SECTION_STARTS else 1.0,
                           z0=1.0 if i % 2 else 1.06, z1=1.06 if i % 2 else 1.0, note=f'L{i}: {note}', **{'in': a}))
-    # first lyric shot follows the title card: a gentle dissolve
-    shots[3]['trd'] = 1.2
+    # first lyric shot follows the humming shot: a gentle dissolve
+    shots[4]['trd'] = 1.2
     # ending: fade the last picture to black under the end card
     shots[-1]['tr'] = 'fadeblack'; shots[-1]['trd'] = 1.6
     for s in shots:

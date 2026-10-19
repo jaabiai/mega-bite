@@ -18,26 +18,30 @@ def run(cmd, **kw):
     subprocess.run([str(c) for c in cmd], check=True, **kw)
 
 # ---------------------------------------------------------------- audio
-def build_audio(tl):
-    """Adhan (first call only) -> song without its humming intro.
+def build_audio(tl, pitch_cents=None, out_name='audio.wav'):
+    """Adhan (first call only, tuned to the song's key) -> the complete song.
 
-    * adhan: kept up to `adhan_keep`, eased out and given a short echo tail so it does not stop dead
-    * song : starts at `song_in` (just before the first verse), placed at `song_film_start`,
-             with a quick fade-in so it blooms out of the adhan's tail
+    * adhan : kept up to `adhan_keep`, shifted by `adhan_pitch_cents` (formants preserved) so its tonal centres sit on
+              the song's (analysis: unshifted fit to the song ~ 0, +2 semitones ~ 0.55), faded out over `adhan_fade`
+              with a short echo tail so it melts into the humming
+    * song  : the whole file from `song_in`, placed so that its humming enters under the adhan's last note
     """
     keep, s_in, s_at, total = tl['adhan_keep'], tl['song_in'], tl['song_film_start'], tl['total_duration']
-    fade = 0.55
+    cents = tl.get('adhan_pitch_cents', 0) if pitch_cents is None else pitch_cents
+    fade = tl.get('adhan_fade', 1.0)
+    ratio = 2 ** (cents / 1200.0)
+    shift = f"rubberband=pitch={ratio:.5f}:formant=preserved:pitchq=quality,volume=1.3," if abs(cents) > 1 else ''   # +2.3 dB: the shifter loses that much level
     fg = (
-        f"[0:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{keep:.3f},asetpts=PTS-STARTPTS,"
+        f"[0:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{keep:.3f},asetpts=PTS-STARTPTS,{shift}"
         f"afade=t=out:st={keep - fade:.3f}:d={fade}:curve=qsin,apad=pad_dur=1.6,"
-        f"aecho=0.85:0.7:85|170|290:0.42|0.30|0.18,afade=t=out:st={keep + 0.2:.3f}:d=1.4[ad];"
+        f"aecho=0.85:0.7:85|170|290:0.30|0.20|0.12,afade=t=out:st={keep + 0.1:.3f}:d=1.3[ad];"
         f"[1:a]aresample=48000,aformat=channel_layouts=stereo,atrim=start={s_in:.3f},asetpts=PTS-STARTPTS,"
-        f"afade=t=in:d=0.28:curve=qsin,adelay={int(round(s_at * 1000))}|{int(round(s_at * 1000))}[sg];"
+        f"adelay={int(round(s_at * 1000))}|{int(round(s_at * 1000))}[sg];"
         f"[ad][sg]amix=inputs=2:normalize=0:duration=longest,apad=whole_dur={total},"
         f"afade=t=out:st={total - 2.6:.3f}:d=2.6,alimiter=limit=0.97[out]"
     )
     run(['ffmpeg', '-v', 'error', '-y', '-i', ROOT / 'inputs' / 'adhan_intro.m4a', '-i', ROOT / 'inputs' / 'song.mp3',
-         '-filter_complex', fg, '-map', '[out]', '-t', f'{total:.3f}', '-c:a', 'pcm_s16le', WORK / 'audio.wav'])
+         '-filter_complex', fg, '-map', '[out]', '-t', f'{total:.3f}', '-c:a', 'pcm_s16le', WORK / out_name])
 
 # ---------------------------------------------------------------- base picture
 def build_base(tl, edl):
@@ -152,7 +156,9 @@ def build_final(tl, out_name):
 def main():
     what = sys.argv[1] if len(sys.argv) > 1 else 'all'
     tl, edl = load_timeline(), load_edl()
-    if what in ('audio', 'all'): build_audio(tl)
+    if what in ('audio', 'all'):
+        build_audio(tl)
+        if os.environ.get('ALT_AUDIO'): build_audio(tl, pitch_cents=0, out_name='audio_original_pitch.wav')
     if what in ('base', 'all'): build_base(tl, edl)
     if what in ('final', 'all'): build_final(tl, os.environ.get('OUT_NAME', 'niskaram_haya_alas_salah_lyric_video_2.39x1.mp4'))
 

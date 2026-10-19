@@ -30,14 +30,35 @@ def parse_srt(text):
         cues.append({'start': start, 'end': end, 'text': ' '.join(l.strip() for l in lines[i + 1:])})
     return cues
 
+def build_cues(proj, off):
+    """Cue list in FILM time with per-word timing.  Word times come from inputs/words.json (tools/align_words.py);
+    a cue whose text changed since the alignment falls back to an even split of its SRT window."""
+    srt = parse_srt(open(ROOT / proj['lyrics_srt'], encoding='utf8').read())
+    wpath = ROOT / 'inputs' / 'words.json'
+    aligned = {w['cue']: w for w in json.load(open(wpath))} if wpath.exists() else {}
+    cues, fallback = [], []
+    for i, c in enumerate(srt, 1):
+        a = aligned.get(i)
+        if a and a['text'] == c['text'] and len(a['words']) == len(c['text'].split()):
+            words = [{'w': w['w'], 't0': round(w['t0'] + off, 3), 't1': round(w['t1'] + off, 3)} for w in a['words']]
+            start, end = a['start'] + off, a['end'] + off
+        else:
+            fallback.append(i)
+            ws = c['text'].split(); n = len(ws); d = c['end'] - c['start']
+            words = [{'w': w, 't0': round(c['start'] + off + d * k / n, 3), 't1': round(c['start'] + off + d * (k + 1) / n, 3)} for k, w in enumerate(ws)]
+            start, end = c['start'] + off, c['end'] + off
+        if end <= proj['song_in'] + off: continue
+        cues.append({'start': round(start, 3), 'end': round(end, 3), 'text': c['text'], 'words': words})
+    if fallback: print('! no word alignment for cue(s)', fallback, '- run tools/align_words.py (see README)')
+    return cues
+
 def main():
     proj = json.load(open(ROOT / 'project.json'))
     song_len = probe_duration(ROOT / 'inputs' / 'song.mp3')
-    # film time = song time + song_offset; everything before song_in (the humming intro) is cut out of the song
+    # film time = song time + song_offset
     off = proj['song_film_start'] - proj['song_in']
     proj['song_offset'] = round(off, 3)
-    cues = [{'start': round(c['start'] + off, 3), 'end': round(c['end'] + off, 3), 'text': c['text']}
-            for c in parse_srt(open(ROOT / proj['lyrics_srt'], encoding='utf8').read()) if c['end'] > proj['song_in']]
+    cues = build_cues(proj, off)
     proj['song_length'] = song_len
     proj['total_duration'] = round(proj['song_film_start'] + (song_len - proj['song_in']) + proj['end_extension'], 3)
     proj['cues'] = cues

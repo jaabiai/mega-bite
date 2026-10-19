@@ -6,12 +6,12 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | | |
 |---|---|
 | Frame | **2.39:1 widescreen, 1920 × 804**, 24 fps, H.264 + AAC 320 k |
-| Intro | **One** adhan call (*Hayya ʿala-ṣ-ṣalāh*, 11.6 s) – the second call and the humming at the start of the song are cut out |
-| Song | `inputs/song.mp3` from 0:13.0 (on a strong beat just before the first verse), blooming out of the adhan's echo at 11.3 s |
-| Lyrics | Left lower-third, Anek Malayalam ExtraBold, wrapping to 2–3 short lines; Arabic lines switch to Naskh automatically |
-| Visuals | One shot per lyric line, chosen for what the line says; every picture change lands on the lyric change |
+| Intro | One adhan call (*Hayya ʿala-ṣ-ṣalāh*, 11.6 s) **tuned +2.1 semitones to the song's key** (see *Adhan decision*), fading into the song's own humming |
+| Song | `inputs/song.mp3`, **complete and uncut from 0:00**, placed at 0:09.2 so the humming enters under the adhan's last note |
+| Lyrics | Left lower-third, wrapping to 2–3 lines. **Live word highlight**: the word being sung is sharp, bright and underlined, every other word of the line is soft-focus |
+| Visuals | One shot per lyric line, chosen for what the line says; the picture changes when the line is first sung |
 | Logo | Miraya Studio badge as a quiet corner bug for the whole film, large on the end card |
-| Length | 5 min 06 s |
+| Length | 5 min 17 s |
 
 ![title](docs/preview_title.jpg)
 ![lyrics](docs/preview_lyrics.jpg)
@@ -21,10 +21,23 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 
 | Time | What |
 |---|---|
-| 0:00 – 0:11 | Adhan (first call only). Opening credits, each 2.2 s and large: **Music** – Miraya Studio · **Editor** – Jabir Varikkodan · **Mixing & Visuals** – Miraya Studio · **Lyrics** – Jabir Varikkodan. |
-| 0:09 – 0:14 | The calligraphic Arabic title **حَيَّ عَلَى الصَّلَاةِ** (the word "Title" is not shown) builds over a moonlit sea while the song fades in under the adhan's echo. |
-| 0:13 – 5:00 | Song, 54 lyric lines. Film time = song time − 1.7 s (`project.json → song_in / song_film_start`). |
-| 4:52 – 5:06 | End credits, then the full logo card ("Thank you for watching"). |
+| 0:00 – 0:11 | Adhan (first call). Opening credits, 2.7 s each, letter-by-letter animation: **Music** – Miraya Studio · **Editor** – Jabir Varikkodan · **Mixing & Visuals** – Miraya Studio · **Lyrics** – Jabir Varikkodan. |
+| 0:10 | The song's humming enters under the adhan's last note (film time = song time + 9.2 s). |
+| 0:11 – 0:20 | The calligraphic Arabic title **حَيَّ عَلَى الصَّلَاةِ** (the word "Title" is not shown). |
+| 0:20 – 0:23 | Humming continues over a sunrise above the clouds. |
+| 0:23.6 – 5:10 | 54 lyric lines (first line sung at song time 14.4 s). |
+| 4:59 – 5:17 | End credits, then the full logo card ("Thank you for watching"). |
+
+## Adhan decision (analysis)
+
+You asked me to analyse whether the adhan belongs in front of the humming. Measured on the supplied files (`tools` + the numbers below, pitch-class histograms of voice and music):
+
+| | key centres found |
+|---|---|
+| adhan, first call | C♯ (+80 ¢), a quarter-tone E (+360 ¢), D♯, G♯; last held note ≈ A3 (217 Hz) |
+| song | F (tonic, +510 ¢), then C, D♯, G♯, A♯, F♯; the humming's long note is C4/B3 |
+
+Correlation of the adhan's pitch distribution with the song: **−0.10 as recorded**; it peaks at **+200…+225 ¢ (≈ +2 semitones): 0.55 (whole song), 0.61 (humming)**; no other shift in ±3 semitones comes close. Shifted by +210 ¢ the adhan's centres land on F, D♯ and A♯, and its last note lands on the humming's B3 plateau (B – D♯ – F♯ is a major triad against the humming's first notes). So the adhan is kept – one call only – and tuned (`project.json → adhan_pitch_cents`, formant-preserving). Set it to `0` to hear the original; a second copy of the film with the original-pitch adhan was rendered too (audio swap only).
 
 ## Picture
 
@@ -34,11 +47,20 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 
 ## Lyrics — please proofread
 
-The SRT that reached me contained only **four cues** (0:15–0:36). Those are exact (`inputs/lyrics_user_supplied_partial.srt`). The other **50 lines were reconstructed from the song itself** (two speech-recognition passes over the vocals, cross-checked, then written out in Malayalam) and may contain wrong words or spellings. They are in `inputs/lyrics.srt`; `docs/LYRICS_REVIEW.md` lists every line with a confidence note.
+The SRT that reached me contained only **four cues** (0:15–0:36). Those are exact (`inputs/lyrics_user_supplied_partial.srt`). The other **50 lines were reconstructed from the song itself** (two speech-recognition passes over the vocals, cross-checked) and may contain wrong words or spellings. They are in `inputs/lyrics.srt`; `docs/LYRICS_REVIEW.md` lists every line with a confidence note.
 
-The song runs at 90 bpm and each lyric line is two bars (5.33 s), so the timings follow the music (the hook's 4th line therefore starts at 0:31.0 rather than the rounded 0:30 in the supplied SRT).
+### Word timing (the live highlight)
 
-To correct the text, edit `inputs/lyrics.srt` (times relative to `song.mp3`) and run `./build.sh overlays final`. If the line count or meaning changes, adjust `tools/plan_edl.py` (one picture per line) and run `./build.sh shots base final`.
+`tools/align_words.py` force-aligns every word to the audio (wav2vec2 / MMS-300m CTC aligner, ONNX int8, text romanised with `uroman`) and writes `inputs/words.json`, which `tools/prep.py` reads. The same hook line comes back at +21.3 s, +53.3 s, +64 s … and the aligner puts each of its words within ~0.08 s of the same place every time, which is the check I used. Result: **the lines are really sung ~0.6 s earlier than the times in the SRT** (first line at 14.4 s, not 15.0 s); the film follows the audio.
+
+To change lyrics: edit `inputs/lyrics.srt`, then
+```bash
+pip install onnxruntime numpy uroman
+# model: https://huggingface.co/Corvo007/mms-300m-1130-forced-aligner-int8  (model.onnx, vocab.json) -> ./aligner/
+python3 tools/align_words.py ./aligner && cp work/words.json inputs/words.json
+./build.sh overlays final        # (and: shots base final  if the number of lines changed -> tools/plan_edl.py)
+```
+Without a fresh alignment a changed line falls back to an even split of its SRT window.
 
 ## Re-render
 

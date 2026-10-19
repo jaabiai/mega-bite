@@ -34,10 +34,9 @@
     box-shadow: 0 0 16px rgba(227,189,98,.75); }
   #credit .dia { position: absolute; left: 960px; top: 355px; width: 14px; height: 14px; margin: -7px 0 0 -7px;
     background: var(--gold-hi); transform: rotate(45deg); box-shadow: 0 0 20px rgba(251,233,174,.95); }
-  #credit .name { position: absolute; left: 0; width: 1920px; top: 382px; text-align: center; white-space: nowrap;
-    font: 700 104px/1.25 'Cinzel', serif; color: transparent; text-transform: uppercase;
-    background-image: linear-gradient(100deg, #f6e9c7 0%, #f6e9c7 36%, #ffffff 50%, #f6e9c7 64%, #f6e9c7 100%);
-    background-size: 320% 100%; -webkit-background-clip: text; background-clip: text; }
+  #credit .name { position: absolute; left: 0; width: 1920px; top: 382px; text-align: center; white-space: pre;
+    font: 700 104px/1.25 'Cinzel', serif; color: #f6e9c7; text-transform: uppercase; }
+  #credit .ch { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
 
   /* ---------- Arabic title ---------- */
   #title { left: 0; top: 0; width: 1920px; height: 804px; }
@@ -64,13 +63,14 @@
     -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 56%, transparent 100%); mask-image: linear-gradient(0deg, #000 0%, #000 56%, transparent 100%); }
   #ltBar { position: absolute; left: 100px; width: 5px; border-radius: 3px; transform-origin: 50% 100%;
     background: linear-gradient(180deg, #fbe9ae, #d9a843 55%, #b98a2b); box-shadow: 0 0 16px rgba(227,189,98,.75); }
-  .ltLine { position: absolute; left: 134px; width: max-content; max-width: 800px; white-space: normal; font: 800 62px/1.34 'Anek Malayalam', 'Noto Naskh Arabic', sans-serif; color: #fff; }
+  .ltLine { position: absolute; left: 134px; width: max-content; max-width: 800px; white-space: normal;
+    font: 800 62px/1.34 'Anek Malayalam', 'Noto Naskh Arabic', sans-serif; color: #fff; }
   .ltLine.ar { font: 700 68px/1.55 'Noto Naskh Arabic', 'Anek Malayalam', serif; }
-  .ltLine .w { display: inline-block; margin-right: .26em; will-change: transform, opacity, filter;
-    text-shadow: 0 2px 14px rgba(0,0,0,.7), 0 0 30px rgba(227,189,98,.18); }
+  .ltLine .w { display: inline-block; position: relative; margin-right: .26em; will-change: transform, opacity, filter; transform-origin: 50% 80%; }
   .ltLine.ar .w { margin-right: 0; margin-left: .26em; }
-  .ltUline { position: absolute; left: 134px; height: 2px; transform-origin: 0 50%;
-    background: linear-gradient(90deg, var(--gold), rgba(227,189,98,0)); }
+  .ltLine .w i.wu { position: absolute; left: 0; right: 0; bottom: 2px; height: 4px; border-radius: 2px; transform-origin: 0 50%;
+    background: linear-gradient(90deg, #fbe9ae, #e3bd62 60%, rgba(227,189,98,.35)); box-shadow: 0 0 12px rgba(227,189,98,.8); opacity: 0; }
+  .ltLine.ar .w i.wu { transform-origin: 100% 50%; }
 
   /* ---------- end credits ---------- */
   #endShade { left: 0; top: 0; width: 1920px; height: 804px; opacity: 0;

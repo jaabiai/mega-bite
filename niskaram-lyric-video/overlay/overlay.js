@@ -31,11 +31,19 @@
   async function setup(project, cueList) {
     P = project; cues = cueList.slice().sort((a, b) => a.start - b.start);
 
-    // ---- lyric runs (contiguous cues share one animated plate) ----
+    // ---- per-cue visibility window; contiguous cues share one animated plate (a "run") ----
+    cues.forEach((c, i) => {
+      const nx = cues[i + 1];
+      c.tin = c.start - 0.34;
+      let tout = c.end + 0.14;
+      if (nx && nx.start - c.end < 1.4) tout = Math.min(tout, nx.start - 0.5);
+      c.tout = Math.max(tout, c.start + 0.9); c.dOut = 0.36;
+      c.vis1 = c.tout + c.dOut + 0.045 * c.words.length;
+    });
     runs = [];
     cues.forEach(c => {
       const r = runs[runs.length - 1];
-      if (r && c.start - r.end <= 1.0) { r.cues.push(c); r.end = c.end; } else runs.push({ start: c.start, end: c.end, cues: [c] });
+      if (r && c.tin - r.vis1 <= 0.8) { r.cues.push(c); r.vis1 = Math.max(r.vis1, c.vis1); } else runs.push({ vis0: c.tin, vis1: c.vis1, cues: [c] });
     });
     const lt = $('lt');
     lines = [];
@@ -43,11 +51,12 @@
       const el = document.createElement('div');
       el.className = 'ltLine' + (isArabic(c.text) ? ' ar' : '');
       if (isArabic(c.text)) el.dir = 'rtl';
-      const words = c.text.trim().split(/\s+/);
-      const spans = words.map(w => { const s = document.createElement('span'); s.className = 'w'; s.textContent = w; el.appendChild(s); return s; });
-      const ul = document.createElement('div'); ul.className = 'ltUline';
-      lt.appendChild(el); lt.appendChild(ul);
-      lines.push({ cue: c, el, spans, ul });
+      const spans = c.words.map(w => {
+        const s = document.createElement('span'); s.className = 'w'; s.textContent = w.w;
+        const u = document.createElement('i'); u.className = 'wu'; s.appendChild(u); el.appendChild(s); return s;
+      });
+      lt.appendChild(el);
+      lines.push({ cue: c, el, spans, ul: spans.map(s => s.lastChild) });
     });
 
     // ---- end credit items ----
@@ -72,7 +81,6 @@
     lines.forEach(L => {
       L.h = L.el.offsetHeight; L.w = L.el.offsetWidth;
       L.el.style.top = (baseBottom - L.h) + 'px';
-      L.ul.style.top = (baseBottom + 4) + 'px';
     });
     runs.forEach(r => { r.h = Math.max(...r.cues.map(c => lines[cues.indexOf(c)].h)); });
 
@@ -97,16 +105,21 @@
   }
 
   // ------------------------------------------------------------------ opening credit
+  let creditKey = '', creditChars = [];
   function updateCredit(t) {
-    const el = $('credit'), shade = $('cardShade');
+    const el = $('credit');
     const c = P.opening_credits.find(c => t >= c.start - 0.05 && t <= c.end + 0.05);
     if (!c) { el.style.display = 'none'; return 0; }
     el.style.display = 'block';
-    const inP = prog(t, c.start, c.start + 0.8), outP = prog(t, c.end - 0.5, c.end);
+    const inP = prog(t, c.start, c.start + 0.8), outP = prog(t, c.end - 0.55, c.end);
     const vis = 1 - eIn3(outP);
     const label = el.querySelector('.label'), name = el.querySelector('.name');
     const rule = el.querySelector('.rule'), dia = el.querySelector('.dia');
-    label.textContent = c.label; name.textContent = c.name;
+    label.textContent = c.label;
+    if (creditKey !== c.name) {                              // one span per letter
+      creditKey = c.name; name.textContent = '';
+      creditChars = [...c.name].map(ch => { const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; name.appendChild(s); return s; });
+    }
 
     const ls = lerp(1.0, 0.46, eOut3(inP)) + outP * 0.1;
     label.style.letterSpacing = ls + 'em'; label.style.paddingLeft = ls + 'em';
@@ -118,13 +131,22 @@
     dia.style.opacity = prog(t, c.start + 0.1, c.start + 0.4) * vis;
     dia.style.transform = `rotate(45deg) scale(${lerp(0.2, 1, eOut3(prog(t, c.start + 0.1, c.start + 0.6)))})`;
 
-    const np = prog(t, c.start + 0.18, c.start + 0.95);
-    const nls = lerp(0.40, 0.11, eOut3(np)) + outP * 0.07;
-    name.style.letterSpacing = nls + 'em'; name.style.paddingLeft = nls + 'em';
-    name.style.opacity = eOut3(np) * vis;
-    name.style.filter = `blur(${(1 - eOut3(np)) * 12 + outP * 6}px) drop-shadow(0 0 26px rgba(227,189,98,.45)) drop-shadow(0 5px 18px rgba(0,0,0,.75))`;
-    name.style.transform = `scale(${lerp(1.07, 1, eOut3(np)) + outP * 0.02})`;
-    name.style.backgroundPosition = `${lerp(110, -10, prog(t, c.start + 0.7, c.end - 0.2))}% 0`;
+    // letters rise out of a blur one after another, flash gold as they land, and lift away in the same order
+    const n = creditChars.length;
+    name.style.letterSpacing = (0.075 + 0.05 * (1 - eOut3(prog(t, c.start + 0.1, c.start + 1.2))) + outP * 0.05) + 'em';
+    name.style.paddingLeft = name.style.letterSpacing;
+    creditChars.forEach((s, i) => {
+      const a = c.start + 0.14 + 0.034 * i;
+      const pIn = eOut3(prog(t, a, a + 0.55));
+      const o = c.end - 0.6 + 0.022 * i, pOut = eIn3(prog(t, o, o + 0.42));
+      const flash = Math.exp(-Math.pow((t - (a + 0.5)) / 0.28, 2));
+      s.style.opacity = pIn * (1 - pOut);
+      s.style.transform = `translateY(${(1 - pIn) * 34 - pOut * 20}px) scale(${1 + (1 - pIn) * 0.16})`;
+      s.style.filter = `blur(${(1 - pIn) * 12 + pOut * 9}px)`;
+      const g = Math.round(233 + 22 * flash), b = Math.round(199 + 56 * flash);
+      s.style.color = `rgb(255,${g},${b})`;
+      s.style.textShadow = `0 0 ${34 * flash + 14}px rgba(227,189,98,${0.32 + 0.55 * flash}), 0 5px 18px rgba(0,0,0,.75)`;
+    });
     return Math.min(inP * 1.2, 1) * vis;
   }
 
@@ -209,47 +231,54 @@
   }
 
   // ------------------------------------------------------------------ lyric lower-third
+  // Every word of the visible line stays on screen but soft-focus; only the word being sung at this very
+  // moment is sharp, full brightness, popped and underlined.  Word times come from forced alignment.
+  const BLUR_REST = 3.8, OP_REST = 0.55;
   function updateLyrics(t) {
     const plate = $('ltPlate'), bar = $('ltBar');
-    const run = runs.find(r => t >= r.start - 0.45 && t <= r.end + 0.75);
-    lines.forEach(L => { L.el.style.display = 'none'; L.ul.style.display = 'none'; });
+    const run = runs.find(r => t >= r.vis0 - 0.3 && t <= r.vis1 + 0.1);
+    lines.forEach(L => { L.el.style.display = 'none'; });
     if (!run) { plate.style.opacity = 0; bar.style.opacity = 0; return; }
-    const inP = prog(t, run.start - 0.4, run.start + 0.35), outP = prog(t, run.end + 0.05, run.end + 0.65);
+    const inP = prog(t, run.vis0 - 0.1, run.vis0 + 0.55), outP = prog(t, run.vis1 - 0.55, run.vis1);
     plate.style.opacity = eOut3(inP) * (1 - eIn3(outP));
     plate.style.transform = `scaleX(${lerp(0.55, 1, eOut3(inP))})`;
     const bottom = H - 96;
-    const bp = eOut5(prog(t, run.start - 0.35, run.start + 0.3));
+    const bp = eOut5(prog(t, run.vis0, run.vis0 + 0.5));
     let wsum = 0, hsum = 0;
-    run.cues.forEach((c, k) => {
-      const L = lines[cues.indexOf(c)], nextContig = k < run.cues.length - 1, prevContig = k > 0;
-      const tin = c.start - (prevContig ? 0.1 : 0.22), tout = nextContig ? c.end - 0.38 : c.end + 0.05, dOut = nextContig ? 0.3 : 0.55;
-      const w = eOut3(prog(t, tin, tin + 0.45)) * (1 - eIn3(prog(t, tout, tout + dOut)));
+    run.cues.forEach(c => {
+      const L = lines[cues.indexOf(c)];
+      const w = eOut3(prog(t, c.tin, c.tin + 0.4)) * (1 - eIn3(prog(t, c.tout, c.tout + c.dOut)));
       if (w > 0) { wsum += w; hsum += w * L.h; }
     });
-    const hNow = wsum > 0 ? hsum / wsum : run.h;
+    const hNow = wsum > 0 ? hsum / wsum : run.cues[0] ? lines[cues.indexOf(run.cues[0])].h : 80;
     bar.style.top = (bottom - hNow + 12) + 'px'; bar.style.height = Math.max(20, hNow - 22) + 'px';
     bar.style.transform = `scaleY(${bp * (1 - eIn3(outP))})`;
     bar.style.opacity = bp > 0 ? 1 : 0;
 
-    run.cues.forEach((c, k) => {
-      const L = lines[cues.indexOf(c)];
-      const nextContig = k < run.cues.length - 1;
-      const prevContig = k > 0;
-      const tin = c.start - (prevContig ? 0.1 : 0.22);
-      const tout = nextContig ? c.end - 0.38 : c.end + 0.05;
-      const dOut = nextContig ? 0.3 : 0.55;
-      if (t < tin - 0.02 || t > tout + dOut + 0.02) return;
-      L.el.style.display = 'block'; L.ul.style.display = 'block';
-      const xp = eIn3(prog(t, tout, tout + dOut));
+    run.cues.forEach(c => {
+      const L = lines[cues.indexOf(c)], n = c.words.length, rtl = L.el.dir === 'rtl';
+      if (t < c.tin - 0.02 || t > c.vis1 + 0.02) return;
+      L.el.style.display = 'block';
       L.spans.forEach((s, j) => {
-        const wp = eOut3(prog(t, tin + j * 0.085, tin + j * 0.085 + 0.62));
-        s.style.opacity = wp * (1 - xp);
-        s.style.transform = `translate(${(-38 * (1 - wp)) * (L.el.dir === 'rtl' ? -1 : 1)}px, ${-22 * xp}px)`;
-        s.style.filter = `blur(${(1 - wp) * 10 + xp * 7}px)`;
+        const w = c.words[j];
+        const e = eOut3(prog(t, c.tin + 0.06 * j, c.tin + 0.06 * j + 0.6));                    // entrance (staggered)
+        const x = eIn3(prog(t, c.tout + 0.045 * j, c.tout + 0.045 * j + c.dOut));              // exit (staggered)
+        const tEnd = j + 1 < n ? c.words[j + 1].t0 : w.t1;
+        const up = eOut3(prog(t, w.t0 - 0.05, w.t0 + 0.09));
+        const down = eIn3(prog(t, tEnd - 0.07, tEnd + 0.12));
+        const f = up * (1 - down);                                                              // 1 while this word is being sung
+        const pop = Math.sin(Math.PI * prog(t, w.t0 - 0.05, w.t0 + 0.34)) * (1 - down);
+        const blur = lerp(BLUR_REST, 0, f) + (1 - e) * 12 + x * 10;
+        s.style.opacity = e * (1 - x) * lerp(OP_REST, 1, f);
+        s.style.transform = `translate(${(1 - e) * (rtl ? 28 : -28)}px, ${(1 - e) * 34 - x * 26 - f * 3}px) scale(${1 + 0.05 * f + 0.045 * pop})`;
+        s.style.filter = `blur(${blur.toFixed(2)}px)`;
+        s.style.textShadow = f > 0.01
+          ? `0 2px 14px rgba(0,0,0,.65), 0 0 ${(12 + 30 * f).toFixed(1)}px rgba(227,189,98,${(0.62 * f).toFixed(2)})`
+          : '0 2px 14px rgba(0,0,0,.6)';
+        const u = L.ul[j], fill = prog(t, w.t0, tEnd);
+        u.style.opacity = (0.95 * f).toFixed(3);
+        u.style.transform = `scaleX(${fill.toFixed(3)})`;
       });
-      const up = eOut3(prog(t, tin + 0.12, tin + 0.95));
-      L.ul.style.width = (Math.min(L.w, 760) * 0.62 * up) + 'px';
-      L.ul.style.opacity = 0.9 * (1 - xp) * Math.min(1, up * 3);
     });
   }
 
@@ -287,7 +316,7 @@
     const iv = [];
     P.opening_credits.forEach(c => iv.push([c.start - 0.1, c.end + 0.1]));
     iv.push([P.title_card.start - 0.1, P.title_card.end + 0.1]);
-    runs.forEach(r => iv.push([r.start - 0.5, r.end + 0.8]));
+    runs.forEach(r => iv.push([r.vis0 - 0.4, r.vis1 + 0.4]));
     iv.push([P.end_credits.start - 0.1, P.total_duration]);
     iv.sort((x, y) => x[0] - y[0]);
     const m = [];

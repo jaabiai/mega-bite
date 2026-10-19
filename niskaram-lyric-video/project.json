@@ -5,40 +5,40 @@
     804
   ],
   "fps": 24,
-  "end_extension": 5.5,
+  "end_extension": 5.4,
   "lyrics_srt": "inputs/lyrics.srt",
   "opening_credits": [
     {
       "label": "MUSIC",
       "name": "MIRAYA STUDIO",
-      "start": 0.7,
-      "end": 2.9
+      "start": 0.5,
+      "end": 3.2
     },
     {
       "label": "EDITOR",
       "name": "JABIR VARIKKODAN",
-      "start": 2.9,
-      "end": 5.1
+      "start": 3.2,
+      "end": 5.9
     },
     {
       "label": "MIXING & VISUALS",
       "name": "MIRAYA STUDIO",
-      "start": 5.1,
-      "end": 7.3
+      "start": 5.9,
+      "end": 8.6
     },
     {
       "label": "LYRICS",
       "name": "JABIR VARIKKODAN",
-      "start": 7.3,
-      "end": 9.5
+      "start": 8.6,
+      "end": 11.3
     }
   ],
   "title_card": {
-    "start": 9.3,
-    "end": 13.7
+    "start": 11.0,
+    "end": 19.6
   },
   "end_credits": {
-    "start": 292.0,
+    "start": 299.0,
     "items": [
       {
         "label": "MUSIC",
@@ -61,7 +61,7 @@
         "name": "MIXKIT.CO"
       }
     ],
-    "logo_card_start": 299.8
+    "logo_card_start": 311.0
   },
   "logo": {
     "bug_size": 100,
@@ -72,6 +72,8 @@
     "bug_opacity": 0.72
   },
   "adhan_keep": 11.63,
-  "song_in": 13.0,
-  "song_film_start": 11.3
+  "song_in": 0.0,
+  "song_film_start": 9.2,
+  "adhan_pitch_cents": 210,
+  "adhan_fade": 1.0
 }
