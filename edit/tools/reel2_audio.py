@@ -21,6 +21,9 @@ import mix_audio  # noqa: E402
 import reel2_plan as P  # noqa: E402
 
 SR, FR = P.SR, P.FR
+VOICE_FILE = os.environ.get("REEL_VOICE", "main_voice_loud.wav")    # main_voice_clear.wav = voice_clarity.py master
+MUSIC_DB = float(os.environ.get("REEL_MUSIC_DB", "-17"))                    # music level under the speech
+MASTER_CEILING = float(os.environ.get("REEL_CEILING", "0.891"))                 # master limiter ceiling (linear)
 MUSIC_START = 25.0       # the "Welcome to Mega Byte" drop of the long video's bed -> the reel's hook lands on the drop
 
 
@@ -59,7 +62,7 @@ def build_sfx(n, cues):
 
 def main(scratch, out):
     L = P.load_layout()
-    voice, sr = sf.read(f"{scratch}/audio/main_voice_loud.wav", dtype="float32")
+    voice, sr = sf.read(f"{scratch}/audio/{VOICE_FILE}", dtype="float32")
     music, _ = sf.read(f"{scratch}/audio_gen/music_bed.wav", dtype="float32")
     assert sr == SR
     n = L["n_frames"] * FR
@@ -77,7 +80,7 @@ def main(scratch, out):
     sf.write(f"{d}/music.wav", m, SR, subtype="FLOAT")
     sf.write(f"{d}/sfx.wav", sfx, SR, subtype="FLOAT")
     mix_audio.main(f"{d}/voice.wav", f"{d}/music.wav", f"{d}/sfx.wav", f"{EDIT}/data/{P.TAG}_words.json", out,
-                   boost_t=2.4)
+                   boost_t=2.4, music_db=MUSIC_DB, ceiling=MASTER_CEILING)
 
 
 if __name__ == "__main__":

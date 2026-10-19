@@ -51,7 +51,7 @@ def lookahead_limiter(x, ceiling=0.97, hold=0.005, smooth=0.004):
     return (1.0 - np.maximum(rs, 0)).astype(np.float32)
 
 
-def main(voice_p, music_p, sfx_p, words_p, out_p, boost_t=27.4):
+def main(voice_p, music_p, sfx_p, words_p, out_p, boost_t=27.4, music_db=-17.0, ceiling=0.891):
     voice, sr = sf.read(voice_p, dtype="float32")
     assert sr == SR and voice.ndim == 2
     n = len(voice)
@@ -65,7 +65,7 @@ def main(voice_p, music_p, sfx_p, words_p, out_p, boost_t=27.4):
     gate = act > 0.8
     v_rms = np.sqrt((voice[gate] ** 2).mean())
     m_rms = np.sqrt((music[gate] ** 2).mean())
-    target_speech = v_rms * 10 ** (-17.0 / 20)       # music 17 dB below the speech
+    target_speech = v_rms * 10 ** (music_db / 20)    # music 17 dB (default) below the speech
     base = target_speech / m_rms
     swell_db = 3.5
     gain_m = base * (10 ** (swell_db / 20 * (1 - act)))
@@ -77,7 +77,7 @@ def main(voice_p, music_p, sfx_p, words_p, out_p, boost_t=27.4):
 
     others = music * gain_m[:, None] + sfx * sfx_gain
     mix = voice + others
-    gr = lookahead_limiter(mix, ceiling=0.891)       # -1 dBFS master ceiling (smooth 4 ms ramps)
+    gr = lookahead_limiter(mix, ceiling=ceiling)      # -1 dBFS master ceiling by default (smooth 4 ms ramps)
     out = mix * gr[:, None]
     red_db = -20 * np.log10(np.maximum(gr, 1e-6))
     print(f"voice speech RMS {20 * np.log10(v_rms):.1f} dBFS | music target {20 * np.log10(target_speech):.1f} dBFS")

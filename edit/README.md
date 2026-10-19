@@ -32,3 +32,6 @@ REEL_OVERLAY=overlay_reel2 REEL_TIMELINE=reel3_timeline.json python tools/render
 python tools/reel2_shots.py <scratch> data/reel3_shots.json ; python tools/reel2_audio.py <scratch> <scratch>/reel3/audio_final/reel2_audio.wav
 python tools/assemble_reel2.py <scratch> MegaByte_Reel_Announce3.mp4
 ```
+
+Voice for phones: `tools/voice_clarity.py` (HPF + de-boom + presence EQ, two-stage compression, soft clip, limiter) makes `main_voice_clear.wav`;
+mix the reel with it via `REEL_VOICE=main_voice_clear.wav REEL_MUSIC_DB=-19 REEL_CEILING=0.80 python tools/reel2_audio.py ...`.
