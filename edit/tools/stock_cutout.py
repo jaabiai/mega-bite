@@ -32,6 +32,14 @@ def main(photo, model, out_path, warm=8, despill="none", lumakey=""):
     a = np.clip((a - 0.05) / 0.90, 0, 1)
     a = cv2.erode(a, np.ones((3, 3), np.uint8), iterations=1)
     a = cv2.GaussianBlur(a, (0, 0), 0.8)
+    # drop stray semi-transparent specks: keep only the biggest connected blob of the matte
+    n_lab, lab, stats, _ = cv2.connectedComponentsWithStats((a > 0.1).astype(np.uint8), connectivity=8)
+    if n_lab > 2:
+        keep = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+        a = a * cv2.dilate((lab == keep).astype(np.float32), np.ones((7, 7), np.uint8))
+    rows = (a > 0.6).sum(axis=1)                      # nothing above the top of the head (haze / dust specks)
+    top = int(np.argmax(rows > 40))
+    a[:max(top - 10, 0)] = 0
     pix = img.astype(np.float32)
     if lumakey:                       # polygon "x,y;x,y;..." (full-res px) kept fully opaque (dark phone on a black backdrop)
         pts = np.array([[int(v) for v in pt.split(",")] for pt in lumakey.split(";")], np.int32)
