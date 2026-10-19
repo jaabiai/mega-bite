@@ -82,7 +82,7 @@
 
     // title geometry + particles
     titleW = $('titleText').getBoundingClientRect().width - 88;
-    const t0 = P.title_card.start, t1 = P.title_card.end, r = mulberry32(20241019);
+    const t0 = P.title_card.start, t1 = t0 + 8.1, r = mulberry32(20241019);
     const penX = tt => (960 + titleW / 2) - ePen(prog(tt, t0 + 0.9, t0 + 3.3)) * titleW;
     particles = [];
     for (let i = 0; i < 170; i++) {
@@ -102,38 +102,42 @@
     const c = P.opening_credits.find(c => t >= c.start - 0.05 && t <= c.end + 0.05);
     if (!c) { el.style.display = 'none'; return 0; }
     el.style.display = 'block';
-    const inP = prog(t, c.start, c.start + 1.25), outP = prog(t, c.end - 0.75, c.end);
+    const inP = prog(t, c.start, c.start + 0.8), outP = prog(t, c.end - 0.5, c.end);
     const vis = 1 - eIn3(outP);
     const label = el.querySelector('.label'), name = el.querySelector('.name');
     const rule = el.querySelector('.rule'), dia = el.querySelector('.dia');
     label.textContent = c.label; name.textContent = c.name;
 
-    const ls = lerp(1.15, 0.5, eOut3(inP)) + outP * 0.12;
+    const ls = lerp(1.0, 0.46, eOut3(inP)) + outP * 0.1;
     label.style.letterSpacing = ls + 'em'; label.style.paddingLeft = ls + 'em';
-    label.style.opacity = eOut3(prog(t, c.start, c.start + 0.9)) * vis;
+    label.style.opacity = eOut3(prog(t, c.start, c.start + 0.55)) * vis;
     label.style.transform = `translateY(${(1 - eOut3(inP)) * 12}px)`;
 
-    const rp = eOut5(prog(t, c.start + 0.2, c.start + 1.2));
-    rule.style.width = (360 * rp) + 'px'; rule.style.opacity = vis;
-    dia.style.opacity = prog(t, c.start + 0.15, c.start + 0.6) * vis;
-    dia.style.transform = `rotate(45deg) scale(${lerp(0.2, 1, eOut3(prog(t, c.start + 0.15, c.start + 0.9)))})`;
+    const rp = eOut5(prog(t, c.start + 0.12, c.start + 0.8));
+    rule.style.width = (640 * rp) + 'px'; rule.style.opacity = vis;
+    dia.style.opacity = prog(t, c.start + 0.1, c.start + 0.4) * vis;
+    dia.style.transform = `rotate(45deg) scale(${lerp(0.2, 1, eOut3(prog(t, c.start + 0.1, c.start + 0.6)))})`;
 
-    const np = prog(t, c.start + 0.3, c.start + 1.5);
-    const nls = lerp(0.42, 0.14, eOut3(np)) + outP * 0.08;
+    const np = prog(t, c.start + 0.18, c.start + 0.95);
+    const nls = lerp(0.40, 0.11, eOut3(np)) + outP * 0.07;
     name.style.letterSpacing = nls + 'em'; name.style.paddingLeft = nls + 'em';
     name.style.opacity = eOut3(np) * vis;
-    name.style.filter = `blur(${(1 - eOut3(np)) * 12 + outP * 6}px) drop-shadow(0 0 20px rgba(227,189,98,.30)) drop-shadow(0 4px 16px rgba(0,0,0,.65))`;
+    name.style.filter = `blur(${(1 - eOut3(np)) * 12 + outP * 6}px) drop-shadow(0 0 26px rgba(227,189,98,.45)) drop-shadow(0 5px 18px rgba(0,0,0,.75))`;
     name.style.transform = `scale(${lerp(1.07, 1, eOut3(np)) + outP * 0.02})`;
-    name.style.backgroundPosition = `${lerp(110, -10, prog(t, c.start + 1.1, c.start + 2.7))}% 0`;
+    name.style.backgroundPosition = `${lerp(110, -10, prog(t, c.start + 0.7, c.end - 0.2))}% 0`;
     return Math.min(inP * 1.2, 1) * vis;
   }
 
   // ------------------------------------------------------------------ Arabic title
-  function updateTitle(t) {
-    const el = $('title'), T = P.title_card, t0 = T.start, t1 = T.end;
-    if (t < t0 - 0.05 || t > t1 + 0.05) { el.style.display = 'none'; return 0; }
+  function updateTitle(treal) {
+    const T = P.title_card, D = T.end - T.start, sc = 8.1 / D;
+    return updateTitleV(T.start + (treal - T.start) * sc, T.start, T.start + 8.1, treal);
+  }
+  function updateTitleV(t, t0, t1, treal) {
+    const el = $('title'), T = P.title_card;
+    if (treal < T.start - 0.05 || treal > T.end + 0.05) { el.style.display = 'none'; return 0; }
     el.style.display = 'block';
-    const ex = prog(t, t1 - 1.1, t1);
+    const ex = prog(t, t1 - 1.5, t1);
     const root = el; root.style.opacity = 1 - eIn3(ex);
 
     // light line
@@ -213,9 +217,17 @@
     const inP = prog(t, run.start - 0.4, run.start + 0.35), outP = prog(t, run.end + 0.05, run.end + 0.65);
     plate.style.opacity = eOut3(inP) * (1 - eIn3(outP));
     plate.style.transform = `scaleX(${lerp(0.55, 1, eOut3(inP))})`;
-    const bh = run.h - 18, bottom = H - 96;
-    bar.style.top = (bottom - run.h + 10) + 'px'; bar.style.height = bh + 'px';
+    const bottom = H - 96;
     const bp = eOut5(prog(t, run.start - 0.35, run.start + 0.3));
+    let wsum = 0, hsum = 0;
+    run.cues.forEach((c, k) => {
+      const L = lines[cues.indexOf(c)], nextContig = k < run.cues.length - 1, prevContig = k > 0;
+      const tin = c.start - (prevContig ? 0.1 : 0.22), tout = nextContig ? c.end - 0.38 : c.end + 0.05, dOut = nextContig ? 0.3 : 0.55;
+      const w = eOut3(prog(t, tin, tin + 0.45)) * (1 - eIn3(prog(t, tout, tout + dOut)));
+      if (w > 0) { wsum += w; hsum += w * L.h; }
+    });
+    const hNow = wsum > 0 ? hsum / wsum : run.h;
+    bar.style.top = (bottom - hNow + 12) + 'px'; bar.style.height = Math.max(20, hNow - 22) + 'px';
     bar.style.transform = `scaleY(${bp * (1 - eIn3(outP))})`;
     bar.style.opacity = bp > 0 ? 1 : 0;
 

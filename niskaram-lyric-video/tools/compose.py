@@ -19,16 +19,20 @@ def run(cmd, **kw):
 
 # ---------------------------------------------------------------- audio
 def build_audio(tl):
-    off, onset, splice = tl['song_offset'], tl['song_onset'], tl['adhan_splice']
-    total, alen = tl['total_duration'], tl['adhan_length']
-    # the adhan is two takes spliced with a hard cut at `splice`: ease the first take out just before the cut
-    # (the second take already fades itself in), then let the natural tail of the adhan decay into the song.
-    ramp = 0.16
-    vol = f"if(lt(t,{splice - ramp:.3f}),1,if(lt(t,{splice:.3f}),pow(({splice:.3f}-t)/{ramp},1.6),1))"
+    """Adhan (first call only) -> song without its humming intro.
+
+    * adhan: kept up to `adhan_keep`, eased out and given a short echo tail so it does not stop dead
+    * song : starts at `song_in` (just before the first verse), placed at `song_film_start`,
+             with a quick fade-in so it blooms out of the adhan's tail
+    """
+    keep, s_in, s_at, total = tl['adhan_keep'], tl['song_in'], tl['song_film_start'], tl['total_duration']
+    fade = 0.55
     fg = (
-        f"[0:a]aresample=48000,aformat=channel_layouts=stereo,volume='{vol}':eval=frame,"
-        f"afade=t=out:st={alen - 0.6:.3f}:d=0.6[ad];"
-        f"[1:a]aresample=48000,aformat=channel_layouts=stereo,adelay={int(off * 1000)}|{int(off * 1000)}[sg];"
+        f"[0:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{keep:.3f},asetpts=PTS-STARTPTS,"
+        f"afade=t=out:st={keep - fade:.3f}:d={fade}:curve=qsin,apad=pad_dur=1.6,"
+        f"aecho=0.85:0.7:85|170|290:0.42|0.30|0.18,afade=t=out:st={keep + 0.2:.3f}:d=1.4[ad];"
+        f"[1:a]aresample=48000,aformat=channel_layouts=stereo,atrim=start={s_in:.3f},asetpts=PTS-STARTPTS,"
+        f"afade=t=in:d=0.28:curve=qsin,adelay={int(round(s_at * 1000))}|{int(round(s_at * 1000))}[sg];"
         f"[ad][sg]amix=inputs=2:normalize=0:duration=longest,apad=whole_dur={total},"
         f"afade=t=out:st={total - 2.6:.3f}:d=2.6,alimiter=limit=0.97[out]"
     )

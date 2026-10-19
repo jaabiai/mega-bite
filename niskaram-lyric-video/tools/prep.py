@@ -33,11 +33,13 @@ def parse_srt(text):
 def main():
     proj = json.load(open(ROOT / 'project.json'))
     song_len = probe_duration(ROOT / 'inputs' / 'song.mp3')
-    off = proj['song_offset']
+    # film time = song time + song_offset; everything before song_in (the humming intro) is cut out of the song
+    off = proj['song_film_start'] - proj['song_in']
+    proj['song_offset'] = round(off, 3)
     cues = [{'start': round(c['start'] + off, 3), 'end': round(c['end'] + off, 3), 'text': c['text']}
-            for c in parse_srt(open(ROOT / proj['lyrics_srt'], encoding='utf8').read())]
+            for c in parse_srt(open(ROOT / proj['lyrics_srt'], encoding='utf8').read()) if c['end'] > proj['song_in']]
     proj['song_length'] = song_len
-    proj['total_duration'] = round(off + song_len + proj['end_extension'], 3)
+    proj['total_duration'] = round(proj['song_film_start'] + (song_len - proj['song_in']) + proj['end_extension'], 3)
     proj['cues'] = cues
     json.dump(proj, open(WORK / 'timeline.json', 'w'), ensure_ascii=False, indent=1)
     print(f'timeline: {proj["total_duration"]:.2f}s total, {len(cues)} lyric cues -> {WORK / "timeline.json"}')
