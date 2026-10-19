@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<title>Mega Byte thumbnails</title>
+<style>
+@font-face{font-family:Sora;font-weight:800;src:url(../assets/fonts/Sora-800.ttf)}
+@font-face{font-family:Poppins;font-weight:700;src:url(../assets/fonts/Poppins-700.ttf)}
+@font-face{font-family:Baloo;font-weight:400 800;src:url(../assets/fonts/BalooChettan2.ttf)}
+:root{--amber:#ffb12e;--amber2:#ff7a00;--ink:#06080f}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;overflow:hidden}
+#stage{position:relative;overflow:hidden;background:var(--ink);color:#fff;font-family:Sora,Poppins,sans-serif}
+/* ---------- sizes */
+#stage.A,#stage.B{width:1280px;height:720px}
+#stage.R{width:1080px;height:1920px}
+/* ---------- background */
+.bg{position:absolute;inset:0}
+.A .bg{background:
+  radial-gradient(ellipse 52% 78% at 72% 50%,rgba(255,150,25,.78) 0%,rgba(255,96,10,.38) 34%,rgba(255,70,0,0) 68%),
+  radial-gradient(ellipse 60% 70% at 0% 100%,rgba(40,70,160,.35),rgba(0,0,0,0) 70%),
+  linear-gradient(100deg,#05070d 0%,#0b1020 45%,#1a0d05 100%)}
+.B .bg{background:
+  radial-gradient(ellipse 52% 80% at 30% 52%,rgba(255,150,25,.75) 0%,rgba(255,96,10,.36) 36%,rgba(255,70,0,0) 68%),
+  radial-gradient(ellipse 60% 70% at 100% 100%,rgba(40,70,160,.38),rgba(0,0,0,0) 70%),
+  linear-gradient(260deg,#05070d 0%,#0b1020 45%,#1a0d05 100%)}
+.R .bg{background:
+  radial-gradient(ellipse 80% 38% at 50% 62%,rgba(255,150,25,.78) 0%,rgba(255,96,10,.36) 38%,rgba(255,70,0,0) 72%),
+  radial-gradient(ellipse 90% 40% at 100% 0%,rgba(40,70,160,.40),rgba(0,0,0,0) 70%),
+  linear-gradient(180deg,#05070d 0%,#0b1020 45%,#1a0d05 100%)}
+.ray{position:absolute;background:linear-gradient(90deg,rgba(255,170,60,0),rgba(255,170,60,.16),rgba(255,170,60,0));transform:skewX(-22deg)}
+.A .r1{left:520px;top:-60px;width:150px;height:860px}.A .r2{left:700px;top:-60px;width:60px;height:860px}.A .r3{left:1010px;top:-60px;width:110px;height:860px}
+.B .r1{left:120px;top:-60px;width:150px;height:860px}.B .r2{left:330px;top:-60px;width:60px;height:860px}.B .r3{left:560px;top:-60px;width:110px;height:860px}
+.R .r1{left:150px;top:0;width:190px;height:1000px}.R .r2{left:520px;top:0;width:80px;height:1000px}.R .r3{left:820px;top:0;width:150px;height:1000px}
+.ring{position:absolute;border-radius:50%;border:3px solid rgba(255,190,80,.55);box-shadow:0 0 40px rgba(255,150,30,.5),inset 0 0 40px rgba(255,150,30,.25)}
+.A .ring{width:520px;height:520px;left:664px;top:30px}
+.B .ring{width:520px;height:520px;left:150px;top:36px}
+.R .ring{width:820px;height:820px;left:130px;top:930px}
+.grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.2 -.1'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%)}
+/* ---------- person */
+.person{position:absolute;filter:drop-shadow(0 0 26px rgba(255,140,20,.55)) drop-shadow(0 14px 30px rgba(0,0,0,.55))}
+.A .person{height:700px;right:-56px;bottom:-34px}
+.B .person{height:700px;left:-40px;bottom:-36px}
+.R .person{width:1080px;left:0;bottom:0}
+/* ---------- text */
+.pill{position:absolute;display:flex;align-items:center;gap:16px;font-weight:800}
+.pill b{background:linear-gradient(180deg,#ffd36b,#ff9a10);color:#1a0f00;border-radius:999px;padding:6px 26px;font-size:40px;letter-spacing:.5px;box-shadow:0 6px 24px rgba(255,140,0,.45)}
+.pill i{font-style:normal;font-family:Poppins;font-size:24px;letter-spacing:5px;color:#ffe2a8;text-shadow:0 2px 8px #000}
+.A .pill{left:64px;top:46px}.B .pill{right:72px;top:50px;left:auto}.R .pill{left:70px;top:210px}
+.R .pill b{font-size:54px;padding:8px 36px}.R .pill i{font-size:32px}
+.num{position:absolute;font-weight:800;line-height:.8;
+  background:linear-gradient(180deg,#fff0b8 0%,#ffc04a 30%,#ff8a00 68%,#ff4d00 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 10px 0 rgba(120,30,0,.55)) drop-shadow(0 0 34px rgba(255,130,0,.55))}
+.A .num{left:46px;top:112px;font-size:420px}
+.R .num{left:56px;top:330px;font-size:560px}
+.stack{position:absolute;display:flex;flex-direction:column;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.45),0 0 28px rgba(0,0,0,.6)}
+.A .stack{left:316px;top:142px}
+.R .stack{left:420px;top:350px}
+.mal{font-family:Baloo,Sora;font-weight:800;line-height:1;color:#fff}
+.A .stack .mal{font-size:116px;margin-bottom:0}.R .stack .mal{font-size:140px}
+.en1,.en2{line-height:.98;letter-spacing:1px}
+.A .en1,.A .en2{font-size:74px}.R .en1,.R .en2{font-size:100px}
+.en1{color:var(--amber)}.en2{color:#fff}
+/* variant B headline */
+.q{position:absolute;font-family:Baloo,Sora;font-weight:800;line-height:.98;text-shadow:0 6px 0 rgba(0,0,0,.45),0 0 34px rgba(0,0,0,.65)}
+.B .q{right:52px;top:104px;display:flex;flex-direction:column;align-items:flex-end;font-size:132px;white-space:nowrap}
+.B .q span:first-child{font-size:176px}
+.q span{display:block}
+.q .hl{text-shadow:none;background:linear-gradient(180deg,#fff0b8,#ffb12e 55%,#ff7a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 0 rgba(120,30,0,.5))}
+.sub{position:absolute;font-family:Baloo,Sora;font-weight:800;color:#1a0f00;background:linear-gradient(180deg,#ffd36b,#ff9a10);border-radius:18px;padding:2px 26px 8px;box-shadow:0 10px 30px rgba(255,140,0,.45);transform:rotate(-2deg)}
+.B .sub{right:56px;top:430px;font-size:50px}
+/* icons */
+.icons{position:absolute;display:flex;gap:34px}
+.A .icons{left:56px;top:498px;gap:22px}.B .icons{right:56px;top:526px;gap:22px}.R .icons{left:105px;top:770px;gap:60px}
+.ic{display:flex;flex-direction:column;align-items:center;gap:10px;width:156px}
+.R .ic{width:250px;gap:16px}
+.ic .c{position:relative;width:118px;height:118px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.22),rgba(255,255,255,.05) 60%),rgba(10,14,28,.82);
+  border:4px solid var(--amber);box-shadow:0 0 0 4px rgba(255,177,46,.18),0 10px 28px rgba(0,0,0,.55),0 0 26px rgba(255,140,0,.5);display:flex;align-items:center;justify-content:center}
+.R .ic .c{width:168px;height:168px;border-width:6px}
+.ic svg{width:66px;height:66px;fill:none;stroke:#ffd27a;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.R .ic svg{width:94px;height:94px}
+.ic .n{position:absolute;left:-8px;top:-8px;width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#ffd36b,#ff8a00);color:#1a0f00;font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.R .ic .n{width:56px;height:56px;font-size:32px;left:-10px;top:-10px}
+.ic .l{font-family:Poppins;font-weight:700;font-size:20px;line-height:1.15;letter-spacing:1.5px;color:#fff;text-shadow:0 2px 10px #000;text-align:center}
+.R .ic .l{font-size:32px}
+/* sticker */
+.tag{position:absolute;font-family:Baloo,Sora;font-weight:800;color:#12060a;background:#fff;border-radius:16px;padding:0 24px 6px;border:5px solid var(--amber);box-shadow:0 10px 28px rgba(0,0,0,.55),0 0 28px rgba(255,150,30,.45);transform:rotate(-5deg)}
+.A .tag{right:30px;bottom:46px;font-size:64px}
+.R .tag{right:44px;top:1490px;font-size:86px}
+.B .tag{display:none}
+.logo{position:absolute;border-radius:50%;box-shadow:0 0 0 3px rgba(255,177,46,.7),0 8px 24px rgba(0,0,0,.6)}
+.A .logo{right:64px;top:44px;width:92px;height:92px}
+.B .logo{left:48px;top:40px;width:92px;height:92px}
+.R .logo{right:70px;top:196px;width:110px;height:110px}
+.chan{position:absolute;font-family:Poppins;font-weight:700;letter-spacing:4px;color:#ffe2a8;text-shadow:0 2px 8px #000;font-size:22px}
+.chan{display:none}
+</style>
+</head>
+<body>
+<div id="stage" class="A">
+  <div class="bg"></div>
+  <div class="ray r1"></div><div class="ray r2"></div><div class="ray r3"></div>
+  <div class="ring"></div>
+  <img class="person" id="person">
+  <div class="vig"></div>
+
+  <div class="pill"><b>iOS 27</b><i>MUST WATCH</i></div>
+  <img class="logo" src="../assets/logo_megabyte.png">
+
+  <!-- A / R : big number + stack -->
+  <div class="num" id="num">3</div>
+  <div class="stack" id="stack"><div class="mal">കിടിലൻ</div><div class="en1">iPHONE</div><div class="en2">FEATURES</div></div>
+
+  <!-- B : question headline -->
+  <div class="q" id="q"><span>ഇത്</span><span class="hl">അറിയാമോ?</span></div>
+  <div class="sub" id="sub">iPhone-ലെ 3 കിടിലൻ ഫീച്ചറുകൾ</div>
+
+  <div class="icons">
+    <div class="ic"><div class="c"><span class="n">1</span>
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="36" r="17"/><path d="M32 26v10l7 4"/><path d="M13 20q3-8 11-9M51 20q-3-8-11-9"/><path d="M22 52l-5 6M42 52l5 6"/></svg></div>
+      <div class="l">MISS CALL<br>REMINDER</div></div>
+    <div class="ic"><div class="c"><span class="n">2</span>
+      <svg viewBox="0 0 64 64"><rect x="24" y="8" width="16" height="28" rx="8"/><path d="M15 29a17 17 0 0 0 34 0"/><path d="M32 46v9M24 55h16"/><path d="M8 22v14M56 22v14"/></svg></div>
+      <div class="l">VOICE<br>ISOLATION</div></div>
+    <div class="ic"><div class="c"><span class="n">3</span>
+      <svg viewBox="0 0 64 64"><rect x="18" y="6" width="28" height="48" rx="6"/><path d="M27 20v14M37 20v14"/><path d="M29 45h6"/></svg></div>
+      <div class="l">HOLD<br>ASSIST</div></div>
+  </div>
+  <div class="tag" id="tag">ഇത് അറിയാമോ?</div>
+  <div class="chan">MEGA BYTE</div>
+  <div class="grain"></div>
+</div>
+<script>
+function setup(v, personSrc){
+  const st = document.getElementById('stage');
+  st.className = v;
+  document.getElementById('person').src = personSrc;
+  const isB = v === 'B';
+  document.getElementById('num').style.display   = isB ? 'none' : '';
+  document.getElementById('stack').style.display = isB ? 'none' : '';
+  document.getElementById('q').style.display     = isB ? '' : 'none';
+  document.getElementById('sub').style.display   = isB ? '' : 'none';
+  return Promise.all([document.fonts.load('800 100px Sora'), document.fonts.load('800 100px Baloo'), document.fonts.load('700 30px Poppins'),
+    new Promise(r => { const p = document.getElementById('person'); p.complete ? r() : p.onload = r; }),
+    new Promise(r => { const p = document.querySelector('.logo'); p.complete ? r() : p.onload = r; })]).then(() => document.fonts.ready);
+}
+</script>
+</body>
+</html>

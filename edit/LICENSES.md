@@ -41,7 +41,7 @@ whooshes, UI sounds – all synthesised from scratch, nothing sampled, no librar
 Because nobody else owns or has registered this audio, a YouTube Content-ID claim on the music is not possible.
 
 ## Fonts and icons
-* Poppins, Sora – SIL Open Font License 1.1 (Google Fonts)
+* Poppins, Sora, Baloo Chettan 2 (Malayalam, thumbnails) – SIL Open Font License 1.1 (Google Fonts)
 * Like / comment / share / bell / check glyphs – Material Design icons, Apache License 2.0
 
 ## Tools that only *helped produce* the picture (nothing of them is in the output)

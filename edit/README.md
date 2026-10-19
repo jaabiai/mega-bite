@@ -35,3 +35,6 @@ python tools/assemble_reel2.py <scratch> MegaByte_Reel_Announce3.mp4
 
 Voice for phones: `tools/voice_clarity.py` (HPF + de-boom + presence EQ, two-stage compression, soft clip, limiter) makes `main_voice_clear.wav`;
 mix the reel with it via `REEL_VOICE=main_voice_clear.wav REEL_MUSIC_DB=-19 REEL_CEILING=0.80 python tools/reel2_audio.py ...`.
+
+Thumbnails: `tools/thumb_matte.py` (full-res person matte of chosen frames) -> `tools/thumb_prep.py` (cut-out) -> `tools/render_thumb.py A|B|R`
+(page: `thumb/index.html`; A/B = 1280x720 YouTube, R = 1080x1920 reel cover).
