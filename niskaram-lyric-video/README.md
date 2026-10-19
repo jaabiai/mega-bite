@@ -10,7 +10,7 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | Song | `inputs/song.mp3`, starts at 23 s so its first beat lands exactly as the adhan fades (24.0 s) |
 | Lyrics | Left lower-third, Anek Malayalam ExtraBold; Arabic lines switch automatically to Naskh |
 | Logo | Miraya Studio badge as a quiet corner bug for the whole film, large on the end card |
-| Length | 5 min 31 s (master ≈ 435 MB, ~10 Mbit/s; kept out of git — see `.gitignore`) |
+| Length | 5 min 31 s (master ≈ 338 MB, ~8 Mbit/s; kept out of git — see `.gitignore`) |
 
 ![title](docs/preview_title.jpg)
 ![lyrics](docs/preview_lyrics.jpg)

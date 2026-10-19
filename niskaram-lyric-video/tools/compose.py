@@ -140,7 +140,7 @@ def build_final(tl, out_name):
          '-framerate', FPS, '-loop', '1', '-t', f'{total:.3f}', '-i', bug,
          '-i', WORK / 'audio.wav',
          '-filter_complex', fg, '-map', '[vout]', '-map', '3:a', '-t', f'{length:.3f}',
-         '-c:v', 'libx264', '-preset', 'slow', '-crf', os.environ.get('CRF', '17'), '-profile:v', 'high', '-pix_fmt', 'yuv420p',
+         '-c:v', 'libx264', '-preset', 'slow', '-crf', os.environ.get('CRF', '18'), '-profile:v', 'high', '-pix_fmt', 'yuv420p',
          '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709',
          '-c:a', 'aac', '-b:a', '320k', '-ar', '48000', '-movflags', '+faststart', out])
     print('wrote', out, f'{out.stat().st_size / 1e6:.1f} MB')
