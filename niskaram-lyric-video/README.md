@@ -8,7 +8,7 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | Frame | **2.39:1 widescreen, 1920 × 804**, 24 fps, H.264 + AAC 320 k |
 | Intro | One adhan call (*Hayya ʿala-ṣ-ṣalāh*, 11.6 s) **tuned +2.1 semitones to the song's key** (see *Adhan decision*), fading into the song's own humming |
 | Song | `inputs/song.mp3`, **complete and uncut from 0:00**, placed at 0:09.2 so the humming enters under the adhan's last note |
-| Lyrics | Left lower-third, wrapping to 2–3 lines. **Live word highlight**: the word being sung is sharp, bright and underlined, every other word of the line is soft-focus |
+| Lyrics | Left lower-third, **one sung word at a time** (a very short word is paired with the next), Baloo Chettan 2 ExtraBold, with a **neon underline that fills along the word for exactly as long as it is sung** |
 | Visuals | One shot per lyric line, chosen for what the line says; the picture changes when the line is first sung |
 | Logo | Miraya Studio badge as a quiet corner bug for the whole film, large on the end card |
 | Length | 5 min 17 s |
@@ -49,22 +49,24 @@ Correlation of the adhan's pitch distribution with the song: **−0.10 as record
 * Colour: custom teal-gold 3D LUT, highlight bloom, gold dust, soft vignette, fine grain (`tools/make_lut.py`, `tools/compose.py`).
 * **Halal check:** all clips were reviewed frame-by-frame. There are no women, no exposed awrah, no music/dance/alcohol; the only people are men at prayer or reading the Quran, and hands.
 
-## Lyrics — please proofread
+## Lyrics — the text must be exactly yours
 
-The SRT that reached me contained only **four cues** (0:15–0:36). Those are exact (`inputs/lyrics_user_supplied_partial.srt`). The other **50 lines were reconstructed from the song itself** (two speech-recognition passes over the vocals, cross-checked) and may contain wrong words or spellings. They are in `inputs/lyrics.srt`; `docs/LYRICS_REVIEW.md` lists every line with a confidence note.
+> **The `inputs/lyrics.srt` in this repo is a DRAFT.** Only four cues (the hook, 0:15–0:36) were ever supplied (`inputs/lyrics_user_supplied_partial.srt`, exact). The other lines were reconstructed from the audio by speech recognition and contain wrong words and spellings. Replace them with the real lyrics before publishing.
 
-### Word timing (the live highlight)
+Put the real lyrics in **`inputs/lyrics.txt`**: plain text, one sung line per row, in the order they are sung (repeat the hook every time it is sung); no timings needed. If that file exists it wins over the SRT.
 
-`tools/align_words.py` force-aligns every word to the audio (wav2vec2 / MMS-300m CTC aligner, ONNX int8, text romanised with `uroman`) and writes `inputs/words.json`, which `tools/prep.py` reads. The same hook line comes back at +21.3 s, +53.3 s, +64 s … and the aligner puts each of its words within ~0.08 s of the same place every time, which is the check I used. Result: **the lines are really sung ~0.6 s earlier than the times in the SRT** (first line at 14.4 s, not 15.0 s); the film follows the audio.
+Then (shots, base picture and audio do not change, only the captions):
 
-To change lyrics: edit `inputs/lyrics.srt`, then
 ```bash
 pip install onnxruntime numpy uroman
 # model: https://huggingface.co/Corvo007/mms-300m-1130-forced-aligner-int8  (model.onnx, vocab.json) -> ./aligner/
-python3 tools/align_words.py ./aligner && cp work/words.json inputs/words.json
-./build.sh overlays final        # (and: shots base final  if the number of lines changed -> tools/plan_edl.py)
+python3 tools/align_words.py ./aligner --global        # whole text <-> whole song, writes work/words.json
+cp work/words.json inputs/words.json
+./build.sh overlays final                              # ~10 + 15 min;  tools/preview.py 22 26 out.mp4 renders a 26 s check clip
 ```
-Without a fresh alignment a changed line falls back to an even split of its SRT window.
+
+### How word timing is found
+`tools/align_words.py --global` force-aligns every word to the audio (wav2vec2 / MMS-300m CTC aligner, ONNX int8, text romanised with `uroman`): pass 1 aligns the whole text to the whole song with a wildcard token between lines; pass 2 re-aligns every line inside its own window (after the previous line, before the next) so a long first word cannot grab the previous line's humming. Check used: the hook comes back at +21.3 s, +53.3 s, +64 s … and each of its words lands within ~0.08 s of the same place every time. The lines are really sung ~0.6 s earlier than the SRT times (first line at 14.4 s, not 15.0 s); the film follows the audio.
 
 ## Re-render
 

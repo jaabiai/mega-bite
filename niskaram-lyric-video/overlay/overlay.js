@@ -19,7 +19,7 @@
   const ePen = p => 0.45 * p + 0.55 * eIO3(p);
   const $ = id => document.getElementById(id);
 
-  let P = null, cues = [], runs = [], lines = [], endItems = [], particles = [];
+  let P = null, cues = [], runs = [], chunks = [], endItems = [], particles = [];
   let titleW = 0;
 
   // small deterministic PRNG so particles are identical on every render
@@ -31,32 +31,39 @@
   async function setup(project, cueList) {
     P = project; cues = cueList.slice().sort((a, b) => a.start - b.start);
 
-    // ---- per-cue visibility window; contiguous cues share one animated plate (a "run") ----
-    cues.forEach((c, i) => {
-      const nx = cues[i + 1];
-      c.tin = c.start - 0.34;
-      let tout = c.end + 0.14;
-      if (nx && nx.start - c.end < 1.4) tout = Math.min(tout, nx.start - 0.5);
-      c.tout = Math.max(tout, c.start + 0.9); c.dOut = 0.36;
-      c.vis1 = c.tout + c.dOut + 0.045 * c.words.length;
+    // ---- caption chunks: every word on its own; a very short word is paired with the next one so it can be read ----
+    const cap = P.caption || {};
+    if (cap.font) document.documentElement.style.setProperty('--capFont', `'${cap.font}'`);
+    if (cap.size) document.documentElement.style.setProperty('--capSize', cap.size + 'px');
+    chunks = [];
+    cues.forEach((c, ci) => {
+      const ws = c.words, n = ws.length;
+      const dur = i => (i + 1 < n ? ws[i + 1].t0 : ws[i].t1) - ws[i].t0;
+      let k = 0;
+      while (k < n) {
+        let b = k;
+        if (b + 1 < n && (dur(b) < 0.42 || [...ws[b].w].length <= 2)) b++;
+        chunks.push({ ci, text: ws.slice(k, b + 1).map(w => w.w).join(' '), t0: ws[k].t0, t1: b + 1 < n ? ws[b + 1].t0 : ws[b].t1, last: b + 1 >= n });
+        k = b + 1;
+      }
+    });
+    chunks.forEach((ch, i) => {
+      const nx = chunks[i + 1];
+      ch.contig = !!nx && nx.t0 - ch.t1 < 0.15;                         // the next word follows straight away
+      ch.vis0 = ch.t0 - 0.16; ch.vis1 = ch.t1 + (ch.contig ? 0.14 : 0.42);
     });
     runs = [];
-    cues.forEach(c => {
+    chunks.forEach(ch => {
       const r = runs[runs.length - 1];
-      if (r && c.tin - r.vis1 <= 0.8) { r.cues.push(c); r.vis1 = Math.max(r.vis1, c.vis1); } else runs.push({ vis0: c.tin, vis1: c.vis1, cues: [c] });
+      if (r && ch.vis0 - r.vis1 <= 0.9) r.vis1 = Math.max(r.vis1, ch.vis1); else runs.push({ vis0: ch.vis0, vis1: ch.vis1 });
     });
     const lt = $('lt');
-    lines = [];
-    cues.forEach((c, i) => {
-      const el = document.createElement('div');
-      el.className = 'ltLine' + (isArabic(c.text) ? ' ar' : '');
-      if (isArabic(c.text)) el.dir = 'rtl';
-      const spans = c.words.map(w => {
-        const s = document.createElement('span'); s.className = 'w'; s.textContent = w.w;
-        const u = document.createElement('i'); u.className = 'wu'; s.appendChild(u); el.appendChild(s); return s;
-      });
-      lt.appendChild(el);
-      lines.push({ cue: c, el, spans, ul: spans.map(s => s.lastChild) });
+    chunks.forEach(ch => {
+      const box = document.createElement('div'); box.className = 'cap';
+      box.innerHTML = '<div class="t"></div><div class="u"><div class="track"></div><div class="fill"></div><div class="head"></div></div>';
+      box.firstChild.textContent = ch.text;
+      lt.appendChild(box);
+      ch.box = box; ch.tEl = box.firstChild; ch.uEl = box.lastChild; ch.fill = ch.uEl.querySelector('.fill'); ch.head = ch.uEl.querySelector('.head');
     });
 
     // ---- end credit items ----
@@ -70,19 +77,22 @@
 
     ['titleShadow', 'titleGlow', 'titleText', 'titleSheen'].forEach(id => { $(id).textContent = P.title_arabic; });
 
-    const fams = ["800 60px 'Anek Malayalam'", "700 60px 'Anek Malayalam'", "700 70px 'Noto Naskh Arabic'", "700 200px 'Aref Ruqaa'",
+    const capFont = (P.caption && P.caption.font) || 'Baloo Chettan 2';
+    const fams = [`800 112px '${capFont}'`, "800 60px 'Anek Malayalam'", "700 70px 'Noto Naskh Arabic'", "700 200px 'Aref Ruqaa'",
       "600 60px 'Cinzel'", "400 24px 'Cinzel'", "italic 500 36px 'Cormorant Garamond'"];
-    await Promise.all(fams.map(f => document.fonts.load(f, 'നിസ്കരിച്ചോ ABC حي على')));
+    await Promise.all(fams.map(f => document.fonts.load(f, 'നിസ്കരിച്ചോ ABC حي على ദുനിയാവിൻ')));
     await document.fonts.ready;
     await new Promise(r => { const i = $('endLogoImg'); if (i.complete) r(); else i.onload = r; });
 
-    // measure & position lyric lines (bottom aligned, left anchored)
-    const baseBottom = H - 96;
-    lines.forEach(L => {
-      L.h = L.el.offsetHeight; L.w = L.el.offsetWidth;
-      L.el.style.top = (baseBottom - L.h) + 'px';
+    // measure every caption chunk (box width = text width; very long chunks are scaled to fit the frame)
+    chunks.forEach(ch => {
+      ch.box.style.display = 'block';
+      let w = ch.tEl.offsetWidth;
+      const maxW = 1560;
+      if (w > maxW) { ch.scale = maxW / w; w = maxW; } else ch.scale = 1;
+      ch.w = w; ch.box.style.display = 'none';
+      ch.uEl.style.width = (w + 16) + 'px';
     });
-    runs.forEach(r => { r.h = Math.max(...r.cues.map(c => lines[cues.indexOf(c)].h)); });
 
     // end items layout: vertically centred stack
     const gap = 118, n = endItems.length, top0 = H / 2 - (n * gap) / 2 + 14;
@@ -231,54 +241,42 @@
   }
 
   // ------------------------------------------------------------------ lyric lower-third
-  // Every word of the visible line stays on screen but soft-focus; only the word being sung at this very
-  // moment is sharp, full brightness, popped and underlined.  Word times come from forced alignment.
-  const BLUR_REST = 3.8, OP_REST = 0.55;
+  // Only the word being sung is on screen (left lower-third).  It pops in, and a neon underline fills along it for exactly
+  // as long as the word is sung.  Word times come from forced alignment (tools/align_words.py).
+  const easeOutBack = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
   function updateLyrics(t) {
-    const plate = $('ltPlate'), bar = $('ltBar');
+    const plate = $('ltPlate');
     const run = runs.find(r => t >= r.vis0 - 0.3 && t <= r.vis1 + 0.1);
-    lines.forEach(L => { L.el.style.display = 'none'; });
-    if (!run) { plate.style.opacity = 0; bar.style.opacity = 0; return; }
-    const inP = prog(t, run.vis0 - 0.1, run.vis0 + 0.55), outP = prog(t, run.vis1 - 0.55, run.vis1);
-    plate.style.opacity = eOut3(inP) * (1 - eIn3(outP));
-    plate.style.transform = `scaleX(${lerp(0.55, 1, eOut3(inP))})`;
-    const bottom = H - 96;
-    const bp = eOut5(prog(t, run.vis0, run.vis0 + 0.5));
-    let wsum = 0, hsum = 0;
-    run.cues.forEach(c => {
-      const L = lines[cues.indexOf(c)];
-      const w = eOut3(prog(t, c.tin, c.tin + 0.4)) * (1 - eIn3(prog(t, c.tout, c.tout + c.dOut)));
-      if (w > 0) { wsum += w; hsum += w * L.h; }
-    });
-    const hNow = wsum > 0 ? hsum / wsum : run.cues[0] ? lines[cues.indexOf(run.cues[0])].h : 80;
-    bar.style.top = (bottom - hNow + 12) + 'px'; bar.style.height = Math.max(20, hNow - 22) + 'px';
-    bar.style.transform = `scaleY(${bp * (1 - eIn3(outP))})`;
-    bar.style.opacity = bp > 0 ? 1 : 0;
-
-    run.cues.forEach(c => {
-      const L = lines[cues.indexOf(c)], n = c.words.length, rtl = L.el.dir === 'rtl';
-      if (t < c.tin - 0.02 || t > c.vis1 + 0.02) return;
-      L.el.style.display = 'block';
-      L.spans.forEach((s, j) => {
-        const w = c.words[j];
-        const e = eOut3(prog(t, c.tin + 0.06 * j, c.tin + 0.06 * j + 0.6));                    // entrance (staggered)
-        const x = eIn3(prog(t, c.tout + 0.045 * j, c.tout + 0.045 * j + c.dOut));              // exit (staggered)
-        const tEnd = j + 1 < n ? c.words[j + 1].t0 : w.t1;
-        const up = eOut3(prog(t, w.t0 - 0.05, w.t0 + 0.09));
-        const down = eIn3(prog(t, tEnd - 0.07, tEnd + 0.12));
-        const f = up * (1 - down);                                                              // 1 while this word is being sung
-        const pop = Math.sin(Math.PI * prog(t, w.t0 - 0.05, w.t0 + 0.34)) * (1 - down);
-        const blur = lerp(BLUR_REST, 0, f) + (1 - e) * 12 + x * 10;
-        s.style.opacity = e * (1 - x) * lerp(OP_REST, 1, f);
-        s.style.transform = `translate(${(1 - e) * (rtl ? 28 : -28)}px, ${(1 - e) * 34 - x * 26 - f * 3}px) scale(${1 + 0.05 * f + 0.045 * pop})`;
-        s.style.filter = `blur(${blur.toFixed(2)}px)`;
-        s.style.textShadow = f > 0.01
-          ? `0 2px 14px rgba(0,0,0,.65), 0 0 ${(12 + 30 * f).toFixed(1)}px rgba(227,189,98,${(0.62 * f).toFixed(2)})`
-          : '0 2px 14px rgba(0,0,0,.6)';
-        const u = L.ul[j], fill = prog(t, w.t0, tEnd);
-        u.style.opacity = (0.95 * f).toFixed(3);
-        u.style.transform = `scaleX(${fill.toFixed(3)})`;
-      });
+    if (!run) { plate.style.opacity = 0; }
+    else {
+      plate.style.opacity = eOut3(prog(t, run.vis0, run.vis0 + 0.45)) * (1 - eIn3(prog(t, run.vis1 - 0.5, run.vis1)));
+      plate.style.transform = `scaleX(${lerp(0.6, 1, eOut3(prog(t, run.vis0, run.vis0 + 0.6)))})`;
+    }
+    chunks.forEach(ch => {
+      if (t < ch.vis0 - 0.02 || t > ch.vis1 + 0.02) { ch.box.style.display = 'none'; return; }
+      ch.box.style.display = 'block';
+      const tin = ch.t0 - 0.07;
+      const e = prog(t, tin, tin + 0.26);
+      const wipe = eOut3(prog(t, tin, tin + 0.24));
+      const exitStart = ch.contig ? ch.t1 - 0.05 : ch.t1 + 0.12;
+      const x = eIn3(prog(t, exitStart, exitStart + (ch.contig ? 0.13 : 0.26)));
+      const sc = lerp(0.8, 1, easeOutBack(e)) * ch.scale * (1 + 0.02 * Math.sin(Math.PI * prog(t, ch.t0, ch.t1)));   // a slow breath while it is sung
+      const el = ch.tEl;
+      el.style.opacity = Math.min(1, e * 2.4) * (1 - x);
+      el.style.transform = `translate(${-34 * x}px, ${(1 - eOut3(e)) * 46 + x * -10}px) scale(${sc.toFixed(4)})`;
+      el.style.filter = `blur(${((1 - e) * (1 - e) * 16 + x * 10).toFixed(2)}px)`;
+      el.style.clipPath = `inset(-70px ${((1 - wipe) * 100).toFixed(1)}% -70px -70px)`;
+      const glow = Math.exp(-Math.pow((t - (ch.t0 + 0.1)) / 0.22, 2));                               // flash as the word lands
+      el.style.textShadow = `0 4px 22px rgba(0,0,0,.72), 0 0 ${(20 + 34 * glow).toFixed(0)}px rgba(255,205,100,${(0.28 + 0.5 * glow).toFixed(2)})`;
+      // neon underline: grows along the word from its first to its last moment
+      const p = prog(t, ch.t0, ch.t1);
+      const w = ch.w + 16;
+      const uIn = eOut3(prog(t, tin, tin + 0.2)), flick = 0.93 + 0.07 * Math.sin(t * 43) * Math.sin(t * 17);
+      ch.uEl.style.opacity = (uIn * (1 - x) * flick).toFixed(3);
+      ch.uEl.style.transform = `translateX(${-34 * x}px)`;
+      ch.fill.style.width = (w * p).toFixed(1) + 'px';
+      ch.head.style.left = (w * p).toFixed(1) + 'px';
+      ch.head.style.opacity = (p < 0.999 ? 1 : 1 - prog(t, ch.t1, ch.t1 + 0.18)).toFixed(3);
     });
   }
 

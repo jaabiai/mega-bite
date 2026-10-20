@@ -10,7 +10,7 @@ Output  $WORK/words.json :  [ {cue, start, end, text, words:[{w, t0, t1}]} , ...
 
 Needs:  pip install onnxruntime numpy uroman   and the model from
         https://huggingface.co/Corvo007/mms-300m-1130-forced-aligner-int8   (model.onnx, vocab.json)
-Usage:  align_words.py <model_dir> [first_cue last_cue]
+Usage:  align_words.py <model_dir> [--global]      (--global: ignore the SRT times, align the whole text to the whole song)
 """
 import json, os, pathlib, re, subprocess, sys
 import numpy as np
@@ -18,7 +18,7 @@ import numpy as np
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 WORK = pathlib.Path(os.environ.get('WORK', ROOT / 'work')); WORK.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from prep import parse_srt
+from prep import parse_srt, lyric_lines
 
 SR = 16000
 STRIDE = 320          # samples per output frame (20 ms)
@@ -128,8 +128,86 @@ def fill_gaps(ws, lo, hi):
                 else: t0[k] = t0[pk] + (t0[nk] - t0[pk]) * (k - pk) / (nk - pk)
     return t0
 
+def encoder_logits(sess, audio, chunk=30.0, ctx=3.0):
+    """wav2vec2 posteriors for the whole song, in overlapping chunks (frames are 20 ms)."""
+    T = int(np.ceil(len(audio) / STRIDE)); out = None; pos = 0.0
+    while pos < len(audio) / SR:
+        a = max(0.0, pos - ctx); b = min(len(audio) / SR, pos + chunk + ctx)
+        x = audio[int(a * SR):int(b * SR)]; x = (x - x.mean()) / (x.std() + 1e-7)
+        lg = sess.run(None, {'input_values': x[None].astype(np.float32)})[0][0]
+        if out is None: out = np.zeros((T + 8, lg.shape[1]), dtype=np.float32)
+        f0 = int(round(a * SR / STRIDE)); lo = int(round((pos - a) * SR / STRIDE)); hi = int(round((min(pos + chunk, len(audio) / SR) - a) * SR / STRIDE))
+        n = max(0, min(hi - lo, len(lg) - lo, len(out) - f0 - lo))
+        out[f0 + lo:f0 + lo + n] = lg[lo:lo + n]
+        pos += chunk
+    return out[:T]
+
+def main_global(model_dir):
+    """Align the complete lyric text to the complete song in one pass (no SRT times needed).  A wildcard token between
+    lines absorbs humming / instrumental parts."""
+    import onnxruntime as ort
+    sess = ort.InferenceSession(str(model_dir / 'model.onnx'), providers=['CPUExecutionProvider'])
+    vocab = json.load(open(model_dir / 'vocab.json'))
+    audio = load_audio()
+    lines = lyric_lines(json.load(open(ROOT / 'project.json')))
+    lp = log_softmax(encoder_logits(sess, audio))
+    star_col = lp[:, 4:].max(1, keepdims=True); lp2 = np.concatenate([lp, star_col], 1); STAR = lp.shape[1]
+    toks, owner = [STAR], [(-1, -1)]
+    for li, text in enumerate(lines):
+        for wi, w in enumerate(romanise(text)):
+            for ch in w:
+                if ch in vocab: toks.append(vocab[ch]); owner.append((li, wi))
+        toks.append(STAR); owner.append((-1, -1))
+    print(f'{len(lines)} lines, {len(toks)} tokens, {len(lp)} frames', flush=True)
+    path, ext = viterbi_ctc(lp2, np.array(toks))
+    first, last = {}, {}
+    for t, s in enumerate(path):
+        if s % 2 == 1:
+            k = s // 2
+            if owner[k][0] >= 0: first.setdefault(k, t); last[k] = t
+    # ---- pass 1 result: first word + last frame of every line
+    p1 = []
+    for li, text in enumerate(lines):
+        ks = [k for k in first if owner[k][0] == li]
+        s0 = min((first[k] for k in ks), default=0) * STRIDE / SR
+        e0 = (max((last[k] for k in ks), default=0) + 1) * STRIDE / SR
+        p1.append((s0, e0))
+    # ---- pass 2: every line again inside its own window, which starts after the previous line has finished (a long word
+    #      such as "mannarakkullil" would otherwise grab the humming of the previous line's final "m") and ends at the next
+    out = []
+    n_lines = len(lines)
+    for li, text in enumerate(lines):
+        s_i = p1[li][0]
+        prev_end = p1[li - 1][1] + 0.35 if li else 0.0
+        nxt = p1[li + 1][0] if li + 1 < n_lines else None
+        lo = max(s_i - 0.9, prev_end - 0.1)
+        hi = (nxt - 0.05) if (nxt is not None and nxt - s_i < 7.5) else s_i + 6.4
+        cue = {'start': lo, 'end': hi, 'text': text}
+        r = align_cue(sess, vocab, audio, cue, win=(lo, hi))
+        words = text.split(); n = len(words)
+        if r is None:
+            t0 = fill_gaps([{'t0': None} for _ in words], lo, hi); score = -99.0; t_last = None
+        else:
+            _, times, score = r
+            t0 = fill_gaps([{'t0': (None if times[k] is None else times[k][0])} for k in range(n)], lo, hi)
+            t_last = times[-1][1] if times[-1] else None
+        t0 = [max(lo, min(t, hi - 0.15)) for t in t0]
+        for k in range(1, n): t0[k] = max(t0[k], t0[k - 1] + 0.12)
+        out.append({'cue': li + 1, 'text': text, 'score': round(score, 2), 'start': round(t0[0], 3),
+                    'words': [{'w': w, 't0': round(t0[k], 3)} for k, w in enumerate(words)], '_last': t_last, '_hi': hi})
+    # a word is sung until the next one starts; the last word of a line until its last frame (+ tail) or the next line
+    for i, c in enumerate(out):
+        nxt = out[i + 1]['start'] if i + 1 < len(out) else 1e9
+        end = min((c['_last'] if c['_last'] else c['words'][-1]['t0'] + 0.8) + 0.35, nxt - 0.05, c['_hi'])
+        end = max(end, c['words'][-1]['t0'] + 0.35)
+        for k, w in enumerate(c['words']): w['t1'] = round(c['words'][k + 1]['t0'] if k + 1 < len(c['words']) else end, 3)
+        c['end'] = round(end, 3); del c['_last'], c['_hi']
+        print(c['cue'], f"[{c['score']:.2f}]", ' | '.join(f"{w['w']} {w['t0']}" for w in c['words']), f"-> {end:.2f}", flush=True)
+    json.dump(out, open(WORK / 'words.json', 'w'), ensure_ascii=False, indent=1)
+
 def main():
     model_dir = pathlib.Path(sys.argv[1])
+    if '--global' in sys.argv: return main_global(model_dir)
     import onnxruntime as ort
     sess = ort.InferenceSession(str(model_dir / 'model.onnx'), providers=['CPUExecutionProvider'])
     vocab = json.load(open(model_dir / 'vocab.json'))

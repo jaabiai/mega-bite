@@ -30,10 +30,21 @@ def parse_srt(text):
         cues.append({'start': start, 'end': end, 'text': ' '.join(l.strip() for l in lines[i + 1:])})
     return cues
 
+def lyric_lines(proj):
+    """The sung lines of the song, in order.  inputs/lyrics.txt (one line per row, blank rows ignored, no times needed)
+    wins over inputs/lyrics.srt."""
+    txt = ROOT / 'inputs' / 'lyrics.txt'
+    if txt.exists():
+        return [l.strip() for l in txt.read_text(encoding='utf8').replace('\ufeff', '').splitlines() if l.strip()]
+    return [c['text'] for c in parse_srt(open(ROOT / proj['lyrics_srt'], encoding='utf8').read())]
+
 def build_cues(proj, off):
     """Cue list in FILM time with per-word timing.  Word times come from inputs/words.json (tools/align_words.py);
     a cue whose text changed since the alignment falls back to an even split of its SRT window."""
-    srt = parse_srt(open(ROOT / proj['lyrics_srt'], encoding='utf8').read())
+    srt_path = ROOT / proj['lyrics_srt']
+    srt = parse_srt(open(srt_path, encoding='utf8').read()) if srt_path.exists() else []
+    if (ROOT / 'inputs' / 'lyrics.txt').exists() or not srt:
+        srt = [{'start': 0, 'end': 0, 'text': t} for t in lyric_lines(proj)]
     wpath = ROOT / 'inputs' / 'words.json'
     aligned = {w['cue']: w for w in json.load(open(wpath))} if wpath.exists() else {}
     cues, fallback = [], []
@@ -44,7 +55,7 @@ def build_cues(proj, off):
             start, end = a['start'] + off, a['end'] + off
         else:
             fallback.append(i)
-            ws = c['text'].split(); n = len(ws); d = c['end'] - c['start']
+            ws = c['text'].split(); n = len(ws); d = max(c['end'] - c['start'], 0.5 * n)
             words = [{'w': w, 't0': round(c['start'] + off + d * k / n, 3), 't1': round(c['start'] + off + d * (k + 1) / n, 3)} for k, w in enumerate(ws)]
             start, end = c['start'] + off, c['end'] + off
         if end <= proj['song_in'] + off: continue

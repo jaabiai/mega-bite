@@ -81,5 +81,9 @@
     "ceiling_db": -2.0,
     "comp_threshold_db": -19,
     "comp_ratio": 2.4
+  },
+  "caption": {
+    "font": "Baloo Chettan 2",
+    "size": 112
   }
 }
