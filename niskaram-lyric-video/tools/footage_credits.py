@@ -21,5 +21,14 @@ for s in edl['shots']:
 L += ['', '## Texture overlays', '', '| Mixkit ID | Title | Licence | Role |', '|---:|---|---|---|']
 for o in edl['overlays']:
     v = fj[str(o['id'])]; L.append(f"| [{o['id']}]({v['page']}) | {v['title']} | {v['license']} | {o['role']} |")
+rf = ROOT / 'reels' / 'footage_reels.json'
+if rf.exists():
+    fr = json.load(open(rf, encoding='utf8')); rc = json.load(open(ROOT / 'reels' / 'reels.json', encoding='utf8'))
+    L += ['', '## Reels (9:16)', '',
+          'Native vertical Mixkit clips wherever the free sites have one for the line. Mosque, prayer and Qur\'an have no vertical clip on Mixkit/Coverr, so those landscape clips are reframed to a 9:16 slice.', '',
+          '| Reel | Mixkit ID | Title | Licence |', '|---|---:|---|---|']
+    for r in rc['reels']:
+        for i in dict.fromkeys(str(x['id']) for x in r['shots']):
+            v = fr[i]; L.append(f"| {r['id']} | [{i}]({v['page']}) | {v['title']} | {v['license']} |")
 (ROOT / 'docs' / 'FOOTAGE_CREDITS.md').write_text('\n'.join(L) + '\n', encoding='utf8')
 print('wrote docs/FOOTAGE_CREDITS.md')

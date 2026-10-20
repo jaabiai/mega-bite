@@ -19,7 +19,8 @@
     R = reel;
     const root = document.documentElement.style;
     root.setProperty('--capSize', (R.capSize || 128) + 'px');
-    root.setProperty('--capY', (R.capY || 1300) + 'px');
+    root.setProperty('--capY', (R.capY || 1470) + 'px');
+    root.setProperty('--capX', (R.capX || 64) + 'px');
     if (R.hook && R.hook.size) root.setProperty('--hookSize', R.hook.size + 'px');
     const cues = cueList.slice().sort((a, b) => a.start - b.start);
 
@@ -72,9 +73,9 @@
         const s = document.createElement('span'); s.textContent = w; s.style.display = 'inline-block'; if (i < a.length - 1) s.style.marginRight = '.28em';
         h.appendChild(s); return s;
       });
-      $('hook').style.top = (R.hook.y - 90) + 'px';
-      $('hookShade').style.top = (R.hook.y - 190) + 'px';
-      $('hookRule').style.top = (R.hook.rule_y || (R.hook.y + 96)) + 'px';
+      $('hook').style.top = R.hook.y + 'px';
+      $('hookShade').style.top = (R.hook.y - 120) + 'px';
+      const hb = $('hook'); $('hookRule').style.top = (hb.offsetTop + hb.offsetHeight + 6) + 'px';
     }
 
     const fams = [`800 128px 'Uroob'`, "700 70px 'Amiri'", "600 40px 'Cinzel'", "700 40px 'Cinzel'"];
@@ -86,15 +87,15 @@
       ch.box.style.display = 'block';
       const tw = ch.tEl.offsetWidth;                      // natural text width (measured while visible)
       let w = tw;
-      const maxW = R.capMaxW || 940;
+      const maxW = R.capMaxW || 800;
       if (w > maxW) { ch.scale = maxW / w; w = maxW; } else ch.scale = 1;
       ch.w = w; ch.box.style.display = 'none';
-      ch.box.style.left = ((W - tw) / 2) + 'px';
+      ch.box.style.left = (R.capX || 64) + 'px';           // left aligned (lower-left, above the reel interface)
       ch.uEl.style.width = (w + 16) + 'px';
-      ch.uEl.style.left = ((tw - w) / 2 - 8) + 'px';
+      ch.uEl.style.left = '-8px';
     });
 
-    const shade = $('capShade'); shade.style.top = (R.capY - 330) + 'px'; shade.style.height = '560px';
+    const shade = $('capShade'); shade.style.top = (R.capY - 640) + 'px'; shade.style.height = (H - (R.capY - 640)) + 'px';
     $('endC1').style.top = (R.endY || 1130) + 'px'; $('endC2').style.top = ((R.endY || 1130) + 128) + 'px';
     window.__ready = true;
   }

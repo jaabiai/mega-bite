@@ -12,13 +12,13 @@
   @font-face { font-family: 'Cinzel'; font-weight: 700; src: url('../fonts/cinzel-latin-700-normal.woff2') format('woff2'); }
   @font-face { font-family: 'Cormorant Garamond'; font-weight: 500; font-style: italic; src: url('../fonts/cormorant-garamond-latin-500-italic.woff2') format('woff2'); }
 
-  :root { --gold: #e3bd62; --gold-hi: #fbe9ae; --capFont: 'Uroob'; --capSize: 128px; --capY: 1300px; }
+  :root { --gold: #e3bd62; --gold-hi: #fbe9ae; --capFont: 'Uroob'; --capSize: 108px; --capY: 1470px; --capX: 64px; }
   html, body { margin: 0; background: transparent; }
   #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
   .abs { position: absolute; }
 
   /* soft shade under the captions so they read on any picture */
-  #capShade { left: 0; width: 1080px; opacity: 0; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(3,5,8,.62) 0%, rgba(3,5,8,.34) 55%, rgba(3,5,8,0) 100%); }
+  #capShade { left: 0; width: 1080px; opacity: 0; background: linear-gradient(180deg, rgba(3,5,8,0) 0%, rgba(3,5,8,.50) 40%, rgba(3,5,8,.80) 100%); }
 
   /* ---------- logo bug ---------- */
   #bug { right: 54px; top: 168px; width: 96px; height: 96px; opacity: 0; }
@@ -27,15 +27,15 @@
   #hookShade { left: 0; width: 1080px; height: 360px; opacity: 0; background: linear-gradient(180deg, rgba(3,5,8,0) 0%, rgba(3,5,8,.62) 45%, rgba(3,5,8,.62) 60%, rgba(3,5,8,0) 100%); }
 
   /* ---------- hook title ---------- */
-  #hook { left: 0; width: 1080px; text-align: center; white-space: nowrap; opacity: 0; }
-  #hook .h { display: inline-block; font: 800 var(--hookSize, 150px)/1.2 'Uroob', sans-serif; color: #fff7dd; will-change: transform, opacity, filter;
+  #hook { left: var(--capX, 64px); width: 930px; text-align: left; white-space: normal; opacity: 0; }
+  #hook .h { display: inline-block; font: 800 var(--hookSize, 150px)/1.18 'Uroob', sans-serif; color: #fff7dd; will-change: transform, opacity, filter;
     text-shadow: 0 6px 28px rgba(0,0,0,.8), 0 0 30px rgba(255,200,90,.55); }
-  #hookRule { left: 540px; width: 0; height: 3px; transform: translateX(-50%); opacity: 0;
-    background: linear-gradient(90deg, rgba(227,189,98,0), var(--gold) 20%, var(--gold-hi) 50%, var(--gold) 80%, rgba(227,189,98,0)); box-shadow: 0 0 16px rgba(227,189,98,.75); }
+  #hookRule { left: var(--capX, 64px); width: 0; height: 3px; opacity: 0;
+    background: linear-gradient(90deg, var(--gold-hi), var(--gold) 55%, rgba(227,189,98,0)); box-shadow: 0 0 16px rgba(227,189,98,.75); }
 
   /* ---------- captions (one sung word at a time, neon underline) ---------- */
   .cap { position: absolute; left: 0; top: 0; height: 1920px; display: none; }
-  .cap .t { position: absolute; left: 0; bottom: calc(1920px - var(--capY)); white-space: nowrap; color: #fff; transform-origin: 50% 80%;
+  .cap .t { position: absolute; left: 0; bottom: calc(1920px - var(--capY)); white-space: nowrap; color: #fff; transform-origin: 0% 80%;
     font: 800 var(--capSize)/1.22 var(--capFont), sans-serif; will-change: transform, opacity, filter;
     font-synthesis: none; }
   .cap .t.ar { font-family: 'Amiri', 'Noto Naskh Arabic', var(--capFont), serif; font-weight: 700; font-size: calc(var(--capSize) * 1.0); line-height: 1.3; }

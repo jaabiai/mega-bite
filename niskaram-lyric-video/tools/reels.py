@@ -9,9 +9,10 @@
   reels.py final  [id]   picture + overlay + grain + fades + audio -> output/<id>.mp4
   reels.py all    [id]
 
-The picture sources are 720p/1080p landscape clips, so a full-bleed 9:16 crop would be 2.7x enlarged.  Instead every reel
-puts the sharp footage in a window (16:9 band / 4:3 / 1:1 depending on the reel) over a blurred, darkened copy of itself.
-Caption style is the film's: one sung word at a time, Uroob, neon underline.  Shot cuts snap to the strongest musical onsets.
+Picture: full-bleed 9:16.  Native vertical Mixkit clips wherever one exists for the line (moon, hourglass, sky, desert, waterfall,
+candle, stars ...); mosque / prayer / Qur'an have no vertical clip on the free sites, so those landscape clips are reframed to a
+9:16 slice.  No blurred bars.  Captions are the film's (one sung word at a time, Uroob, neon underline) but left-aligned in the
+lower-left, above the reel interface.  Shot cuts snap to the strongest musical onsets.
 """
 import json, os, pathlib, subprocess, sys
 from concurrent.futures import ThreadPoolExecutor
@@ -22,7 +23,6 @@ import compose
 CFG = json.load(open(ROOT / 'reels' / 'reels.json', encoding='utf8'))
 W, H = CFG['size']; FPS = CFG['fps']
 OUTPUT = ROOT / 'output'
-WINDOWS = {'band': (1080, 608), 'frame43': (1080, 810), 'square': (1080, 1080)}
 
 def rdir(r):
     d = WORK / 'reels' / r['id']; d.mkdir(parents=True, exist_ok=True); return d
@@ -52,7 +52,7 @@ def prep(r, tl):
         ws = c['words']; t0, t1 = ws[0]['t0'] - off, ws[-1]['t1'] - off
         if t0 >= a - 0.01 and t1 <= b + 0.01:
             cues.append({'start': round(t0 - a, 3), 'end': round(t1 - a, 3), 'words': [{'w': w['w'], 't0': round(w['t0'] - off - a, 3), 't1': round(w['t1'] - off - a, 3)} for w in ws]})
-    reel = {k: r[k] for k in ('capY', 'capSize', 'capMaxW', 'hook', 'endStart', 'endY') if k in r}
+    reel = {k: r[k] for k in ('capX', 'capY', 'capSize', 'capMaxW', 'hook', 'endStart', 'endY') if k in r}
     job = {'fps': FPS, 'duration': duration(r), 'reel': reel, 'cues': cues}
     json.dump(job, open(rdir(r) / 'reel.json', 'w', encoding='utf8'), ensure_ascii=False)
     json.dump(reel_shots(r, tl), open(rdir(r) / 'shots.json', 'w'))
@@ -75,29 +75,35 @@ def probe(path):
     j = json.loads(r.stdout); s = j['streams'][0]
     return int(s['width']), int(s['height']), float(j['format']['duration'])
 
+def source_path(cid):
+    """vsrc/ holds the vertical (and 1080p) downloads, src/ the original landscape library."""
+    for d in ('vsrc', 'src'):
+        f = WORK / d / f"{cid}.mp4"
+        if f.exists(): return f
+    raise FileNotFoundError(cid)
+
 def build_shot(args):
+    """Full-bleed 9:16 shot.  Native vertical clips are used as they are; landscape clips are reframed (a 9:16 slice
+    around `cx`) - never shown with blurred bars.  A slow push (z0 -> z1) runs over every shot."""
     r, sp = args
     d = rdir(r); (d / 'shots').mkdir(exist_ok=True)
-    Ww, Wh = WINDOWS[r['layout']]; Y = r['win'][1]
-    src = WORK / 'src' / f"{sp['id']}.mp4"
+    src = source_path(sp['id'])
     w, h, dur = probe(src)
     need = sp['length']
     nframes = max(2, round(need * FPS))
     inp = sp['in']
     if inp + need > dur - 0.05:
         inp = max(0.0, dur - 0.05 - need)
-    asp = Ww / Wh
     cx, cy = sp.get('cx', 0.5), sp.get('cy', 0.5)
     z0, z1 = sp.get('z0', 1.0), sp.get('z1', 1.08)
     zexpr = f"{z0}+({z1}-{z0})*on/{nframes - 1}"
-    g = (f"[0:v]fps={FPS}:round=near,format=yuv420p,split=2[s1][s2];"
-         f"[s1]crop=w='ih*{W}/{H}':h=ih:x='(iw-ow)*{cx}':y=0,scale={W // 5}:{H // 5}:flags=area,gblur=sigma=5:steps=2,"
-         f"scale={W}:{H}:flags=bicubic,eq=brightness={r.get('bg_brightness', -0.17)}:saturation={r.get('bg_sat', 0.9)}[bg];"
-         f"[s2]crop=w='min(iw,ih*{asp:.5f})':h='min(ih,iw/{asp:.5f})':x='(iw-ow)*{cx}':y='(ih-oh)*{cy}',"
-         f"scale={Ww * 2}:{Wh * 2}:flags=lanczos,"
-         f"zoompan=z='{zexpr}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s={Ww}x{Wh}:fps={FPS},format=yuv420p[win];"
-         f"[bg][win]overlay=x=0:y={Y}:format=auto,"
-         f"drawbox=x=0:y={Y - 2}:w={W}:h=2:color=0xE3BD62@0.85:t=fill,drawbox=x=0:y={Y + Wh}:w={W}:h=2:color=0xE3BD62@0.85:t=fill,"
+    # a slice that is enlarged more than 1.4x gets a touch of sharpening
+    slice_h = min(h, w * 16 / 9)
+    sharp = ",unsharp=5:5:0.55:5:5:0.0" if slice_h < H / 1.4 else ""
+    g = (f"[0:v]fps={FPS}:round=near,format=yuv420p,"
+         f"crop=w='min(iw,ih*{W}/{H})':h='min(ih,iw*{H}/{W})':x='(iw-ow)*{cx}':y='(ih-oh)*{cy}',"
+         f"scale={W * 2}:{H * 2}:flags=lanczos,"
+         f"zoompan=z='{zexpr}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s={W}x{H}:fps={FPS}{sharp},"
          f"format=yuv420p,setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv[out]")
     out = d / 'shots' / f"{sp['idx']:02d}_{sp['id']}.mp4"
     cmd = ['ffmpeg', '-v', 'error', '-y', '-ss', f'{inp:.3f}', '-t', f'{need + 0.5:.3f}', '-i', src, '-an', '-filter_complex', g, '-map', '[out]',
