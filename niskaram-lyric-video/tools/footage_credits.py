@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Regenerate docs/FOOTAGE_CREDITS.md from edl.json + footage.json."""
+"""Regenerate docs/FOOTAGE_CREDITS.md from edl.json + footage.json (+ reels/)."""
 import json, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-edl = json.load(open(ROOT / 'edl.json')); fj = json.load(open(ROOT / 'footage.json'))
-free = [i for i, v in fj.items() if v['license'].startswith('Mixkit Stock Video Free')]
-restr = [i for i, v in fj.items() if 'Restricted' in v['license']]
-L = ['# Footage credits and licences', '',
-     'All picture material is stock footage from **Mixkit** (https://mixkit.co). Licence labels were read from each clip page on 2026-10-19.', '',
-     f'* **{len(free)} clips: Mixkit Stock Video Free License** – free for commercial and non-commercial use, no attribution required.',
-     f'* **{len(restr)} clips: Mixkit Restricted License** – the clip page offers the 720p file "for personal use only"; commercial use (e.g. a monetised YouTube channel) needs the Envato licence/4K download for that clip, or a replacement.', '',
-     'The shot list is in `edl.json`, so a restricted clip can be swapped for any other footage by changing its `id` (see README → *Swapping footage*).', '',
-     'Content check: every clip was inspected frame-by-frame; no women, no uncovered awrah, no music/dance/alcohol. The only people are men at prayer / reading the Quran, and hands.', '',
-     '| Film time (s) | Mixkit ID | Title | Licence | Used for |', '|---:|---:|---|---|---|']
+edl = json.load(open(ROOT / 'edl.json')); fj = json.load(open(ROOT / 'footage.json', encoding='utf8'))
+used = {str(s['id']) for s in edl['shots']} | {str(o['id']) for o in edl['overlays']}
+vid = [i for i in used if fj[i].get('kind') != 'still']; stl = [i for i in used if fj[i].get('kind') == 'still']
+assert not [i for i in used if 'Restricted' in fj[i]['license']], 'restricted clip in the edit'
+L = ['# Footage and image credits, licences', '',
+     'Every picture in the film and in the three reels is free for **commercial use on a monetised channel**; no clip is under a "personal use only" licence.', '',
+     f'* **{len(vid)} stock clips - Mixkit Stock Video Free License** (https://mixkit.co/license/#videoFree): free for commercial and non-commercial use, no attribution required. The licence label was re-read from every clip page on 2026-10-20 (`tools/audit_licences.py`, result in `LICENCE_AUDIT.txt`).',
+     f'* **{len(stl)} still images - public-domain works and museum open-access scans**, turned into camera-move clips by `tools/still_clip.py` (no footage of prayer, sujood, mosque interiors or the Qur\'an with a verifiable commercial-use licence could be found on the free sites): the Metropolitan Museum of Art **Open Access (CC0 1.0)** scans, and paintings by Jean-L\u00e9on G\u00e9r\u00f4me (d. 1904), Osman Hamdi Bey (d. 1910) from Wikimedia Commons / the Met - all in the **public domain**. No attribution is legally required; the credits below are given as a courtesy. Authors, dates, source pages and licences: `stills/sources.json`.', '',
+     'The shot list is in `edl.json`; to change a picture change its `id` (see README -> *Swapping footage*).', '',
+     'Content check: every second of the film and of the reels was checked on contact sheets; no women, no uncovered awrah, no music/dance/alcohol. The only people are men at prayer / reading the Qur\'an, and painted worshippers.', '',
+     '| Film time (s) | ID | Title | Licence | Used for |', '|---:|---:|---|---|---|']
 seen = set()
 for s in edl['shots']:
     i = str(s['id'])
@@ -25,10 +26,10 @@ rf = ROOT / 'reels' / 'footage_reels.json'
 if rf.exists():
     fr = json.load(open(rf, encoding='utf8')); rc = json.load(open(ROOT / 'reels' / 'reels.json', encoding='utf8'))
     L += ['', '## Reels (9:16)', '',
-          'Native vertical Mixkit clips wherever the free sites have one for the line. Mosque, prayer and Qur\'an have no vertical clip on Mixkit/Coverr, so those landscape clips are reframed to a 9:16 slice.', '',
-          '| Reel | Mixkit ID | Title | Licence |', '|---|---:|---|---|']
+          'Native vertical Mixkit clips wherever the free sites have one for the line; the prayer / mihrab / Qur\'an shots are the public-domain / CC0 still images above, framed vertically.', '',
+          '| Reel | ID | Title | Licence |', '|---|---:|---|---|']
     for r in rc['reels']:
         for i in dict.fromkeys(str(x['id']) for x in r['shots']):
-            v = fr[i]; L.append(f"| {r['id']} | [{i}]({v['page']}) | {v['title']} | {v['license']} |")
+            v = fr[i]; assert 'Restricted' not in v['license']; L.append(f"| {r['id']} | [{i}]({v['page']}) | {v['title']} | {v['license']} |")
 (ROOT / 'docs' / 'FOOTAGE_CREDITS.md').write_text('\n'.join(L) + '\n', encoding='utf8')
 print('wrote docs/FOOTAGE_CREDITS.md')

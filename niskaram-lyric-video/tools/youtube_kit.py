@@ -65,7 +65,8 @@ Music: Miraya Studio
 Lyrics: Jabir Varikkodan
 Editor: Jabir Varikkodan
 Mixing & Visuals: Miraya Studio
-Stock footage: Mixkit (mixkit.co)
+Stock footage: Mixkit (mixkit.co), Mixkit Stock Video Free License
+Images: The Metropolitan Museum of Art Open Access (CC0); paintings by Jean-Léon Gérôme and Osman Hamdi Bey (public domain)
 
 📜 വരികൾ / LYRICS
 {LYRICS}

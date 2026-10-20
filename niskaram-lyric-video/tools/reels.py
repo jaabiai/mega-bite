@@ -175,7 +175,7 @@ def overlays(r, tl, workers=4, only=None):
 
 def final(r, tl):
     d = rdir(r); dur = duration(r)
-    out = OUTPUT / f"{r['id']}.mp4"
+    out = OUTPUT / f"{r['id']}{os.environ.get('OUT_SUFFIX', '')}.mp4"
     fg = (f"[1:v]format=rgba[ov];[0:v][ov]overlay=0:0:format=auto:eof_action=pass,noise=alls={r.get('noise', 6)}:allf=t+u,"
           f"fade=t=in:st=0:d=0.5,fade=t=out:st={dur - 1.2:.2f}:d=1.2,format=yuv420p,"
           f"setparams=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv[vout]")

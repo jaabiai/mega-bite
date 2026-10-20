@@ -49,11 +49,6 @@
   "page": "https://mixkit.co/free-stock-video/symmetrical-mosque-4313/",
   "license": "Mixkit Stock Video Free License"
  },
- "9998": {
-  "title": "Mosque in the mountain at dawn",
-  "page": "https://mixkit.co/free-stock-video/mosque-in-the-mountain-at-dawn-9998/",
-  "license": "Mixkit Restricted License (personal use only)"
- },
  "21585": {
   "title": "Thick clouds speeding in the sky with the wind",
   "page": "https://mixkit.co/free-stock-video/thick-clouds-speeding-in-the-sky-with-the-wind-21585/",
@@ -68,16 +63,6 @@
   "title": "Sand falling from an hourglass on a black background",
   "page": "https://mixkit.co/free-stock-video/sand-falling-from-an-hourglass-on-a-black-background-28901/",
   "license": "Mixkit Stock Video Free License"
- },
- "34189": {
-  "title": "The book of the Quran, close up view",
-  "page": "https://mixkit.co/free-stock-video/the-book-of-the-quran-close-up-view-34189/",
-  "license": "Mixkit Restricted License (personal use only)"
- },
- "34223": {
-  "title": "Men praying inside a mosque on the floor",
-  "page": "https://mixkit.co/free-stock-video/men-praying-inside-a-mosque-on-the-floor-34223/",
-  "license": "Mixkit Restricted License (personal use only)"
  },
  "39770": {
   "title": "View of the night sky filled with stars",
@@ -108,5 +93,29 @@
   "title": "Avenue with trees, buildings and fast cars at dusk",
   "page": "https://mixkit.co/free-stock-video/avenue-with-trees-buildings-and-fast-cars-at-dusk-34563/",
   "license": "Mixkit Stock Video Free License"
+ },
+ "900101": {
+  "title": "Mihrab (Prayer Niche) (Unknown maker, dated 755 AH/1354–55 CE)",
+  "page": "https://www.metmuseum.org/art/collection/search/449537",
+  "license": "CC0 1.0 (Metropolitan Museum of Art Open Access)",
+  "kind": "still"
+ },
+ "900102": {
+  "title": "Evening Prayer, Cairo (Jean-Léon Gérôme, 1865)",
+  "page": "https://commons.wikimedia.org/wiki/File:Jean-Léon_Gérôme_-_Evening_Prayer,_Cairo_(1865).jpg",
+  "license": "Public domain (Jean-Léon Gérôme, 1824-1904; Wikimedia Commons, \"Public domain\")",
+  "kind": "still"
+ },
+ "900103": {
+  "title": "\"Senneh\" Prayer Rug (Unknown maker, late 18th–early 19th century)",
+  "page": "https://www.metmuseum.org/art/collection/search/452193",
+  "license": "CC0 1.0 (Metropolitan Museum of Art Open Access)",
+  "kind": "still"
+ },
+ "900104": {
+  "title": "Qur'an of Ibrahim Sultan (Unknown maker, dated 830 AH/1427 CE)",
+  "page": "https://www.metmuseum.org/art/collection/search/446539",
+  "license": "CC0 1.0 (Metropolitan Museum of Art Open Access)",
+  "kind": "still"
  }
 }

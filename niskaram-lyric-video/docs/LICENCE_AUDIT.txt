@@ -1,0 +1,83 @@
+Licence audit
+
+38	film	reel	Blinking round lights with bokeh effect	Free
+1086	film		Sunrise on the ocean	Free
+1170		reel	Sun setting or rising over palm trees	Free
+1518	film		Time-lapse of the sun with clouds passing by	Free
+1610	film		Stars in space background	Free
+1704	film		Night sky with stars at a calm lake, time lapse	Free
+1707	film		Large green plant leaves in the rain	Free
+1938		reel	Moon in the sky at the evening	Free
+1944	film		Beautiful sunrise landscape	Free
+2125	film		Beautiful sunset over mountains	Free
+2186	film		Water falling over stones	Free
+2202	film		Rain in the woods	Free
+2221	film		Forest disappearing in the fog	Free
+2392	film		Road surrounded by mountains	Free
+2562	film		Pink flower blooming	Free
+2639	film		Sunset over fields of tall dry grass	Free
+2716	film		Rain falling from the roof on a rainy day	Free
+2846	film	reel	Window on a rainy day	Free
+3132	film		Time lapse of a small town at night	Free
+3133		reel	The sun hiding on the horizon	Free
+3147	film		Clouds passing over the moon	Free
+3308		reel	Mist at the base of a snowy mountain	Free
+3438	film		Flames in candles close up	Free
+3458		reel	Candle lighting in the dark	Free
+3980		reel	Sun hiding between hills on the horizon	Free
+4059	film		Electric storm over the ocean	Free
+4060	film		Thunderstorm timelapse	Free
+4093	film		Starry sky at night, time lapse	Free
+4113	film		Sun rays pass through the clouds in the mountains	Free
+4124	film		Many stars in the night sky	Free
+4148	film		Milky way seen at night	Free
+4149	film		Dunes in the Sahara desert	Free
+4166	film		The moon and the stars at sea	Free
+4240	film		Time lapse of traffic at night	Free
+4282	film		Clouds touching the tip of Matterhorn Mountain	Free
+4308	film		Aerial view of a city during the night	Free
+4310	film		Roading through the desert	Free
+4311	film	reel	Ancient mosque	Free
+4312	film	reel	Mosque during the night	Free
+4313	film	reel	Symmetrical mosque	Free
+4323	film		Niagara Waterfalls	Free
+4357	film		Mountain during the night until dawn	Free
+4407	film	reel	White particles moving on black background	Free
+4422	film		Thunderstorm at night	Free
+4423	film		Electrical storm in the mountains	Free
+4428	film		Active volcano smoking during the starry night	Free
+4433	film		Full moon with a soft haze	Free
+4695	film		Clouds covering the mountains	Free
+5032	film		Dry tree in the middle of a desert at sunset	Free
+21585		reel	Thick clouds speeding in the sky with the wind	Free
+28889	film		Glass hourglass close up on a black background	Free
+28897	film	reel	Slowly approaching a clock on a black background	Free
+28901		reel	Sand falling from an hourglass on a black backgrou	Free
+34372	film	reel	Lens flares from the sun through the out-of-focus 	Free
+34563		reel	Avenue with trees, buildings and fast cars at dusk	Free
+39770		reel	View of the night sky filled with stars	Free
+40047	film		Skyline of a desert with the moon at night	Free
+51792		reel	Road that passes through the rugged relief of a de	Free
+51793		reel	Vast and flat desert in a view from above	Free
+52012	film		Flying over a landscape of sun soaked desert land 	Free
+99841		reel	Colorful rain-soaked bokeh lights at night	Free
+100174		reel	Waterfall Between Green Hills	Free
+900007	still	Le Caire - Intérieur de la mosquée El Bordei (Félix Bonfils,	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900011	still	Le Kaire, Mosquée Nâcéryeh (Félix Teynard, 1851–52, printed 	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900017	still	Evening Prayer, Cairo (Jean-Léon Gérôme, 1865)	Public domain (artist died before 1935; 	OK
+900021	still	Prayer in the Mosque (Jean-Léon Gérôme, by 1874)	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900033	still	Qur'an Manuscript (Unknown maker, late 18th–early 19th centu	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900035	still	Moti Masjid: Pearl Mosque in Interior of Fort Agra (Unknown,	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900037	still	Qur'an of Ibrahim Sultan (Unknown maker, dated 830 AH/1427 C	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900041	still	At the Mosque Door (Osman Hamdi Bey, dated 1879)	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900044	still	"Senneh" Prayer Rug (Unknown maker, late 18th–early 19th cen	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900045	still	Portable Qur’an Manuscript (Unknown maker, 17th century)	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900050	still	Mihrab (Prayer Niche) (Unknown maker, dated 755 AH/1354–55 C	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900054	still	Qur'an Bookbinding Inset with Turquoise (Unknown maker, 16th	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900055	still	[The Citadel and the Mosque of Mohammed Ali, Cairo] (Unknown	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900101	still	Mihrab (Prayer Niche) (Unknown maker, dated 755 AH/1354–55 C	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900102	still	Evening Prayer, Cairo (Jean-Léon Gérôme, 1865)	Public domain (artist died before 1935; 	OK
+900103	still	"Senneh" Prayer Rug (Unknown maker, late 18th–early 19th cen	CC0 1.0 (Metropolitan Museum of Art Open	OK
+900104	still	Qur'an of Ibrahim Sultan (Unknown maker, dated 830 AH/1427 C	CC0 1.0 (Metropolitan Museum of Art Open	OK
+
+problems: none

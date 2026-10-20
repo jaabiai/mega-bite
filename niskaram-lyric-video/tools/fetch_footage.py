@@ -39,7 +39,7 @@ def fetch(cid):
 
 if __name__ == '__main__':
     edl = json.load(open(ROOT / 'edl.json'))
-    ids = sorted({s['id'] for s in edl['shots']} | {o['id'] for o in edl.get('overlays', [])})
+    ids = sorted(i for i in {s['id'] for s in edl['shots']} | {o['id'] for o in edl.get('overlays', [])} if i < 900000)   # 9000xx = stills, see fetch_stills.py
     with ThreadPoolExecutor(6) as ex:
         for cid, status in ex.map(fetch, ids):
             print(cid, status, flush=True)

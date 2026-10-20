@@ -79,8 +79,8 @@ def main():
     # --- thumbnails: 16:9 crop of the 2.39:1 picture
     crop = "crop=1429:804:{x}:0,scale=1280:720,eq=saturation=1.12:contrast=1.06"
     frame(film, 7.0, TMP / 'tA.jpg', crop.format(x=0) + ',hflip')                  # mosque at night, mirrored so the minarets sit on the right
-    frame(film, 26.0, TMP / 'tB.jpg', crop.format(x=491))                           # hourglass in the desert sunset
-    frame(film, 224.0, TMP / 'tC.jpg', crop.format(x=491))                          # mosque above the clouds
+    frame(film, 26.0, TMP / 'tB.jpg', crop.format(x=0))                           # the hourglass on black
+    frame(film, 233.5, TMP / 'tC.jpg', crop.format(x=0))                          # sunrise over the ocean
     thumb('thumb_A_niskaram', TMP / 'tA.jpg', ('നിസ്കാരം', 230, 500), 'MALAYALAM ISLAMIC SONG', 'OFFICIAL LYRIC VIDEO')
     thumb('thumb_B_khabar', TMP / 'tB.jpg', ('ഖബറിലെ ആദ്യത്തെ\nചോദ്യം…', 150, 520), None, 'NISKARAM · NEW MALAYALAM SONG')
     thumb('thumb_C_iruloka', TMP / 'tC.jpg', ('ഇരുലോക\nവിജയം', 185, 470), None, 'NISKARAM · OFFICIAL LYRIC VIDEO')
