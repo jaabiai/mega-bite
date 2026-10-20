@@ -61,7 +61,17 @@
     chunks.forEach(ch => {
       const box = document.createElement('div'); box.className = 'cap';
       box.innerHTML = '<div class="t"></div><div class="u"><div class="track"></div><div class="fill"></div><div class="head"></div></div>';
-      box.firstChild.textContent = ch.text;
+      const tEl = box.firstChild;
+      if (/[\u0600-\u06FF]/.test(ch.text)) {
+        if (/[\u0D00-\u0D7F]/.test(ch.text)) {
+          // mixed-script token: each script in its own isolated run so the Malayalam sign never collides with the Arabic marks
+          ch.text.split(/([\u0600-\u06FF]+)/).filter(Boolean).forEach(part => {
+            const sp = document.createElement('span'); sp.textContent = part;
+            if (/[\u0600-\u06FF]/.test(part)) sp.className = 'arw';
+            tEl.appendChild(sp);
+          });
+        } else { tEl.textContent = ch.text; tEl.classList.add('ar'); }
+      } else tEl.textContent = ch.text;
       lt.appendChild(box);
       ch.box = box; ch.tEl = box.firstChild; ch.uEl = box.lastChild; ch.fill = ch.uEl.querySelector('.fill'); ch.head = ch.uEl.querySelector('.head');
     });
@@ -78,7 +88,7 @@
     ['titleShadow', 'titleGlow', 'titleText', 'titleSheen'].forEach(id => { $(id).textContent = P.title_arabic; });
 
     const capFont = (P.caption && P.caption.font) || 'Baloo Chettan 2';
-    const fams = [`800 112px '${capFont}'`, "800 60px 'Anek Malayalam'", "700 70px 'Noto Naskh Arabic'", "700 200px 'Aref Ruqaa'",
+    const fams = [`800 112px '${capFont}'`, "800 60px 'Anek Malayalam'", "700 70px 'Noto Naskh Arabic'", "700 70px 'Amiri'", "700 200px 'Aref Ruqaa'",
       "600 60px 'Cinzel'", "400 24px 'Cinzel'", "italic 500 36px 'Cormorant Garamond'"];
     await Promise.all(fams.map(f => document.fonts.load(f, 'നിസ്കരിച്ചോ ABC حي على ദുനിയാവിൻ')));
     await document.fonts.ready;
@@ -265,7 +275,9 @@
       el.style.opacity = Math.min(1, e * 2.4) * (1 - x);
       el.style.transform = `translate(${-34 * x}px, ${(1 - eOut3(e)) * 46 + x * -10}px) scale(${sc.toFixed(4)})`;
       el.style.filter = `blur(${((1 - e) * (1 - e) * 16 + x * 10).toFixed(2)}px)`;
-      el.style.clipPath = `inset(-70px ${((1 - wipe) * 100).toFixed(1)}% -70px -70px)`;
+      // left-to-right reveal.  The reveal edge overshoots the text box by 120 px so the ink that hangs past the advance width
+      // (chillu letters such as ൻ ൽ ൾ, long vowel tails) is never cut; once fully revealed there is no clip at all.
+      el.style.clipPath = wipe >= 0.999 ? 'none' : `inset(-80px calc(${((1 - wipe) * 100).toFixed(2)}% - ${(wipe * 120).toFixed(1)}px) -80px -80px)`;
       const glow = Math.exp(-Math.pow((t - (ch.t0 + 0.1)) / 0.22, 2));                               // flash as the word lands
       el.style.textShadow = `0 4px 22px rgba(0,0,0,.72), 0 0 ${(20 + 34 * glow).toFixed(0)}px rgba(255,205,100,${(0.28 + 0.5 * glow).toFixed(2)})`;
       // neon underline: grows along the word from its first to its last moment

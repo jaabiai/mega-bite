@@ -8,7 +8,7 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | Frame | **2.39:1 widescreen, 1920 × 804**, 24 fps, H.264 + AAC 320 k |
 | Intro | One adhan call (*Hayya ʿala-ṣ-ṣalāh*, 11.6 s) **tuned +2.1 semitones to the song's key** (see *Adhan decision*), fading into the song's own humming |
 | Song | `inputs/song.mp3`, **complete and uncut from 0:00**, placed at 0:09.2 so the humming enters under the adhan's last note |
-| Lyrics | Left lower-third, **one sung word at a time** (a very short word is paired with the next), Baloo Chettan 2 ExtraBold, with a **neon underline that fills along the word for exactly as long as it is sung** |
+| Lyrics | Your SRT text, verbatim (punctuation included). Left lower-third, **one sung word at a time** (a very short word is paired with the next), Baloo Chettan 2 ExtraBold, with a **neon-tube underline whose white-hot light travels along it for exactly as long as the word is sung** |
 | Visuals | One shot per lyric line, chosen for what the line says; the picture changes when the line is first sung |
 | Logo | Miraya Studio badge as a quiet corner bug for the whole film, large on the end card |
 | Length | 5 min 17 s |
@@ -25,7 +25,7 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | 0:10 | The song's humming enters under the adhan's last note (film time = song time + 9.2 s). |
 | 0:11 – 0:20 | The calligraphic Arabic title **حَيَّ عَلَى الصَّلَاةِ** (the word "Title" is not shown). |
 | 0:20 – 0:23 | Humming continues over a sunrise above the clouds. |
-| 0:23.6 – 5:10 | 54 lyric lines (first line sung at song time 14.4 s). |
+| 0:23.6 – 5:10 | 55 lyric lines (first line sung at song time 14.4 s). |
 | 4:59 – 5:17 | End credits, then the full logo card ("Thank you for watching"). |
 
 ## Loudness
@@ -49,13 +49,15 @@ Correlation of the adhan's pitch distribution with the song: **−0.10 as record
 * Colour: custom teal-gold 3D LUT, highlight bloom, gold dust, soft vignette, fine grain (`tools/make_lut.py`, `tools/compose.py`).
 * **Halal check:** all clips were reviewed frame-by-frame. There are no women, no exposed awrah, no music/dance/alcohol; the only people are men at prayer or reading the Quran, and hands.
 
-## Lyrics — the text must be exactly yours
+## Lyrics — the text is exactly yours
 
-> **The `inputs/lyrics.srt` in this repo is a DRAFT.** Only four cues (the hook, 0:15–0:36) were ever supplied (`inputs/lyrics_user_supplied_partial.srt`, exact). The other lines were reconstructed from the audio by speech recognition and contain wrong words and spellings. Replace them with the real lyrics before publishing.
+`inputs/lyrics.srt` is the 55-cue SRT supplied for this film and is the only source of caption text: every caption chunk is a word cut from an SRT line, and the chunks of each line join back into that line character for character (checked for all 55 cues). Punctuation (`, … ! ?`) is shown as written. **Only the text is used from the SRT; its times are ignored** – each word is placed where it is actually sung (see below).
 
-Put the real lyrics in **`inputs/lyrics.txt`**: plain text, one sung line per row, in the order they are sung (repeat the hook every time it is sung); no timings needed. If that file exists it wins over the SRT.
+* **Malayalam script.** All chillu letters (ൻ ൽ ൾ ർ ൺ ൿ) and conjuncts are the font's own glyphs; a 1:1 sheet of all 94 distinct caption chunks was reviewed for missing, broken or dotted-circle glyphs. The clipped chillus seen in an earlier preview were caused by the left-to-right reveal mask cutting the ink that overhangs a glyph's box, not by the font; the mask is now wider than the text and removed once the word is fully revealed.
+* **Arabic words** (`اللّٰهُ أَكْبَرُ`, `وُضُوءٍ`) are set in Amiri Bold, larger than the Malayalam.
+* **Cue 33 (`قَلْبിൽ`)** mixes scripts in one word: the Arabic letters `قلب` are followed by the Malayalam vowel sign `ി` and the chillu `ൽ`. It is shown exactly as written (each script in its own run, so nothing overlaps). If `ഖൽബിൽ` was meant, change that word in `inputs/lyrics.srt` and re-run the steps below.
 
-Then (shots, base picture and audio do not change, only the captions):
+To change a word later, edit `inputs/lyrics.srt` (keep the number of words per line the same, or re-run the aligner) and:
 
 ```bash
 pip install onnxruntime numpy uroman
@@ -65,8 +67,10 @@ cp work/words.json inputs/words.json
 ./build.sh overlays final                              # ~10 + 15 min;  tools/preview.py 22 26 out.mp4 renders a 26 s check clip
 ```
 
+An `inputs/lyrics.txt` (one sung line per row) wins over the SRT if present.
+
 ### How word timing is found
-`tools/align_words.py --global` force-aligns every word to the audio (wav2vec2 / MMS-300m CTC aligner, ONNX int8, text romanised with `uroman`): pass 1 aligns the whole text to the whole song with a wildcard token between lines; pass 2 re-aligns every line inside its own window (after the previous line, before the next) so a long first word cannot grab the previous line's humming. Check used: the hook comes back at +21.3 s, +53.3 s, +64 s … and each of its words lands within ~0.08 s of the same place every time. The lines are really sung ~0.6 s earlier than the SRT times (first line at 14.4 s, not 15.0 s); the film follows the audio.
+`tools/align_words.py --global` force-aligns every word to the audio (wav2vec2 / MMS-300m CTC aligner, ONNX int8, text romanised with `uroman`): pass 1 aligns the whole text to the whole song with a wildcard token between lines; pass 2 re-aligns every line inside its own window (after the previous line, before the next) so a long first word cannot grab the previous line's humming. Check used: the hook comes back at +21.3 s, +53.3 s, +64 s … and each of its words lands within ~0.08 s of the same place every time. The lines are sung up to ~0.6 s away from the SRT times; the film follows the audio.
 
 ## Re-render
 
@@ -93,14 +97,4 @@ Each shot in `edl.json` is `{id, in, t, tr, trd, z0, z1, cy, ...}`. To use your 
 ## Notes
 
 * Title spelling: the brief wrote `حي عل الصلاة`; the title uses the standard `حَيَّ عَلَى الصَّلَاةِ`.
-* **Footage licence – please read before uploading.** All footage is from Mixkit. **23 of the 58 clips** (stars, moon and dusk time-lapses, the desert and several mosque exteriors, the texture overlays) are under the *Mixkit Stock Video Free License* (free for commercial use). The other **35 – including the drone mosque shots, the Quran, the prayer footage and the rain/storm shots – are under the *Mixkit Restricted License*: the clip page offers them "for personal use only"**. If the channel is monetised you need either the Envato licence for those clips or replacement footage. Per-clip status and links: [`docs/FOOTAGE_CREDITS.md`](docs/FOOTAGE_CREDITS.md). Swapping is a one-line change per shot (below).
-
-## Swapping footage
-
-Each shot in `edl.json` is `{id, in, t, tr, trd, z0, z1, cy, ...}`. To use your own clip put it at `$WORK/src/<id>.mp4` (any resolution/fps; it is cropped to 2.39:1 automatically) and give the shot that `id`. `in` is the in-point in seconds, `cy` shifts the 2.39:1 crop vertically (0 = top … 1 = bottom), `z0 → z1` is the slow push/pull. Then `./build.sh shots base final`.
-
-## Notes
-
-* Title spelling: the brief wrote `حي عل الصلاة`; the title uses the standard `حَيَّ عَلَى الصَّلَاةِ`.
-* **Footage licence – please read before uploading.** All footage is from Mixkit. Only **11 of the 52 clips** (the stars/moon/dusk time-lapses, three mosque exteriors and the texture overlays) are under the *Mixkit Stock Video Free License* (free for commercial use). The other **41 clips – including the drone mosque shots, the Quran and the prayer footage – are under the *Mixkit Restricted License*: the clip page offers them "for personal use only"**. If the channel is monetised you need either the Envato licence for those clips or replacement footage. Per-clip status and links: [`docs/FOOTAGE_CREDITS.md`](docs/FOOTAGE_CREDITS.md). Swapping is a one-line change per shot (below).
-* The song audio is untouched except for gain-neutral summing with the adhan and a −0.3 dB safety limiter; programme loudness is about −13.8 LUFS.
+* **Footage licence – please read before uploading.** All footage is from Mixkit. **23 of the 58 clips** (stars, moon and dusk time-lapses, the desert and several mosque exteriors, the texture overlays) are under the *Mixkit Stock Video Free License* (free for commercial use). The other **35 – including the drone mosque shots, the Quran, the prayer footage and the rain/storm shots – are under the *Mixkit Restricted License*: the clip page offers them "for personal use only"**. If the channel is monetised you need either the Envato licence for those clips or replacement footage. Per-clip status and links: [`docs/FOOTAGE_CREDITS.md`](docs/FOOTAGE_CREDITS.md). Swapping is a one-line change per shot (see *Swapping footage*).
