@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<title>Reel overlay renderer</title>
+<style>
+  @font-face { font-family: 'Uroob'; font-weight: 800; src: url('../fonts/uroob-regular-nodotcircle.woff2') format('woff2'); unicode-range: U+0020-007E, U+00A0, U+0D00-0D7F, U+200C-200D, U+2026; }
+  @font-face { font-family: 'Uroob'; font-weight: 700; src: url('../fonts/uroob-regular-nodotcircle.woff2') format('woff2'); unicode-range: U+0020-007E, U+00A0, U+0D00-0D7F, U+200C-200D, U+2026; }
+  @font-face { font-family: 'Amiri'; font-weight: 700; src: url('../fonts/amiri-arabic-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Cinzel'; font-weight: 400; src: url('../fonts/cinzel-latin-400-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Cinzel'; font-weight: 600; src: url('../fonts/cinzel-latin-600-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Cinzel'; font-weight: 700; src: url('../fonts/cinzel-latin-700-normal.woff2') format('woff2'); }
+  @font-face { font-family: 'Cormorant Garamond'; font-weight: 500; font-style: italic; src: url('../fonts/cormorant-garamond-latin-500-italic.woff2') format('woff2'); }
+
+  :root { --gold: #e3bd62; --gold-hi: #fbe9ae; --capFont: 'Uroob'; --capSize: 128px; --capY: 1300px; }
+  html, body { margin: 0; background: transparent; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+  .abs { position: absolute; }
+
+  /* soft shade under the captions so they read on any picture */
+  #capShade { left: 0; width: 1080px; opacity: 0; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(3,5,8,.62) 0%, rgba(3,5,8,.34) 55%, rgba(3,5,8,0) 100%); }
+
+  /* ---------- logo bug ---------- */
+  #bug { right: 54px; top: 168px; width: 96px; height: 96px; opacity: 0; }
+  #bug img { width: 96px; height: 96px; display: block; filter: drop-shadow(0 3px 8px rgba(0,0,0,.6)); }
+
+  #hookShade { left: 0; width: 1080px; height: 360px; opacity: 0; background: linear-gradient(180deg, rgba(3,5,8,0) 0%, rgba(3,5,8,.62) 45%, rgba(3,5,8,.62) 60%, rgba(3,5,8,0) 100%); }
+
+  /* ---------- hook title ---------- */
+  #hook { left: 0; width: 1080px; text-align: center; white-space: nowrap; opacity: 0; }
+  #hook .h { display: inline-block; font: 800 var(--hookSize, 150px)/1.2 'Uroob', sans-serif; color: #fff7dd; will-change: transform, opacity, filter;
+    text-shadow: 0 6px 28px rgba(0,0,0,.8), 0 0 30px rgba(255,200,90,.55); }
+  #hookRule { left: 540px; width: 0; height: 3px; transform: translateX(-50%); opacity: 0;
+    background: linear-gradient(90deg, rgba(227,189,98,0), var(--gold) 20%, var(--gold-hi) 50%, var(--gold) 80%, rgba(227,189,98,0)); box-shadow: 0 0 16px rgba(227,189,98,.75); }
+
+  /* ---------- captions (one sung word at a time, neon underline) ---------- */
+  .cap { position: absolute; left: 0; top: 0; height: 1920px; display: none; }
+  .cap .t { position: absolute; left: 0; bottom: calc(1920px - var(--capY)); white-space: nowrap; color: #fff; transform-origin: 50% 80%;
+    font: 800 var(--capSize)/1.22 var(--capFont), sans-serif; will-change: transform, opacity, filter;
+    font-synthesis: none; }
+  .cap .t.ar { font-family: 'Amiri', 'Noto Naskh Arabic', var(--capFont), serif; font-weight: 700; font-size: calc(var(--capSize) * 1.0); line-height: 1.3; }
+  .cap .t .arw { display: inline-block; unicode-bidi: isolate; direction: rtl; font-family: 'Amiri', 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 1.0em; line-height: 1; margin-right: .14em; }
+  .cap .u { position: absolute; left: -8px; bottom: calc(1920px - var(--capY) - 22px); height: 8px; will-change: opacity; }
+  .cap .u .track { position: absolute; inset: 0; border-radius: 5px; background: rgba(255,200,90,.14); box-shadow: 0 0 8px rgba(255,170,50,.28), inset 0 0 3px rgba(255,230,170,.25); }
+  .cap .u .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 5px;
+    background: linear-gradient(90deg, rgba(255,150,30,.55) 0%, #ffb02e 22%, #ffd978 62%, #fff4cc 90%, #ffffff 100%);
+    box-shadow: 0 0 3px #fff, 0 0 9px #ffe08a, 0 0 20px #ffb62e, 0 0 42px rgba(255,150,20,.8), 0 0 86px rgba(255,120,0,.5); }
+  .cap .u .fill::after { content: ''; position: absolute; left: 0; right: 0; top: -8px; bottom: -8px; border-radius: 12px; background: linear-gradient(90deg, rgba(255,140,20,0), rgba(255,170,40,.9)); filter: blur(11px); opacity: .75; }
+  .cap .u .head { position: absolute; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border-radius: 50%; left: 0;
+    background: radial-gradient(circle, rgba(255,255,245,1) 0%, rgba(255,236,160,.85) 18%, rgba(255,176,46,.45) 42%, rgba(255,140,20,0) 72%); }
+  .cap .u .head::before { content: ''; position: absolute; left: -90px; right: -90px; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px;
+    background: linear-gradient(90deg, rgba(255,230,160,0), rgba(255,250,225,.95) 50%, rgba(255,230,160,0)); filter: blur(.6px); }
+
+  /* ---------- end plate ---------- */
+  #endShade { left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; background: radial-gradient(ellipse 80% 38% at 50% 52%, rgba(3,5,8,.82) 0%, rgba(3,5,8,.55) 55%, rgba(3,5,8,0) 100%); }
+  #endLogo { left: 540px; top: 840px; width: 300px; height: 300px; margin: -150px 0 0 -150px; opacity: 0; }
+  #endLogo img { width: 300px; height: 300px; display: block; filter: drop-shadow(0 0 36px rgba(227,189,98,.35)) drop-shadow(0 10px 26px rgba(0,0,0,.6)); }
+  #endName { left: 0; width: 1080px; top: 1030px; text-align: center; font: 600 46px 'Cinzel', serif; letter-spacing: .3em; color: #f4ead0; opacity: 0; margin-left: .3em; filter: drop-shadow(0 2px 10px rgba(0,0,0,.85)); }
+  .endC { left: 0; width: 1080px; text-align: center; opacity: 0; white-space: nowrap; }
+  .endC .l { font: 600 25px 'Cinzel', serif; letter-spacing: .4em; color: var(--gold); text-transform: uppercase; margin-left: .4em; filter: drop-shadow(0 2px 6px rgba(0,0,0,.8)); }
+  .endC .n { font: 600 40px 'Cinzel', serif; letter-spacing: .12em; color: #f4ead0; margin-top: 8px; filter: drop-shadow(0 2px 10px rgba(0,0,0,.8)); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="capShade" class="abs"></div>
+  <div id="lt" class="abs" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="hookShade" class="abs"></div>
+  <div id="hook" class="abs"><div class="h" id="hookText"></div></div>
+  <div id="hookRule" class="abs"></div>
+  <div id="bug" class="abs"><img src="../inputs/logo_badge.png"></div>
+  <div id="endShade" class="abs"></div>
+  <div id="endLogo" class="abs"><img src="../inputs/logo_badge.png"></div>
+  <div id="endName" class="abs">MIRAYA STUDIO</div>
+  <div id="endC1" class="endC abs"><div class="l">Music</div><div class="n">Miraya Studio</div></div>
+  <div id="endC2" class="endC abs"><div class="l">Lyrics &amp; Editor</div><div class="n">Jabir Varikkodan</div></div>
+</div>
+<script src="reel.js"></script>
+</body>
+</html>

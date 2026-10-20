@@ -76,6 +76,22 @@ An `inputs/lyrics.txt` (one sung line per row) wins over the SRT if present.
 ### How word timing is found
 `tools/align_words.py --global` force-aligns every word to the audio (wav2vec2 / MMS-300m CTC aligner, ONNX int8, text romanised with `uroman`): pass 1 aligns the whole text to the whole song with a wildcard token between lines; pass 2 re-aligns every line inside its own window (after the previous line, before the next) so a long first word cannot grab the previous line's humming. Check used: the hook comes back at +21.3 s, +53.3 s, +64 s … and each of its words lands within ~0.08 s of the same place every time. The lines are sung up to ~0.6 s away from the SRT times; the film follows the audio.
 
+## Reels (9:16, 1080 × 1920, 30 fps)
+
+Three different reels are cut from the song (`reels/reels.json`, built by `tools/reels.py`; `output/r1_khabar.mp4`, `r2_sujood.mp4`, `r3_jannah.mp4`):
+
+| Reel | Song section | Mood / look | Picture window |
+|---|---|---|---|
+| **R1 · Khabar** (35.6 s) | 0:12 – 0:47, the hook: *desires fade… the first question in the grave… did you pray?* | cold, desaturated teal, moon / hourglass / storm / fog | 16:9 cinema band |
+| **R2 · Sujood** (44.4 s) | 0:46 – 1:30: *the Allahu Akbar call… don't be lazy… there is no medicine like sujood* | warm amber, mosque lights, rain on glass | 4:3 window |
+| **R3 · Jannah** (38.7 s) | 3:21 – 3:59: *seek His mercy… paradise's garden… success in both worlds… Ya Rabb* | bright golden, waterfall / rainbow / sunrise / candle | 1:1 window |
+
+* **Why windows and not full-bleed:** the footage is 720p/1080p landscape; a full-bleed 9:16 crop would enlarge a 405-px-wide slice 2.7×. Each shot is therefore shown sharp in a window over a blurred, darkened copy of itself, with gold hairlines at the window edges.
+* **Captions are the film's:** one sung word at a time, Uroob, neon underline with the travelling light, word timing from the audio alignment; centred at the lower third, above the area Instagram covers with its caption/username. A hook line (an exact line of the lyrics) opens each reel; the last ~2.4 s is a Miraya Studio plate with the credits.
+* **Audio:** the song is cut at line boundaries (fade-in/out), then mastered with the same phone-speaker chain as the film (−7.8 LUFS, peak-safe AAC).
+* **Cuts** snap to the strongest musical onsets (same helper as the film).
+* Build: `python3 tools/reels.py all [reel-id]` (steps: `audio shots base overlays final`).
+
 ## Re-render
 
 ```bash
