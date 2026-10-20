@@ -77,13 +77,13 @@
   "adhan_pitch_cents": 210,
   "adhan_fade": 1.0,
   "master": {
-    "target_lufs": -9.0,
-    "ceiling_db": -2.0,
+    "target_lufs": -8.0,
+    "ceiling_db": -1.8,
     "comp_threshold_db": -19,
     "comp_ratio": 2.4
   },
   "caption": {
-    "font": "Baloo Chettan 2",
-    "size": 112
+    "font": "Uroob",
+    "size": 144
   }
 }

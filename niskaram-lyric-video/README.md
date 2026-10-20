@@ -8,7 +8,7 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 | Frame | **2.39:1 widescreen, 1920 × 804**, 24 fps, H.264 + AAC 320 k |
 | Intro | One adhan call (*Hayya ʿala-ṣ-ṣalāh*, 11.6 s) **tuned +2.1 semitones to the song's key** (see *Adhan decision*), fading into the song's own humming |
 | Song | `inputs/song.mp3`, **complete and uncut from 0:00**, placed at 0:09.2 so the humming enters under the adhan's last note |
-| Lyrics | Your SRT text, verbatim (punctuation included). Left lower-third, **one sung word at a time** (a very short word is paired with the next), Baloo Chettan 2 ExtraBold, with a **neon-tube underline whose white-hot light travels along it for exactly as long as the word is sung** |
+| Lyrics | Your SRT text, verbatim (punctuation included). Left lower-third, **one sung word at a time** (a very short word is paired with the next), Uroob Regular (SMC, traditional script), with a **neon-tube underline whose white-hot light travels along it for exactly as long as the word is sung** |
 | Visuals | One shot per lyric line, chosen for what the line says; the picture changes when the line is first sung |
 | Logo | Miraya Studio badge as a quiet corner bug for the whole film, large on the end card |
 | Length | 5 min 17 s |
@@ -30,7 +30,7 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 
 ## Loudness
 
-The supplied song is −14.1 LUFS (peak −2.5 dBFS); the first cuts of the film kept that level. The delivered audio is mastered **−9.1 LUFS integrated, −1.3 dBTP after the AAC encode** (about +5 dB louder than the original): `project.json → master` (gentle 2.4:1 compressor, make-up gain found by iteration so the integrated loudness hits `target_lufs`, look-ahead limiter at `ceiling_db`). Loudness range drops from 5.2 to 2.2 LU. Set `master` to `null` to get the unmastered mix back. Re-master an existing video without re-encoding it: `python3 tools/compose.py remux IN.mp4 OUT.mp4`.
+The supplied song is −14.1 LUFS (peak −2.5 dBFS). The delivered audio is mastered **−8.1 LUFS integrated, −0.8 dBTP after the AAC encode** (about +6 dB louder than the original): `project.json → master` (gentle 2.4:1 compressor, make-up gain found by iteration so the integrated loudness hits `target_lufs`, look-ahead limiter at `ceiling_db`). Set `master` to `null` to get the unmastered mix back. Re-master an existing video without re-encoding it: `python3 tools/compose.py remux IN.mp4 OUT.mp4 [master.wav]`. Note that YouTube and most streaming services normalise playback loudness, so a louder file is not played louder there.
 
 ## Adhan decision (analysis)
 
@@ -53,7 +53,7 @@ Correlation of the adhan's pitch distribution with the song: **−0.10 as record
 
 `inputs/lyrics.srt` is the 55-cue SRT supplied for this film and is the only source of caption text: every caption chunk is a word cut from an SRT line, and the chunks of each line join back into that line character for character (checked for all 55 cues). Punctuation (`, … ! ?`) is shown as written. **Only the text is used from the SRT; its times are ignored** – each word is placed where it is actually sung (see below).
 
-* **Malayalam script.** All chillu letters (ൻ ൽ ൾ ർ ൺ ൿ) and conjuncts are the font's own glyphs; a 1:1 sheet of all 94 distinct caption chunks was reviewed for missing, broken or dotted-circle glyphs. The clipped chillus seen in an earlier preview were caused by the left-to-right reveal mask cutting the ink that overhangs a glyph's box, not by the font; the mask is now wider than the text and removed once the word is fully revealed.
+* **Malayalam script.** Captions are set in **Uroob Regular** (Swathanthra Malayalam Computing, OFL-1.1; `fonts/UROOB-LICENSE.txt`), a bold condensed *traditional-script* face: conjuncts are drawn as real single ligature glyphs (ഞ്ഞ ണ്ണ ണ്ട പ്പ റ്റ ന്ന ല്ല ള്ള ക്ക ച്ച ത്ത ന്ത ങ്ങ ക്ഷ ഹൃ …) and the chillus ൻ ൽ ൾ ർ ൺ ൿ are their own letters. Earlier versions used Baloo Chettan 2 and Lohit Malayalam; Baloo draws conjuncts in the *reformed* style with a visible chandrakkala (ഞ് + ഞ), which is wrong for this video. A 1:1 sheet of all 94 distinct caption chunks was reviewed for missing, broken or dotted-circle glyphs. Traditional faces draw two things in their own way: `ശു/ശൂ` (a ശ with a curled tail) and `ഹ്മ` (looks like ഫ). Uroob's `U+25CC` is removed from the web-font copy (`fonts/uroob-regular-nodotcircle.woff2`) so a stray vowel sign never gets a dotted circle.
 * **Arabic words** (`اللّٰهُ أَكْبَرُ`, `وُضُوءٍ`) are set in Amiri Bold, larger than the Malayalam.
 * **Cue 33 (`قَلْبിൽ`)** mixes scripts in one word: the Arabic letters `قلب` are followed by the Malayalam vowel sign `ി` and the chillu `ൽ`. It is shown exactly as written (each script in its own run, so nothing overlaps). If `ഖൽബിൽ` was meant, change that word in `inputs/lyrics.srt` and re-run the steps below.
 
@@ -88,7 +88,7 @@ Requirements: ffmpeg ≥ 6 (libx264, libass not needed), Node 18+ with Playwrigh
 | `edl.json` | the shot list (Mixkit id, in-point, start time on the film, transition, zoom) |
 | `overlay/overlay.{html,js}` | all animated graphics, rendered frame-exactly in headless Chromium |
 | `tools/*.py` / `tools/render_overlays.mjs` | footage download, shot building, LUT, audio mix, compositing |
-| `fonts/` | Anek Malayalam, Noto Naskh Arabic, Aref Ruqaa, Cinzel, Cormorant Garamond (SIL OFL) |
+| `fonts/` | Uroob (captions), Amiri + Noto Naskh Arabic, Aref Ruqaa, Cinzel, Cormorant Garamond (SIL OFL) |
 
 ## Swapping footage
 

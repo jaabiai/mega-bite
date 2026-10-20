@@ -87,7 +87,7 @@
 
     ['titleShadow', 'titleGlow', 'titleText', 'titleSheen'].forEach(id => { $(id).textContent = P.title_arabic; });
 
-    const capFont = (P.caption && P.caption.font) || 'Baloo Chettan 2';
+    const capFont = (P.caption && P.caption.font) || 'Uroob';
     const fams = [`800 112px '${capFont}'`, "800 60px 'Anek Malayalam'", "700 70px 'Noto Naskh Arabic'", "700 70px 'Amiri'", "700 200px 'Aref Ruqaa'",
       "600 60px 'Cinzel'", "400 24px 'Cinzel'", "italic 500 36px 'Cormorant Garamond'"];
     await Promise.all(fams.map(f => document.fonts.load(f, 'നിസ്കരിച്ചോ ABC حي على ദുനിയാവിൻ')));

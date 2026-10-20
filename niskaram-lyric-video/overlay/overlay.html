@@ -8,8 +8,8 @@
   @font-face { font-family: 'Anek Malayalam'; font-weight: 800; src: url('../fonts/anek-malayalam-malayalam-800-normal.woff2') format('woff2'); unicode-range: U+0D00-0D7F, U+200C-200D, U+25CC; }
   @font-face { font-family: 'Anek Malayalam'; font-weight: 700; src: url('../fonts/anek-malayalam-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
   @font-face { font-family: 'Anek Malayalam'; font-weight: 800; src: url('../fonts/anek-malayalam-latin-800-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-  @font-face { font-family: 'Baloo Chettan 2'; font-weight: 800; src: url('../fonts/baloo-chettan-2-malayalam-800-nodotcircle.woff2') format('woff2'); unicode-range: U+0D00-0D7F, U+200C-200D; }
-  @font-face { font-family: 'Baloo Chettan 2'; font-weight: 700; src: url('../fonts/baloo-chettan-2-malayalam-700-nodotcircle.woff2') format('woff2'); unicode-range: U+0D00-0D7F, U+200C-200D; }
+  @font-face { font-family: 'Uroob'; font-weight: 800; src: url('../fonts/uroob-regular-nodotcircle.woff2') format('woff2'); unicode-range: U+0020-007E, U+00A0, U+0D00-0D7F, U+200C-200D, U+2026; }
+  @font-face { font-family: 'Uroob'; font-weight: 700; src: url('../fonts/uroob-regular-nodotcircle.woff2') format('woff2'); unicode-range: U+0020-007E, U+00A0, U+0D00-0D7F, U+200C-200D, U+2026; }
   @font-face { font-family: 'Noto Serif Malayalam'; font-weight: 800; src: url('../fonts/noto-serif-malayalam-malayalam-800-normal.woff2') format('woff2'); unicode-range: U+0D00-0D7F, U+200C-200D, U+25CC; }
   @font-face { font-family: 'Noto Naskh Arabic'; font-weight: 700; src: url('../fonts/noto-naskh-arabic-arabic-700-normal.woff2') format('woff2'); }
   @font-face { font-family: 'Amiri'; font-weight: 700; src: url('../fonts/amiri-arabic-700-normal.woff2') format('woff2'); }
@@ -66,10 +66,11 @@
     background: linear-gradient(90deg, rgba(4,6,9,.72) 0%, rgba(4,6,9,.46) 52%, rgba(4,6,9,0) 100%);
     -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 55%, transparent 100%); mask-image: linear-gradient(0deg, #000 0%, #000 55%, transparent 100%); }
   .cap { position: absolute; left: 134px; top: 0; height: 804px; display: none; }
-  .cap .t { position: absolute; left: 0; bottom: 122px; white-space: nowrap; color: #fff; transform-origin: 0 80%;
-    font: 800 var(--capSize, 112px)/1.22 var(--capFont, 'Baloo Chettan 2'), 'Anek Malayalam', sans-serif; will-change: transform, opacity, filter; }
-  .cap .t.ar { font-family: 'Amiri', 'Noto Naskh Arabic', var(--capFont, 'Baloo Chettan 2'), serif; font-weight: 700; font-size: calc(var(--capSize, 112px) * 1.12); line-height: 1.3; }
-  .cap .t .arw { display: inline-block; unicode-bidi: isolate; direction: rtl; font-family: 'Amiri', 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 1.08em; line-height: 1; margin-right: .14em; }
+  .cap .t { position: absolute; left: 0; bottom: 112px; white-space: nowrap; color: #fff; transform-origin: 0 80%;
+    font: 800 var(--capSize, 112px)/1.22 var(--capFont, 'Uroob'), 'Anek Malayalam', sans-serif; will-change: transform, opacity, filter;
+    font-synthesis: none; -webkit-text-stroke: var(--capStroke, 0px) currentColor; stroke-linejoin: round; }
+  .cap .t.ar { font-family: 'Amiri', 'Noto Naskh Arabic', var(--capFont, 'Uroob'), serif; font-weight: 700; font-size: calc(var(--capSize, 112px) * 1.0); line-height: 1.3; -webkit-text-stroke: 0; }
+  .cap .t .arw { display: inline-block; unicode-bidi: isolate; direction: rtl; font-family: 'Amiri', 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 1.0em; line-height: 1; margin-right: .14em; -webkit-text-stroke: 0; }
   .cap .u { position: absolute; left: -8px; bottom: 96px; height: 8px; will-change: opacity; }
   /* neon tube: dark glass tube, a white-hot core that travels along it with a comet tail, and a wide amber bloom */
   .cap .u .track { position: absolute; inset: 0; border-radius: 5px; background: rgba(255,200,90,.14); box-shadow: 0 0 8px rgba(255,170,50,.28), inset 0 0 3px rgba(255,230,170,.25); }
