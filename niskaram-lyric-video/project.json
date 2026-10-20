@@ -77,10 +77,16 @@
   "adhan_pitch_cents": 210,
   "adhan_fade": 1.0,
   "master": {
-    "target_lufs": -8.0,
-    "ceiling_db": -1.8,
-    "comp_threshold_db": -19,
-    "comp_ratio": 2.4
+    "target_lufs": -7.7,
+    "ceiling_db": -3.0,
+    "comp_threshold_db": -20,
+    "comp_ratio": 2.8,
+    "phone": {
+      "highpass_hz": 60,
+      "low_cut_db": -5,
+      "presence_db": 8,
+      "air_db": 5
+    }
   },
   "caption": {
     "font": "Uroob",

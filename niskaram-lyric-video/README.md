@@ -30,7 +30,11 @@ Everything is script-driven, so the film can be re-rendered after any change (ne
 
 ## Loudness
 
-The supplied song is −14.1 LUFS (peak −2.5 dBFS). The delivered audio is mastered **−8.1 LUFS integrated, −0.8 dBTP after the AAC encode** (about +6 dB louder than the original): `project.json → master` (gentle 2.4:1 compressor, make-up gain found by iteration so the integrated loudness hits `target_lufs`, look-ahead limiter at `ceiling_db`). Set `master` to `null` to get the unmastered mix back. Re-master an existing video without re-encoding it: `python3 tools/compose.py remux IN.mp4 OUT.mp4 [master.wav]`. Note that YouTube and most streaming services normalise playback loudness, so a louder file is not played louder there.
+The supplied song is −14.1 LUFS (peak −2.5 dBFS). **Why plain gain is not enough:** about 75 % of the song's energy sits below 300 Hz (a very bass-heavy mix; only ~3 % is above 1 kHz), which a phone speaker cannot play. Measured with a phone-speaker band (300 Hz – 6 kHz) the supplied song is −18.8 LUFS and the earlier −8.1 LUFS master only −12.8 LUFS – that is why it was audible only next to the ear.
+
+`project.json → master → phone` (`tools/compose.py → master_audio`) is therefore tuned for small speakers: 60 Hz high-pass, −5 dB dip at 160 Hz, +2 dB at 1 kHz, +8 dB presence at 2.5 kHz, +5 dB shelf at 6 kHz, 2.8:1 compressor, a tanh soft-clipper (its harmonics move bass energy into the range a phone can play) and a −3 dBFS limiter. Result: **−7.8 LUFS integrated, −0.9 dBTP after AAC; phone-band −10.6 LUFS** (+8 dB over the supplied song, +2.2 dB over the earlier master). It is deliberately close to the limit: pushing further only adds distortion (estimated distortion-to-signal is already about −16 dB). The tonal balance is brighter and thinner in the sub-bass than the supplied mix; remove the `phone` block to get the plain mix back (−8.1 LUFS).
+
+The AAC encode uses `-cutoff 16000 -aac_tns 0 -aac_pns 0` (`AAC_SAFE` in `compose.py`): with the default settings the encoder overshot the hard-limited master by up to +4 dB at a few instants (clipping on playback). Re-master an existing video without re-encoding the picture: `python3 tools/compose.py remux IN.mp4 OUT.mp4 [master.wav]`. YouTube, Instagram and similar services normalise playback loudness, so a louder file is not played louder there.
 
 ## Adhan decision (analysis)
 

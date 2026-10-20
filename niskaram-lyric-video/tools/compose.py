@@ -44,6 +44,10 @@ def build_audio(tl, pitch_cents=None, out_name='audio.wav'):
          '-filter_complex', fg, '-map', '[out]', '-t', f'{total:.3f}', '-c:a', 'pcm_s16le', WORK / out_name])
 
 # ---------------------------------------------------------------- loudness master
+# The loud master is hard-limited; with the default AAC settings the encoder's noise substitution / TNS overshoot it by up to
+# +4 dB at a few instants (clipping on playback). A 16 kHz cut-off (nothing musical lives above it) and no PNS/TNS keep the decoded peak < -1 dBFS.
+AAC_SAFE = ['-cutoff', '16000', '-aac_tns', '0', '-aac_pns', '0']
+
 def measure_lufs(wav, af=''):
     """Integrated loudness (LUFS) and true peak (dBTP) of `wav` after the filter chain `af` (EBU R128 via ffmpeg)."""
     chain = (af + ',' if af else '') + 'ebur128=peak=true:framelog=quiet'
@@ -53,21 +57,33 @@ def measure_lufs(wav, af=''):
     return float(re.search(r'I:\s+(-?[\d.]+) LUFS', txt).group(1)), float(re.search(r'Peak:\s+(-?[\d.]+) dBFS', txt).group(1))
 
 def master_audio(src, dst, tl):
-    """Make the mix louder than the supplied song: gentle compression, make-up gain found by iteration so that the
-    integrated loudness hits `target_lufs`, then a look-ahead limiter at `ceiling_db` (headroom for the AAC encode)."""
+    """Make the mix louder than the supplied song. Two modes (project.json -> master):
+    * default: gentle compression, make-up gain found by iteration so the integrated loudness hits `target_lufs`,
+      then a look-ahead limiter at `ceiling_db` (headroom for the AAC encode);
+    * `phone: {...}`: tuned for phone speakers.  The supplied song keeps ~75 % of its energy below 300 Hz, which a
+      phone cannot play, so the level a listener actually hears is ~5 dB below the measured loudness.  This mode trims
+      the sub-bass, lifts the 1-6 kHz presence band, compresses, drives a tanh soft clipper (its harmonics put bass
+      energy into the range a phone can reproduce) and then limits."""
     m = tl.get('master')
     if not m:
         return src
     ceil = 10 ** (m['ceiling_db'] / 20)
+    ph = m.get('phone')
     def chain(g):
+        if ph:
+            return (f"highpass=f={ph['highpass_hz']}:poles=2,"
+                    f"equalizer=f=160:t=h:w=120:g={ph['low_cut_db']},equalizer=f=1000:t=q:w=0.8:g=2,"
+                    f"equalizer=f=2500:t=q:w=0.6:g={ph['presence_db']},equalizer=f=6000:t=h:w=2000:g={ph['air_db']},"
+                    f"acompressor=threshold={10 ** (m['comp_threshold_db'] / 20):.4f}:ratio={m['comp_ratio']}:attack=10:release=180:knee=3:makeup=1,"
+                    f"volume={g:.2f}dB,asoftclip=type=tanh,alimiter=limit={ceil:.4f}:attack=5:release=60:level=0")
         return (f"highpass=f=22,acompressor=threshold={10 ** (m['comp_threshold_db'] / 20):.4f}:ratio={m['comp_ratio']}:attack=18:release=220:knee=3:makeup=1,"
                 f"volume={g:.2f}dB,alimiter=limit={ceil:.4f}:attack=4:release=70:level=0")
-    g = 4.0
-    for _ in range(6):
+    g = 12.0 if ph else 4.0
+    for _ in range(8):
         lufs, tp = measure_lufs(src, chain(g))
         print(f'  master: gain {g:+.2f} dB -> {lufs:.2f} LUFS, true peak {tp:.2f} dBTP', flush=True)
         if abs(lufs - m['target_lufs']) < 0.1: break
-        g += m['target_lufs'] - lufs
+        g += (m['target_lufs'] - lufs) * (0.8 if ph else 1.0)
     run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', chain(g), '-c:a', 'pcm_s16le', dst])
     return dst
 
@@ -178,7 +194,7 @@ def build_final(tl, out_name):
          '-filter_complex', fg, '-map', '[vout]', '-map', '3:a', '-t', f'{length:.3f}',
          '-c:v', 'libx264', '-preset', 'slow', '-crf', os.environ.get('CRF', '18'), '-profile:v', 'high', '-pix_fmt', 'yuv420p',
          '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709',
-         '-c:a', 'aac', '-b:a', '320k', '-ar', '48000', '-movflags', '+faststart', out])
+         '-c:a', 'aac', '-b:a', '320k', *AAC_SAFE, '-ar', '48000', '-movflags', '+faststart', out])
     print('wrote', out, f'{out.stat().st_size / 1e6:.1f} MB')
 
 def main():
@@ -193,7 +209,7 @@ def main():
     if what == 'remux':      # remux IN.mp4 OUT.mp4 [audio.wav]  -> same picture, different audio, no re-encode of the video
         src, out = sys.argv[2], sys.argv[3]
         wav = sys.argv[4] if len(sys.argv) > 4 else str(WORK / 'audio_master.wav')
-        run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-i', wav, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k',
+        run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-i', wav, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k', *AAC_SAFE,
              '-ar', '48000', '-movflags', '+faststart', '-t', f"{tl['total_duration']:.3f}", out])
     if what in ('base', 'all'): build_base(tl, edl)
     if what in ('final', 'all'): build_final(tl, os.environ.get('OUT_NAME', 'niskaram_haya_alas_salah_lyric_video_2.39x1.mp4'))
