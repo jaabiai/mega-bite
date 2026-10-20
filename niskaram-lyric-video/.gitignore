@@ -1,5 +1,5 @@
 work/
-output/*.mp4
-output/*.mov
+output/**/*.mp4
+output/**/*.mov
 *.tmp
 __pycache__/
