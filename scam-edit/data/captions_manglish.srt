@@ -1,0 +1,628 @@
+1
+00:00:00,107 --> 00:00:01,187
+Google Pay-yude ombathaam
+
+2
+00:00:01,187 --> 00:00:02,987
+vaarshikathinte oru sammaanamaayi
+
+3
+00:00:02,987 --> 00:00:04,507
+ningalkku ₹6000 roopa nalkum
+
+4
+00:00:04,507 --> 00:00:06,107
+athallenkil ₹9000 roopa nalkum
+
+5
+00:00:06,107 --> 00:00:07,147
+₹10000 roopa nalkum
+
+6
+00:00:07,147 --> 00:00:08,078
+ennokke paranjukondu
+
+7
+00:00:08,209 --> 00:00:09,449
+ningalkku pala reethiyilulla
+
+8
+00:00:09,449 --> 00:00:10,689
+messageukalo WhatsApp
+
+9
+00:00:10,689 --> 00:00:12,279
+sandeshangalokke vannittundaakum
+
+10
+00:00:12,309 --> 00:00:13,553
+Facebookilokke
+
+11
+00:00:13,583 --> 00:00:14,903
+ethenkilum postukalokke
+
+12
+00:00:14,903 --> 00:00:16,452
+ningal kandittundaakum
+
+13
+00:00:16,725 --> 00:00:17,645
+kelkkumbol
+
+14
+00:00:17,717 --> 00:00:18,637
+santhosham thonnum
+
+15
+00:00:18,637 --> 00:00:19,477
+nammalathilekku
+
+16
+00:00:19,477 --> 00:00:21,031
+aakarshakamaavukayum cheyyum
+
+17
+00:00:21,061 --> 00:00:22,201
+ennal ithu sathyamaano?
+
+18
+00:00:22,809 --> 00:00:23,859
+orikkalum alla
+
+19
+00:00:26,689 --> 00:00:27,889
+ningal ettavum kooduthal
+
+20
+00:00:27,889 --> 00:00:29,478
+sookshikkenda oru bhaagamaanithu
+
+21
+00:00:29,568 --> 00:00:31,168
+ningalude panam nashtappedukayo
+
+22
+00:00:31,168 --> 00:00:31,808
+athallenkil ningalude
+
+23
+00:00:31,808 --> 00:00:33,008
+phoneyilo computeryilokke
+
+24
+00:00:33,008 --> 00:00:34,547
+data nashtappedukayo
+
+25
+00:00:34,577 --> 00:00:35,377
+enthinere parayunnu
+
+26
+00:00:35,377 --> 00:00:36,257
+ningalude maanam vare
+
+27
+00:00:36,257 --> 00:00:38,219
+nashtappedaan saadhyathayaakunna
+
+28
+00:00:38,285 --> 00:00:38,875
+oru
+
+29
+00:00:38,927 --> 00:00:39,847
+sangathiyaanu
+
+30
+00:00:39,847 --> 00:00:41,287
+ingane ulla offerukal
+
+31
+00:00:41,287 --> 00:00:42,829
+ningalkku labhikkuka ennullathu
+
+32
+00:00:42,968 --> 00:00:44,648
+ingane ulla messageukalkku
+
+33
+00:00:44,648 --> 00:00:45,816
+pinnaampurathullathu
+
+34
+00:00:46,019 --> 00:00:47,379
+ee messageinoppam oru link um
+
+35
+00:00:47,379 --> 00:00:48,019
+nalkittundaakum
+
+36
+00:00:48,019 --> 00:00:49,564
+aa link open cheythu kazhinjaal
+
+37
+00:00:49,687 --> 00:00:50,847
+nerathe paranja kaaryangalaaya
+
+38
+00:00:50,847 --> 00:00:52,047
+ningalude data
+
+39
+00:00:52,149 --> 00:00:53,149
+maananashtam
+
+40
+00:00:53,149 --> 00:00:54,207
+dhananashtam
+
+41
+00:00:54,237 --> 00:00:55,477
+angane thudangi palathum
+
+42
+00:00:55,477 --> 00:00:56,997
+sambhavikkaan saadhyathayulla
+
+43
+00:00:56,997 --> 00:00:57,797
+pala kaaryangalum
+
+44
+00:00:57,797 --> 00:00:59,480
+aa linkiloode nadannekkaam
+
+45
+00:00:59,756 --> 00:01:00,636
+Google Pay-yo allenkil
+
+46
+00:01:00,636 --> 00:01:01,596
+PhonePe-yo allenkil
+
+47
+00:01:01,596 --> 00:01:02,356
+Paytm-mo okke
+
+48
+00:01:02,356 --> 00:01:03,286
+paranjukondu
+
+49
+00:01:03,316 --> 00:01:04,276
+aalukal pettennu
+
+50
+00:01:04,276 --> 00:01:05,316
+vishwasikkunna reethiyilulla
+
+51
+00:01:05,316 --> 00:01:06,596
+ithrathilulla linkukal
+
+52
+00:01:06,596 --> 00:01:08,096
+ningalkku varikayaanenkil
+
+53
+00:01:08,215 --> 00:01:09,071
+sookshikkanam
+
+54
+00:01:09,101 --> 00:01:10,621
+athu open cheyyaathirikkukayum
+
+55
+00:01:10,621 --> 00:01:11,821
+athodoppam mattaarkkum
+
+56
+00:01:11,821 --> 00:01:12,741
+athine forward
+
+57
+00:01:12,741 --> 00:01:14,122
+cheyyaathirikkukayum cheyyuka
+
+58
+00:01:14,431 --> 00:01:15,911
+ithrathilulla vyaaja
+
+59
+00:01:15,911 --> 00:01:16,874
+linkukal vazhi
+
+60
+00:01:16,904 --> 00:01:17,961
+thattippukaar
+
+61
+00:01:17,991 --> 00:01:20,031
+ningalude vyakthigatha vivarangalo
+
+62
+00:01:20,031 --> 00:01:22,262
+athallenkil bank vivarangalo
+
+63
+00:01:22,292 --> 00:01:23,652
+athumallenkil mobile-le
+
+64
+00:01:23,652 --> 00:01:25,172
+mattethenkilum data-yokke
+
+65
+00:01:25,172 --> 00:01:26,110
+chorthiyekkaam
+
+66
+00:01:26,345 --> 00:01:27,745
+chilar OTP chodikkum
+
+67
+00:01:27,745 --> 00:01:29,863
+chilar UPI PIN chodikkum
+
+68
+00:01:30,100 --> 00:01:30,900
+orkkuka,
+
+69
+00:01:30,900 --> 00:01:32,340
+ingane ulla yaathonnum thanne
+
+70
+00:01:32,340 --> 00:01:33,515
+nalkaan nilkkaruthu
+
+71
+00:01:33,564 --> 00:01:34,283
+orikkalum
+
+72
+00:01:34,313 --> 00:01:35,757
+panam sweekarikkaan vendi
+
+73
+00:01:35,787 --> 00:01:36,667
+oru OTP-yo
+
+74
+00:01:36,667 --> 00:01:38,227
+allenkil UPI PIN-no
+
+75
+00:01:38,227 --> 00:01:39,467
+ningal nalkendathilla
+
+76
+00:01:39,467 --> 00:01:41,027
+panam nalkaan vendiyaanu
+
+77
+00:01:41,027 --> 00:01:42,147
+ingane ulla kaaryangalokke
+
+78
+00:01:42,147 --> 00:01:43,184
+nalkendi varika
+
+79
+00:01:43,467 --> 00:01:44,867
+appo ingane ulla oru sandeshamo
+
+80
+00:01:44,867 --> 00:01:45,787
+allenkil oru linko
+
+81
+00:01:45,787 --> 00:01:46,267
+vannu kazhinjaal
+
+82
+00:01:46,267 --> 00:01:47,439
+ningal enthu cheyyum?
+
+83
+00:01:47,757 --> 00:01:49,085
+aadyam cheyyendathu
+
+84
+00:01:49,332 --> 00:01:50,892
+ethu platforminte link aanu
+
+85
+00:01:50,892 --> 00:01:51,932
+ningalkku vannittullathu
+
+86
+00:01:51,932 --> 00:01:52,732
+ennulla domain
+
+87
+00:01:52,732 --> 00:01:54,132
+kruthyamaayi onnu parishodhikkuka
+
+88
+00:01:54,132 --> 00:01:55,332
+theerchayaayum ningalkku varunna
+
+89
+00:01:55,332 --> 00:01:57,318
+domain official aayirikkilla
+
+90
+00:01:57,348 --> 00:01:58,068
+parishodhikkaan vendi
+
+91
+00:01:58,068 --> 00:01:59,188
+athil click cheythukondalla
+
+92
+00:01:59,188 --> 00:01:59,868
+parishodhikkendathu
+
+93
+00:01:59,868 --> 00:02:01,308
+just athonnu vaayichu nokkuka
+
+94
+00:02:01,308 --> 00:02:02,148
+athinte linkil
+
+95
+00:02:02,148 --> 00:02:03,348
+ippol Google Pay aanenkil
+
+96
+00:02:03,348 --> 00:02:05,234
+google.com ennullathil
+
+97
+00:02:05,516 --> 00:02:06,556
+Google-inteyaaya
+
+98
+00:02:06,556 --> 00:02:07,356
+official link
+
+99
+00:02:07,356 --> 00:02:08,815
+thanneyaayirikkum undaavuka
+
+100
+00:02:08,845 --> 00:02:10,205
+athallenkil PhonePe-yudethaanenkil
+
+101
+00:02:10,205 --> 00:02:12,002
+PhonePe-yude official link
+
+102
+00:02:12,041 --> 00:02:13,281
+athupole ethu website-inte
+
+103
+00:02:13,281 --> 00:02:14,521
+perilaano ningalkku varunnathu
+
+104
+00:02:14,521 --> 00:02:15,761
+athinte official link aano
+
+105
+00:02:15,761 --> 00:02:16,801
+ennu parishodhikkuka
+
+106
+00:02:16,801 --> 00:02:17,961
+ini official link pole
+
+107
+00:02:17,961 --> 00:02:18,921
+ningalkku thonniyaalum
+
+108
+00:02:18,921 --> 00:02:21,108
+athine open cheyyaan nilkkaruthu
+
+109
+00:02:21,445 --> 00:02:23,125
+ini GPay-yudethaanenkil
+
+110
+00:02:23,125 --> 00:02:25,045
+direct ningal GPay open cheyyuka
+
+111
+00:02:25,045 --> 00:02:26,445
+athinakath thanne ningalkku
+
+112
+00:02:26,445 --> 00:02:28,245
+offers available aayittullathellaam
+
+113
+00:02:28,245 --> 00:02:29,045
+avide kaanikkum
+
+114
+00:02:29,045 --> 00:02:30,285
+just avide ninnu kondu
+
+115
+00:02:30,285 --> 00:02:31,805
+ningalkku verify cheyyaam
+
+116
+00:02:31,805 --> 00:02:32,485
+avide yaathoru vidha
+
+117
+00:02:32,485 --> 00:02:33,325
+offerum ee paranja
+
+118
+00:02:33,325 --> 00:02:34,855
+reethiyil illenkil
+
+119
+00:02:34,885 --> 00:02:36,108
+ee paranja link
+
+120
+00:02:36,236 --> 00:02:37,196
+nooru shathamaanam
+
+121
+00:02:37,196 --> 00:02:38,244
+fake aayirikkum
+
+122
+00:02:38,591 --> 00:02:39,551
+athupole thanneyaanu
+
+123
+00:02:39,551 --> 00:02:40,798
+mattu platformukalum
+
+124
+00:02:40,828 --> 00:02:41,809
+PhonePe aayaalum
+
+125
+00:02:41,839 --> 00:02:42,799
+Paytm aayaalum,
+
+126
+00:02:42,799 --> 00:02:43,719
+ini athalla CRED
+
+127
+00:02:43,719 --> 00:02:44,799
+angane ethum aayikkotte
+
+128
+00:02:44,799 --> 00:02:45,479
+athilokke ningalkku
+
+129
+00:02:45,479 --> 00:02:46,719
+offers nalkunnundenkil
+
+130
+00:02:46,719 --> 00:02:47,959
+athinte official website-il
+
+131
+00:02:47,959 --> 00:02:48,879
+athallenkil official
+
+132
+00:02:48,879 --> 00:02:50,239
+application-akathoo
+
+133
+00:02:50,239 --> 00:02:51,639
+ithrathilulla offerukal
+
+134
+00:02:51,639 --> 00:02:53,647
+avar thanne nalkunnathaayirikkum
+
+135
+00:02:53,677 --> 00:02:55,597
+avar thanne mention cheythittundaavum
+
+136
+00:02:55,597 --> 00:02:57,067
+athu parishodhikkuka
+
+137
+00:02:57,460 --> 00:02:58,740
+cheriyoru ashraddha mathi
+
+138
+00:02:58,740 --> 00:03:00,420
+ningalude account-le panam nashtappedaan
+
+139
+00:03:00,420 --> 00:03:01,860
+athallenkil ningalude maanam
+
+140
+00:03:01,860 --> 00:03:02,980
+thanne nashtappedaan
+
+141
+00:03:02,980 --> 00:03:04,677
+athukondu ithrathilulla
+
+142
+00:03:04,707 --> 00:03:06,063
+linkukalo mattoo varumbol
+
+143
+00:03:06,093 --> 00:03:06,933
+udanadi kayari
+
+144
+00:03:06,933 --> 00:03:07,893
+athil click cheyyukayo
+
+145
+00:03:07,893 --> 00:03:08,933
+mattullavarkku share
+
+146
+00:03:08,933 --> 00:03:10,289
+cheyyaathirikkukayo cheyyuka
+
+147
+00:03:10,543 --> 00:03:11,383
+ee video ningalude
+
+148
+00:03:11,383 --> 00:03:12,183
+suhruthukkalilekkum
+
+149
+00:03:12,183 --> 00:03:13,103
+share cheythu kodukkuka
+
+150
+00:03:13,103 --> 00:03:14,063
+naalaal ariyatte
+
+151
+00:03:14,063 --> 00:03:16,119
+ingane ulla sambhavangal nadakkaamenn
+
+152
+00:03:16,297 --> 00:03:17,417
+enthaayaalum puthiyoru topicaayittu
+
+153
+00:03:17,417 --> 00:03:18,777
+namukku veendum kandumuttaam
+
+154
+00:03:18,777 --> 00:03:19,497
+athuvareyum channel
+
+155
+00:03:19,497 --> 00:03:20,137
+subscribe cheythu
+
+156
+00:03:20,137 --> 00:03:21,097
+kaathirikkuka
+
+157
+00:03:21,097 --> 00:03:22,640
+nandi, namaskaaram
+

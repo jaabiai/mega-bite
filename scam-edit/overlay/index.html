@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>overlay</title>
+<style>
+@font-face{font-family:'Poppins';font-weight:500;src:url('fonts/Poppins-Medium.ttf')}
+@font-face{font-family:'Poppins';font-weight:600;src:url('fonts/Poppins-SemiBold.ttf')}
+@font-face{font-family:'Poppins';font-weight:700;src:url('fonts/Poppins-Bold.ttf')}
+@font-face{font-family:'Poppins';font-weight:800;src:url('fonts/Poppins-ExtraBold.ttf')}
+:root{--red:#FF4D5A;--amber:#FFB020;--green:#3DDC84;--blue:#4DA3FF;--yellow:#FFE14D;--ink:#0A0C12}
+html,body{margin:0;padding:0;background:transparent;overflow:hidden}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;font-family:'Poppins',sans-serif;color:#fff;background:transparent}
+.abs{position:absolute}
+.ic{display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ic svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.glass{background:rgba(9,11,17,.78);border:1.5px solid rgba(255,255,255,.14);border-radius:26px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+.glass.red{background:rgba(54,10,16,.84);border-color:rgba(255,77,90,.55)}
+.glass.green{background:rgba(8,40,26,.84);border-color:rgba(61,220,132,.5)}
+.card{display:flex;align-items:center;gap:22px;padding:0 28px 0 34px;box-sizing:border-box;overflow:hidden}
+.card .bar{position:absolute;left:0;top:0;bottom:0;width:9px}
+.card .icb{width:86px;height:86px;border-radius:24px;display:flex;align-items:center;justify-content:center;flex:none}
+.card .t1{font-weight:800;font-size:42px;line-height:1.05;letter-spacing:.4px}
+.card .t2{font-weight:500;font-size:25px;line-height:1.25;color:#C9CFDB;margin-top:6px}
+.pill{display:inline-flex;align-items:center;gap:12px;border-radius:999px;padding:10px 26px 10px 18px;font-weight:800;font-size:34px;letter-spacing:1.5px}
+.pill.red{background:var(--red);color:#fff;box-shadow:0 8px 30px rgba(255,77,90,.45)}
+.shadow-t{text-shadow:0 6px 24px rgba(0,0,0,.6)}
+/* captions */
+.cap{position:absolute;left:60px;right:60px;bottom:58px;text-align:center;line-height:1.12}
+.cap .w{display:inline-block;margin:0 .27em;font-weight:800;font-size:62px;letter-spacing:.3px;color:#fff;
+  -webkit-text-stroke:11px rgba(6,8,12,.92);paint-order:stroke fill;text-shadow:0 7px 24px rgba(0,0,0,.55);transform-origin:50% 70%}
+#grad{left:0;right:0;bottom:0;height:330px;background:linear-gradient(to top,rgba(0,0,0,.52),rgba(0,0,0,0))}
+/* fake message */
+.fmsg{width:560px;box-sizing:border-box;padding:26px 30px 26px 30px}
+.fmsg .hd{display:flex;align-items:center;gap:16px;font-weight:700;font-size:25px;color:#B9C0CE}
+.fmsg .av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#4DA3FF,#7C5CFF);display:flex;align-items:center;justify-content:center;color:#fff}
+.fmsg .tt{font-weight:800;font-size:34px;margin-top:18px;line-height:1.15}
+.fmsg .amtw{position:relative;height:104px;margin-top:6px}
+.fmsg .amt{position:absolute;left:0;top:0;font-weight:800;font-size:92px;color:var(--amber);letter-spacing:-1px;white-space:nowrap}
+.fmsg .sub{font-weight:600;font-size:27px;color:#E6EAF3;margin-top:4px}
+.fmsg .lnk{margin-top:16px;display:inline-block;font-weight:600;font-size:25px;color:#6BB7FF;text-decoration:underline;word-break:break-all}
+.stamp{position:absolute;border:9px solid var(--red);color:var(--red);font-weight:800;border-radius:16px;padding:2px 26px;letter-spacing:4px;
+  text-shadow:0 0 18px rgba(255,77,90,.45);background:rgba(10,0,2,.35);white-space:nowrap}
+.big{position:absolute;font-weight:800;line-height:1;white-space:nowrap}
+.chip{display:flex;align-items:center;gap:16px;border-radius:22px;padding:0 26px 0 20px;height:96px;box-sizing:border-box;font-weight:800;font-size:36px;letter-spacing:.4px}
+.tag{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:6px 14px;font-weight:800;font-size:22px;letter-spacing:1px}
+.tag.red{background:rgba(255,77,90,.2);color:#FF7A84;border:1.5px solid rgba(255,77,90,.6)}
+.tag.green{background:rgba(61,220,132,.18);color:#58E79A;border:1.5px solid rgba(61,220,132,.55)}
+.url{position:absolute;box-sizing:border-box;padding:0 26px;display:flex;align-items:center;gap:18px;height:112px}
+.url .u{font-weight:600;font-size:35px;letter-spacing:.1px;white-space:nowrap;color:#EAEFF8}
+.url .u b{font-weight:700}
+.phone{position:absolute;width:374px;height:783px;border-radius:60px;background:#0b0c10;box-shadow:0 0 0 3px #3a3f4b,0 40px 90px rgba(0,0,0,.6),inset 0 0 0 2px #1b1e26}
+.phone .scr{position:absolute;left:12px;top:12px;right:12px;bottom:12px;border-radius:52px;overflow:hidden;background:#000}
+.phone .scr img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;transform-origin:0 0}
+.phone .notch{position:absolute;left:50%;top:26px;width:112px;height:30px;border-radius:20px;background:#000;transform:translateX(-50%);z-index:3}
+.ring{position:absolute;border:7px solid var(--yellow);border-radius:50%;box-shadow:0 0 0 6px rgba(255,225,77,.25),0 0 40px rgba(255,225,77,.7);z-index:4}
+.rrect{position:absolute;border:6px solid var(--yellow);border-radius:22px;box-shadow:0 0 34px rgba(255,225,77,.6);z-index:4}
+.step{display:flex;align-items:center;gap:18px;border-radius:22px;padding:0 22px 0 16px;height:96px;box-sizing:border-box;font-weight:700;font-size:29px;line-height:1.15}
+.step .n{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;flex:none}
+.glitch{font-weight:800;line-height:1;white-space:nowrap;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div id="stage"><div id="grad" class="abs"></div></div>
+<script src="gsap.min.js"></script>
+<script src="data.js"></script>
+<script src="overlay.js"></script>
+<script src="overlay2.js"></script>
+<script src="overlay3.js"></script>
+</body>
+</html>
