@@ -1,0 +1,144 @@
+{
+ "scenes": [
+  {
+   "id": "wa",
+   "t0": 2.4,
+   "t1": 8.166666666666666,
+   "wipeIn": true,
+   "wipeOut": true
+  },
+  {
+   "id": "b1",
+   "t0": 8.166666666666666,
+   "t1": 12.166666666666666,
+   "wipeIn": false,
+   "wipeOut": true,
+   "broll": {
+    "file": "s_41165.mp4",
+    "start": 3.0,
+    "mode": "full",
+    "grade": "eq=brightness=-0.16:contrast=1.06:saturation=0.9",
+    "t0": 8.166666666666666,
+    "t1": 12.166666666666666
+   }
+  },
+  {
+   "id": "b2",
+   "t0": 12.166666666666666,
+   "t1": 15.5,
+   "wipeIn": false,
+   "wipeOut": true,
+   "broll": {
+    "file": "s_42136.mp4",
+    "start": 0.3,
+    "mode": "portrait",
+    "cx": 1180,
+    "grade": "eq=brightness=-0.10:contrast=1.04:saturation=0.95",
+    "t0": 12.166666666666666,
+    "t1": 15.5
+   }
+  },
+  {
+   "id": "never",
+   "t0": 19.333333333333332,
+   "t1": 21.166666666666668,
+   "wipeIn": true,
+   "wipeOut": true
+  },
+  {
+   "id": "loss",
+   "t0": 24.366666666666667,
+   "t1": 32.666666666666664,
+   "wipeIn": true,
+   "wipeOut": true,
+   "broll": {
+    "file": "s_34838.mp4",
+    "start": 5.0,
+    "mode": "full",
+    "grade": "eq=brightness=-0.22:contrast=1.10:saturation=0.9",
+    "t0": 24.366666666666667,
+    "t1": 32.666666666666664
+   }
+  },
+  {
+   "id": "link",
+   "t0": 35.96666666666667,
+   "t1": 46.5,
+   "wipeIn": true,
+   "wipeOut": true,
+   "broll": {
+    "file": "s_46627.mp4",
+    "start": 3.5,
+    "mode": "full",
+    "t0": 38.9,
+    "grade": "eq=brightness=-0.16:contrast=1.10:saturation=0.95",
+    "t1": 46.5
+   }
+  },
+  {
+   "id": "rules",
+   "t0": 57.96666666666667,
+   "t1": 78.7,
+   "wipeIn": true,
+   "wipeOut": true
+  },
+  {
+   "id": "domain",
+   "t0": 82.4,
+   "t1": 96.53333333333333,
+   "wipeIn": true,
+   "wipeOut": true
+  },
+  {
+   "id": "official",
+   "t0": 96.53333333333333,
+   "t1": 105.1,
+   "wipeIn": false,
+   "wipeOut": true
+  },
+  {
+   "id": "gpay",
+   "t0": 113.73333333333333,
+   "t1": 130.56666666666666,
+   "wipeIn": true,
+   "wipeOut": true
+  },
+  {
+   "id": "careful",
+   "t0": 146.13333333333333,
+   "t1": 151.53333333333333,
+   "wipeIn": true,
+   "wipeOut": true,
+   "broll": {
+    "file": "s_46639.mp4",
+    "start": 9.0,
+    "mode": "full",
+    "grade": "eq=brightness=-0.16:contrast=1.08:saturation=0.95",
+    "t0": 146.13333333333333,
+    "t1": 151.53333333333333
+   }
+  },
+  {
+   "id": "recap",
+   "t0": 151.53333333333333,
+   "t1": 158.4,
+   "wipeIn": false,
+   "wipeOut": true
+  },
+  {
+   "id": "share",
+   "t0": 158.4,
+   "t1": 163.7,
+   "wipeIn": false,
+   "wipeOut": true
+  },
+  {
+   "id": "end",
+   "t0": 166.8,
+   "t1": 176.0,
+   "wipeIn": true,
+   "wipeOut": false
+  }
+ ],
+ "total": 176.0
+}

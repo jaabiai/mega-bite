@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>overlay v3</title>
+<style>
+@font-face{font-family:'Anek';font-weight:100 800;src:url('fonts/AnekMalayalam.ttf')}
+@font-face{font-family:'Poppins';font-weight:500;src:url('fonts/Poppins-Medium.ttf')}
+@font-face{font-family:'Poppins';font-weight:600;src:url('fonts/Poppins-SemiBold.ttf')}
+@font-face{font-family:'Poppins';font-weight:700;src:url('fonts/Poppins-Bold.ttf')}
+@font-face{font-family:'Poppins';font-weight:800;src:url('fonts/Poppins-ExtraBold.ttf')}
+:root{--red:#FF4D5A;--amber:#FFB020;--green:#3DDC84;--blue:#2D8CFF;--cyan:#5BD6FF;--yellow:#FFE14D}
+html,body{margin:0;padding:0;background:transparent;overflow:hidden}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;font-family:'Anek','Poppins',sans-serif;color:#fff;background:transparent}
+.abs{position:absolute}
+.en{font-family:'Poppins','Anek',sans-serif}
+.ic{display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ic svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.glass{background:rgba(5,16,44,.80);border:1.5px solid rgba(110,175,255,.26);border-radius:28px;box-shadow:0 18px 56px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.07)}
+.glass.red{background:rgba(58,8,18,.86);border-color:rgba(255,77,90,.6)}
+.glass.green{background:rgba(6,44,30,.86);border-color:rgba(61,220,132,.55)}
+.glass.amber{background:rgba(52,34,4,.86);border-color:rgba(255,176,32,.6)}
+.pill{display:inline-flex;align-items:center;gap:12px;border-radius:999px;padding:8px 26px 8px 18px;font-weight:800;font-size:34px;letter-spacing:1.5px}
+.pill.red{background:var(--red);color:#fff;box-shadow:0 8px 30px rgba(255,77,90,.45)}
+.pill.blue{background:var(--blue);color:#fff;box-shadow:0 8px 30px rgba(45,140,255,.5)}
+.t-ml{font-family:'Anek','Poppins',sans-serif;font-weight:800;line-height:1.16}
+.shadow-t{text-shadow:0 6px 26px rgba(0,0,0,.65)}
+/* captions (left column) */
+.cap{position:absolute;left:96px;width:800px;font-family:'Anek','Poppins',sans-serif;font-weight:800;font-size:66px;line-height:1.3;color:#fff;
+  text-shadow:0 4px 22px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.6)}
+.cap .w{display:inline-block;margin-right:.26em;white-space:nowrap;transform-origin:50% 80%}
+.cap .bar{position:absolute;left:-30px;top:6px;bottom:6px;width:8px;border-radius:5px;background:linear-gradient(180deg,#7BE0FF,#2D8CFF);box-shadow:0 0 22px rgba(45,140,255,.9)}
+.cap .ul{position:absolute;height:9px;border-radius:6px;background:linear-gradient(90deg,#4FD0FF,#2D8CFF);box-shadow:0 0 20px rgba(60,170,255,.95),0 0 4px rgba(160,225,255,.9)}
+.cap-probe{position:absolute;left:-3000px;top:0;width:800px;font-family:'Anek','Poppins',sans-serif;font-weight:800;font-size:66px;line-height:1.3}
+.cap-probe .w{display:inline-block;margin-right:.26em;white-space:nowrap}
+.card{display:flex;align-items:center;gap:26px;box-sizing:border-box;overflow:hidden}
+.card .bar{position:absolute;left:0;top:0;bottom:0;width:10px}
+.card .icb{border-radius:26px;display:flex;align-items:center;justify-content:center;flex:none}
+.big{position:absolute;white-space:nowrap}
+.phone{position:absolute;border-radius:58px;background:#0b0c10;box-shadow:0 0 0 3px #4a5160,0 40px 90px rgba(0,0,0,.65),inset 0 0 0 2px #1b1e26}
+.phone .scr{position:absolute;left:12px;top:12px;right:12px;bottom:12px;border-radius:48px;overflow:hidden;background:#000}
+.phone .scr img{position:absolute;left:0;top:0;width:100%;display:block;transform-origin:0 0}
+.rrect{position:absolute;border:6px solid var(--yellow);border-radius:20px;box-shadow:0 0 34px rgba(255,225,77,.65),inset 0 0 18px rgba(255,225,77,.18);z-index:4}
+.stamp{position:absolute;border:10px solid var(--red);color:var(--red);font-weight:800;border-radius:18px;padding:0 30px;white-space:nowrap;
+  text-shadow:0 0 22px rgba(255,77,90,.5);background:rgba(20,0,4,.45)}
+.urlbar{position:absolute;box-sizing:border-box;padding:0 26px;display:flex;align-items:center;gap:20px;height:116px;border-radius:28px}
+.urlbar .u{font-family:'Poppins',sans-serif;font-weight:600;font-size:36px;white-space:nowrap;color:#EAF1FF}
+.chip{display:flex;align-items:center;gap:18px;border-radius:24px;padding:0 30px 0 22px;height:104px;box-sizing:border-box;font-weight:800;font-size:46px}
+.kscene{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:1}
+.hl{z-index:2}
+.cap{z-index:5}
+.fx{z-index:30}
+#shade{left:0;top:0;width:1100px;height:1080px;background:linear-gradient(90deg,rgba(2,8,22,.62),rgba(2,8,22,0))}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="gsap.min.js"></script>
+<script src="data.js"></script>
+<script src="core.js"></script>
+<script src="captions.js"></script>
+<script src="scenes1.js"></script>
+<script src="scenes2.js"></script>
+<script src="finish.js"></script>
+</body>
+</html>
