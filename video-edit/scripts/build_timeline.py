@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """EDL + word timings -> timeline.json for the overlay engine (render/overlay.html).
 
-Usage: build_timeline.py OUT.json [--upto SECONDS]
+Usage: build_timeline.py OUT.json [--upto SECONDS] [--layout wide|vertical]
 """
 import json
 import os
@@ -22,7 +22,7 @@ def find_word(words, text, after):
     raise KeyError(text)
 
 
-def build(upto=None):
+def build(upto=None, layout="wide"):
     words = json.load(open(os.path.join(ROOT, "captions/words.json")))["words"]
     end = EDL["end_card"]
     total = round(end["start"] + end["length"], 3) if end else EDL["main_duration"]
@@ -61,6 +61,8 @@ def build(upto=None):
         "cta": cta, "toasts": EDL["toasts"],
         "end": {"start": end["start"], "captionsOff": end["start"] - .05, "lines": end["lines"]} if end else None,
     }
+    if layout == "vertical":                       # Reel: 1080 x 1920, same words / scenes / audio
+        tl["layout"], tl["W"], tl["H"] = "vertical", 1080, 1920
     if upto is not None:
         tl["duration"] = upto
         if tl["end"]:
@@ -71,7 +73,8 @@ def build(upto=None):
 if __name__ == "__main__":
     out = sys.argv[1]
     upto = float(sys.argv[sys.argv.index("--upto") + 1]) if "--upto" in sys.argv else None
-    tl = build(upto)
+    layout = sys.argv[sys.argv.index("--layout") + 1] if "--layout" in sys.argv else "wide"
+    tl = build(upto, layout)
     json.dump(tl, open(out, "w"))
     print(f"timeline: {tl['duration']}s, {len(tl['words'])} caption chunks, {len(tl['blocks'])} phone blocks, "
           f"{len(tl['cta'])} CTA events -> {out}")

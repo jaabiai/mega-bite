@@ -10,7 +10,7 @@
     --font: 'Display';
   }
   html, body { margin: 0; background: transparent; overflow: hidden; }
-  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: transparent;
+  #stage { position: relative; overflow: hidden; background: transparent;
            font-family: var(--font), 'Inter', sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
   .abs { position: absolute; }
   .hide { display: none; }
@@ -28,11 +28,7 @@
   #logoWrap { z-index: 11; }
 
   /* ---------- screen block ---------- */
-  #blockPanel { left: -140px; top: -140px; width: 2200px; height: 1360px; background:
-      radial-gradient(900px 700px at 1560px 280px, var(--glowA), transparent 70%),
-      radial-gradient(1000px 800px at 150px 1180px, var(--glowB), transparent 72%),
-      linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
-      background-repeat: no-repeat; }
+  #blockPanel { left: -140px; top: -140px; background-repeat: no-repeat; }  /* size + gradients set per layout in JS */
   #blockDots { inset: 0; opacity: .5;
       background-image: radial-gradient(rgba(255,255,255,.085) 1.4px, transparent 1.6px); background-size: 46px 46px; }
   #blockEdge { top: 0; bottom: 0; width: 8px; background: linear-gradient(180deg, var(--accent2), var(--accent), var(--accent2));
@@ -55,28 +51,28 @@
   .hl-tap { position: absolute; border-radius: 50%; border: calc(var(--inv) * 5px) solid var(--hot); box-sizing: border-box; }
 
   /* ---------- titles ---------- */
-  .kicker { position: absolute; left: 96px; display: flex; align-items: center; gap: 14px;
+  .kicker { position: absolute; left: var(--mx); display: flex; align-items: center; gap: 14px;
       font-weight: 800; letter-spacing: .22em; font-size: 24px; color: var(--accent); text-transform: uppercase; }
   .kicker .bar { width: 46px; height: 4px; border-radius: 3px; background: linear-gradient(90deg, var(--accent2), var(--accent)); box-shadow: 0 0 14px var(--accent); }
-  .title { position: absolute; left: 96px; font-weight: 900; line-height: .98; letter-spacing: -.015em; white-space: nowrap;
+  .title { position: absolute; left: var(--mx); font-weight: 900; line-height: .98; letter-spacing: -.015em; white-space: nowrap;
       text-shadow: 0 4px 26px rgba(0,0,0,.45); }
   .title .ln { display: block; overflow: hidden; padding: 0 0 .06em 0; }
   .title .ln > span { display: inline-block; will-change: transform; }
   .title .ac { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent;
       padding-right: .03em; }
-  .sub { position: absolute; left: 96px; font-weight: 600; font-size: 38px; color: var(--muted); letter-spacing: .005em; }
+  .sub { position: absolute; left: var(--mx); font-weight: 600; font-size: var(--subFs); color: var(--muted); letter-spacing: .005em; }
 
-.chips { position: absolute; left: 96px; display: flex; gap: 14px; flex-wrap: wrap; width: 1000px; }
-  .chip { display: inline-flex; align-items: center; gap: 10px; padding: 12px 26px; border-radius: 40px; font-weight: 800; font-size: 30px; letter-spacing: .05em;
+.chips { position: absolute; left: var(--mx); display: flex; gap: 14px; flex-wrap: wrap; width: var(--chipsW); }
+  .chip { display: inline-flex; align-items: center; gap: 10px; padding: 12px 26px; border-radius: 40px; font-weight: 800; font-size: var(--chipFs); letter-spacing: .05em;
       text-transform: uppercase; color: rgba(255,255,255,.78); background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.26); white-space: nowrap; }
   .chip.on { color: #1a1206; border-color: transparent; background: linear-gradient(90deg, var(--accent2), var(--accent)); box-shadow: 0 0 30px var(--accentGlow); }
 
   /* ---------- captions ---------- */
-  #capText { position: absolute; left: 96px; top: 858px; height: 104px; display: flex; align-items: flex-end; white-space: nowrap;
-      font-weight: 800; font-size: 90px; line-height: 104px; letter-spacing: -.012em; color: #fff;
+  #capText { position: absolute; left: var(--mx); top: var(--capTop); height: var(--capH); display: flex; align-items: flex-end; white-space: nowrap;
+      font-weight: 800; font-size: var(--capFs); line-height: var(--capH); letter-spacing: -.012em; color: #fff;
       text-shadow: 0 3px 0 rgba(0,0,0,.28), 0 8px 30px rgba(0,0,0,.55); will-change: transform, opacity; }
-  #capMeasure { position: absolute; left: -9999px; top: 0; white-space: nowrap; font-weight: 800; font-size: 90px; line-height: 104px; letter-spacing: -.012em; }
-  #ulTrack { position: absolute; left: 96px; top: 978px; height: 8px; border-radius: 8px; background: var(--accentFaint);
+  #capMeasure { position: absolute; left: -9999px; top: 0; white-space: nowrap; font-weight: 800; font-size: var(--capFs); line-height: var(--capH); letter-spacing: -.012em; }
+  #ulTrack { position: absolute; left: var(--mx); top: var(--ulTop); height: 8px; border-radius: 8px; background: var(--accentFaint);
       box-shadow: 0 0 12px var(--accentFaint); }
   #ulFill { position: absolute; left: 0; top: 0; height: 8px; border-radius: 8px;
       background: linear-gradient(90deg, var(--accent2), var(--accent) 70%, var(--hot) 100%); box-shadow: 0 0 14px var(--accent), 0 0 34px var(--accentGlow); }
@@ -87,8 +83,8 @@
       background: linear-gradient(90deg, transparent, var(--accent) 70%, #fff 100%); opacity: .9; }
 
   /* ---------- logo ---------- */
-  #logoWrap { position: absolute; width: 112px; height: 112px; }
-  #logoWrap img { width: 112px; height: 112px; display: block; filter: drop-shadow(0 4px 14px rgba(0,0,0,.5)); }
+  #logoWrap { position: absolute; width: var(--logoS); height: var(--logoS); }
+  #logoWrap img { width: var(--logoS); height: var(--logoS); display: block; filter: drop-shadow(0 4px 14px rgba(0,0,0,.5)); }
   #logoRing { position: absolute; inset: -6px; border-radius: 50%; border: 3px solid var(--accent); box-shadow: 0 0 24px var(--accent); opacity: 0; }
 
   /* ---------- CTA ---------- */
@@ -100,7 +96,7 @@
   .tip { position: absolute; white-space: nowrap; font-weight: 700; font-size: 24px; letter-spacing: .08em; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.6); text-transform: uppercase; }
 
   /* ---------- toast ---------- */
-  #toastCard { position: absolute; left: 96px; top: 56px; width: 800px; height: 124px; border-radius: 32px;
+  #toastCard { position: absolute; left: var(--toastX); top: var(--toastY); width: var(--toastW); height: 124px; border-radius: 32px;
       background: rgba(22,22,28,.94); border: 1.5px solid rgba(255,255,255,.14); box-shadow: 0 22px 60px rgba(0,0,0,.5); backdrop-filter: blur(22px);
       display: flex; align-items: center; gap: 22px; padding: 0 26px; box-sizing: border-box; }
   #toastCard img { width: 76px; height: 76px; border-radius: 18px; background: #05122B; }
@@ -167,7 +163,44 @@ const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${
 
 const TL = window.TL, ST = window.STYLE;
 const FPS = TL.fps || 30;
-const SW = 1920, SH = 1080;
+const VERT = TL.layout === 'vertical';                       // 9:16 Reel: 1080 x 1920 with Instagram / Shorts safe zones
+const SW = VERT ? 1080 : 1920, SH = VERT ? 1920 : 1080;
+const G = VERT ? {
+  mx: 72, logo: { x: SW - 72 - 104, y: 256, s: 104 },
+  cap: { top: 1388, h: 100, ul: 1508, fs: 84, maxW: 936 },
+  title: { y0: 330, k: .72, kick: 56, subFs: 30, subGap: 50 },
+  card: { cx: 540, cy: 990, w: 800, h: 760, bodyPad: 7, innerPad: 0 },
+  toast: { x: 72, y: 236, w: 936 }, cta: { x: 72, y: 1274, w: 340, gap: 150 },
+  chipFs: 25, chipsW: 936,
+} : {
+  mx: 96, logo: { x: SW - 96 - 112, y: 56, s: 112 },
+  cap: { top: 858, h: 104, ul: 978, fs: 90, maxW: 1e9 },
+  title: { y0: 340, k: 1, kick: 70, subFs: 38, subGap: 62 },
+  card: { cx: 1424, cy: 540, w: 1320 * 936 / 2868, h: 936, bodyPad: 11, innerPad: 4 },
+  toast: { x: 96, y: 56, w: 800 }, cta: { x: null, y: 735, w: 380, gap: 170 },
+  chipFs: 30, chipsW: 1000,
+};
+(function layoutVars() {
+  const r = document.documentElement.style, st = $('stage').style;
+  st.width = SW + 'px'; st.height = SH + 'px';
+  r.setProperty('--mx', G.mx + 'px'); r.setProperty('--capTop', G.cap.top + 'px'); r.setProperty('--capH', G.cap.h + 'px');
+  r.setProperty('--capFs', G.cap.fs + 'px'); r.setProperty('--ulTop', G.cap.ul + 'px');
+  r.setProperty('--logoS', G.logo.s + 'px'); r.setProperty('--subFs', G.title.subFs + 'px');
+  r.setProperty('--toastX', G.toast.x + 'px'); r.setProperty('--toastY', G.toast.y + 'px'); r.setProperty('--toastW', G.toast.w + 'px');
+  r.setProperty('--chipFs', G.chipFs + 'px'); r.setProperty('--chipsW', G.chipsW + 'px');
+  const bp = $('blockPanel').style;                          // oversized so drifting glows never expose an edge
+  bp.width = (SW + 280) + 'px'; bp.height = (SH + 280) + 'px';
+  const ax = Math.round(SW * (VERT ? .86 : .74)) + 140, ay = Math.round(SH * (VERT ? .1 : .13)) + 140;
+  const bx = Math.round(SW * (VERT ? .1 : .08)) + 140, by = Math.round(SH * (VERT ? .98 : .96)) + 140;
+  const ra = VERT ? '760px 760px' : '900px 700px', rb = VERT ? '860px 860px' : '1000px 800px';
+  bp.background = `radial-gradient(${ra} at ${ax}px ${ay}px, var(--glowA), transparent 70%), radial-gradient(${rb} at ${bx}px ${by}px, var(--glowB), transparent 72%), linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%)`;
+  bp.backgroundRepeat = 'no-repeat';
+  if (VERT) {
+    $('leftScrim').style.background = 'linear-gradient(180deg, rgba(8,8,12,.80) 0%, rgba(8,8,12,.56) 24%, rgba(8,8,12,0) 50%)';
+    const e = $('blockEdge').style; e.width = '100%'; e.height = '8px'; e.top = 'auto'; e.bottom = 'auto'; e.left = '0';
+    e.background = 'linear-gradient(90deg, var(--accent2), var(--accent), var(--accent2))';
+  }
+})();
 
 /* ---------- apply palette / font ---------- */
 (function applyStyle() {
@@ -185,18 +218,26 @@ const SW = 1920, SH = 1080;
 /* ---------- logo ---------- */
 const logoImg = $('logoImg'); logoImg.src = TL.logo;
 $('toastLogo').src = TL.logo;
-const LOGO = { x: SW - 96 - 112, y: 56 };           // top-right, same 96 px margin as the captions
-$('logoWrap').style.left = LOGO.x + 'px'; $('logoWrap').style.top = LOGO.y + 'px';
+$('logoWrap').style.left = G.logo.x + 'px'; $('logoWrap').style.top = G.logo.y + 'px';   // top-right, same margin as the captions
 
 /* ---------- screen block geometry ---------- */
-const PH = { cx: 1424, cy: 540, H: 936 };           // phone screen height in px at z = 1
-const K = PH.H / 2868, PW = 1320 * K;
+/* wide: iPhone mock-up (whole screen visible at z = 1).  vertical: a large rounded "UI zoom card" showing the
+   screen at the card's width (z = 1) - much larger text than a phone mock-up would give on a phone-sized screen. */
+const PH = { cx: G.card.cx, cy: G.card.cy, H: G.card.h };
+const PW = G.card.w, K = PW / 1320;
+const PAD = G.card.bodyPad + G.card.innerPad;
 const phoneBody = $('phoneBody'), phoneScreen = $('phoneScreen'), zoomLayer = $('zoomLayer');
 phoneScreen.style.width = PW + 'px'; phoneScreen.style.height = PH.H + 'px';
 $('phoneInner').style.width = PW + 'px'; $('phoneInner').style.height = PH.H + 'px';
-phoneBody.style.width = (PW + 8) + 'px'; phoneBody.style.height = (PH.H + 8) + 'px';
-(function sideButtons() {
-  const w = $('phoneWrap');
+phoneBody.style.width = (PW + 2 * G.card.innerPad) + 'px'; phoneBody.style.height = (PH.H + 2 * G.card.innerPad) + 'px';
+phoneBody.style.padding = G.card.bodyPad + 'px'; $('phoneInner').style.padding = G.card.innerPad + 'px';
+if (VERT) {
+  phoneBody.style.borderRadius = '58px';
+  phoneBody.style.background = 'linear-gradient(135deg, var(--accent), var(--accent2))';
+  phoneBody.style.boxShadow = '0 40px 90px rgba(0,0,0,.55), 0 0 120px var(--accentGlowSoft)';
+  $('phoneInner').style.borderRadius = '51px'; $('phoneInner').style.background = '#000';
+  phoneScreen.style.borderRadius = '51px';
+} else (function sideButtons() {
   [[-4, 150, 70], [-4, 250, 110], [-4, 380, 110], [PW + 30 - 1, 300, 150]].forEach(([x, y, h]) => {
     const b = document.createElement('div'); b.className = 'btn-side'; b.style.left = x + 'px'; b.style.top = y + 'px'; b.style.height = h + 'px';
     phoneBody.appendChild(b);
@@ -237,12 +278,14 @@ function drawBlock(t) {
   if (!b) { el.style.display = 'none'; return null; }
   el.style.display = 'block';
   const enter = seg(t, b.start, b.start + .6), exitK = seg(t, b.end, b.end + (b.exit ?? .5));
-  const px = (1 - E.out4(enter)) * SW - E.in3(exitK) * SW;          // whole block pushes in from the right, leaves to the left
-  el.style.transform = `translateX(${px}px)`;
+  const px = VERT ? (1 - E.out4(enter)) * SH - E.in3(exitK) * SH     // vertical: swipes up from the bottom, leaves through the top
+                  : (1 - E.out4(enter)) * SW - E.in3(exitK) * SW;   // wide: pushes in from the right, leaves to the left
+  el.style.transform = VERT ? `translateY(${px}px)` : `translateX(${px}px)`;
   $('blockDots').style.transform = `translateY(${(t * 6) % 46}px)`;
   const edge = $('blockEdge');                                        // neon leading edge of the sliding block
-  if (enter < 1) { edge.style.left = '0px'; edge.style.opacity = 1; }
-  else if (exitK > 0) { edge.style.left = (SW - 8) + 'px'; edge.style.opacity = 1; }
+  const edgeProp = VERT ? 'top' : 'left', edgeEnd = (VERT ? SH : SW) - 8;
+  if (enter < 1) { edge.style[edgeProp] = '0px'; edge.style.opacity = 1; }
+  else if (exitK > 0) { edge.style[edgeProp] = edgeEnd + 'px'; edge.style.opacity = 1; }
   else edge.style.opacity = 0;
   // drifting glows
   $('blockPanel').style.backgroundPosition = `${Math.sin(t * .35) * 40}px ${Math.cos(t * .27) * 30}px, ${Math.cos(t * .3) * 50}px 0, 0 0`;
@@ -252,8 +295,9 @@ function drawBlock(t) {
   const phoneIn = E.out4(seg(t, b.start + .12, b.start + .85));
   const phoneOut = E.in3(seg(t, b.end, b.end + .4));
   const wrap = $('phoneWrap');
-  const tx = (b.phoneX ?? PH.cx) - (PW + 30) / 2 + (1 - phoneIn) * 120 - phoneOut * 120;
-  const ty = PH.cy - (PH.H + 30) / 2 + bob + (1 - phoneIn) * 40;
+  const par = VERT ? [0, (1 - phoneIn) * 120 - phoneOut * 120] : [(1 - phoneIn) * 120 - phoneOut * 120, (1 - phoneIn) * 40];
+  const tx = (b.phoneX ?? PH.cx) - (PW + 2 * PAD) / 2 + par[0];
+  const ty = PH.cy - (PH.H + 2 * PAD) / 2 + bob + par[1];
   wrap.style.transform = `translate(${tx}px, ${ty}px) scale(${lerp(.92, 1, phoneIn)})`;
   wrap.style.opacity = 1;                                   // the block slide is the transition; the phone must never look ghosted
 
@@ -334,17 +378,18 @@ function drawTitles(t, info) {
     const kOut = E.in3(seg(t, it.end - .3, it.end));
     if (it.scrim) scrimK = Math.max(scrimK, E.out3(seg(t, it.start, it.start + .5)) * (1 - E.in3(seg(t, it.end - .3, it.end))));
     if (kIn <= 0 || kOut >= 1) continue;
-    const y0 = it.y ?? 340, fs = it.size ?? 112, lh = fs * .98;
+    const y0 = VERT ? G.title.y0 : (it.y ?? 340), fs = (it.size ?? 112) * G.title.k, lh = fs * .98;
+    const tvis = VERT ? 1 - (window.__toastK || 0) : 1;     // a toast takes over the title area for a moment
     const lines = it.lines;
-    html += `<div class="kicker" style="top:${y0 - 70}px;opacity:${kIn * (1 - kOut)};transform:translateX(${(1 - kIn) * -40}px)"><span class="bar"></span>${it.kicker || ''}</div>`;
+    html += `<div class="kicker" style="top:${y0 - G.title.kick}px;opacity:${kIn * (1 - kOut) * tvis};transform:translateX(${(1 - kIn) * -40}px)"><span class="bar"></span>${it.kicker || ''}</div>`;
     lines.forEach((ln, i) => {
       const d = seg(t, it.start + lead + .12 + i * .09, it.start + lead + .7 + i * .09);
       const k = E.out4(d), ko = kOut;
       const parts = ln.split(/(\*[^*]+\*)/).filter(Boolean).map(p => p.startsWith('*') ? `<span class="ac">${p.slice(1, -1)}</span>` : p).join('');
-      html += `<div class="title" style="top:${y0 + i * lh}px;font-size:${fs}px"><span class="ln"><span style="transform:translateY(${(1 - k) * 105 + ko * -60}%);opacity:${(.15 + .85 * k) * (1 - ko)}">${parts}</span></span></div>`;
+      html += `<div class="title" style="top:${y0 + i * lh}px;font-size:${fs}px"><span class="ln"><span style="transform:translateY(${(1 - k) * 105 + ko * -60}%);opacity:${(.15 + .85 * k) * (1 - ko) * tvis}">${parts}</span></span></div>`;
     });
     let yy = y0 + lines.length * lh + 18;
-    if (it.sub) { html += `<div class="sub" style="top:${yy}px;opacity:${seg(t, it.start + lead + .5, it.start + lead + 1) * (1 - kOut)}">${it.sub}</div>`; yy += 62; }
+    if (it.sub) { html += `<div class="sub" style="top:${yy}px;opacity:${seg(t, it.start + lead + .5, it.start + lead + 1) * (1 - kOut) * tvis}">${it.sub}</div>`; yy += G.title.subGap; }
     if (it.chips) {
       let ch = '';
       it.chips.forEach((c, i) => {
@@ -354,7 +399,7 @@ function drawTitles(t, info) {
         const pulse = on ? 1.06 + Math.sin(t * 6) * .012 : 1;
         ch += `<span class="chip${on ? ' on' : ''}" style="opacity:${clamp(ck * 2)};transform:translateY(${(1 - clamp(ck, 0, 1.1)) * 26}px) scale(${pulse})">${c}</span>`;
       });
-      html += `<div class="chips" style="top:${yy + 22}px;opacity:${1 - kOut}">${ch}</div>`;
+      html += `<div class="chips" style="top:${yy + 22}px;opacity:${(1 - kOut) * tvis}">${ch}</div>`;
     }
   }
   host.innerHTML = html;
@@ -373,12 +418,15 @@ function drawCaptions(t, hide) {
     cap.style.opacity = 0; track.style.opacity = 0; return;
   }
   const w = words[i], dur = w.end - w.start, tau = t - w.start, p = clamp(tau / dur);
-  const wid = textWidth(w.text);
-  const prevW = i > 0 && words[i - 1].end >= w.start - .05 ? textWidth(words[i - 1].text) : wid;
+  const fitOf = (txt) => Math.min(1, G.cap.maxW / textWidth(txt));
+  const fit = fitOf(w.text);
+  const wid = textWidth(w.text) * fit;
+  const prevW = i > 0 && words[i - 1].end >= w.start - .05 ? textWidth(words[i - 1].text) * fitOf(words[i - 1].text) : wid;
   const wk = E.out3(seg(tau, 0, .16));
   const curW = lerp(prevW, wid, wk);
   const inK = E.out4(seg(tau, 0, .14)), pop = E.back(seg(tau, 0, .2));
   cap.textContent = w.text;
+  cap.style.fontSize = (G.cap.fs * fit) + 'px';
   cap.style.opacity = inK;
   cap.style.transform = `translateY(${(1 - inK) * 18}px) scale(${lerp(.93, 1, pop)})`;
   cap.style.transformOrigin = '0 100%';
@@ -418,8 +466,9 @@ function ctaSubscribe(t, ev, ox = 0, oy = 0) {
   if (inK <= 0 || outK >= 1) return '';
   const clickAt = ev.clickAt ?? 1.55;
   const subbed = tau > clickAt + .12;
-  const W = 380, H = 88, x = SW - 96 - W - 110 + ox, y = (ev.y ?? 735) + oy;   // leaves room for the 88 px bell
-  const slide = (1 - inK) * 160 + outK * 160, op = clamp(inK * 2) * (1 - outK);
+  const W = G.cta.w, H = 88, x = (VERT ? G.cta.x : SW - 96 - W - 110) + ox, y = (VERT ? G.cta.y : (ev.y ?? 735)) + oy;   // leaves room for the 88 px bell
+  const dirX = VERT ? -1 : 1;
+  const slide = ((1 - inK) * 160 + outK * 160) * dirX, op = clamp(inK * 2) * (1 - outK);
   const press = tau > clickAt && tau < clickAt + .16 ? .94 : 1;
   const pulse = tau < clickAt ? 1 + Math.sin(tau * 7) * .018 : 1;
   const bellK = tau - (clickAt + .25), ring = bellK > 0 ? Math.exp(-bellK * 2.6) * Math.sin(bellK * 20) * 22 : 0;
@@ -443,9 +492,9 @@ function ctaIcons(t, ev) {                      // like + share + copy-link row
   const items = ev.items || ['like', 'share', 'link'];
   const labels = { like: 'Like', share: 'Share', link: 'Copy link' };
   const icons = { like: SVG.like, share: SVG.share, link: SVG.link };
-  let h = ''; const y = ev.y ?? 735, gap = 170;
+  let h = ''; const y = VERT ? G.cta.y : (ev.y ?? 735), gap = G.cta.gap;
   const total = items.length * 88 + (items.length - 1) * (gap - 88);
-  const x0 = SW - 96 - total;
+  const x0 = VERT ? G.cta.x : SW - 96 - total;
   items.forEach((id, i) => {
     const d = seg(tau, i * .12, i * .12 + .5), k = E.back(d); if (k <= 0 || outK >= 1) return;
     const hit = tau > (ev.hitAt ?? 1.2) + i * .16, hk = hit ? seg(tau, (ev.hitAt ?? 1.2) + i * .16, (ev.hitAt ?? 1.2) + i * .16 + .5) : 0;
@@ -471,12 +520,13 @@ function drawCTA(t) {
 function drawToast(t) {
   const card = $('toastCard'); let on = null;
   for (const ev of (TL.toasts || [])) if (t >= ev.start && t < ev.end) on = ev;
-  if (!on) { $('toast').style.display = 'none'; return; }
+  if (!on) { $('toast').style.display = 'none'; window.__toastK = 0; return; }
   $('toast').style.display = 'block';
   const tau = t - on.start, dur = on.end - on.start;
   const k = tau < .6 ? E.back(seg(tau, 0, .6)) : 1 - E.in3(seg(tau, dur - .45, dur));
   card.style.transform = `translateY(${(1 - k) * -190}px) scale(${lerp(.96, 1, clamp(k))})`;
   card.style.opacity = String(clamp(k * 2));
+  window.__toastK = clamp(k);
   card.querySelector('.tt').textContent = on.title; card.querySelector('.tb').textContent = on.body;
 }
 
@@ -527,11 +577,11 @@ window.renderAt = async function (t) {
   $('vignette').style.opacity = String(inBlock ? 0 : 1);
   const scrimK = TL.scrim === false ? 0 : (inBlock ? 0 : 1);
   $('bottomScrim').style.opacity = String(scrimK);
+  drawToast(t);
   drawTitles(t, info);
   const endOn = drawEnd(t);
   drawCaptions(t, TL.noCaptions || (TL.end && t >= TL.end.captionsOff));
   drawCTA(t);
-  drawToast(t);
   drawLogo(t);
   await new Promise(r => requestAnimationFrame(() => r()));
   return true;

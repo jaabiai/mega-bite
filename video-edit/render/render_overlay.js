@@ -5,7 +5,8 @@
  *        [--from 0 --to 16]            frame range in seconds (end exclusive)
  *        [--times 1.2,5.5,12]          explicit stills instead of a range
  *        [--names a,b,c]               output names for --times (default t_<time>)
- *        [--fps 30] [--scale 1] [--workers 3]
+ *        [--fps 30] [--scale 1] [--workers 3] [--html other_overlay.html]
+ * The viewport follows the timeline (TL.W x TL.H, default 1920x1080; the Reel layout is 1080x1920).
  */
 const { chromium } = require('playwright');
 const fs = require('fs');
@@ -33,10 +34,10 @@ if (args.times) {
 (async () => {
   const t0 = Date.now();
   const browser = await chromium.launch({ args: ['--font-render-hinting=none', '--disable-lcd-text', '--allow-file-access-from-files'] });
-  const html = 'file://' + path.resolve(__dirname, 'overlay.html');
+  const html = 'file://' + path.resolve(__dirname, args.html || 'overlay.html');
   let done = 0;
   async function worker(w) {
-    const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: scale });
+    const ctx = await browser.newContext({ viewport: { width: TL.W || 1920, height: TL.H || 1080 }, deviceScaleFactor: scale });
     const page = await ctx.newPage();
     page.on('pageerror', (e) => console.error('PAGE ERROR', e.message));
     page.on('console', (m) => { if (m.type() === 'error') console.error('CONSOLE', m.text()); });

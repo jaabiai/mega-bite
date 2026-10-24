@@ -25,8 +25,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("video")
     ap.add_argument("--sheet", default=None)
+    ap.add_argument("--layout", default="wide", choices=["wide", "vertical"])
     a = ap.parse_args()
     v = a.video
+    vert = a.layout == "vertical"
+    logo_box = "104:104:904:256" if vert else "112:112:1712:56"       # w:h:x:y of the logo
+    tile_w, tile_h = (270, 480) if vert else (480, 270)
 
     p = run(f'ffprobe -v error -count_frames -show_entries stream=codec_name,width,height,r_frame_rate,nb_read_frames,duration,'
             f'sample_rate,channels -of default=nw=1 "{v}"').stdout
@@ -41,7 +45,7 @@ def main():
     ts = np.arange(1.0, dur - .2, 1.0)
     missing = []
     for t in ts:
-        raw = subprocess.run(f'ffmpeg -v error -ss {t:.2f} -i "{v}" -frames:v 1 -vf "crop=112:112:1712:56" -f rawvideo -pix_fmt rgb24 -',
+        raw = subprocess.run(f'ffmpeg -v error -ss {t:.2f} -i "{v}" -frames:v 1 -vf "crop={logo_box}" -f rawvideo -pix_fmt rgb24 -',
                              shell=True, capture_output=True).stdout
         px = np.frombuffer(raw, np.uint8).reshape(-1, 3).astype(int)
         blue = ((px[:, 2] > px[:, 0] + 40) & (px[:, 2] > 120)).mean()
@@ -60,18 +64,18 @@ def main():
         times = np.arange(2, dur, 4.0)
         tiles = []
         for t in times:
-            raw = subprocess.run(f'ffmpeg -v error -ss {t:.2f} -i "{v}" -frames:v 1 -vf scale=480:270 -f rawvideo -pix_fmt rgb24 -',
+            raw = subprocess.run(f'ffmpeg -v error -ss {t:.2f} -i "{v}" -frames:v 1 -vf scale={tile_w}:{tile_h} -f rawvideo -pix_fmt rgb24 -',
                                  shell=True, capture_output=True).stdout
-            im = Image.fromarray(np.frombuffer(raw, np.uint8).reshape(270, 480, 3))
+            im = Image.fromarray(np.frombuffer(raw, np.uint8).reshape(tile_h, tile_w, 3))
             d = ImageDraw.Draw(im)
             d.rectangle((0, 0, 78, 30), fill=(0, 0, 0))
             d.text((6, 3), f"{t:.0f}s", font=f, fill=(255, 235, 80))
             tiles.append(im)
-        cols = 6
+        cols = 10 if vert else 6
         rows = (len(tiles) + cols - 1) // cols
-        sheet = Image.new("RGB", (cols * 484, rows * 274), (20, 20, 20))
+        sheet = Image.new("RGB", (cols * (tile_w + 4), rows * (tile_h + 4)), (20, 20, 20))
         for i, im in enumerate(tiles):
-            sheet.paste(im, ((i % cols) * 484, (i // cols) * 274))
+            sheet.paste(im, ((i % cols) * (tile_w + 4), (i // cols) * (tile_h + 4)))
         sheet.save(a.sheet, quality=88)
         print("== contact sheet:", a.sheet)
 

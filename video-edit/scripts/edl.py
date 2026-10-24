@@ -167,3 +167,31 @@ EDL = {
         {"start": 79.8, "end": 83.4, "title": "MEGA BITE", "body": "Enjoying this? Like, share & subscribe"},
     ],
 }
+
+
+# ---------------------------------------------------------------- Reel (9:16) framing of the presenter shots
+# keys = start time of a base shot; values override zoom / cx / cy / push for the vertical crop
+# (the face sits at x ~ 0.58 of the 16:9 frame, so the 9:16 window is centred there)
+V_FRAMING = {
+    0.0: dict(zoom=1.0, cx=.58, cy=.46, push=.03),
+    6.3: dict(zoom=1.12, cx=.58, cy=.44, push=.03),
+    10.7: dict(zoom=1.0, cx=.58, cy=.46, push=0),
+    25.4: dict(zoom=1.0, cx=.58, cy=.46, push=0),
+    30.4: dict(zoom=1.08, cx=.58, cy=.45, push=.03),
+    33.5: dict(zoom=1.0, cx=.58, cy=.46, push=0),
+    51.7: dict(zoom=1.04, cx=.58, cy=.46, push=.03),
+    57.4: dict(zoom=1.0, cx=.58, cy=.46, push=0),
+    92.7: dict(zoom=1.0, cx=.58, cy=.46, push=0),
+    100.8: dict(zoom=1.14, cx=.57, cy=.44, push=.03),
+    109.9: dict(zoom=1.08, cx=.58, cy=.45, push=.02),
+}
+
+
+def base_shots(layout="wide"):
+    """Base shot list for a layout ("wide" 16:9 or "vertical" 9:16)."""
+    shots = [dict(s) for s in EDL["base"]]
+    if layout == "vertical":
+        for s in shots:
+            if s["kind"] == "talk":
+                s.update(V_FRAMING[s["start"]])
+    return shots

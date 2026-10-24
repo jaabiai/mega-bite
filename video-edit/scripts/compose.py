@@ -38,6 +38,7 @@ def main():
     ap.add_argument("--crf", type=int, default=18)
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--tag", default="run")
+    ap.add_argument("--layout", default="wide", choices=["wide", "vertical"], help="wide 16:9 video or vertical 9:16 Reel")
     ap.add_argument("--keep", action="store_true", help="keep the overlay PNG frames (needed for --reuse)")
     ap.add_argument("--reuse", action="store_true", help="reuse base video + overlay frames of an earlier --keep run")
     ap.add_argument("--patch", action="append", default=[], metavar="A,B",
@@ -53,7 +54,7 @@ def main():
     os.makedirs(work, exist_ok=True)
 
     # 1 timeline + style
-    tl = build_timeline.build(upto=t1 if a.t1 is not None and t1 < full else None)
+    tl = build_timeline.build(upto=t1 if a.t1 is not None and t1 < full else None, layout=a.layout)
     json.dump(tl, open(f"{work}/tl.json", "w"))
     json.dump(style_for(a.palette, a.font), open(f"{work}/style.json", "w"))
 
@@ -61,7 +62,7 @@ def main():
     base = f"{work}/base.mp4"
     spoken_end = min(t1, EDL["main_duration"])
     if not (a.reuse and os.path.exists(base)):
-        sh(f'python3 -I "{ROOT}/scripts/render_base.py" "{base}" --from {t0} --to {spoken_end}')
+        sh(f'python3 -I "{ROOT}/scripts/render_base.py" "{base}" --from {t0} --to {spoken_end} --layout {a.layout}')
     if t1 > spoken_end and not a.reuse:
         pad = t1 - spoken_end
         sh(f'ffmpeg -v error -y -i "{base}" -vf "tpad=stop_mode=clone:stop_duration={pad:.3f}" -c:v libx264 -preset veryfast -crf 12 '
@@ -90,7 +91,8 @@ def main():
     if t1 >= full - 1e-6:
         fades += f",fade=t=out:st={t1 - t0 - 0.8:.3f}:d=0.8"
     start_no = round(t0 * FPS) + 1
-    W, H = 1920 * a.scale, 1080 * a.scale
+    W, H = (1080, 1920) if a.layout == "vertical" else (1920, 1080)
+    W, H = W * a.scale, H * a.scale
     up = f"[0:v]scale={W}:{H}:flags=lanczos[b];[b][1:v]" if a.scale != 1 else "[0:v][1:v]"
     sh(f'ffmpeg -v error -y -i "{base}" -framerate {FPS} -start_number {start_no} -i "{ov}/%05d.png" {aud} '
        f'-filter_complex "{up}overlay=format=auto:shortest=1{fades},format=yuv420p[v]" -map "[v]" -map 2:a '

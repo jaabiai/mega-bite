@@ -43,6 +43,23 @@ python3 scripts/compose.py --out final.mp4 --palette C_magenta --font montserrat
 python3 scripts/qa.py final.mp4 --sheet qa_sheet.jpg
 ```
 
+## Reel (9:16, 1080x1920)
+
+Same edit, words, scenes and audio, laid out for Instagram Reels / YouTube Shorts:
+
+```
+python3 scripts/compose.py --layout vertical --out reel.mp4 --palette C_magenta --font montserrat \
+        --audio $MB_WORK/audio/mix.wav --crf 18 --workers 4 --keep
+python3 scripts/qa.py reel.mp4 --layout vertical --sheet reel_qa.jpg
+```
+
+* presenter = 9:16 window cut from the 4K frame (face-centred, `V_FRAMING` in `scripts/edl.py`);
+  B-roll = full-width 16:9 band over a blurred copy of itself
+* phone scenes use a large rounded "UI zoom card" (screen shown at card width) instead of the phone mock-up
+* everything stays inside the app-UI safe zones: top 230 px, bottom 340 px, right-hand icon column
+* a notification banner replaces the step title for its 3.6 s so the two never collide
+* `scripts/make_reel_stills.py` renders layout stills with the safe-zone guides drawn in
+
 ## Notes on the source material
 
 * **SRT timing** - the delivered SRT ends at 1:32 but the speech runs to 1:52 and the cues drift
