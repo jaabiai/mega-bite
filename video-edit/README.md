@@ -5,8 +5,8 @@ scenes built from the screen recording (zoom + highlights), free B-roll, word-by
 with a moving neon underline, subscribe / share reminders, logo on every frame, and a clean
 synthesised sound bed.
 
-Status: **style approval pending** - nothing is rendered to final until a palette and font are
-approved (see `previews/`).
+Status: style approved by the channel owner - **palette C "Magenta Dusk", Montserrat ExtraBold, 1080p, no end card**.
+Style boards / previews are in `previews/`.
 
 ## What is in here
 
@@ -39,7 +39,8 @@ Heavy intermediates (downloaded sources, frames, renders) live outside git under
 ```
 python3 scripts/build_assets.py
 python3 scripts/build_audio.py $MB_WORK/audio/mix.wav
-python3 scripts/compose.py --out final.mp4 --palette A_ember --font montserrat --audio $MB_WORK/audio/mix.wav
+python3 scripts/compose.py --out final.mp4 --palette C_magenta --font montserrat --audio $MB_WORK/audio/mix.wav --crf 17 --workers 4
+python3 scripts/qa.py final.mp4 --sheet qa_sheet.jpg
 ```
 
 ## Notes on the source material

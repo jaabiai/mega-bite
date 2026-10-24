@@ -251,8 +251,9 @@ def events(tl):
            (77.9, "shimmer", -2),         # Invisible ink selected
            (90.4, "click", 0),            # tap send
            (98.5, "shimmer", -1)]         # final reveal
-    e = EDL["end_card"]["start"]
-    ev += [(e + .15, "chime2", -2), (e + 1.9, "bell", 0), (e + 2.35, "pop_hi", 0), (e + 2.8, "pop_hi", 0)]
+    if EDL["end_card"]:
+        e = EDL["end_card"]["start"]
+        ev += [(e + .15, "chime2", -2), (e + 1.9, "bell", 0), (e + 2.35, "pop_hi", 0), (e + 2.8, "pop_hi", 0)]
     ev = sorted(ev)
     # de-cluster: a tick is dropped when a "real" sound happens within 0.5 s of it
     keep = [e for e in ev if e[1] != "tick" or not any(o is not e and o[1] != "tick" and abs(o[0] - e[0]) < .5 for o in ev)]
@@ -349,10 +350,10 @@ def main(out_path):
     sh(f'ffmpeg -v error -y -i "{MAIN}" -vn -af "{VOICE_CHAIN},apad=whole_dur={total}" -t {total} -ar {SR} -ac 2 "{voice}"')
 
     mus = music(total)
-    # a little more music once the voice has finished (end card)
-    gain = np.where(t_axis(len(mus)) > EDL["end_card"]["start"], 10 ** (5 / 20), 1.0)
-    gain = np.convolve(gain, np.ones(int(.8 * SR)) / int(.8 * SR), mode="same")
-    mus = mus * gain
+    if EDL["end_card"]:                       # a little more music once the voice has finished (end card)
+        gain = np.where(t_axis(len(mus)) > EDL["end_card"]["start"], 10 ** (5 / 20), 1.0)
+        gain = np.convolve(gain, np.ones(int(.8 * SR)) / int(.8 * SR), mode="same")
+        mus = mus * gain
     write_wav(os.path.join(AUD, "music.wav"), mus)
     ev = events(tl)
     sfx = sfx_track(total, ev)

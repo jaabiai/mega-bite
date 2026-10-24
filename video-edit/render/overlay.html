@@ -255,7 +255,7 @@ function drawBlock(t) {
   const tx = (b.phoneX ?? PH.cx) - (PW + 30) / 2 + (1 - phoneIn) * 120 - phoneOut * 120;
   const ty = PH.cy - (PH.H + 30) / 2 + bob + (1 - phoneIn) * 40;
   wrap.style.transform = `translate(${tx}px, ${ty}px) scale(${lerp(.92, 1, phoneIn)})`;
-  wrap.style.opacity = phoneIn * (1 - phoneOut);
+  wrap.style.opacity = 1;                                   // the block slide is the transition; the phone must never look ghosted
 
   /* active sub scene */
   let sub = b.subs[0];                                  // the last sub scene that has started (first one before any starts)

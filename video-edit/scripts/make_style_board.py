@@ -53,8 +53,9 @@ STILLS_T = {
     "sceneL": (98.4, "Reveal: spotlight on the scratched bubbles"),
     "coming": (55.6, "Presenter shot + 'coming up' chips"),
     "icons": (106.7, "B-roll + Share / Copy-link reminder"),
-    "end": (116.0, "End card"),
 }
+if EDL["end_card"]:
+    STILLS_T["end"] = (EDL["end_card"]["start"] + 3.4, "End card")
 
 
 def base_frame(t, name):

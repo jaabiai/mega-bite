@@ -46,7 +46,8 @@ def eff_title(i, sub):
 
 EDL = {
     "main_duration": 113.0,
-    "end_card": {"start": 112.6, "length": 5.6, "lines": ["Thanks for watching!", "More iPhone tips coming soon"]},
+    # owner chose "no end card"; set to {"start": 112.6, "length": 5.6, "lines": [...]} to add one (engine supports it)
+    "end_card": None,
 
     # ---------------------------------------------------------------- base (picture under the overlay)
     # talk = presenter (graded, optional punch-in), broll = free Mixkit stock footage
@@ -71,12 +72,12 @@ EDL = {
     # titles that sit on top of presenter / B-roll shots (left column, dark scrim)
     "titles": [
         {"start": .35, "end": 3.5, "kicker": "iPhone tip", "lines": ["*INVISIBLE*", "MESSAGES"], "size": 116, "y": 340, "scrim": True},
-        {"start": 22.6, "end": 25.3, "kicker": "On their phone", "lines": ["MESSAGE", "*RECEIVED*"], "size": 104, "y": 340, "scrim": True},
-        {"start": 30.5, "end": 33.4, "kicker": "Quick note", "lines": ["SIMPLE &", "*HANDY*"], "size": 116, "y": 340, "scrim": True},
-        {"start": 51.9, "end": 57.3, "kicker": "Coming up", "lines": ["4 BUBBLE", "*EFFECTS*"], "size": 116, "y": 300, "scrim": True,
+        {"start": 22.95, "end": 25.3, "kicker": "On their phone", "lines": ["MESSAGE", "*RECEIVED*"], "size": 104, "y": 340, "scrim": True},
+        {"start": 30.85, "end": 33.4, "kicker": "Quick note", "lines": ["SIMPLE &", "*HANDY*"], "size": 116, "y": 340, "scrim": True},
+        {"start": 52.1, "end": 57.3, "kicker": "Coming up", "lines": ["4 BUBBLE", "*EFFECTS*"], "size": 116, "y": 300, "scrim": True,
          "chips": EFFECTS, "chipStagger": [52.3, 52.7, 53.1, 53.5], "active": 3, "activeFrom": 54.4},
-        {"start": 90.9, "end": 92.6, "kicker": "Sent", "lines": ["DELIVERED", "*HIDDEN*"], "size": 100, "y": 340, "scrim": True},
-        {"start": 100.9, "end": 102.45, "kicker": "That's it", "lines": ["NEAT", "*TRICK!*"], "size": 120, "y": 340, "scrim": True},
+        {"start": 91.25, "end": 92.6, "kicker": "Sent", "lines": ["DELIVERED", "*HIDDEN*"], "size": 100, "y": 340, "scrim": True},
+        {"start": 101.3, "end": 102.45, "kicker": "That's it", "lines": ["NEAT", "*TRICK!*"], "size": 120, "y": 340, "scrim": True},
         {"start": 104.7, "end": 109.8, "kicker": "Share it", "lines": ["SHARE WITH", "*FRIENDS*"], "size": 104, "y": 340, "scrim": True},
     ],
 
@@ -101,7 +102,7 @@ EDL = {
             {"id": "C", "n0": 25.4, "n1": 30.3, "src": [[25.4, 30.3, 19.4, 24.3]],
              "title": {"kicker": "On their phone", "lines": ["SCRATCH", "TO *READ*"], "size": 124, "sub": "Swipe over the bubble to reveal the text"},
              "zoom": [dict(t=25.4, z=1.2, fx=660, fy=2050)],
-             "hl": spot_ring(R_PAIR, 25.9, 30.3)},
+             "hl": spot_ring(R_BUBBLES, 25.9, 30.3)},
         ]},
         {"id": "B3", "start": 33.4, "end": 51.7, "subs": [
             {"id": "T", "n0": 33.5, "n1": 42.4, "src": [[33.5, 42.4, 36.2, 45.1]],

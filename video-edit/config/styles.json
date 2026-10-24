@@ -15,7 +15,7 @@
     },
     "C_magenta": {
       "label": "C  Magenta Dusk - neon pink/violet on deep purple",
-      "accent": "#FF4FD8", "accent2": "#A15CFF", "hot": "#FFE5F8",
+      "accent": "#FF4FD8", "accent2": "#B67CFF", "hot": "#FFE5F8",
       "bg1": "#0E0A18", "bg2": "#2A1145",
       "glowA": "rgba(255,79,216,.18)", "glowB": "rgba(161,92,255,.15)"
     }

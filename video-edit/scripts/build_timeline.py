@@ -25,7 +25,7 @@ def find_word(words, text, after):
 def build(upto=None):
     words = json.load(open(os.path.join(ROOT, "captions/words.json")))["words"]
     end = EDL["end_card"]
-    total = round(end["start"] + end["length"], 3)
+    total = round(end["start"] + end["length"], 3) if end else EDL["main_duration"]
 
     blocks = []
     for b in EDL["blocks"]:
@@ -59,11 +59,12 @@ def build(upto=None):
         "fps": FPS, "duration": total, "logo": url(LOGO),
         "words": words, "blocks": blocks, "titles": EDL["titles"],
         "cta": cta, "toasts": EDL["toasts"],
-        "end": {"start": end["start"], "captionsOff": end["start"] - .05, "lines": end["lines"]},
+        "end": {"start": end["start"], "captionsOff": end["start"] - .05, "lines": end["lines"]} if end else None,
     }
     if upto is not None:
         tl["duration"] = upto
-        tl["end"]["start"] = max(tl["end"]["start"], upto + 1)       # never show the end card in a partial render
+        if tl["end"]:
+            tl["end"]["start"] = max(tl["end"]["start"], upto + 1)   # never show the end card in a partial render
     return tl
 
 
