@@ -1,0 +1,12 @@
+{
+  "_note": "Approximate real speech boundaries between SRT cues (seconds in the main video). Derived from an offline ASR translation of the audio; each is snapped onto the nearest real pause in the audio envelope by scripts/make_words.py. The delivered SRT timings were ~20 s shorter than the real speech, so they could not be used as-is.",
+  "first_onset": 0.1,
+  "between": {
+    "1|2": 3.65, "2|3": 6.40, "3|4": 10.60, "4|5": 12.20, "5|6": 16.20, "6|7": 22.80,
+    "7|8": 30.50, "8|9": 33.55, "9|10": 42.60, "10|11": 48.30, "11|12": 51.40,
+    "12|13": 57.30, "13|14": 64.70, "14|15": 71.50, "15|16": 77.40, "16|17": 84.00,
+    "17|18": 90.80, "18|19": 95.40, "19|20": 100.80, "20|21": 102.55, "21|22": 104.90,
+    "22|23": 109.90
+  },
+  "last_end": 111.80
+}

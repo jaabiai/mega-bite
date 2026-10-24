@@ -1,0 +1,542 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MEGA BITE overlay engine</title>
+<style>
+  :root {
+    --accent: #FFB020; --accent2: #FF6A1A; --hot: #FFF3D6;
+    --bg1: #0F0E14; --bg2: #1B1424; --text: #fff; --muted: rgba(255,255,255,.72);
+    --font: 'Display';
+  }
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: transparent;
+           font-family: var(--font), 'Inter', sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
+  .abs { position: absolute; }
+  .hide { display: none; }
+
+  /* ---------- layers (z-order) ---------- */
+  #vignette { inset: 0; z-index: 1; background: radial-gradient(ellipse 78% 78% at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,.42) 100%); }
+  #leftScrim { inset: 0; z-index: 2; background: linear-gradient(90deg, rgba(8,8,12,.78) 0%, rgba(8,8,12,.52) 34%, rgba(8,8,12,0) 62%); }
+  #block { inset: 0; z-index: 3; overflow: hidden; }
+  #bottomScrim { inset: 0; z-index: 5; background: linear-gradient(0deg, rgba(0,0,0,.68) 0%, rgba(0,0,0,.40) 15%, rgba(0,0,0,0) 36%); }
+  #titles { inset: 0; z-index: 6; }
+  #captions { inset: 0; z-index: 7; }
+  #cta { inset: 0; z-index: 8; }
+  #toast { inset: 0; z-index: 9; }
+  #endcard { inset: 0; z-index: 10; }
+  #logoWrap { z-index: 11; }
+
+  /* ---------- screen block ---------- */
+  #blockPanel { left: -140px; top: -140px; width: 2200px; height: 1360px; background:
+      radial-gradient(900px 700px at 1560px 280px, var(--glowA), transparent 70%),
+      radial-gradient(1000px 800px at 150px 1180px, var(--glowB), transparent 72%),
+      linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      background-repeat: no-repeat; }
+  #blockDots { inset: 0; opacity: .5;
+      background-image: radial-gradient(rgba(255,255,255,.085) 1.4px, transparent 1.6px); background-size: 46px 46px; }
+  #blockEdge { top: 0; bottom: 0; width: 8px; background: linear-gradient(180deg, var(--accent2), var(--accent), var(--accent2));
+      box-shadow: 0 0 26px 6px var(--accentGlow), 0 0 80px 14px var(--accentGlowSoft); border-radius: 4px; }
+  #blockVig { inset: 0; background: radial-gradient(ellipse 85% 85% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,.45) 100%); }
+  #phoneWrap { width: 0; height: 0; }
+  #phoneBody { border-radius: 68px; padding: 11px; box-sizing: content-box;
+      background: linear-gradient(145deg, #5b5f68 0%, #1d1e23 35%, #2d2f36 65%, #6a6e77 100%);
+      box-shadow: 0 50px 110px rgba(0,0,0,.6), 0 0 140px var(--accentGlowSoft), inset 0 0 0 2px rgba(255,255,255,.10); }
+  #phoneInner { border-radius: 57px; padding: 4px; background: #050506; box-sizing: content-box; }
+  #phoneScreen { overflow: hidden; border-radius: 53px; background: #000; position: relative; }
+  #zoomLayer { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+  #zoomLayer img { position: absolute; left: 0; top: 0; width: 1320px; height: 2868px; display: block; }
+  .btn-side { position: absolute; width: 5px; border-radius: 3px; background: linear-gradient(90deg, #3a3c43, #6b6f78); }
+
+  /* highlight primitives live in screen coordinates (inside zoomLayer) */
+  .hl-ring { position: absolute; box-sizing: border-box; border: calc(var(--inv) * 5px) solid var(--accent);
+      box-shadow: 0 0 calc(var(--inv) * 22px) var(--accent), inset 0 0 calc(var(--inv) * 18px) var(--accentGlow); }
+  .hl-spot { position: absolute; box-shadow: 0 0 0 4000px rgba(6,6,10,.46); }
+  .hl-tap { position: absolute; border-radius: 50%; border: calc(var(--inv) * 5px) solid var(--hot); box-sizing: border-box; }
+
+  /* ---------- titles ---------- */
+  .kicker { position: absolute; left: 96px; display: flex; align-items: center; gap: 14px;
+      font-weight: 800; letter-spacing: .22em; font-size: 24px; color: var(--accent); text-transform: uppercase; }
+  .kicker .bar { width: 46px; height: 4px; border-radius: 3px; background: linear-gradient(90deg, var(--accent2), var(--accent)); box-shadow: 0 0 14px var(--accent); }
+  .title { position: absolute; left: 96px; font-weight: 900; line-height: .98; letter-spacing: -.015em; white-space: nowrap;
+      text-shadow: 0 4px 26px rgba(0,0,0,.45); }
+  .title .ln { display: block; overflow: hidden; padding: 0 0 .06em 0; }
+  .title .ln > span { display: inline-block; will-change: transform; }
+  .title .ac { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent;
+      padding-right: .03em; }
+  .sub { position: absolute; left: 96px; font-weight: 600; font-size: 38px; color: var(--muted); letter-spacing: .005em; }
+
+.chips { position: absolute; left: 96px; display: flex; gap: 14px; flex-wrap: wrap; width: 1000px; }
+  .chip { display: inline-flex; align-items: center; gap: 10px; padding: 12px 26px; border-radius: 40px; font-weight: 800; font-size: 30px; letter-spacing: .05em;
+      text-transform: uppercase; color: rgba(255,255,255,.78); background: rgba(255,255,255,.07); border: 2px solid rgba(255,255,255,.26); white-space: nowrap; }
+  .chip.on { color: #1a1206; border-color: transparent; background: linear-gradient(90deg, var(--accent2), var(--accent)); box-shadow: 0 0 30px var(--accentGlow); }
+
+  /* ---------- captions ---------- */
+  #capText { position: absolute; left: 96px; top: 858px; height: 104px; display: flex; align-items: flex-end; white-space: nowrap;
+      font-weight: 800; font-size: 90px; line-height: 104px; letter-spacing: -.012em; color: #fff;
+      text-shadow: 0 3px 0 rgba(0,0,0,.28), 0 8px 30px rgba(0,0,0,.55); will-change: transform, opacity; }
+  #capMeasure { position: absolute; left: -9999px; top: 0; white-space: nowrap; font-weight: 800; font-size: 90px; line-height: 104px; letter-spacing: -.012em; }
+  #ulTrack { position: absolute; left: 96px; top: 978px; height: 8px; border-radius: 8px; background: var(--accentFaint);
+      box-shadow: 0 0 12px var(--accentFaint); }
+  #ulFill { position: absolute; left: 0; top: 0; height: 8px; border-radius: 8px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent) 70%, var(--hot) 100%); box-shadow: 0 0 14px var(--accent), 0 0 34px var(--accentGlow); }
+  #ulHead { position: absolute; top: -9px; width: 26px; height: 26px; margin-left: -13px; border-radius: 50%;
+      background: radial-gradient(circle, #fff 0%, var(--hot) 28%, var(--accent) 62%, transparent 72%);
+      filter: blur(.5px); box-shadow: 0 0 22px 8px var(--accentGlow); }
+  #ulComet { position: absolute; top: -3px; height: 14px; border-radius: 14px; filter: blur(5px);
+      background: linear-gradient(90deg, transparent, var(--accent) 70%, #fff 100%); opacity: .9; }
+
+  /* ---------- logo ---------- */
+  #logoWrap { position: absolute; width: 112px; height: 112px; }
+  #logoWrap img { width: 112px; height: 112px; display: block; filter: drop-shadow(0 4px 14px rgba(0,0,0,.5)); }
+  #logoRing { position: absolute; inset: -6px; border-radius: 50%; border: 3px solid var(--accent); box-shadow: 0 0 24px var(--accent); opacity: 0; }
+
+  /* ---------- CTA ---------- */
+  .pill { position: absolute; display: flex; align-items: center; justify-content: center; gap: 14px; height: 88px; border-radius: 44px;
+      font-weight: 800; letter-spacing: .06em; font-size: 31px; color: #fff; box-shadow: 0 14px 40px rgba(0,0,0,.45); will-change: transform; }
+  .pill svg { display: block; }
+  .circle { position: absolute; width: 88px; height: 88px; border-radius: 44px; display: flex; align-items: center; justify-content: center;
+      background: rgba(20,20,26,.82); border: 2px solid rgba(255,255,255,.16); box-shadow: 0 14px 40px rgba(0,0,0,.45); backdrop-filter: blur(10px); will-change: transform; }
+  .tip { position: absolute; white-space: nowrap; font-weight: 700; font-size: 24px; letter-spacing: .08em; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.6); text-transform: uppercase; }
+
+  /* ---------- toast ---------- */
+  #toastCard { position: absolute; left: 96px; top: 56px; width: 800px; height: 124px; border-radius: 32px;
+      background: rgba(22,22,28,.94); border: 1.5px solid rgba(255,255,255,.14); box-shadow: 0 22px 60px rgba(0,0,0,.5); backdrop-filter: blur(22px);
+      display: flex; align-items: center; gap: 22px; padding: 0 26px; box-sizing: border-box; }
+  #toastCard img { width: 76px; height: 76px; border-radius: 18px; background: #05122B; }
+  #toastCard .tt { font-weight: 800; font-size: 29px; letter-spacing: .03em; }
+  #toastCard .tb { font-weight: 600; font-size: 27px; color: rgba(255,255,255,.82); margin-top: 4px; }
+  #toastCard .tn { position: absolute; right: 26px; top: 16px; font-size: 18px; color: rgba(255,255,255,.5); font-weight: 600; }
+
+  /* ---------- end card ---------- */
+  #endBg { inset: 0; background:
+      radial-gradient(1000px 760px at 72% 40%, var(--glowA), transparent 70%),
+      radial-gradient(900px 700px at 10% 100%, var(--glowB), transparent 72%),
+      linear-gradient(135deg, var(--bg1), var(--bg2)); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="vignette" class="abs"></div>
+  <div id="leftScrim" class="abs"></div>
+
+  <div id="block" class="abs">
+    <div id="blockPanel" class="abs"></div>
+    <div id="blockDots" class="abs"></div>
+    <div id="blockVig" class="abs"></div>
+    <div id="phoneWrap" class="abs">
+      <div id="phoneBody" class="abs">
+        <div id="phoneInner"><div id="phoneScreen"><div id="zoomLayer"><img id="imgPrev"><img id="imgCur"><div id="hlLayer"></div></div></div></div>
+      </div>
+    </div>
+    <div id="blockEdge" class="abs"></div>
+  </div>
+
+  <div id="bottomScrim" class="abs"></div>
+  <div id="titles" class="abs"></div>
+  <div id="captions" class="abs">
+    <div id="ulTrack"><div id="ulFill"></div><div id="ulComet"></div><div id="ulHead"></div></div>
+    <div id="capText"></div>
+    <div id="capMeasure"></div>
+  </div>
+  <div id="cta" class="abs"></div>
+  <div id="toast" class="abs"><div id="toastCard"><img id="toastLogo"><div><div class="tt"></div><div class="tb"></div></div><div class="tn">now</div></div></div>
+  <div id="endcard" class="abs hide"><div id="endBg" class="abs"></div><div id="endContent"></div></div>
+  <div id="logoWrap" class="abs"><div id="logoRing"></div><img id="logoImg"></div>
+</div>
+
+<script>
+/* =====================================================================
+   Deterministic overlay renderer.  window.renderAt(t) draws everything
+   for time t (seconds) from window.TL (timeline) + window.STYLE.
+   ===================================================================== */
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const E = {
+  out3: (k) => 1 - Math.pow(1 - k, 3),
+  out4: (k) => 1 - Math.pow(1 - k, 4),
+  in3: (k) => k * k * k,
+  io3: (k) => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2),
+  io2: (k) => (k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2),
+  back: (k) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); },
+  sine: (k) => 0.5 - Math.cos(Math.PI * k) / 2,
+};
+const seg = (t, a, b) => clamp((t - a) / (b - a));           // 0..1 progress of t inside [a,b]
+const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+
+const TL = window.TL, ST = window.STYLE;
+const FPS = TL.fps || 30;
+const SW = 1920, SH = 1080;
+
+/* ---------- apply palette / font ---------- */
+(function applyStyle() {
+  const r = document.documentElement.style, p = ST.palette;
+  r.setProperty('--accent', p.accent); r.setProperty('--accent2', p.accent2); r.setProperty('--hot', p.hot);
+  r.setProperty('--bg1', p.bg1); r.setProperty('--bg2', p.bg2);
+  r.setProperty('--glowA', p.glowA); r.setProperty('--glowB', p.glowB);
+  r.setProperty('--accentGlow', rgba(p.accent, .55)); r.setProperty('--accentGlowSoft', rgba(p.accent, .20));
+  r.setProperty('--accentFaint', rgba(p.accent, .30));
+  r.setProperty('--inv', '1');
+  const ff = new FontFace('Display', `url(${ST.font.file})`, { weight: '100 900' });
+  document.fonts.add(ff); window.__fontReady = ff.load();
+})();
+
+/* ---------- logo ---------- */
+const logoImg = $('logoImg'); logoImg.src = TL.logo;
+$('toastLogo').src = TL.logo;
+const LOGO = { x: SW - 96 - 112, y: 56 };           // top-right, same 96 px margin as the captions
+$('logoWrap').style.left = LOGO.x + 'px'; $('logoWrap').style.top = LOGO.y + 'px';
+
+/* ---------- screen block geometry ---------- */
+const PH = { cx: 1424, cy: 540, H: 936 };           // phone screen height in px at z = 1
+const K = PH.H / 2868, PW = 1320 * K;
+const phoneBody = $('phoneBody'), phoneScreen = $('phoneScreen'), zoomLayer = $('zoomLayer');
+phoneScreen.style.width = PW + 'px'; phoneScreen.style.height = PH.H + 'px';
+$('phoneInner').style.width = PW + 'px'; $('phoneInner').style.height = PH.H + 'px';
+phoneBody.style.width = (PW + 8) + 'px'; phoneBody.style.height = (PH.H + 8) + 'px';
+(function sideButtons() {
+  const w = $('phoneWrap');
+  [[-4, 150, 70], [-4, 250, 110], [-4, 380, 110], [PW + 30 - 1, 300, 150]].forEach(([x, y, h]) => {
+    const b = document.createElement('div'); b.className = 'btn-side'; b.style.left = x + 'px'; b.style.top = y + 'px'; b.style.height = h + 'px';
+    phoneBody.appendChild(b);
+  });
+})();
+
+/* ---------- per-frame helpers ---------- */
+const measureEl = $('capMeasure'); const widthCache = {};
+function textWidth(txt) {
+  if (widthCache[txt] == null) { measureEl.textContent = txt; widthCache[txt] = measureEl.getBoundingClientRect().width; }
+  return widthCache[txt];
+}
+function findIdx(arr, t) { for (let i = 0; i < arr.length; i++) if (t >= arr[i].start && t < arr[i].end) return i; return -1; }
+const imgCache = {};
+function loadImg(src) {
+  if (!imgCache[src]) {
+    const im = new Image(); im.src = src;
+    imgCache[src] = im.decode().then(() => src).catch(() => src);
+  }
+  return imgCache[src];
+}
+
+/* ---------- scenes ---------- */
+const blocks = TL.blocks || [], talks = TL.talks || [], brolls = TL.brolls || [];
+function activeBlock(t) {
+  for (const b of blocks) if (t >= b.start - 0.001 && t < b.end + (b.exit ?? .5)) return b;
+  return null;
+}
+
+/* screen frame for sub scene (frames are pre-rendered at output fps) */
+function subFrameSrc(sub, t) {
+  const n = Math.max(0, Math.min(sub.count - 1, Math.round((t - sub.start) * FPS)));
+  return sub.frames.replace('%05d', String(n + 1).padStart(5, '0'));
+}
+
+function drawBlock(t) {
+  const el = $('block'), b = activeBlock(t);
+  if (!b) { el.style.display = 'none'; return null; }
+  el.style.display = 'block';
+  const enter = seg(t, b.start, b.start + .6), exitK = seg(t, b.end, b.end + (b.exit ?? .5));
+  const px = (1 - E.out4(enter)) * SW - E.in3(exitK) * SW;          // whole block pushes in from the right, leaves to the left
+  el.style.transform = `translateX(${px}px)`;
+  $('blockDots').style.transform = `translateY(${(t * 6) % 46}px)`;
+  const edge = $('blockEdge');                                        // neon leading edge of the sliding block
+  if (enter < 1) { edge.style.left = '0px'; edge.style.opacity = 1; }
+  else if (exitK > 0) { edge.style.left = (SW - 8) + 'px'; edge.style.opacity = 1; }
+  else edge.style.opacity = 0;
+  // drifting glows
+  $('blockPanel').style.backgroundPosition = `${Math.sin(t * .35) * 40}px ${Math.cos(t * .27) * 30}px, ${Math.cos(t * .3) * 50}px 0, 0 0`;
+
+  /* phone */
+  const bob = Math.sin(t * 1.1) * 5;
+  const phoneIn = E.out4(seg(t, b.start + .12, b.start + .85));
+  const phoneOut = E.in3(seg(t, b.end, b.end + .4));
+  const wrap = $('phoneWrap');
+  const tx = (b.phoneX ?? PH.cx) - (PW + 30) / 2 + (1 - phoneIn) * 120 - phoneOut * 120;
+  const ty = PH.cy - (PH.H + 30) / 2 + bob + (1 - phoneIn) * 40;
+  wrap.style.transform = `translate(${tx}px, ${ty}px) scale(${lerp(.92, 1, phoneIn)})`;
+  wrap.style.opacity = phoneIn * (1 - phoneOut);
+
+  /* active sub scene */
+  let sub = b.subs[0];                                  // the last sub scene that has started (first one before any starts)
+  for (const s of b.subs) if (t >= s.start - 1e-6) sub = s;
+  return { b, sub, enter, exitK };
+}
+
+function zoomState(sub, t) {
+  const kf = sub.zoom && sub.zoom.length ? sub.zoom : [{ t: sub.start, z: 1, fx: 660, fy: 1434 }];
+  let a = kf[0], c = kf[kf.length - 1];
+  if (t <= a.t) c = a; else if (t >= c.t) a = c; else {
+    for (let i = 0; i < kf.length - 1; i++) if (t >= kf[i].t && t < kf[i + 1].t) { a = kf[i]; c = kf[i + 1]; break; }
+  }
+  const k = a === c ? 1 : E.io3(seg(t, a.t, c.t));
+  return { z: lerp(a.z, c.z, k), fx: lerp(a.fx, c.fx, k), fy: lerp(a.fy, c.fy, k) };
+}
+
+async function prepareBlock(info, t) {
+  if (!info) return;
+  const { sub } = info;
+  const src = subFrameSrc(sub, t);
+  await loadImg(src);
+  $('imgCur').src = src;
+  // dissolve from the previous scene's last frame
+  const fade = sub.fadeIn ?? .2, kk = seg(t, sub.start, sub.start + fade);
+  if (sub.prevFrame && kk < 1) { await loadImg(sub.prevFrame); $('imgPrev').src = sub.prevFrame; $('imgPrev').style.opacity = 1 - kk; }
+  else { $('imgPrev').style.opacity = 0; }
+}
+
+function drawBlockContent(info, t) {
+  if (!info) return;
+  const { sub } = info;
+  const zs = zoomState(sub, t), s = K * zs.z;
+  const vw = PW, vh = PH.H;
+  let tx = vw / 2 - zs.fx * s, ty = vh / 2 - zs.fy * s;
+  tx = clamp(tx, vw - 1320 * s, 0); ty = clamp(ty, vh - 2868 * s, 0);
+  zoomLayer.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+  document.documentElement.style.setProperty('--inv', String(1 / s));
+
+  /* highlights (screen coords) */
+  const layer = $('hlLayer'); let html = '';
+  for (const h of (sub.hl || [])) {
+    const k = seg(t, h.t0, h.t0 + .35), o = seg(t, h.t1 - .3, h.t1);
+    const vis = E.out3(k) * (1 - E.in3(o)); if (vis <= 0.001) continue;
+    if (h.type === 'spot') {
+      html += `<div class="hl-spot" style="left:${h.x}px;top:${h.y}px;width:${h.w}px;height:${h.h}px;border-radius:${h.r}px;opacity:${vis}"></div>`;
+    } else if (h.type === 'ring') {
+      const pulse = 1 + Math.sin((t - h.t0) * 5.2) * .018, grow = lerp(1.18, 1, E.out3(k));
+      const sc = pulse * grow, pad = 0;
+      html += `<div class="hl-ring" style="left:${h.x - pad}px;top:${h.y - pad}px;width:${h.w + 2 * pad}px;height:${h.h + 2 * pad}px;border-radius:${h.r}px;opacity:${vis};transform:scale(${sc})"></div>`;
+    } else if (h.type === 'tap') {
+      for (let i = 0; i < 3; i++) {
+        const ph = ((t - h.t0) * 1.15 + i / 3) % 1, rr = lerp(40, 150, ph);
+        html += `<div class="hl-tap" style="left:${h.x - rr}px;top:${h.y - rr}px;width:${rr * 2}px;height:${rr * 2}px;opacity:${(1 - ph) * vis * .95}"></div>`;
+      }
+      html += `<div class="hl-tap" style="left:${h.x - 46}px;top:${h.y - 46}px;width:92px;height:92px;background:${rgba(ST.palette.hot, .30)};border:calc(var(--inv) * 3px) solid ${rgba(ST.palette.hot, .75)};opacity:${vis}"></div>`;
+    }
+  }
+  layer.innerHTML = html;
+
+  return { s, tx, ty };
+}
+
+/* ---------- titles (left column) ---------- */
+function drawTitles(t, info) {
+  const host = $('titles'); let html = '';
+  const items = [];
+  if (info) {
+    const sb = info.sub; if (sb.title) items.push({ ...sb.title, start: sb.start, end: sb.end, kind: 'sub' });
+  }
+  for (const a of (TL.titles || [])) if (t >= a.start - .01 && t < a.end + .01) items.push({ ...a, kind: 'free' });
+  let scrimK = 0;
+  for (const it of items) {
+    const lead = it.kind === 'sub' ? .15 : 0;
+    const kIn = E.out4(seg(t, it.start + lead, it.start + lead + .6));
+    const kOut = E.in3(seg(t, it.end - .3, it.end));
+    if (it.scrim) scrimK = Math.max(scrimK, E.out3(seg(t, it.start, it.start + .5)) * (1 - E.in3(seg(t, it.end - .3, it.end))));
+    if (kIn <= 0 || kOut >= 1) continue;
+    const y0 = it.y ?? 340, fs = it.size ?? 112, lh = fs * .98;
+    const lines = it.lines;
+    html += `<div class="kicker" style="top:${y0 - 70}px;opacity:${kIn * (1 - kOut)};transform:translateX(${(1 - kIn) * -40}px)"><span class="bar"></span>${it.kicker || ''}</div>`;
+    lines.forEach((ln, i) => {
+      const d = seg(t, it.start + lead + .12 + i * .09, it.start + lead + .7 + i * .09);
+      const k = E.out4(d), ko = kOut;
+      const parts = ln.split(/(\*[^*]+\*)/).filter(Boolean).map(p => p.startsWith('*') ? `<span class="ac">${p.slice(1, -1)}</span>` : p).join('');
+      html += `<div class="title" style="top:${y0 + i * lh}px;font-size:${fs}px"><span class="ln"><span style="transform:translateY(${(1 - k) * 105 + ko * -60}%);opacity:${(.15 + .85 * k) * (1 - ko)}">${parts}</span></span></div>`;
+    });
+    let yy = y0 + lines.length * lh + 18;
+    if (it.sub) { html += `<div class="sub" style="top:${yy}px;opacity:${seg(t, it.start + lead + .5, it.start + lead + 1) * (1 - kOut)}">${it.sub}</div>`; yy += 62; }
+    if (it.chips) {
+      let ch = '';
+      it.chips.forEach((c, i) => {
+        const at = it.chipStagger ? it.chipStagger[i] : it.start + lead + .5 + i * .12;
+        const ck = E.back(seg(t, at, at + .45)); if (ck <= 0) return;
+        const on = it.activeFrom != null ? (t >= it.activeFrom && i === it.active) : i === it.active;
+        const pulse = on ? 1.06 + Math.sin(t * 6) * .012 : 1;
+        ch += `<span class="chip${on ? ' on' : ''}" style="opacity:${clamp(ck * 2)};transform:translateY(${(1 - clamp(ck, 0, 1.1)) * 26}px) scale(${pulse})">${c}</span>`;
+      });
+      html += `<div class="chips" style="top:${yy + 22}px;opacity:${1 - kOut}">${ch}</div>`;
+    }
+  }
+  host.innerHTML = html;
+  $('leftScrim').style.opacity = String(scrimK);
+}
+
+/* ---------- captions ---------- */
+let lastW = 0, lastIdx = -2;
+function drawCaptions(t, hide) {
+  const words = TL.words, cap = $('capText'), track = $('ulTrack');
+  let i = findIdx(words, t);
+  if (hide || i < 0) {
+    // short fade-out hold so the line never pops
+    const prev = words.findIndex(w => t >= w.end && t < w.end + .12);
+    if (!hide && prev >= 0) { const k = 1 - seg(t, words[prev].end, words[prev].end + .12); cap.style.opacity = k; track.style.opacity = k; return; }
+    cap.style.opacity = 0; track.style.opacity = 0; return;
+  }
+  const w = words[i], dur = w.end - w.start, tau = t - w.start, p = clamp(tau / dur);
+  const wid = textWidth(w.text);
+  const prevW = i > 0 && words[i - 1].end >= w.start - .05 ? textWidth(words[i - 1].text) : wid;
+  const wk = E.out3(seg(tau, 0, .16));
+  const curW = lerp(prevW, wid, wk);
+  const inK = E.out4(seg(tau, 0, .14)), pop = E.back(seg(tau, 0, .2));
+  cap.textContent = w.text;
+  cap.style.opacity = inK;
+  cap.style.transform = `translateY(${(1 - inK) * 18}px) scale(${lerp(.93, 1, pop)})`;
+  cap.style.transformOrigin = '0 100%';
+  track.style.opacity = 1; track.style.width = curW + 'px';
+  /* neon fill + travelling head follow the speech inside the word */
+  const prog = E.sine(p) * .6 + p * .4, head = prog * curW;
+  $('ulFill').style.width = head + 'px';
+  $('ulHead').style.left = head + 'px'; $('ulHead').style.opacity = String(.35 + .65 * Math.min(1, p * 8) * (1 - .3 * seg(p, .85, 1)));
+  const cw = Math.min(150, curW * .6);
+  $('ulComet').style.left = (head - cw) + 'px'; $('ulComet').style.width = cw + 'px';
+}
+
+/* ---------- logo ---------- */
+function drawLogo(t) {
+  const k = E.back(seg(t, .15, .85)), ring = seg(t, .35, 1.4);
+  const endHide = TL.end ? seg(t, TL.end.start + .1, TL.end.start + .5) : 0;
+  $('logoWrap').style.opacity = String(clamp((t - .1) / .4) * (1 - endHide));
+  $('logoWrap').style.transform = `scale(${lerp(.55, 1, k)})`;
+  const r = $('logoRing'); r.style.opacity = String(ring > 0 && ring < 1 ? (1 - ring) * .9 : 0); r.style.transform = `scale(${lerp(.9, 1.55, E.out3(ring))})`;
+}
+
+/* ---------- CTA (subscribe / like / share / link) ---------- */
+const SVG = {
+  bell: (c = '#fff', s = 40) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${c}"><path d="M12 2.5a1.5 1.5 0 0 1 1.5 1.5v.6A6.5 6.5 0 0 1 18.5 11v3.6l1.7 2.3a1 1 0 0 1-.8 1.6H4.6a1 1 0 0 1-.8-1.6l1.7-2.3V11A6.5 6.5 0 0 1 10.5 4.6V4A1.5 1.5 0 0 1 12 2.5zM9.6 20h4.8a2.4 2.4 0 0 1-4.8 0z"/></svg>`,
+  check: (c = '#fff', s = 34) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.8l5 5 10-11"/></svg>`,
+  like: (c = '#fff', s = 40) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${c}"><path d="M2 10.5h4V21H2zM8 10.5l3.6-7.1a1.8 1.8 0 0 1 3.4 1l-.9 4.6h5.4a2 2 0 0 1 2 2.4l-1.5 7.6a2 2 0 0 1-2 1.6H8z"/></svg>`,
+  share: (c = '#fff', s = 40) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${c}"><path d="M14 3.2a.8.8 0 0 1 1.3-.6l7.2 6a.8.8 0 0 1 0 1.2l-7.2 6a.8.8 0 0 1-1.3-.6v-3.5C8 11.7 4.6 14 2.6 19c-.2.5-1 .4-1-.2C1.9 11 6.5 7.4 14 6.9z"/></svg>`,
+  link: (c = '#fff', s = 40) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></svg>`,
+  cursor: `<svg width="62" height="62" viewBox="0 0 24 24"><path d="M5 2.5v17l4.4-4.1 2.9 6.2 2.8-1.3-2.9-6.1h6.2z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>`,
+  play: `<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg>`,
+};
+const RED = '#E8202A';
+
+function ctaSubscribe(t, ev, ox = 0, oy = 0) {
+  const tau = t - ev.start, dur = ev.end - ev.start;
+  const inK = E.back(seg(tau, 0, .55)), outK = E.in3(seg(tau, dur - .4, dur));
+  if (inK <= 0 || outK >= 1) return '';
+  const clickAt = ev.clickAt ?? 1.55;
+  const subbed = tau > clickAt + .12;
+  const W = 380, H = 88, x = SW - 96 - W - 110 + ox, y = (ev.y ?? 735) + oy;   // leaves room for the 88 px bell
+  const slide = (1 - inK) * 160 + outK * 160, op = clamp(inK * 2) * (1 - outK);
+  const press = tau > clickAt && tau < clickAt + .16 ? .94 : 1;
+  const pulse = tau < clickAt ? 1 + Math.sin(tau * 7) * .018 : 1;
+  const bellK = tau - (clickAt + .25), ring = bellK > 0 ? Math.exp(-bellK * 2.6) * Math.sin(bellK * 20) * 22 : 0;
+  const rip = seg(tau, clickAt, clickAt + .7);
+  // cursor path: comes in from lower right to the button centre
+  const cK = E.io3(seg(tau, clickAt - .75, clickAt)), cOut = seg(tau, clickAt + .45, clickAt + .9);
+  const cx = lerp(x + W + 150, x + W * .62, cK), cy = lerp(y + H + 140, y + H * .55, cK);
+  let h = `<div style="position:absolute;left:0;top:0;opacity:${op};transform:translateX(${slide}px)">`;
+  h += `<div class="pill" style="left:${x}px;top:${y}px;width:${W}px;background:${subbed ? 'rgba(46,46,54,.95)' : RED};transform:scale(${press * pulse});border:${subbed ? '2px solid rgba(255,255,255,.18)' : '0'}">${subbed ? SVG.check() + 'SUBSCRIBED' : SVG.play + 'SUBSCRIBE'}</div>`;
+  if (rip > 0 && rip < 1) h += `<div style="position:absolute;left:${x + W * .62 - 70}px;top:${y + H * .55 - 70}px;width:140px;height:140px;border-radius:50%;border:4px solid #fff;opacity:${(1 - rip) * .7};transform:scale(${lerp(.3, 1.4, E.out3(rip))})"></div>`;
+  const bx = x + W + 22;
+  h += `<div class="circle" style="left:${bx}px;top:${y}px;background:${subbed ? rgba(ST.palette.accent, .95) : 'rgba(20,20,26,.82)'};transform:rotate(${ring}deg);transform-origin:50% 12%">${SVG.bell(subbed ? '#1a1206' : '#fff')}</div>`;
+  if (subbed && bellK > 0 && bellK < .9) for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2, r = lerp(46, 92, E.out3(bellK / .9)); h += `<div style="position:absolute;left:${bx + 44 + Math.cos(a) * r - 4}px;top:${y + 44 + Math.sin(a) * r - 4}px;width:8px;height:8px;border-radius:50%;background:${ST.palette.accent};opacity:${1 - bellK / .9}"></div>`; }
+  if (cOut < 1 && cK > 0) h += `<div style="position:absolute;left:${cx}px;top:${cy}px;opacity:${(1 - cOut) * clamp(cK * 3)};transform:scale(${press < 1 ? .86 : 1});filter:drop-shadow(0 6px 10px rgba(0,0,0,.5))">${SVG.cursor}</div>`;
+  h += `</div>`;
+  return h;
+}
+
+function ctaIcons(t, ev) {                      // like + share + copy-link row
+  const tau = t - ev.start, dur = ev.end - ev.start, outK = E.in3(seg(tau, dur - .4, dur));
+  const items = ev.items || ['like', 'share', 'link'];
+  const labels = { like: 'Like', share: 'Share', link: 'Copy link' };
+  const icons = { like: SVG.like, share: SVG.share, link: SVG.link };
+  let h = ''; const y = ev.y ?? 735, gap = 170;
+  const total = items.length * 88 + (items.length - 1) * (gap - 88);
+  const x0 = SW - 96 - total;
+  items.forEach((id, i) => {
+    const d = seg(tau, i * .12, i * .12 + .5), k = E.back(d); if (k <= 0 || outK >= 1) return;
+    const hit = tau > (ev.hitAt ?? 1.2) + i * .16, hk = hit ? seg(tau, (ev.hitAt ?? 1.2) + i * .16, (ev.hitAt ?? 1.2) + i * .16 + .5) : 0;
+    const pop = hit ? 1 + Math.sin(hk * Math.PI) * .22 : 1;
+    const bg = hit ? ST.palette.accent : 'rgba(20,20,26,.82)', ic = hit ? '#1a1206' : '#fff';
+    h += `<div class="circle" style="left:${x0 + i * gap}px;top:${y + (1 - clamp(k, 0, 1.2)) * 70 + outK * 70}px;opacity:${clamp(d * 2) * (1 - outK)};transform:scale(${pop});background:${hit ? rgba(ST.palette.accent, .96) : 'rgba(20,20,26,.82)'}">${icons[id](ic)}</div>`;
+    h += `<div class="tip" style="left:${x0 + i * gap + 44}px;top:${y + 104}px;transform:translateX(-50%);opacity:${clamp(d * 2) * (1 - outK)}">${labels[id]}</div>`;
+  });
+  return h;
+}
+
+function drawCTA(t) {
+  let h = '';
+  for (const ev of (TL.cta || [])) {
+    if (t < ev.start - .01 || t > ev.end + .01) continue;
+    if (ev.type === 'subscribe') h += ctaSubscribe(t, ev);
+    else if (ev.type === 'icons') h += ctaIcons(t, ev);
+  }
+  $('cta').innerHTML = h;
+}
+
+/* ---------- toast (iOS style banner) ---------- */
+function drawToast(t) {
+  const card = $('toastCard'); let on = null;
+  for (const ev of (TL.toasts || [])) if (t >= ev.start && t < ev.end) on = ev;
+  if (!on) { $('toast').style.display = 'none'; return; }
+  $('toast').style.display = 'block';
+  const tau = t - on.start, dur = on.end - on.start;
+  const k = tau < .6 ? E.back(seg(tau, 0, .6)) : 1 - E.in3(seg(tau, dur - .45, dur));
+  card.style.transform = `translateY(${(1 - k) * -190}px) scale(${lerp(.96, 1, clamp(k))})`;
+  card.style.opacity = String(clamp(k * 2));
+  card.querySelector('.tt').textContent = on.title; card.querySelector('.tb').textContent = on.body;
+}
+
+/* ---------- end card ---------- */
+function drawEnd(t) {
+  const ev = TL.end, el = $('endcard');
+  if (!ev || t < ev.start) { el.classList.add('hide'); return false; }
+  el.classList.remove('hide');
+  const tau = t - ev.start, k = E.out3(seg(tau, 0, .6));
+  $('endBg').style.opacity = String(k);
+  const cx = 560, cy = 470, big = 360;
+  let h = '';
+  const lk = E.back(seg(tau, .2, .9));
+  h += `<img src="${TL.logo}" style="position:absolute;left:${cx - big / 2}px;top:${cy - big / 2 - 30 + (1 - lk) * 40}px;width:${big}px;height:${big}px;opacity:${clamp(lk * 2)};transform:scale(${lerp(.7, 1, clamp(lk, 0, 1.1))});filter:drop-shadow(0 20px 50px rgba(0,0,0,.6)) drop-shadow(0 0 60px ${rgba(ST.palette.accent, .25)})">`;
+  const lines = ev.lines || ['Thanks for watching!', 'New tech tips every week'];
+  lines.forEach((ln, i) => {
+    const kk = E.out4(seg(tau, .6 + i * .15, 1.2 + i * .15));
+    h += `<div style="position:absolute;left:${cx - 420}px;width:840px;text-align:center;top:${cy + 190 + i * 76}px;font-weight:${i ? 600 : 900};font-size:${i ? 36 : 58}px;color:${i ? 'rgba(255,255,255,.75)' : '#fff'};opacity:${kk};transform:translateY(${(1 - kk) * 24}px)">${ln}</div>`;
+  });
+  // action stack on the right
+  const bx = 1180, W = 560;
+  const rows = [
+    { y: 300, label: 'SUBSCRIBE', fill: RED, icon: SVG.play, after: 'SUBSCRIBED', afterFill: 'rgba(46,46,54,.95)', at: 1.9 },
+    { y: 420, label: 'LIKE', fill: 'rgba(20,20,26,.85)', icon: SVG.like('#fff', 34), after: 'LIKED', afterFill: ST.palette.accent, at: 2.35, dark: true },
+    { y: 540, label: 'SHARE', fill: 'rgba(20,20,26,.85)', icon: SVG.share('#fff', 34), after: 'SHARED', afterFill: ST.palette.accent, at: 2.8, dark: true },
+  ];
+  rows.forEach((r, i) => {
+    const kk = E.back(seg(tau, .8 + i * .14, 1.4 + i * .14)); if (kk <= 0) return;
+    const hit = tau > r.at, pk = hit ? seg(tau, r.at, r.at + .4) : 0, pop = 1 + Math.sin(pk * Math.PI) * .07;
+    const fill = hit ? r.afterFill : r.fill, dark = hit && r.dark;
+    h += `<div class="pill" style="left:${bx + (1 - clamp(kk, 0, 1.1)) * 240}px;top:${r.y}px;width:${W}px;opacity:${clamp(kk * 2)};transform:scale(${pop});background:${fill};color:${dark ? '#1a1206' : '#fff'};border:${r.fill === RED && !hit ? 0 : '2px solid rgba(255,255,255,.16)'}">${hit && i === 0 ? SVG.check() : r.icon}<span style="margin-left:6px">${hit ? r.after : r.label}</span></div>`;
+  });
+  const bk = E.out3(seg(tau, 1.6, 2.3)), bell = tau > 2.0 ? Math.exp(-(tau - 2) * 2.4) * Math.sin((tau - 2) * 20) * 20 : 0;
+  h += `<div class="circle" style="left:${bx + W + 26}px;top:300px;opacity:${bk};background:${tau > 2.0 ? rgba(ST.palette.accent, .96) : 'rgba(20,20,26,.85)'};transform:rotate(${bell}deg);transform-origin:50% 12%">${SVG.bell(tau > 2.0 ? '#1a1206' : '#fff')}</div>`;
+  $('endContent').innerHTML = h;
+  return true;
+}
+
+/* ---------- master ---------- */
+window.renderAt = async function (t) {
+  await window.__fontReady;
+  const info = drawBlock(t);
+  await prepareBlock(info, t);
+  const geo = drawBlockContent(info, t);
+  window.__geo = geo;
+  const isTalk = talks.some(a => t >= a.start - .2 && t < a.end + .2) || brolls.some(a => t >= a.start - .2 && t < a.end + .2);
+  const inBlock = !!info && info.enter > .05 && info.exitK < .95;
+  $('vignette').style.opacity = String(inBlock ? 0 : 1);
+  const scrimK = TL.scrim === false ? 0 : (inBlock ? 0 : 1);
+  $('bottomScrim').style.opacity = String(scrimK);
+  drawTitles(t, info);
+  const endOn = drawEnd(t);
+  drawCaptions(t, TL.noCaptions || (TL.end && t >= TL.end.captionsOff));
+  drawCTA(t);
+  drawToast(t);
+  drawLogo(t);
+  await new Promise(r => requestAnimationFrame(() => r()));
+  return true;
+};
+window.__ready = true;
+</script>
+</body>
+</html>

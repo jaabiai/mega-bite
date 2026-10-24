@@ -1,0 +1,28 @@
+{
+  "_note": "Candidate looks shown to the channel owner for approval. Nothing here is applied to the final video until a palette + font are approved.",
+  "palettes": {
+    "A_ember": {
+      "label": "A  Ember - neon amber on graphite/plum",
+      "accent": "#FFB020", "accent2": "#FF6A1A", "hot": "#FFF1CF",
+      "bg1": "#0F0E14", "bg2": "#241432",
+      "glowA": "rgba(255,140,40,.20)", "glowB": "rgba(255,70,130,.13)"
+    },
+    "B_lime": {
+      "label": "B  Lime Pulse - neon lime on forest-black",
+      "accent": "#C8FF3D", "accent2": "#4FE88A", "hot": "#F6FFD9",
+      "bg1": "#070D0A", "bg2": "#0F271B",
+      "glowA": "rgba(190,255,60,.15)", "glowB": "rgba(40,220,160,.11)"
+    },
+    "C_magenta": {
+      "label": "C  Magenta Dusk - neon pink/violet on deep purple",
+      "accent": "#FF4FD8", "accent2": "#A15CFF", "hot": "#FFE5F8",
+      "bg1": "#0E0A18", "bg2": "#2A1145",
+      "glowA": "rgba(255,79,216,.18)", "glowB": "rgba(161,92,255,.15)"
+    }
+  },
+  "fonts": {
+    "montserrat": {"label": "Montserrat ExtraBold", "file": "Montserrat-VF.ttf"},
+    "sora":       {"label": "Sora ExtraBold",       "file": "Sora-VF.ttf"},
+    "poppins":    {"label": "Poppins ExtraBold",    "file": "Poppins-ExtraBold.ttf"}
+  }
+}

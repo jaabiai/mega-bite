@@ -1,0 +1,1156 @@
+{
+ "cues": [
+  {
+   "idx": 1,
+   "start": 0.0,
+   "end": 4.2,
+   "text": "Let me share a simple message tip for iPhone users.",
+   "real_start": 0.22,
+   "real_end": 3.34
+  },
+  {
+   "idx": 2,
+   "start": 4.2,
+   "end": 6.8,
+   "text": "It\u2019s really useful, do give it a try.",
+   "real_start": 3.6,
+   "real_end": 6.0
+  },
+  {
+   "idx": 3,
+   "start": 6.8,
+   "end": 11.5,
+   "text": "To get more helpful videos like this, subscribe to the channel right away and stay tuned.",
+   "real_start": 6.34,
+   "real_end": 10.34
+  },
+  {
+   "idx": 4,
+   "start": 11.5,
+   "end": 14.2,
+   "text": "I will keep uploading great content.",
+   "real_start": 10.78,
+   "real_end": 12.36
+  },
+  {
+   "idx": 5,
+   "start": 14.2,
+   "end": 17.2,
+   "text": "Now, let's see how it works. Open the Messages app on your phone.",
+   "real_start": 12.84,
+   "real_end": 16.2
+  },
+  {
+   "idx": 6,
+   "start": 17.2,
+   "end": 23.5,
+   "text": "Select the contact you want to message, and you can send invisible messages just like this.",
+   "real_start": 16.2,
+   "real_end": 22.4
+  },
+  {
+   "idx": 7,
+   "start": 23.5,
+   "end": 27.5,
+   "text": "They will receive it the same way, hidden until they scratch over it to read.",
+   "real_start": 22.58,
+   "real_end": 30.2
+  },
+  {
+   "idx": 8,
+   "start": 27.5,
+   "end": 30.0,
+   "text": "It is a very simple and handy tip.",
+   "real_start": 30.44,
+   "real_end": 33.55
+  },
+  {
+   "idx": 9,
+   "start": 30.0,
+   "end": 34.5,
+   "text": "Here's how to do it: select the contact and type your message.",
+   "real_start": 33.55,
+   "real_end": 42.36
+  },
+  {
+   "idx": 10,
+   "start": 34.5,
+   "end": 39.0,
+   "text": "Instead of tapping the send button, long-press on it.",
+   "real_start": 42.5,
+   "real_end": 48.38
+  },
+  {
+   "idx": 11,
+   "start": 39.0,
+   "end": 43.2,
+   "text": "You will see three or four effect options appear.",
+   "real_start": 48.56,
+   "real_end": 51.575
+  },
+  {
+   "idx": 12,
+   "start": 43.2,
+   "end": 46.8,
+   "text": "You can use any of them\u2014I'll cover the invisible effect at the end.",
+   "real_start": 51.645,
+   "real_end": 57.485
+  },
+  {
+   "idx": 13,
+   "start": 46.8,
+   "end": 52.5,
+   "text": "The first option at the top is \"Slam.\" If you select Slam and hit send, it delivers with a slam effect.",
+   "real_start": 57.535,
+   "real_end": 64.7
+  },
+  {
+   "idx": 14,
+   "start": 52.5,
+   "end": 58.0,
+   "text": "If you pick the second option, \"Loud,\" it sends with an animated notification effect.",
+   "real_start": 64.7,
+   "real_end": 71.47
+  },
+  {
+   "idx": 15,
+   "start": 58.0,
+   "end": 62.0,
+   "text": "The third option applies another subtle visual effect.",
+   "real_start": 71.53,
+   "real_end": 77.28
+  },
+  {
+   "idx": 16,
+   "start": 62.0,
+   "end": 67.0,
+   "text": "The fourth one is \"Invisible Ink,\" which we talked about earlier.",
+   "real_start": 77.42,
+   "real_end": 84.0
+  },
+  {
+   "idx": 17,
+   "start": 67.0,
+   "end": 70.2,
+   "text": "Select \"Send with Invisible Ink\" and tap Send.",
+   "real_start": 84.0,
+   "real_end": 90.7
+  },
+  {
+   "idx": 18,
+   "start": 70.2,
+   "end": 75.0,
+   "text": "The recipient receives the message hidden under a digital scratch layer.",
+   "real_start": 90.94,
+   "real_end": 95.64
+  },
+  {
+   "idx": 19,
+   "start": 75.0,
+   "end": 78.5,
+   "text": "They can simply swipe or scratch over the bubble to read it.",
+   "real_start": 95.76,
+   "real_end": 100.66
+  },
+  {
+   "idx": 20,
+   "start": 78.5,
+   "end": 81.5,
+   "text": "Isn't that a neat trick?",
+   "real_start": 101.06,
+   "real_end": 102.52
+  },
+  {
+   "idx": 21,
+   "start": 81.5,
+   "end": 84.8,
+   "text": "Follow along for more useful tips like this!",
+   "real_start": 102.6,
+   "real_end": 104.48
+  },
+  {
+   "idx": 22,
+   "start": 84.8,
+   "end": 88.5,
+   "text": "Share this video with others so more people learn about these features.",
+   "real_start": 104.58,
+   "real_end": 109.64
+  },
+  {
+   "idx": 23,
+   "start": 88.5,
+   "end": 92.0,
+   "text": "See you again soon with another new topic!",
+   "real_start": 110.26,
+   "real_end": 112.12
+  }
+ ],
+ "words": [
+  {
+   "text": "Let me share",
+   "start": 0.22,
+   "end": 0.907,
+   "cue": 1
+  },
+  {
+   "text": "a simple",
+   "start": 0.907,
+   "end": 1.529,
+   "cue": 1
+  },
+  {
+   "text": "message",
+   "start": 1.529,
+   "end": 1.9,
+   "cue": 1
+  },
+  {
+   "text": "tip",
+   "start": 1.9,
+   "end": 2.18,
+   "cue": 1
+  },
+  {
+   "text": "for iPhone",
+   "start": 2.18,
+   "end": 2.802,
+   "cue": 1
+  },
+  {
+   "text": "users.",
+   "start": 2.802,
+   "end": 3.34,
+   "cue": 1
+  },
+  {
+   "text": "It\u2019s really",
+   "start": 3.6,
+   "end": 4.183,
+   "cue": 2
+  },
+  {
+   "text": "useful,",
+   "start": 4.183,
+   "end": 4.791,
+   "cue": 2
+  },
+  {
+   "text": "do give",
+   "start": 4.791,
+   "end": 5.2,
+   "cue": 2
+  },
+  {
+   "text": "it a try.",
+   "start": 5.2,
+   "end": 6.0,
+   "cue": 2
+  },
+  {
+   "text": "To get",
+   "start": 6.34,
+   "end": 6.673,
+   "cue": 3
+  },
+  {
+   "text": "more",
+   "start": 6.673,
+   "end": 6.953,
+   "cue": 3
+  },
+  {
+   "text": "helpful",
+   "start": 6.953,
+   "end": 7.237,
+   "cue": 3
+  },
+  {
+   "text": "videos",
+   "start": 7.237,
+   "end": 7.521,
+   "cue": 3
+  },
+  {
+   "text": "like",
+   "start": 7.521,
+   "end": 7.801,
+   "cue": 3
+  },
+  {
+   "text": "this,",
+   "start": 7.801,
+   "end": 8.081,
+   "cue": 3
+  },
+  {
+   "text": "subscribe",
+   "start": 8.081,
+   "end": 8.365,
+   "cue": 3
+  },
+  {
+   "text": "to the channel",
+   "start": 8.365,
+   "end": 9.031,
+   "cue": 3
+  },
+  {
+   "text": "right",
+   "start": 9.031,
+   "end": 9.311,
+   "cue": 3
+  },
+  {
+   "text": "away",
+   "start": 9.311,
+   "end": 9.595,
+   "cue": 3
+  },
+  {
+   "text": "and stay",
+   "start": 9.595,
+   "end": 9.929,
+   "cue": 3
+  },
+  {
+   "text": "tuned.",
+   "start": 9.929,
+   "end": 10.34,
+   "cue": 3
+  },
+  {
+   "text": "I will keep",
+   "start": 10.78,
+   "end": 11.281,
+   "cue": 4
+  },
+  {
+   "text": "uploading",
+   "start": 11.281,
+   "end": 11.687,
+   "cue": 4
+  },
+  {
+   "text": "great",
+   "start": 11.687,
+   "end": 11.967,
+   "cue": 4
+  },
+  {
+   "text": "content.",
+   "start": 11.967,
+   "end": 12.36,
+   "cue": 4
+  },
+  {
+   "text": "Now,",
+   "start": 12.84,
+   "end": 13.12,
+   "cue": 5
+  },
+  {
+   "text": "let's",
+   "start": 13.12,
+   "end": 13.4,
+   "cue": 5
+  },
+  {
+   "text": "see",
+   "start": 13.4,
+   "end": 13.68,
+   "cue": 5
+  },
+  {
+   "text": "how it works.",
+   "start": 13.68,
+   "end": 14.343,
+   "cue": 5
+  },
+  {
+   "text": "Open",
+   "start": 14.343,
+   "end": 14.631,
+   "cue": 5
+  },
+  {
+   "text": "the Messages",
+   "start": 14.631,
+   "end": 15.257,
+   "cue": 5
+  },
+  {
+   "text": "app",
+   "start": 15.257,
+   "end": 15.537,
+   "cue": 5
+  },
+  {
+   "text": "on your phone.",
+   "start": 15.537,
+   "end": 16.2,
+   "cue": 5
+  },
+  {
+   "text": "Select",
+   "start": 16.2,
+   "end": 16.642,
+   "cue": 6
+  },
+  {
+   "text": "the contact",
+   "start": 16.642,
+   "end": 17.383,
+   "cue": 6
+  },
+  {
+   "text": "you want",
+   "start": 17.383,
+   "end": 17.903,
+   "cue": 6
+  },
+  {
+   "text": "to message,",
+   "start": 17.903,
+   "end": 18.755,
+   "cue": 6
+  },
+  {
+   "text": "and you can send",
+   "start": 18.755,
+   "end": 19.872,
+   "cue": 6
+  },
+  {
+   "text": "invisible",
+   "start": 19.872,
+   "end": 20.756,
+   "cue": 6
+  },
+  {
+   "text": "messages",
+   "start": 20.756,
+   "end": 21.42,
+   "cue": 6
+  },
+  {
+   "text": "just",
+   "start": 21.42,
+   "end": 21.7,
+   "cue": 6
+  },
+  {
+   "text": "like",
+   "start": 21.7,
+   "end": 21.98,
+   "cue": 6
+  },
+  {
+   "text": "this.",
+   "start": 21.98,
+   "end": 22.4,
+   "cue": 6
+  },
+  {
+   "text": "They will receive",
+   "start": 22.58,
+   "end": 24.147,
+   "cue": 7
+  },
+  {
+   "text": "it the same",
+   "start": 24.147,
+   "end": 25.381,
+   "cue": 7
+  },
+  {
+   "text": "way,",
+   "start": 25.381,
+   "end": 25.881,
+   "cue": 7
+  },
+  {
+   "text": "hidden",
+   "start": 25.881,
+   "end": 26.548,
+   "cue": 7
+  },
+  {
+   "text": "until",
+   "start": 26.548,
+   "end": 27.215,
+   "cue": 7
+  },
+  {
+   "text": "they scratch",
+   "start": 27.215,
+   "end": 27.999,
+   "cue": 7
+  },
+  {
+   "text": "over",
+   "start": 27.999,
+   "end": 28.666,
+   "cue": 7
+  },
+  {
+   "text": "it to read.",
+   "start": 28.666,
+   "end": 30.2,
+   "cue": 7
+  },
+  {
+   "text": "It is a very",
+   "start": 30.44,
+   "end": 31.855,
+   "cue": 8
+  },
+  {
+   "text": "simple",
+   "start": 31.855,
+   "end": 32.322,
+   "cue": 8
+  },
+  {
+   "text": "and handy",
+   "start": 32.322,
+   "end": 33.106,
+   "cue": 8
+  },
+  {
+   "text": "tip.",
+   "start": 33.106,
+   "end": 33.55,
+   "cue": 8
+  },
+  {
+   "text": "Here's",
+   "start": 33.55,
+   "end": 34.454,
+   "cue": 9
+  },
+  {
+   "text": "how to do it:",
+   "start": 34.454,
+   "end": 36.961,
+   "cue": 9
+  },
+  {
+   "text": "select",
+   "start": 36.961,
+   "end": 37.865,
+   "cue": 9
+  },
+  {
+   "text": "the contact",
+   "start": 37.865,
+   "end": 39.378,
+   "cue": 9
+  },
+  {
+   "text": "and type",
+   "start": 39.378,
+   "end": 40.44,
+   "cue": 9
+  },
+  {
+   "text": "your message.",
+   "start": 40.44,
+   "end": 42.36,
+   "cue": 9
+  },
+  {
+   "text": "Instead",
+   "start": 42.5,
+   "end": 43.261,
+   "cue": 10
+  },
+  {
+   "text": "of tapping",
+   "start": 43.261,
+   "end": 44.536,
+   "cue": 10
+  },
+  {
+   "text": "the send",
+   "start": 44.536,
+   "end": 45.43,
+   "cue": 10
+  },
+  {
+   "text": "button,",
+   "start": 45.43,
+   "end": 46.382,
+   "cue": 10
+  },
+  {
+   "text": "long-press",
+   "start": 46.382,
+   "end": 47.143,
+   "cue": 10
+  },
+  {
+   "text": "on it.",
+   "start": 47.143,
+   "end": 48.38,
+   "cue": 10
+  },
+  {
+   "text": "You will see",
+   "start": 48.56,
+   "end": 49.341,
+   "cue": 11
+  },
+  {
+   "text": "three",
+   "start": 49.341,
+   "end": 49.621,
+   "cue": 11
+  },
+  {
+   "text": "or four",
+   "start": 49.621,
+   "end": 50.118,
+   "cue": 11
+  },
+  {
+   "text": "effect",
+   "start": 50.118,
+   "end": 50.54,
+   "cue": 11
+  },
+  {
+   "text": "options",
+   "start": 50.54,
+   "end": 50.963,
+   "cue": 11
+  },
+  {
+   "text": "appear.",
+   "start": 50.963,
+   "end": 51.575,
+   "cue": 11
+  },
+  {
+   "text": "You can use",
+   "start": 51.645,
+   "end": 52.551,
+   "cue": 12
+  },
+  {
+   "text": "any",
+   "start": 52.551,
+   "end": 53.041,
+   "cue": 12
+  },
+  {
+   "text": "of them\u2014",
+   "start": 53.041,
+   "end": 53.739,
+   "cue": 12
+  },
+  {
+   "text": "I'll cover",
+   "start": 53.739,
+   "end": 54.559,
+   "cue": 12
+  },
+  {
+   "text": "the invisible",
+   "start": 54.559,
+   "end": 55.869,
+   "cue": 12
+  },
+  {
+   "text": "effect",
+   "start": 55.869,
+   "end": 56.359,
+   "cue": 12
+  },
+  {
+   "text": "at the end.",
+   "start": 56.359,
+   "end": 57.485,
+   "cue": 12
+  },
+  {
+   "text": "The first",
+   "start": 57.535,
+   "end": 58.06,
+   "cue": 13
+  },
+  {
+   "text": "option",
+   "start": 58.06,
+   "end": 58.507,
+   "cue": 13
+  },
+  {
+   "text": "at the top",
+   "start": 58.507,
+   "end": 59.334,
+   "cue": 13
+  },
+  {
+   "text": "is \"Slam.\"",
+   "start": 59.334,
+   "end": 60.061,
+   "cue": 13
+  },
+  {
+   "text": "If you select",
+   "start": 60.061,
+   "end": 61.112,
+   "cue": 13
+  },
+  {
+   "text": "Slam",
+   "start": 61.112,
+   "end": 61.392,
+   "cue": 13
+  },
+  {
+   "text": "and hit",
+   "start": 61.392,
+   "end": 61.917,
+   "cue": 13
+  },
+  {
+   "text": "send,",
+   "start": 61.917,
+   "end": 62.252,
+   "cue": 13
+  },
+  {
+   "text": "it delivers",
+   "start": 62.252,
+   "end": 63.225,
+   "cue": 13
+  },
+  {
+   "text": "with a slam",
+   "start": 63.225,
+   "end": 64.052,
+   "cue": 13
+  },
+  {
+   "text": "effect.",
+   "start": 64.052,
+   "end": 64.7,
+   "cue": 13
+  },
+  {
+   "text": "If you pick",
+   "start": 64.7,
+   "end": 65.595,
+   "cue": 14
+  },
+  {
+   "text": "the second",
+   "start": 65.595,
+   "end": 66.405,
+   "cue": 14
+  },
+  {
+   "text": "option,",
+   "start": 66.405,
+   "end": 67.009,
+   "cue": 14
+  },
+  {
+   "text": "\"Loud,\"",
+   "start": 67.009,
+   "end": 67.372,
+   "cue": 14
+  },
+  {
+   "text": "it sends",
+   "start": 67.372,
+   "end": 67.94,
+   "cue": 14
+  },
+  {
+   "text": "with an animated",
+   "start": 67.94,
+   "end": 69.56,
+   "cue": 14
+  },
+  {
+   "text": "notification",
+   "start": 69.56,
+   "end": 70.769,
+   "cue": 14
+  },
+  {
+   "text": "effect.",
+   "start": 70.769,
+   "end": 71.47,
+   "cue": 14
+  },
+  {
+   "text": "The third",
+   "start": 71.53,
+   "end": 72.362,
+   "cue": 15
+  },
+  {
+   "text": "option",
+   "start": 72.362,
+   "end": 73.069,
+   "cue": 15
+  },
+  {
+   "text": "applies",
+   "start": 73.069,
+   "end": 73.777,
+   "cue": 15
+  },
+  {
+   "text": "another",
+   "start": 73.777,
+   "end": 74.838,
+   "cue": 15
+  },
+  {
+   "text": "subtle",
+   "start": 74.838,
+   "end": 75.546,
+   "cue": 15
+  },
+  {
+   "text": "visual",
+   "start": 75.546,
+   "end": 76.254,
+   "cue": 15
+  },
+  {
+   "text": "effect.",
+   "start": 76.254,
+   "end": 77.28,
+   "cue": 15
+  },
+  {
+   "text": "The fourth",
+   "start": 77.42,
+   "end": 78.215,
+   "cue": 16
+  },
+  {
+   "text": "one",
+   "start": 78.215,
+   "end": 78.553,
+   "cue": 16
+  },
+  {
+   "text": "is \"Invisible",
+   "start": 78.553,
+   "end": 80.363,
+   "cue": 16
+  },
+  {
+   "text": "Ink,\"",
+   "start": 80.363,
+   "end": 80.871,
+   "cue": 16
+  },
+  {
+   "text": "which",
+   "start": 80.871,
+   "end": 81.209,
+   "cue": 16
+  },
+  {
+   "text": "we talked",
+   "start": 81.209,
+   "end": 82.342,
+   "cue": 16
+  },
+  {
+   "text": "about",
+   "start": 82.342,
+   "end": 83.019,
+   "cue": 16
+  },
+  {
+   "text": "earlier.",
+   "start": 83.019,
+   "end": 84.0,
+   "cue": 16
+  },
+  {
+   "text": "Select",
+   "start": 84.0,
+   "end": 84.985,
+   "cue": 17
+  },
+  {
+   "text": "\"Send",
+   "start": 84.985,
+   "end": 85.478,
+   "cue": 17
+  },
+  {
+   "text": "with Invisible",
+   "start": 85.478,
+   "end": 88.114,
+   "cue": 17
+  },
+  {
+   "text": "Ink\"",
+   "start": 88.114,
+   "end": 88.606,
+   "cue": 17
+  },
+  {
+   "text": "and tap",
+   "start": 88.606,
+   "end": 89.764,
+   "cue": 17
+  },
+  {
+   "text": "Send.",
+   "start": 89.764,
+   "end": 90.7,
+   "cue": 17
+  },
+  {
+   "text": "The recipient",
+   "start": 90.94,
+   "end": 91.858,
+   "cue": 18
+  },
+  {
+   "text": "receives",
+   "start": 91.858,
+   "end": 92.491,
+   "cue": 18
+  },
+  {
+   "text": "the message",
+   "start": 92.491,
+   "end": 93.197,
+   "cue": 18
+  },
+  {
+   "text": "hidden",
+   "start": 93.197,
+   "end": 93.619,
+   "cue": 18
+  },
+  {
+   "text": "under",
+   "start": 93.619,
+   "end": 94.041,
+   "cue": 18
+  },
+  {
+   "text": "a digital",
+   "start": 94.041,
+   "end": 94.959,
+   "cue": 18
+  },
+  {
+   "text": "scratch",
+   "start": 94.959,
+   "end": 95.239,
+   "cue": 18
+  },
+  {
+   "text": "layer.",
+   "start": 95.239,
+   "end": 95.64,
+   "cue": 18
+  },
+  {
+   "text": "They can simply",
+   "start": 95.76,
+   "end": 97.064,
+   "cue": 19
+  },
+  {
+   "text": "swipe",
+   "start": 97.064,
+   "end": 97.344,
+   "cue": 19
+  },
+  {
+   "text": "or scratch",
+   "start": 97.344,
+   "end": 97.996,
+   "cue": 19
+  },
+  {
+   "text": "over",
+   "start": 97.996,
+   "end": 98.551,
+   "cue": 19
+  },
+  {
+   "text": "the bubble",
+   "start": 98.551,
+   "end": 99.481,
+   "cue": 19
+  },
+  {
+   "text": "to read",
+   "start": 99.481,
+   "end": 100.133,
+   "cue": 19
+  },
+  {
+   "text": "it.",
+   "start": 100.133,
+   "end": 100.66,
+   "cue": 19
+  },
+  {
+   "text": "Isn't",
+   "start": 101.06,
+   "end": 101.34,
+   "cue": 20
+  },
+  {
+   "text": "that a neat",
+   "start": 101.34,
+   "end": 102.12,
+   "cue": 20
+  },
+  {
+   "text": "trick?",
+   "start": 102.12,
+   "end": 102.52,
+   "cue": 20
+  },
+  {
+   "text": "Follow",
+   "start": 102.6,
+   "end": 102.869,
+   "cue": 21
+  },
+  {
+   "text": "along",
+   "start": 102.869,
+   "end": 103.137,
+   "cue": 21
+  },
+  {
+   "text": "for more",
+   "start": 103.137,
+   "end": 103.406,
+   "cue": 21
+  },
+  {
+   "text": "useful",
+   "start": 103.406,
+   "end": 103.674,
+   "cue": 21
+  },
+  {
+   "text": "tips",
+   "start": 103.674,
+   "end": 103.943,
+   "cue": 21
+  },
+  {
+   "text": "like",
+   "start": 103.943,
+   "end": 104.211,
+   "cue": 21
+  },
+  {
+   "text": "this!",
+   "start": 104.211,
+   "end": 104.48,
+   "cue": 21
+  },
+  {
+   "text": "Share",
+   "start": 104.58,
+   "end": 104.86,
+   "cue": 22
+  },
+  {
+   "text": "this video",
+   "start": 104.86,
+   "end": 105.694,
+   "cue": 22
+  },
+  {
+   "text": "with others",
+   "start": 105.694,
+   "end": 106.528,
+   "cue": 22
+  },
+  {
+   "text": "so more",
+   "start": 106.528,
+   "end": 107.113,
+   "cue": 22
+  },
+  {
+   "text": "people",
+   "start": 107.113,
+   "end": 107.611,
+   "cue": 22
+  },
+  {
+   "text": "learn",
+   "start": 107.611,
+   "end": 107.891,
+   "cue": 22
+  },
+  {
+   "text": "about",
+   "start": 107.891,
+   "end": 108.389,
+   "cue": 22
+  },
+  {
+   "text": "these",
+   "start": 108.389,
+   "end": 108.669,
+   "cue": 22
+  },
+  {
+   "text": "features.",
+   "start": 108.669,
+   "end": 109.64,
+   "cue": 22
+  },
+  {
+   "text": "See",
+   "start": 110.26,
+   "end": 110.54,
+   "cue": 23
+  },
+  {
+   "text": "you again",
+   "start": 110.54,
+   "end": 110.862,
+   "cue": 23
+  },
+  {
+   "text": "soon",
+   "start": 110.862,
+   "end": 111.142,
+   "cue": 23
+  },
+  {
+   "text": "with another",
+   "start": 111.142,
+   "end": 111.56,
+   "cue": 23
+  },
+  {
+   "text": "new",
+   "start": 111.56,
+   "end": 111.84,
+   "cue": 23
+  },
+  {
+   "text": "topic!",
+   "start": 111.84,
+   "end": 112.12,
+   "cue": 23
+  }
+ ]
+}
