@@ -34,14 +34,15 @@ _LUT = build_curve_lut()
 _masks = {}
 
 
-def _window_masks(h, w):
-    key = (h, w)
+def _window_masks(h, w, face=None):
+    fx, fy, rx, ry = face or (FACE_CX, FACE_CY, FACE_RX, FACE_RY)
+    key = (h, w, round(fx, 3), round(fy, 3), round(rx, 3), round(ry, 3))
     if key in _masks:
         return _masks[key]
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
     xx /= w
     yy /= h
-    d = np.sqrt(((xx - FACE_CX) / FACE_RX) ** 2 + ((yy - FACE_CY) / FACE_RY) ** 2)
+    d = np.sqrt(((xx - fx) / rx) ** 2 + ((yy - fy) / ry) ** 2)
     face = 1.0 - _smoothstep((d - 0.35) / 0.9)           # 1 at face, 0 outside
     # vignette: darker towards the corners, extra weight on the left (sky)
     dv = np.sqrt(((xx - 0.52) / 0.75) ** 2 + ((yy - 0.45) / 0.80) ** 2)
@@ -52,13 +53,13 @@ def _window_masks(h, w):
     return m
 
 
-def grade(rgb, grain=0.0, rng=None):
+def grade(rgb, grain=0.0, rng=None, face=None):
     """rgb: float32 HxWx3 in 0..1 -> graded float32."""
     h, w, _ = rgb.shape
-    face, vig = _window_masks(h, w)
+    face, vig = _window_masks(h, w, face)
 
     # 1. face exposure lift (~ +0.35 stop) with a soft window
-    img = rgb * (1.0 + 0.27 * face)
+    img = rgb * (1.0 + 0.20 * face)
 
     # 2. highlight / sky handling before the curve
     img = np.clip(img, 0, 1.4)
@@ -72,14 +73,14 @@ def grade(rgb, grain=0.0, rng=None):
     sh = (1.0 - _smoothstep(luma / 0.45)) * 1.0
     hl = _smoothstep((luma - 0.55) / 0.40)
     teal = np.array([-0.020, 0.006, 0.030], np.float32)
-    warm = np.array([0.020, 0.008, -0.020], np.float32)
+    warm = np.array([0.012, 0.006, -0.014], np.float32)
     img = img + sh * teal + hl * warm
 
     # 5. selective saturation in HSV: calm the loud greens, add vibrance
     hsv = cv2.cvtColor(np.clip(img, 0, 1), cv2.COLOR_RGB2HSV)  # H 0..360
     hue = hsv[..., 0]
     green = np.exp(-((hue - 100.0) / 38.0) ** 2)               # foliage
-    hsv[..., 1] *= (1.07 - 0.38 * green)
+    hsv[..., 1] *= (1.00 - 0.38 * green)
     # nudge foliage hue slightly toward teal for the cinematic palette
     hsv[..., 0] = np.where(green > 0.05, hue + 10.0 * green, hue)
     hsv[..., 1] = np.clip(hsv[..., 1], 0, 1)
@@ -87,7 +88,7 @@ def grade(rgb, grain=0.0, rng=None):
 
     # 5b. clarity: gentle large-radius local contrast on luminance
     blur = cv2.GaussianBlur(img, (0, 0), max(h, w) / 90.0)
-    img = np.clip(img + 0.22 * (img - blur), 0, 1)
+    img = np.clip(img + 0.12 * (img - blur), 0, 1)
 
     # 6. vignette
     img = img * vig

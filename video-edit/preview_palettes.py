@@ -6,7 +6,7 @@ import sys, os
 import numpy as np, cv2
 from PIL import Image
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
-import brand, phone, scene, caption, grade, logo_placeholder
+import brand, phone, scene, caption, grade
 from brand import PALETTES, hex2rgb
 
 face_png, screen_png, out_dir = sys.argv[1:4]
@@ -38,7 +38,6 @@ def face_panel(pal):
     g = g * (1 - a) + dark[None, None, :] * a
     img = Image.fromarray((np.clip(g, 0, 1) * 255).astype(np.uint8), "RGB").convert("RGBA")
     caption.draw_caption(img, ["Lock", "your", "Google", "search", "history"], 3, pal, S=S, x=96, y=500, max_w=470, size=70)
-    logo_placeholder.draw_bug(img, pal, S=S)
     return img.convert("RGB")
 
 
@@ -69,7 +68,6 @@ def phone_panel(pal):
     bg.alpha_composite(Image.fromarray(shl, "RGBA"))
     bg.alpha_composite(grp, (px, py))
     caption.draw_caption(bg, ["Require", "extra", "verification"], 1, pal, S=S, x=96, y=500, max_w=560, size=70)
-    logo_placeholder.draw_bug(bg, pal, S=S)
     return bg.convert("RGB")
 
 
