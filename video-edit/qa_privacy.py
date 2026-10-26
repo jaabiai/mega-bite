@@ -12,8 +12,10 @@ ap.add_argument("video")
 ap.add_argument("--t0", type=float, default=20.0)
 ap.add_argument("--t1", type=float, default=92.0)
 ap.add_argument("--step", type=float, default=0.2)
+ap.add_argument("--size", default="1920x1080", help="WxH of the video (use 1080x1920 for the reel)")
+ap.add_argument("--crop-x", type=int, default=700, help="ignore the left part (our own captions) – 0 for the reel")
 args = ap.parse_args()
-W, H = 1920, 1080
+W, H = (int(v) for v in args.size.split("x"))
 PAT = re.compile(r"@|gmail|\.com|raabso|jabir|varikkodan|ibbc|hameed|belly|laughs|megabyte1|jafareasy|mysrh|jaabi|newses", re.I)
 ocr = RapidOCR()
 hits = 0
@@ -26,7 +28,7 @@ while True:
     buf = p.stdout.read(W * H * 3)
     if len(buf) < W * H * 3:
         break
-    fr = np.frombuffer(buf, np.uint8).reshape(H, W, 3)[:, 700:]          # phone area only (captions are English text we wrote)
+    fr = np.frombuffer(buf, np.uint8).reshape(H, W, 3)[:, args.crop_x:]          # phone area only (captions are English text we wrote)
     res, _ = ocr(fr)
     t = args.t0 + i * args.step
     for box, text, conf in (res or []):

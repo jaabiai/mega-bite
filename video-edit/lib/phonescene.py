@@ -22,10 +22,16 @@ def cam_at(T, keys):
 
 
 class PhoneScene:
-    def __init__(self, S, pal, out_w, out_h):
-        self.S, self.W, self.H = S, out_w, out_h
-        self.hb = 0.88 * out_h                         # phone screen height (output px) at zoom 1
-        self.anchor = (0.675 * out_w, 0.50 * out_h)
+    def __init__(self, S, pal, out_w, out_h, layout="wide"):
+        self.S, self.W, self.H, self.layout = S, out_w, out_h, layout
+        if layout == "reel":
+            self.hb = 0.52 * out_h                     # phone screen height at zoom 1 (leaves room for captions on top)
+            self.anchor = (0.50 * out_w, 0.565 * out_h)
+            glow_center = (0.5, 0.58)
+        else:
+            self.hb = 0.88 * out_h                     # phone screen height (output px) at zoom 1
+            self.anchor = (0.675 * out_w, 0.50 * out_h)
+            glow_center = (0.70, 0.5)
         self.HI = int(round(2300 * S))                 # hi-res frame build size (screen height)
         frame, smask, (sx, sy, sw, sh) = phone.build(self.HI)
         self.frame_hi = np.asarray(frame, np.uint8)                       # RGBA
@@ -34,7 +40,7 @@ class PhoneScene:
         gloss = np.asarray(phone.glass_gloss(sw, sh, 0.06), np.uint8)
         self.gloss_hi = gloss
         mg = int(0.08 * out_w)
-        self.bg = np.asarray(scene_mod.background(out_w + 2 * mg, out_h + 2 * mg, pal, glow_center=(0.70, 0.5)), np.float32) / 255.0
+        self.bg = np.asarray(scene_mod.background(out_w + 2 * mg, out_h + 2 * mg, pal, glow_center=glow_center), np.float32) / 255.0
         self.mg = mg
 
     # -- geometry -------------------------------------------------------------------------------
@@ -43,10 +49,17 @@ class PhoneScene:
         s = z * self.hb / SRC_H * scale_mul
         ax, ay = self.anchor
         X0 = ax - u * SRC_W * s
-        # keep the phone clear of the caption column on the left and inside the frame on the right
-        x_min = 830 * self.S
-        x_max = self.W - 24 * self.S - SRC_W * s
-        X0 = min(max(X0, x_min), max(x_max, x_min))
+        width = SRC_W * s
+        if self.layout == "reel":
+            lo, hi = 24 * self.S, self.W - 24 * self.S - width      # phone narrower than the frame: keep it inside
+            if lo > hi:                                              # zoomed past the frame width: keep it filling the frame
+                lo, hi = hi, lo
+            X0 = min(max(X0, lo), hi)
+        else:
+            # keep the phone clear of the caption column on the left and inside the frame on the right
+            x_min = 830 * self.S
+            x_max = self.W - 24 * self.S - width
+            X0 = min(max(X0, x_min), max(x_max, x_min))
         X0 += extra[0]
         Y0 = ay - v * SRC_H * s + extra[1]
         return dict(s=s, X0=X0, Y0=Y0)

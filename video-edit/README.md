@@ -13,6 +13,7 @@ palette, caption wording or timing is a re-render away.
 | 4 | `render.py` | compositor: cinematic grade, B-roll, phone-in-frame scenes with camera zoom + highlight rings + tap ripples, word-highlight captions, CTAs, wipes, end card → H.264 |
 | 5 | `mix_audio.py` | voice + ducked music bed + timeline-synced SFX → `mix.wav` |
 | 6 | ffmpeg | mux video + mix (`alimiter`, AAC 320k) |
+| 4b | `render_reel.py` | vertical 9:16 (1080×1920) version for Reels / Shorts: tall face card on a blurred backdrop, stacked phone scenes with a caption header, B-roll as a rounded card, short outro; audio via `mix_audio.py --total 104.93` |
 | QA | `qa_privacy.py`, `qa_privacy_screen.py` | OCR sweeps that fail if any e-mail / account name is still legible |
 | Extra | `make_thumbnail.py` | 1280×720 thumbnail |
 
@@ -23,6 +24,7 @@ ffmpeg -i RPReplay.mp4 -an -vf "fps=60,zscale=t=linear:npl=100,format=gbrpf32le,
 # 3) clean it in 20 s slices (parallel), then concat -> screen_clean60.mp4 (first frame == recording time 8.0 s)
 python prep_screen.py screen_sdr60.mp4 8 28 seg0.mp4   # ... 28-48, 48-68, 68-87.7
 # 4) render (split in chunks for speed; chunk edges at frame boundaries), then concat
+#    16:9 -> render.py ; 9:16 reel -> render_reel.py (same arguments, 5 chunks: 0-26.5667, -48, -70, -91.9, -104.9333)
 python render.py --face main.mp4 --screen screen_clean60.mp4 --broll-dir broll/ --start 0 --end 26.5667 --out p0.mp4
 ```
 

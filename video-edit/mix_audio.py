@@ -16,9 +16,10 @@ ap.add_argument("--music", required=True)
 ap.add_argument("--sfx-dir", required=True)
 ap.add_argument("--out", required=True)
 ap.add_argument("--music-lufs", type=float, default=-27.0, help="loudness of the music bed on its own")
+ap.add_argument("--total", type=float, default=None, help="output length in seconds (default: timeline total incl. end card)")
 args = ap.parse_args()
 SR = 48000
-TOTAL = TL.TOTAL
+TOTAL = args.total if args.total else TL.TOTAL
 
 
 def decode(path, af=None, ch=2):

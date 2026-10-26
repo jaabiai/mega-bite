@@ -41,7 +41,7 @@ BUG_X, BUG_Y, BUG_H = 56, 40, 64          # pill position / logo height in 1080p
 BUG_PADX, BUG_PADY = 12, 8
 
 
-def draw_logo_bug(fr, S, pal, alpha=1.0):
+def draw_logo_bug(fr, S, pal, alpha=1.0, x=None, y=None):
     """Persistent corner mark: logo + wordmark on a dark translucent pill."""
     h = int(BUG_H * S)
     m = mark(h, pal, S)
@@ -54,17 +54,18 @@ def draw_logo_bug(fr, S, pal, alpha=1.0):
     base = rrect((W_, H_), (0, 0, W_ - 1, H_ - 1), H_ / 2, (6, 8, 7), 0.55)
     base.alpha_composite(m, (int(padx), int((H_ - m.height) / 2)))
     ImageDraw.Draw(base).text((padx + m.width + 12 * S, H_ / 2 - 22 * S), label, font=f, fill=(255, 255, 255, 240))
-    blend(fr, base, BUG_X * S, BUG_Y * S, alpha)
+    blend(fr, base, (BUG_X if x is None else x) * S, (BUG_Y if y is None else y) * S, alpha)
 
 
-def draw_logo_reveal(fr, S, pal, t, big=270, x=96, y=96):
+def draw_logo_reveal(fr, S, pal, t, big=270, x=96, y=96, bug=None):
     """Logo sting while the host says the channel name: pop in, hold, then fly into the corner bug (t in 0..2.55 s)."""
     acc = hex2rgb(pal["accent"])
     t_pop, t_hold_end, t_fly_end = 0.45, 1.95, 2.55
     if t < 0 or t > t_fly_end:
         return
     bug_logo_h = BUG_H * S
-    bug_x, bug_y = (BUG_X + BUG_PADX) * S, (BUG_Y + BUG_PADY) * S
+    bx0, by0 = bug if bug is not None else (BUG_X, BUG_Y)
+    bug_x, bug_y = (bx0 + BUG_PADX) * S, (by0 + BUG_PADY) * S
     if t < t_pop:
         k = ease_back(t / t_pop)
         size, px, py, a = big * S * (0.35 + 0.65 * k), x * S, y * S, ease_out(t / 0.25)
@@ -112,14 +113,17 @@ def draw_step_chip(fr, S, pal, n, total, label, x=96, y=400, alpha=1.0, slide=0.
 
 
 # ---------------------------------------------------------------------------------------------- hook title
-def draw_title(fr, S, pal, t):
-    """Animated hook title, t = seconds since the title started (total ~3.2 s)."""
+def draw_title(fr, S, pal, t, lay=None):
+    """Animated hook title, t = seconds since the title started (total ~3.2 s).
+    lay (optional): dict(lines=[(text, hot)], size, step, x, y0, kicker_dy)."""
+    lay = lay or {}
     acc, dark = hex2rgb(pal["accent"]), hex2rgb(pal["on_accent"])
-    lines = [("LOCK YOUR GOOGLE", False), ("SEARCH HISTORY", True)]
-    f = font("title", 62 * S)
+    lines = lay.get("lines", [("LOCK YOUR GOOGLE", False), ("SEARCH HISTORY", True)])
+    size, step = lay.get("size", 62), lay.get("step", 74)
+    f = font("title", size * S)
     fk = font("title", 22 * S)
     out_a = 1.0 - ease_io((t - 2.85) / 0.35)
-    x, y0 = 96 * S, 232 * S
+    x, y0 = lay.get("x", 96) * S, lay.get("y0", 232) * S
     # kicker
     ka = ease_out(t / 0.35) * out_a
     kw = fk.getlength("TECH TIP") + 36 * S
@@ -127,7 +131,7 @@ def draw_title(fr, S, pal, t):
     ImageDraw.Draw(k).text((18 * S, 6 * S), "TECH TIP", font=fk, fill=dark + (255,))
     blend(fr, k, x, y0 - 62 * S + (1 - ease_out(t / 0.35)) * 18 * S, ka)
     # accent bar
-    bar_h = 2 * 74 * S
+    bar_h = len(lines) * step * S
     bh = bar_h * ease_out((t - 0.1) / 0.5)
     bar = rrect((int(10 * S), int(max(bar_h, 4))), (0, 0, 9 * S, max(bh, 1)), 4 * S, acc, 1.0)
     blend(fr, bar, x - 24 * S, y0 + 6 * S, out_a)
@@ -137,16 +141,15 @@ def draw_title(fr, S, pal, t):
         if a <= 0:
             continue
         w = int(f.getlength(txt)) + int(30 * S)
-        h = int(100 * S)
+        h = int((step + 26) * S)
         layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-        d = ImageDraw.Draw(layer)
         sh = Image.new("L", (w, h), 0)
         ImageDraw.Draw(sh).text((6 * S, 8 * S), txt, font=f, fill=200)
         sh = sh.filter(ImageFilter.GaussianBlur(8 * S))
         sl = np.zeros((h, w, 4), np.uint8); sl[..., 3] = np.asarray(sh)
         layer = Image.alpha_composite(layer, Image.fromarray(sl, "RGBA"))
         ImageDraw.Draw(layer).text((6 * S, 8 * S), txt, font=f, fill=(acc if hot else (255, 255, 255)) + (255,))
-        blend(fr, layer, x - 6 * S, y0 + i * 74 * S + (1 - ease_out(ti)) * 34 * S, a)
+        blend(fr, layer, x - 6 * S, y0 + i * step * S + (1 - ease_out(ti)) * 34 * S, a)
 
 
 # ---------------------------------------------------------------------------------------------- icons
@@ -237,16 +240,18 @@ def cursor_icon(size):
 
 
 # ---------------------------------------------------------------------------------------------- search + lock scene
-def render_search_lock(t, S, pal, bg_img):
+def render_search_lock(t, S, pal, bg_img, lay=None):
     """t seconds since scene start (4.0 s). Returns float32 RGB frame."""
     W_, H_ = bg_img.size
     fr = np.asarray(bg_img.convert("RGB"), np.float32) / 255.0
     fr = fr.copy()
     acc = hex2rgb(pal["accent"])
-    cx = 1290 * S
+    lay = lay or {}
+    cx = lay.get("cx", 1290) * S
+    lock_y, lock_size = lay.get("lock_y", 240), lay.get("lock_size", 250)
     # --- search bar
-    bw, bh = 800 * S, 112 * S
-    bx, by = cx - bw / 2, 560 * S
+    bw, bh = lay.get("bar_w", 800) * S, lay.get("bar_h", 112) * S
+    bx, by = cx - bw / 2, lay.get("bar_y", 560) * S
     p_in = ease_out(t / 0.45)
     bar = Image.new("RGBA", (int(bw + 120 * S), int(bh + 120 * S)), (0, 0, 0, 0))
     box = (60 * S, 60 * S, 60 * S + bw, 60 * S + bh)
@@ -271,11 +276,11 @@ def render_search_lock(t, S, pal, bg_img):
     # --- padlock
     open_amt = 1.0 - ease_back((t - 2.2) / 0.35) if t > 2.2 else 1.0
     open_amt = max(open_amt, 0.0)
-    ls = 250 * S
+    ls = lock_size * S
     lock = lock_icon(ls, (238, 242, 239), body_rgb=acc if t > 2.5 else (238, 242, 239), open_amt=open_amt)
     drop = (1 - ease_out(t / 0.6)) * -90 * S
     glow = glow_of(lock, 26 * S, 1.2)
-    lx, ly = cx - lock.width / 2, 250 * S - 10 * S + drop
+    lx, ly = cx - lock.width / 2, lock_y * S + drop
     blend_glow(fr, glow, lx, ly, 0.25 + (0.6 if locked else 0.0))
     shake = math.sin((t - 2.5) * 60) * 5 * S * max(0.0, 1 - (t - 2.5) / 0.35) if 2.5 < t < 2.85 else 0.0
     blend(fr, lock, lx + shake, ly, ease_out(t / 0.4))
@@ -285,7 +290,7 @@ def render_search_lock(t, S, pal, bg_img):
         rad = (110 + 250 * ease_out(r)) * S
         ring = Image.new("RGBA", (int(rad * 2 + 20 * S), int(rad * 2 + 20 * S)), (0, 0, 0, 0))
         ImageDraw.Draw(ring).ellipse((10 * S, 10 * S, 10 * S + rad * 2, 10 * S + rad * 2), outline=acc + (int(220 * (1 - r)),), width=int(6 * S))
-        blend(fr, ring, cx - ring.width / 2, 250 * S + ls * 0.55 - ring.height / 2)
+        blend(fr, ring, cx - ring.width / 2, lock_y * S + ls * 0.55 - ring.height / 2)
     # --- LOCKED pill
     if t > 2.75:
         a = ease_out((t - 2.75) / 0.3)
@@ -514,3 +519,41 @@ def zoom_punch(fr, amount):
     if k > 1:
         out = cv2.GaussianBlur(out, (k, 1), 0)
     return out
+
+
+# ---------------------------------------------------------------------------------------------- reel outro
+def render_reel_outro(t, S, pal, bg_img):
+    """Short vertical outro (about 3 s): logo, name, tagline, follow pill."""
+    fr = np.asarray(bg_img.convert("RGB"), np.float32) / 255.0
+    fr = fr.copy()
+    W_ = fr.shape[1]
+    acc, dark = hex2rgb(pal["accent"]), hex2rgb(pal["on_accent"])
+    cx = W_ / 2
+    size = 380 * S
+    k = ease_back(t / 0.7)
+    lg = mark(int(size * (0.4 + 0.6 * clamp01(k))), pal, S)
+    px, py = cx - lg.width / 2, 470 * S + (size - lg.height) / 2
+    blend_glow(fr, glow_of(lg, 30 * S, 1.0), px, py, 0.45 * clamp01(t / 0.5))
+    blend(fr, lg, px, py, clamp01(t / 0.3))
+    f1, f2 = font("title", 92 * S), font("label", 38 * S)
+    a1 = ease_out((t - 0.35) / 0.5)
+    lay1 = Image.new("RGBA", (int(f1.getlength("MEGABYTE")) + int(40 * S), int(130 * S)), (0, 0, 0, 0))
+    ImageDraw.Draw(lay1).text((20 * S, 6 * S), "MEGABYTE", font=f1, fill=(255, 255, 255, 255))
+    blend(fr, lay1, cx - lay1.width / 2, 900 * S + (1 - a1) * 26 * S, a1)
+    a2 = ease_out((t - 0.55) / 0.5)
+    tag = "TECH  •  AI  •  FUTURE"
+    lay2 = Image.new("RGBA", (int(f2.getlength(tag)) + int(40 * S), int(70 * S)), (0, 0, 0, 0))
+    ImageDraw.Draw(lay2).text((20 * S, 4 * S), tag, font=f2, fill=acc + (255,))
+    blend(fr, lay2, cx - lay2.width / 2, 1030 * S + (1 - a2) * 20 * S, a2)
+    a3 = ease_back((t - 0.8) / 0.5)
+    pf = font("title", 40 * S)
+    txt = "FOLLOW FOR MORE TECH TIPS"
+    pw, ph = int(pf.getlength(txt) + 90 * S), int(96 * S)
+    pill = rrect((pw, ph), (0, 0, pw - 1, ph - 1), ph / 2, acc, 1.0)
+    ImageDraw.Draw(pill).text((45 * S, 24 * S), txt, font=pf, fill=dark + (255,))
+    sc = clamp01(a3) * 1.0
+    if sc < 1.0:
+        pill = pill.resize((max(int(pw * sc), 2), max(int(ph * sc), 2)), Image.LANCZOS)
+    blend_glow(fr, glow_of(pill, 18 * S, 1.0), cx - pill.width / 2, 1180 * S + (ph - pill.height) / 2, 0.5)
+    blend(fr, pill, cx - pill.width / 2, 1180 * S + (ph - pill.height) / 2, clamp01(a3))
+    return fr
