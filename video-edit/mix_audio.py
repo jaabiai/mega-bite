@@ -89,6 +89,8 @@ def sfx(name):
 
 events = []          # (time, name, gain_dB)
 events.append((0.55, "3124", -15))
+events.append((17.50, "3005", -13))                # logo sting pops in
+events.append((19.45, "1489", -16))                # ...and flies into the corner
 for (tt, kind) in TL.TRANSITIONS:
     if kind == "wipe":
         events.append((tt - 0.42, "1492", -9))

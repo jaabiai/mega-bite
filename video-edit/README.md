@@ -1,4 +1,4 @@
-# video-edit — MEGA BYTE "Lock your Google search history"
+# video-edit — MEGABYTE "Lock your Google search history"
 
 Scripted, repeatable edit of the face-cam + iPhone screen-recording pair. Everything is code, so a different
 palette, caption wording or timing is a re-render away.

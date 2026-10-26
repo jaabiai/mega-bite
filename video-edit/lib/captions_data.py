@@ -20,7 +20,7 @@ CHUNKS = [
     (14.18, 15.80, "can be locked too."),
     (15.75, 17.05, "That's today's topic."),
     (17.10, 17.95, "Welcome to"),
-    (18.00, 19.00, "MEGA BYTE!"),
+    (18.00, 19.00, "MEGABYTE!"),
     (19.01, 20.38, "To get videos like this,"),
     (20.41, 20.95, "right now,"),
     (20.99, 21.85, "subscribe"),

@@ -20,7 +20,7 @@ and are the first to double-check against the audio.
 | 12 | 14.18 | 15.80 | can be locked too. |
 | 13 | 15.75 | 17.05 | That's today's topic. |
 | 14 | 17.10 | 17.95 | Welcome to |
-| 15 | 18.00 | 19.00 | MEGA BYTE! |
+| 15 | 18.00 | 19.00 | MEGABYTE! |
 | 16 | 19.01 | 20.38 | To get videos like this, |
 | 17 | 20.41 | 20.95 | right now, |
 | 18 | 20.99 | 21.85 | subscribe |

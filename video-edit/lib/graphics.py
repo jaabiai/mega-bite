@@ -37,21 +37,54 @@ def mark(size, pal, S=1.0):
     return img
 
 
+BUG_X, BUG_Y, BUG_H = 56, 40, 64          # pill position / logo height in 1080p space
+BUG_PADX, BUG_PADY = 12, 8
+
+
 def draw_logo_bug(fr, S, pal, alpha=1.0):
-    h = int(60 * S)
+    """Persistent corner mark: logo + wordmark on a dark translucent pill."""
+    h = int(BUG_H * S)
     m = mark(h, pal, S)
-    show_word = logo_image() is None
     f = font("title", 30 * S)
-    label = "MEGA BYTE"
-    tw = f.getlength(label) if show_word else 0
-    padx, pady = 14 * S, 10 * S
-    W_ = int(padx * 2 + m.width + (14 * S + tw if show_word else 0))
+    label = "MEGABYTE"
+    tw = f.getlength(label)
+    padx, pady = BUG_PADX * S, BUG_PADY * S
+    W_ = int(padx * 2 + m.width + 12 * S + tw + 6 * S)
     H_ = int(max(m.height, h) + pady * 2)
-    base = rrect((W_, H_), (0, 0, W_ - 1, H_ - 1), H_ / 2, (6, 8, 7), 0.45)
+    base = rrect((W_, H_), (0, 0, W_ - 1, H_ - 1), H_ / 2, (6, 8, 7), 0.55)
     base.alpha_composite(m, (int(padx), int((H_ - m.height) / 2)))
-    if show_word:
-        ImageDraw.Draw(base).text((padx + m.width + 14 * S, H_ / 2 - 22 * S), label, font=f, fill=(255, 255, 255, 240))
-    blend(fr, base, 56 * S, 40 * S, alpha)
+    ImageDraw.Draw(base).text((padx + m.width + 12 * S, H_ / 2 - 22 * S), label, font=f, fill=(255, 255, 255, 240))
+    blend(fr, base, BUG_X * S, BUG_Y * S, alpha)
+
+
+def draw_logo_reveal(fr, S, pal, t, big=270, x=96, y=96):
+    """Logo sting while the host says the channel name: pop in, hold, then fly into the corner bug (t in 0..2.55 s)."""
+    acc = hex2rgb(pal["accent"])
+    t_pop, t_hold_end, t_fly_end = 0.45, 1.95, 2.55
+    if t < 0 or t > t_fly_end:
+        return
+    bug_logo_h = BUG_H * S
+    bug_x, bug_y = (BUG_X + BUG_PADX) * S, (BUG_Y + BUG_PADY) * S
+    if t < t_pop:
+        k = ease_back(t / t_pop)
+        size, px, py, a = big * S * (0.35 + 0.65 * k), x * S, y * S, ease_out(t / 0.25)
+        cx, cy = px + big * S / 2, py + big * S / 2                  # keep centred while scaling
+        px, py = cx - size / 2, cy - size / 2
+    elif t < t_hold_end:
+        bob = math.sin((t - t_pop) * 2.4) * 4 * S
+        size, px, py, a = big * S, x * S, y * S + bob, 1.0
+    else:
+        k = ease_io((t - t_hold_end) / (t_fly_end - t_hold_end))
+        size = lerp(big * S, bug_logo_h, k)
+        px, py, a = lerp(x * S, bug_x, k), lerp(y * S, bug_y, k), 1.0
+    lg = mark(int(max(size, 8)), pal, S)
+    if t < t_hold_end:                                              # lime halo ties the (blue) logo to the palette
+        halo = Image.new("RGBA", (lg.width, lg.height), (0, 0, 0, 0))
+        m = aa_shape(halo.size, lambda d, s_: d.ellipse([0.04 * lg.width * s_, 0.04 * lg.height * s_, 0.96 * lg.width * s_, 0.96 * lg.height * s_], fill=255))
+        halo = with_mask(halo.size, acc, m, 0.5)
+        pulse = 0.55 + 0.25 * math.sin(t * 5.0)
+        blend_glow(fr, glow_of(halo, 30 * S, 1.2), px, py, pulse * a)
+    blend(fr, lg, px, py, a)
 
 
 # ---------------------------------------------------------------------------------------------- step chip
@@ -365,12 +398,12 @@ def render_end_card(t, S, pal, bg_img):
     fr = fr.copy()
     acc, dark = hex2rgb(pal["accent"]), hex2rgb(pal["on_accent"])
     # left column
-    lg = mark(150 * S, pal, S)
-    a0 = ease_out(t / 0.5)
-    blend_glow(fr, glow_of(lg, 20 * S, 1.0), 120 * S, 190 * S + (1 - a0) * 30 * S, 0.5 * a0)
-    blend(fr, lg, 120 * S, 190 * S + (1 - a0) * 30 * S, a0)
+    lg = mark(250 * S, pal, S)
+    a0 = ease_back(t / 0.7)
+    blend_glow(fr, glow_of(lg, 26 * S, 1.0), 112 * S, 120 * S + (1 - ease_out(t / 0.5)) * 30 * S, 0.45 * clamp01(t / 0.5))
+    blend(fr, lg, 112 * S, 120 * S + (1 - ease_out(t / 0.5)) * 30 * S, clamp01(t / 0.35))
     f1, f2, f3 = font("title", 74 * S), font("title", 74 * S), font("label", 32 * S)
-    for i, (txt, col, y) in enumerate((("Thanks for", (255, 255, 255), 380), ("watching!", acc, 462))):
+    for i, (txt, col, y) in enumerate((("Thanks for", (255, 255, 255), 400), ("watching!", acc, 482))):
         a = ease_out((t - 0.25 - 0.12 * i) / 0.5)
         layer = Image.new("RGBA", (int(f1.getlength(txt)) + int(40 * S), int(110 * S)), (0, 0, 0, 0))
         ImageDraw.Draw(layer).text((8 * S, 6 * S), txt, font=f1, fill=col + (255,))
@@ -378,9 +411,9 @@ def render_end_card(t, S, pal, bg_img):
     a = ease_out((t - 0.8) / 0.5)
     sub = Image.new("RGBA", (int(900 * S), int(150 * S)), (0, 0, 0, 0))
     d = ImageDraw.Draw(sub)
-    d.text((8 * S, 0), "Subscribe to MEGA BYTE for more", font=f3, fill=(214, 220, 216, 255))
+    d.text((8 * S, 0), "Subscribe to MEGABYTE for more", font=f3, fill=(214, 220, 216, 255))
     d.text((8 * S, 46 * S), "tech tips, AI tools and updates.", font=f3, fill=(214, 220, 216, 255))
-    blend(fr, sub, 112 * S, 600 * S + (1 - a) * 20 * S, a)
+    blend(fr, sub, 112 * S, 630 * S + (1 - a) * 20 * S, a)
     # right-hand panels (YouTube end-screen slots)
     for i, (px, py, pw, ph, lab) in enumerate(((1010, 150, 760, 428, "WATCH NEXT"), (1010, 610, 360, 260, "SUBSCRIBE"))):
         a = ease_out((t - 0.5 - 0.15 * i) / 0.5)

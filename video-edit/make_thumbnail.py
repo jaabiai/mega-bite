@@ -62,7 +62,7 @@ lk = G.lock_icon(170, (245, 247, 245), body_rgb=ACC, open_amt=0.0)
 blend_glow(fr, glow_of(lk, 20, 1.4), 395, 505, 0.85)
 blend(fr, lk, 395, 505, 1.0)
 # kicker + brand bug
-G.draw_logo_bug(fr, 0.8, PAL, 1.0)
+G.draw_logo_bug(fr, 1.0, PAL, 1.0)
 img = (np.clip(fr, 0, 1) * 255).astype(np.uint8)
 Image.fromarray(img).save(a.out, quality=93)
 print("wrote", a.out)

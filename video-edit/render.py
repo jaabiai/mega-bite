@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MEGA BYTE – compositor.  Renders the picture track (no audio) frame by frame and pipes it into x264.
+"""MEGABYTE – compositor.  Renders the picture track (no audio) frame by frame and pipes it into x264.
 
 usage:
   render.py --out video.mp4 [--start 0 --end 107.7] [--scale 1]
@@ -180,6 +180,7 @@ def scene_at(T):
 
 # ---------------------------------------------------------------------------------------------- overlays
 CHUNK_STARTS = [c[0] for c in CD.CHUNKS]
+REVEAL_T0 = 17.45          # "Welcome to MEGABYTE"
 
 
 def active_chunk(T):
@@ -226,7 +227,12 @@ def draw_caption_overlay(fr, T, kind):
 def draw_overlays(fr, T, sc, geo):
     kind = sc["kind"]
     if kind != "end":
-        G.draw_logo_bug(fr, S, PAL, alpha=ease_out((T - 0.15) / 0.5))
+        bug_a = ease_out((T - 0.15) / 0.5)
+        r0 = REVEAL_T0
+        if r0 <= T < r0 + 2.6:                         # logo sting: bug hidden while the big logo is on screen
+            bug_a = ease_io((T - (r0 + 1.95)) / 0.6) if T > r0 + 1.95 else 0.0
+        G.draw_logo_bug(fr, S, PAL, alpha=bug_a)
+        G.draw_logo_reveal(fr, S, PAL, T - REVEAL_T0)
     if T < 3.5:
         G.draw_title(fr, S, PAL, T - 0.35)
     # step chip + highlights + taps
