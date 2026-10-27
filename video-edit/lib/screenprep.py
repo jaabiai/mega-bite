@@ -77,7 +77,8 @@ def calibrate_bubble(sdr_path, bg_light=None, bg_dark=None):
     cal = R.BUBBLE_CAL
     t_light, t_dark = cal["t_light"], cal["t_dark"]
     cx, cy, _ = R.ASSIST
-    x0, y0, n = cx - 150, cy - 150, 300
+    n = 300
+    x0, y0 = max(0, min(cx - 150, SW - n)), max(0, min(cy - 150, SH - n))      # box stays inside the frame
 
     def grab(t):
         raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(t), "-i", sdr_path, "-frames:v", "1",
@@ -87,14 +88,14 @@ def calibrate_bubble(sdr_path, bg_light=None, bg_dark=None):
 
     L, D = grab(t_light), grab(t_dark)
     yy, xx = np.mgrid[0:n, 0:n]
-    r0 = np.hypot(xx - n / 2, yy - n / 2)
-    ring = (r0 > 130) & (r0 < 146)
+    cxm, cym = cal["centre_in_crop"]                                      # bubble centre (measured on the flat light frame)
+    r = np.hypot(xx - cxm, yy - cym)
+    r_in, r_out = cal.get("ring", (130, 146))                             # flat background ring around the bubble
+    ring = (r > r_in) & (r < r_out)
     bgL = np.median(L[ring], axis=0) if bg_light is None else np.array(bg_light, np.float32)
     bgD = np.median(D[ring & (yy < cal["lower_valid"] + 5)], axis=0) if bg_dark is None else np.array(bg_dark, np.float32)
     raw = (L - D) / (bgL - bgD)[None, None, :]                       # per-channel (1-a) estimate
-    valid = (yy < cal["lower_valid"]) & (r0 < 135)                                   # lower rim of the dark frame sits on another background
-    cxm, cym = cal["centre_in_crop"]                                      # bubble centre (measured on the flat light frame)
-    r = np.hypot(xx - cxm, yy - cym)
+    valid = (yy < cal["lower_valid"]) & (r < cal.get("valid_r", 135))              # lower rim of the dark frame sits on another background
     # radial profiles (median over angle), per channel
     nb = 140
     oma_prof = np.ones((nb, 3), np.float32)
@@ -131,6 +132,80 @@ def _erase_bubble(img):
     img[y0:y0 + n, x0:x0 + n] = np.clip(out, 0, 255).astype(np.uint8)
 
 
+def _remove_indicators(img, band, disc=28):
+    """Find the red / orange recording indicators wherever they currently sit inside `band` (x0, y0, x1, y1) and paint them out
+    together with the black disc they sit in."""
+    x0, y0, x1, y1 = band
+    roi = img[y0:y1, x0:x1]
+    r, g, b = (roi[..., k].astype(np.int16) for k in range(3))
+    m = (((r - b) > 90) & (r > 150)).astype(np.uint8)
+    if not m.any():
+        return
+    n, _, stats, cen = cv2.connectedComponentsWithStats(cv2.dilate(m, np.ones((5, 5), np.uint8)))
+    mask = np.zeros(m.shape, np.uint8)
+    for i in range(1, n):
+        if stats[i, cv2.CC_STAT_AREA] >= 20:
+            cv2.circle(mask, (int(round(cen[i][0])), int(round(cen[i][1]))), disc, 255, -1)
+    img[y0:y1, x0:x1] = cv2.inpaint(np.ascontiguousarray(roi), mask, 6, cv2.INPAINT_TELEA)
+
+
+# ---- AssistiveTouch bubble, second method: rebuild the background instead of un-mixing the bubble -------------------------
+_BG = {}
+
+
+def _bubble_geom(spec):
+    if "geom" not in _BG:
+        cx, cy = spec["centre"]
+        r, f = spec["radius"], spec.get("feather", 4)
+        pad = r + f + 28
+        x0, y0, x1, y1 = max(int(cx - pad), 0), max(int(cy - pad), 0), min(int(cx + pad), SW), min(int(cy + pad), SH)
+        yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
+        d = np.hypot(xx - cx, yy - cy)
+        _BG["geom"] = dict(box=(x0, y0, x1, y1), d=d, xx=xx, yy=yy, m=np.clip((r + f - d) / f, 0, 1)[..., None])
+    return _BG["geom"]
+
+
+def erase_bubble(img, S):
+    """Mode by recording time (spec['modes'] = [(s0, s1, mode)]): 'flat' wallpaper -> fill with the colour around it,
+    'inpaint' -> generic fill (transitions), 'patch' -> redraw the known header / search-field edge of the Recents page."""
+    spec = R.BUBBLE
+    mode = next((m for a, b, m in spec["modes"] if a <= S < b), None)
+    if mode is None:
+        return
+    g = _bubble_geom(spec)
+    x0, y0, x1, y1 = g["box"]
+    roi = img[y0:y1, x0:x1]
+    d, m = g["d"], g["m"]
+    r, f = spec["radius"], spec.get("feather", 4)
+    ring = (d > r + f + 4) & (d < r + f + 24)
+    if mode == "flat":
+        px = roi[ring].astype(np.float32)
+        if px.std(0).max() <= 2.5:
+            col = np.median(px, axis=0)
+            img[y0:y1, x0:x1] = (roi * (1 - m) + col[None, None, :] * m + 0.5).astype(np.uint8)
+            return
+        mode = "inpaint"                                  # not flat after all
+    if mode == "inpaint":
+        mask = (d <= r + f / 2).astype(np.uint8) * 255
+        img[y0:y1, x0:x1] = cv2.inpaint(np.ascontiguousarray(roi), mask, 7, cv2.INPAINT_TELEA)
+        return
+    pa = spec["patch"]                                   # header colour, search-field colour and the field's outline
+    hx, hy = pa["header_px"]; fx, fy = pa["fill_px"]
+    base = np.median(img[hy:hy + 6, hx:hx + 20].reshape(-1, 3), axis=0).astype(np.float32)
+    fill = np.median(img[fy:fy + 6, fx:fx + 20].reshape(-1, 3), axis=0).astype(np.float32)
+    px0, py0, px1, py1 = pa["pill"]
+    rad = (py1 - py0) / 2
+    qx = np.maximum(np.abs(g["xx"] - (px0 + px1) / 2) - ((px1 - px0) / 2 - rad), 0)      # stadium (pill) distance field
+    sdf = np.hypot(qx, g["yy"] - (py0 + py1) / 2) - rad
+    cov = np.clip(0.5 - sdf, 0, 1)[..., None]
+    patch = base[None, None, :] * (1 - cov) + fill[None, None, :] * cov
+    if "line_y" in pa:                                   # hairline under the navigation bar
+        ly = pa["line_y"]
+        lc = np.median(img[ly, hx:hx + 20].reshape(-1, 3), axis=0).astype(np.float32)
+        patch[(g["yy"] == ly)] = lc
+    img[y0:y1, x0:x1] = (roi * (1 - m) + patch * m + 0.5).astype(np.uint8)
+
+
 def prepare(img, S):
     """img: HxWx3 uint8 RGB (modified & returned); S = recording time of the frame in seconds."""
     for s0, s1, rect in R.BLUR_RECTS:
@@ -148,6 +223,11 @@ def prepare(img, S):
         if orange not in _masks:
             _masks[orange] = _circle_mask(roi.shape, pad, pad, r)
         img[y0:y1, x0:x1] = cv2.inpaint(roi, _masks[orange], 6, cv2.INPAINT_TELEA)
-    if getattr(R, "ASSIST", None):
+    band = getattr(R, "INDICATOR_BAND", None)
+    if band:                                             # moving indicators: detect by colour instead of fixed positions
+        _remove_indicators(img, band)
+    if getattr(R, "BUBBLE", None):
+        erase_bubble(img, S)
+    elif getattr(R, "ASSIST", None):
         _erase_bubble(img)
     return img

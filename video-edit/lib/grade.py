@@ -53,13 +53,13 @@ def _window_masks(h, w, face=None):
     return m
 
 
-def grade(rgb, grain=0.0, rng=None, face=None):
-    """rgb: float32 HxWx3 in 0..1 -> graded float32."""
+def grade(rgb, grain=0.0, rng=None, face=None, clarity=0.12, face_lift=0.20, tint=1.0):
+    """rgb: float32 HxWx3 in 0..1 -> graded float32.  clarity / face_lift / tint (strength of the teal-orange split tone) are per-project."""
     h, w, _ = rgb.shape
     face, vig = _window_masks(h, w, face)
 
     # 1. face exposure lift (~ +0.35 stop) with a soft window
-    img = rgb * (1.0 + 0.20 * face)
+    img = rgb * (1.0 + face_lift * face)
 
     # 2. highlight / sky handling before the curve
     img = np.clip(img, 0, 1.4)
@@ -74,7 +74,7 @@ def grade(rgb, grain=0.0, rng=None, face=None):
     hl = _smoothstep((luma - 0.55) / 0.40)
     teal = np.array([-0.020, 0.006, 0.030], np.float32)
     warm = np.array([0.012, 0.006, -0.014], np.float32)
-    img = img + sh * teal + hl * warm
+    img = img + tint * (sh * teal + hl * warm)
 
     # 5. selective saturation in HSV: calm the loud greens, add vibrance
     hsv = cv2.cvtColor(np.clip(img, 0, 1), cv2.COLOR_RGB2HSV)  # H 0..360
@@ -88,7 +88,7 @@ def grade(rgb, grain=0.0, rng=None, face=None):
 
     # 5b. clarity: gentle large-radius local contrast on luminance
     blur = cv2.GaussianBlur(img, (0, 0), max(h, w) / 90.0)
-    img = np.clip(img + 0.12 * (img - blur), 0, 1)
+    img = np.clip(img + clarity * (img - blur), 0, 1)
 
     # 6. vignette
     img = img * vig

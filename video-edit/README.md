@@ -1,7 +1,18 @@
-# video-edit — MEGABYTE "Lock your Google search history"
+# video-edit — MEGABYTE tutorial edits
 
-Scripted, repeatable edit of the face-cam + iPhone screen-recording pair. Everything is code, so a different
-palette, caption wording or timing is a re-render away.
+Scripted, repeatable edit of a face-cam + iPhone screen-recording pair. Everything is code, so a different
+palette, caption wording or timing is a re-render away. Every video is a *project* (`projects/<name>/`) and every
+tool takes `--project <name>` (`prep_screen.py` / `render*.py` / `mix_audio.py`):
+
+| Project | Video |
+|---------|-------|
+| `lock-google-history` | Lock your Google search history (16:9 + reel) |
+| `whatsapp-face-id` | Hide WhatsApp calls from the iPhone call log with "Require Face ID" (16:9 + reel) |
+
+A project folder holds `timeline.py` (scenes, screen re-timing, camera, taps, highlights, steps, CTAs, sound effects, grade
+overrides), `captions_data.py` (English caption chunks) and `screen_rules.py` (what to blur / remove in the screen recording).
+Scene kinds: `face`, `broll` (`clip` landscape id, `reel_clip` vertical id), `graphic` (`graphic`: `search-lock`, `call-log`,
+`face-unlock`), `phone`, `end`.
 
 ## Pipeline
 
@@ -9,7 +20,7 @@ palette, caption wording or timing is a re-render away.
 |------|--------|--------------|
 | 1 | `audio_clean.sh` | declip → rumble high-pass → RNNoise (`bd.rnnn`) → EQ → de-ess → soft gate → compression → 2-pass loudnorm (−14 LUFS / −1.5 dBTP) |
 | 2 | ffmpeg (see below) | iPhone HDR (HEVC, BT.2020 PQ) → SDR BT.709, constant 60 fps |
-| 3 | `prep_screen.py` + `lib/screenprep.py` | blur every e-mail / account name, remove the screen-recording indicators, remove the AssistiveTouch bubble (alpha un-mixing calibrated from two flat-background frames) |
+| 3 | `prep_screen.py` + `lib/screenprep.py` | blur private text, remove the screen-recording indicators (fixed positions, or found by colour for the wandering ones) and the AssistiveTouch bubble (alpha un-mixing from two flat-background frames, or rebuilding the known background: flat fill / header + search-field redraw) |
 | 4 | `render.py` | compositor: cinematic grade, B-roll, phone-in-frame scenes with camera zoom + highlight rings + tap ripples, word-highlight captions, CTAs, wipes, end card → H.264 |
 | 5 | `mix_audio.py` | voice + ducked music bed + timeline-synced SFX → `mix.wav` |
 | 6 | ffmpeg | mux video + mix (`alimiter`, AAC 320k) |
@@ -34,9 +45,8 @@ python render.py --face main.mp4 --screen screen_clean60.mp4 --broll-dir broll/ 
 * Logo: drop the real file at `assets/logo/logo.png` (RGBA). Until then a placeholder "MB" mark is drawn.
 
 ## Timing data
-`lib/timeline.py` (scenes, screen-recording re-timing, camera, taps, highlights, steps) and
-`lib/captions_data.py` (English caption chunks). `captions/script_en.md` lists the captions for review.
+`projects/<name>/timeline.py` and `projects/<name>/captions_data.py`. `captions/*script_en.md` list the captions for review.
 
 ## Licences
 Music / SFX / stock clips: Mixkit (Mixkit licence — free for commercial use, no attribution required).
-Music "Lo-Fi 05" by Lily J; clips 39782, 25451, 144; SFX 1492, 1489, 1109, 3005, 3124, 2856, 2852, 2354, 933.
+Music "Lo-Fi 05" by Lily J; clips 39782, 25451, 144 (Google video), 41165, 4805, 4915 (wide) and 41173, 49939, 39833 (reel) (WhatsApp video); SFX 1492, 1489, 1109, 3005, 3124, 2856, 2852, 2354, 933.

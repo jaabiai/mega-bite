@@ -20,7 +20,7 @@ def _project_dir():
 
 
 sys.path.insert(0, _project_dir())
-import brand, grade, scene as scene_mod, graphics as G, timeline as TL, captions_data as CD, phonescene
+import brand, grade, scene as scene_mod, graphics as G, graphics_calls as GC, timeline as TL, captions_data as CD, phonescene
 from caption import render_caption
 from gfx import blend, ease_io, ease_out, clamp01, lerp
 
@@ -143,7 +143,7 @@ def scene_face(T, sc):
     out = cv2.warpAffine(src, M, (W, H), flags=cv2.INTER_CUBIC if sc_ >= 0.98 else cv2.INTER_LINEAR)
     fr = out.astype(np.float32) / 255.0
     cx, cy = (a["fx"] - x0) * z, (a["fy"] - y0) * z
-    fr = grade.grade(fr, grain=0.010, rng=np.random.default_rng(int(T * 30)), face=(cx, cy - 0.03, 0.22, 0.36))
+    fr = grade.grade(fr, grain=0.010, rng=np.random.default_rng(int(T * 30)), face=(cx, cy - 0.03, 0.22, 0.36), **getattr(TL, "GRADE", {}))
     left_scrim(fr, 0.80, 0.52)
     return fr
 
@@ -179,6 +179,25 @@ def scene_phone(T):
     fr = ps.render(screen, g, opacity=min(1.0, enter * 1.6), sway=sway)
     g["sway"] = sway
     return fr, g
+
+
+GRAPHIC_LAY = {
+    "call-log": dict(cx=1290, top=190, card_w=640, row_h=92, head_h=112, rows=6),
+    "face-unlock": dict(cx=1290, cy=480, tile=270, face=260, gap=250, pill_size=32),
+}
+
+
+def scene_graphic(T, sc):
+    t, g = T - sc["t0"], sc.get("graphic", "search-lock")
+    if g == "call-log":
+        return GC.render_call_log(t, S, PAL, bg_plain, lay=GRAPHIC_LAY[g])
+    if g == "face-unlock":
+        return GC.render_face_unlock(t, S, PAL, bg_plain, lay=GRAPHIC_LAY[g])
+    return G.render_search_lock(t, S, PAL, bg_plain)
+
+
+def _spans(v):
+    return v if isinstance(v[0], (tuple, list)) else [v]
 
 
 def scene_at(T):
@@ -263,10 +282,12 @@ def draw_overlays(fr, T, sc, geo):
             if tt - 0.35 <= T <= tt + 0.9:
                 x, y = ps.to_out(geo, u, v)
                 G.draw_tap(fr, S, PAL, x, y + geo.get("sway", 0), T - tt)
-    if TL.SUBSCRIBE_T[0] <= T < TL.SUBSCRIBE_T[1]:
-        G.draw_subscribe(fr, S, PAL, T - TL.SUBSCRIBE_T[0], x=96, y=870)
-    if TL.SHARE_T[0] <= T < TL.SHARE_T[1]:
-        G.draw_share(fr, S, PAL, T - TL.SHARE_T[0], x=96, y=870)
+    for (a, b) in _spans(TL.SUBSCRIBE_T):
+        if a <= T < b:
+            G.draw_subscribe(fr, S, PAL, T - a, x=96, y=870)
+    for (a, b) in _spans(TL.SHARE_T):
+        if a <= T < b:
+            G.draw_share(fr, S, PAL, T - a, x=96, y=870)
     draw_caption_overlay(fr, T, kind)
 
 
@@ -280,7 +301,7 @@ def render_frame(T):
     elif kind == "broll":
         fr = scene_broll(T, sc)
     elif kind == "graphic":
-        fr = G.render_search_lock(T - sc["t0"], S, PAL, bg_plain)
+        fr = scene_graphic(T, sc)
     elif kind == "phone":
         fr, geo = scene_phone(T)
     else:

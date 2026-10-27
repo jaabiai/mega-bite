@@ -24,7 +24,7 @@ def _project_dir():
 
 
 sys.path.insert(0, _project_dir())
-import brand, grade, scene as scene_mod, graphics as G, timeline as TL, captions_data as CD, phonescene
+import brand, grade, scene as scene_mod, graphics as G, graphics_calls as GC, timeline as TL, captions_data as CD, phonescene
 from caption import render_caption
 from gfx import blend, blend_glow, glow_of, ease_io, ease_out, clamp01, lerp, aa_shape
 
@@ -61,9 +61,13 @@ CAP_TOP_MAIN, CAP_SIZE_MAIN = 1230, 78
 CAP_TOP_PHONE, CAP_SIZE_PHONE = 362, 70
 CHIP_XY = (64, 238)
 CTA_XY = (64, 256)
-TITLE = dict(lines=TL.TITLE_LINES, size=84, step=96, x=70, y0=318)
+TITLE = dict(lines=TL.TITLE_LINES, size=78, step=90, x=70, y0=316)
 LOCK = dict(cx=540, lock_y=380, lock_size=300, bar_y=900, bar_w=900, bar_h=124)
-REVEAL = dict(big=300, x=64, y=250)
+REVEAL = dict(big=280, x=64, y=232)
+GRAPHIC_LAY = {
+    "call-log": dict(cx=540, top=520, card_w=940, row_h=112, head_h=138, rows=4, badge=230, pill_size=34, t_scan=(1.55, 2.85)),
+    "face-unlock": dict(cx=540, cy=730, tile=250, face=250, gap=185, vertical=True, pill_size=34),
+}
 FACE_CARD = dict(x=28, y=520, w=1024, h=576, r=34)         # the main video, complete and uncropped (16:9)
 
 
@@ -196,7 +200,7 @@ def scene_face(T, sc):
     c = FACE_CARD
     card = cv2.resize(src, (c["w"], c["h"]), interpolation=cv2.INTER_AREA).astype(np.float32) / 255.0
     fx, fy = TL.FACE_ANCHOR["fx"], TL.FACE_ANCHOR["fy"]
-    card = grade.grade(card, grain=0.008, rng=np.random.default_rng(int(T * 30)), face=(fx, fy - 0.02, 0.18, 0.30))
+    card = grade.grade(card, grain=0.008, rng=np.random.default_rng(int(T * 30)), face=(fx, fy - 0.02, 0.18, 0.30), **getattr(TL, "GRADE", {}))
     bg = backdrop_from(card)
     paste_card(bg, card, c)
     return np.clip(bg, 0, 1)
@@ -235,6 +239,19 @@ def scene_phone(T):
     g["sway"] = sway
     header_band(fr)                                     # readable caption area over a zoomed-in phone
     return fr, g
+
+
+def scene_graphic(T, sc):
+    t, g = T - sc["t0"], sc.get("graphic", "search-lock")
+    if g == "call-log":
+        return GC.render_call_log(t, S, PAL, bg_lock, lay=GRAPHIC_LAY[g])
+    if g == "face-unlock":
+        return GC.render_face_unlock(t, S, PAL, bg_lock, lay=GRAPHIC_LAY[g])
+    return G.render_search_lock(t, S, PAL, bg_lock, lay=LOCK)
+
+
+def _spans(v):
+    return v if isinstance(v[0], (tuple, list)) else [v]
 
 
 def scene_at(T):
@@ -311,10 +328,12 @@ def draw_overlays(fr, T, sc, geo):
             if tt - 0.35 <= T <= tt + 0.9:
                 x, y = ps.to_out(geo, u, v)
                 G.draw_tap(fr, S, PAL, x, y + geo.get("sway", 0), T - tt)
-    if TL.SUBSCRIBE_T[0] <= T < TL.SUBSCRIBE_T[1]:
-        G.draw_subscribe(fr, S, PAL, T - TL.SUBSCRIBE_T[0], x=CTA_XY[0], y=CTA_XY[1])
-    if TL.SHARE_T[0] <= T < TL.SHARE_T[1]:
-        G.draw_share(fr, S, PAL, T - TL.SHARE_T[0], x=CTA_XY[0], y=CTA_XY[1])
+    for (a, b) in _spans(TL.SUBSCRIBE_T):
+        if a <= T < b:
+            G.draw_subscribe(fr, S, PAL, T - a, x=CTA_XY[0], y=CTA_XY[1])
+    for (a, b) in _spans(TL.SHARE_T):
+        if a <= T < b:
+            G.draw_share(fr, S, PAL, T - a, x=CTA_XY[0], y=CTA_XY[1])
     draw_caption_overlay(fr, T, kind)
 
 
@@ -327,7 +346,7 @@ def render_frame(T):
     elif kind == "broll":
         fr = scene_broll(T, sc)
     elif kind == "graphic":
-        fr = G.render_search_lock(T - sc["t0"], S, PAL, bg_lock, lay=LOCK)
+        fr = scene_graphic(T, sc)
     elif kind == "phone":
         fr, geo = scene_phone(T)
     else:
