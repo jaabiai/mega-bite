@@ -8,9 +8,19 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "lib"))
+
+def _project_dir():
+    for i, a in enumerate(sys.argv):
+        if a == "--project" and i + 1 < len(sys.argv):
+            return os.path.join(HERE, "projects", sys.argv[i + 1])
+    sys.exit("--project NAME is required (a folder under projects/)")
+
+
+sys.path.insert(0, _project_dir())
 import timeline as TL
 
 ap = argparse.ArgumentParser()
+ap.add_argument("--project", required=True)
 ap.add_argument("--voice", required=True)
 ap.add_argument("--music", required=True)
 ap.add_argument("--sfx-dir", required=True)
@@ -89,9 +99,6 @@ def sfx(name):
 
 
 events = []          # (time, name, gain_dB)
-events.append((0.55, "3124", -15))
-events.append((17.50, "3005", -13))                # logo sting pops in
-events.append((19.45, "1489", -16))                # ...and flies into the corner
 for (tt, kind) in TL.TRANSITIONS:
     if kind == "wipe":
         events.append((tt - 0.42, "1492", -9))
@@ -101,10 +108,7 @@ for (tt, u, v) in TL.TAPS:
     events.append((tt, "1109", -13))
 for (t0, t1, n, label) in TL.STEPS[1:]:
     events.append((t0, "3005", -17))
-events += [(14.38, "2856", -8), (14.52, "2852", -15),            # padlock closes
-           (21.05, "2354", -10), (21.18, "933", -13),            # subscribe click + bell
-           (23.95, "2354", -10),                                 # share
-           (78.40, "2852", -13)]                                 # Save -> locked
+events += TL.EXTRA_SFX
 sfx_bus = np.zeros((N, 2), np.float32)
 for tt, name, gdb in events:
     x = sfx(name) * 10 ** (gdb / 20)

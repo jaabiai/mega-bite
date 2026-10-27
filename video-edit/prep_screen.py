@@ -1,14 +1,18 @@
 """Write the cleaned (blurred / de-cluttered) screen recording for a slice of recording time.
 
-usage: python prep_screen.py <sdr60.mp4> <start_s> <end_s> <out.mp4>
+usage: python prep_screen.py <project> <sdr60.mp4> <start_s> <end_s> <out.mp4>
 """
 import sys, os, subprocess
 import numpy as np
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
-import screenprep
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, "lib"))
+sys.path.insert(0, os.path.join(HERE, "projects", sys.argv[1]))
+import screenprep, screen_rules
 
-src, a, b, out = sys.argv[1], float(sys.argv[2]), float(sys.argv[3]), sys.argv[4]
-screenprep.calibrate_bubble(src)
+project, src, a, b, out = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
+screenprep.configure(screen_rules)
+if getattr(screen_rules, "ASSIST", None):
+    screenprep.calibrate_bubble(src)
 W, H, FPS = 1320, 2868, 60
 n = int(round((b - a) * FPS))
 dec = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", f"{a:.4f}", "-i", src, "-frames:v", str(n),

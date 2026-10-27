@@ -9,19 +9,37 @@ NARR_END = 101.72
 END_CARD = 6.0
 TOTAL = NARR_END + END_CARD
 
+# screen recording: recording-time of the first frame of screen_clean60.mp4 and of the last usable frame
+SCREEN_T0, SCREEN_END = 8.0, 87.7
+
+# on-screen furniture (output times, seconds)
+TITLE_T = (0.35, 3.5)                                   # hook title
+TITLE_LINES = [("LOCK YOUR GOOGLE", False), ("SEARCH HISTORY", True)]
+REVEAL_T0 = 17.45                                       # logo sting ("Welcome to MEGABYTE")
+SUBSCRIBE_T = (19.9, 22.95)                             # subscribe button
+SHARE_T = (22.95, 26.6)                                 # share button
+FACE_ANCHOR = dict(fx=0.54, fy=0.36)                    # face centre in the source frame (for framing + grade window)
+
+# project-specific sound effects (time, mixkit id, gain dB) on top of the generic transition / tap / step ones
+EXTRA_SFX = [(0.55, "3124", -15), (17.50, "3005", -13), (19.45, "1489", -16),
+             (14.38, "2856", -8), (14.52, "2852", -15),              # padlock closes
+             (21.05, "2354", -10), (21.18, "933", -13),              # subscribe click + bell
+             (23.95, "2354", -10),                                   # share
+             (78.40, "2852", -13)]                                   # Save -> locked
+
 # ---- scenes -----------------------------------------------------------------------------------------
 # kind: face | broll | graphic | phone | end
 SCENES = [
-    dict(kind="face",    t0=0.00,   t1=3.88,   zoom=(1.20, 1.27), name="hook"),
+    dict(kind="face",    t0=0.00,   t1=3.88,   zoom=(1.20, 1.27), reel_zoom=(1.0, 1.10), name="hook"),
     dict(kind="broll",   t0=3.88,   t1=6.50,   clip="39782", clip_t=2.0, name="browsing"),
     dict(kind="broll",   t0=6.50,   t1=8.34,   clip="25451", clip_t=1.5, name="safe-keypad"),
     dict(kind="broll",   t0=8.34,   t1=11.88,  clip="144",   clip_t=0.5, name="phone-in-hand"),
     dict(kind="graphic", t0=11.88,  t1=15.88,  name="search-lock"),
-    dict(kind="face",    t0=15.88,  t1=21.50,  zoom=(1.18, 1.24), name="welcome"),
-    dict(kind="face",    t0=21.50,  t1=26.58,  zoom=(1.30, 1.24), name="share"),
+    dict(kind="face",    t0=15.88,  t1=21.50,  zoom=(1.18, 1.24), reel_zoom=(1.0, 1.10), name="welcome"),
+    dict(kind="face",    t0=21.50,  t1=26.58,  zoom=(1.30, 1.24), reel_zoom=(1.14, 1.04), name="share"),
     dict(kind="phone",   t0=26.58,  t1=91.90,  name="phone"),
-    dict(kind="face",    t0=91.90,  t1=96.60,  zoom=(1.22, 1.28), name="outro-a"),
-    dict(kind="face",    t0=96.60,  t1=NARR_END, zoom=(1.34, 1.28), name="outro-b"),
+    dict(kind="face",    t0=91.90,  t1=96.60,  zoom=(1.22, 1.28), reel_zoom=(1.0, 1.10), name="outro-a"),
+    dict(kind="face",    t0=96.60,  t1=NARR_END, zoom=(1.34, 1.28), reel_zoom=(1.16, 1.06), name="outro-b"),
     dict(kind="end",     t0=NARR_END, t1=TOTAL, name="end-card"),
 ]
 

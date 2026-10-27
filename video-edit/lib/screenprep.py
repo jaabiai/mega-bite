@@ -28,7 +28,14 @@ BLUR_RECTS = [
     (73.50, 73.90, (0.03, 0.405, 0.70, 0.470)),     # chip position during the page's first frames
 ]
 
-BLUR_SIGMA = 15
+R = None          # per-project rules module (BLUR_RECTS, DOT, ORANGE, ASSIST, BUBBLE_CAL, BLUR_SIGMA)
+
+
+def configure(rules):
+    """rules: module with BLUR_RECTS [(s0, s1, (u0, v0, u1, v1))], BLUR_SIGMA, DOT / ORANGE / ASSIST (x, y, r) or None,
+    BUBBLE_CAL dict(t_light, t_dark, centre_in_crop, rim, lower_valid)."""
+    global R
+    R = rules
 
 
 def _blur_rect(img, rect, soft=True):
@@ -36,12 +43,13 @@ def _blur_rect(img, rect, soft=True):
     x0, y0, x1, y1 = (int(max(0, u0) * SW), int(max(0, v0) * SH), int(min(1, u1) * SW), int(min(1, v1) * SH))
     if x1 <= x0 or y1 <= y0:
         return
-    pad = 3 * BLUR_SIGMA
+    sigma = R.BLUR_SIGMA
+    pad = 3 * sigma
     xa, ya, xb, yb = max(0, x0 - pad), max(0, y0 - pad), min(SW, x1 + pad), min(SH, y1 + pad)
     roi = img[ya:yb, xa:xb]
     # blur twice: second pass is on a much smaller image for speed and extra strength
     small = cv2.resize(roi, None, fx=0.25, fy=0.25, interpolation=cv2.INTER_AREA)
-    small = cv2.GaussianBlur(small, (0, 0), BLUR_SIGMA / 4.0 * 1.6)
+    small = cv2.GaussianBlur(small, (0, 0), sigma / 4.0 * 1.6)
     blur = cv2.resize(small, (roi.shape[1], roi.shape[0]), interpolation=cv2.INTER_CUBIC)
     m = np.zeros(roi.shape[:2], np.float32)
     m[y0 - ya:y1 - ya, x0 - xa:x1 - xa] = 1.0
@@ -50,10 +58,6 @@ def _blur_rect(img, rect, soft=True):
     img[ya:yb, xa:xb] = (roi * (1 - m[..., None]) + blur * m[..., None]).astype(np.uint8)
 
 
-# fixed UI artefacts (pixel coordinates at 1320x2868)
-DOT = (446, 97, 22)                  # red recording dot inside the island
-ORANGE = (948, 97, 30)               # orange recording glyph right of the island
-ASSIST = (786, 2706, 98)             # AssistiveTouch bubble
 _masks = {}
 
 
@@ -66,11 +70,13 @@ def _circle_mask(shape, cx, cy, r):
 _CAL = {}
 
 
-def calibrate_bubble(sdr_path, t_light=49.0, t_dark=66.0, bg_light=None, bg_dark=None):
+def calibrate_bubble(sdr_path, bg_light=None, bg_dark=None):
     """Estimate the AssistiveTouch bubble's per-pixel alpha / colour from two frames where it sits on flat backgrounds.
     obs = (1-a)*bg + a*C  ->  (1-a) = (obs_L - obs_D) / (bg_L - bg_D)."""
     import subprocess
-    cx, cy, _ = ASSIST
+    cal = R.BUBBLE_CAL
+    t_light, t_dark = cal["t_light"], cal["t_dark"]
+    cx, cy, _ = R.ASSIST
     x0, y0, n = cx - 150, cy - 150, 300
 
     def grab(t):
@@ -84,10 +90,10 @@ def calibrate_bubble(sdr_path, t_light=49.0, t_dark=66.0, bg_light=None, bg_dark
     r0 = np.hypot(xx - n / 2, yy - n / 2)
     ring = (r0 > 130) & (r0 < 146)
     bgL = np.median(L[ring], axis=0) if bg_light is None else np.array(bg_light, np.float32)
-    bgD = np.median(D[ring & (yy < 205)], axis=0) if bg_dark is None else np.array(bg_dark, np.float32)
+    bgD = np.median(D[ring & (yy < cal["lower_valid"] + 5)], axis=0) if bg_dark is None else np.array(bg_dark, np.float32)
     raw = (L - D) / (bgL - bgD)[None, None, :]                       # per-channel (1-a) estimate
-    valid = (yy < 200) & (r0 < 135)                                   # lower rim of the dark frame sits on another background
-    cxm, cym = 150.5, 152.0                                              # bubble centre (measured on the flat light frame)
+    valid = (yy < cal["lower_valid"]) & (r0 < 135)                                   # lower rim of the dark frame sits on another background
+    cxm, cym = cal["centre_in_crop"]                                      # bubble centre (measured on the flat light frame)
     r = np.hypot(xx - cxm, yy - cym)
     # radial profiles (median over angle), per channel
     nb = 140
@@ -100,7 +106,7 @@ def calibrate_bubble(sdr_path, t_light=49.0, t_dark=66.0, bg_light=None, bg_dark
     # smooth the profile a little and force 1.0 beyond the rim
     for c in range(3):
         oma_prof[:, c] = np.convolve(np.pad(oma_prof[:, c], 2, mode="edge"), np.ones(3) / 3, mode="same")[2:-2]
-    rim = 127
+    rim = cal["rim"]
     oma_prof[rim:] = 1.0
     ar = np.arange(nb, dtype=np.float32)
     one_minus_a = np.stack([np.interp(r, ar, oma_prof[:, c]) for c in range(3)], axis=-1).astype(np.float32)
@@ -126,19 +132,22 @@ def _erase_bubble(img):
 
 
 def prepare(img, S):
-    """img: HxWx3 uint8 RGB (will be modified & returned)."""
-    for s0, s1, rect in BLUR_RECTS:
+    """img: HxWx3 uint8 RGB (modified & returned); S = recording time of the frame in seconds."""
+    for s0, s1, rect in R.BLUR_RECTS:
         if s0 <= S <= s1:
             _blur_rect(img, rect)
-    # island dot -> pure black
-    cv2.circle(img, (DOT[0], DOT[1]), DOT[2], (0, 0, 0), -1)
-    # orange glyph -> small inpaint; AssistiveTouch bubble -> row-wise interpolation (keeps card edges straight)
-    cx, cy, r = ORANGE
-    pad = r + 30
-    x0, y0, x1, y1 = cx - pad, cy - pad, cx + pad, cy + pad
-    roi = np.ascontiguousarray(img[y0:y1, x0:x1])
-    if ORANGE not in _masks:
-        _masks[ORANGE] = _circle_mask(roi.shape, pad, pad, r)
-    img[y0:y1, x0:x1] = cv2.inpaint(roi, _masks[ORANGE], 6, cv2.INPAINT_TELEA)
-    _erase_bubble(img)
+    dot = getattr(R, "DOT", None)
+    if dot:                                              # island dot -> pure black
+        cv2.circle(img, (dot[0], dot[1]), dot[2], (0, 0, 0), -1)
+    orange = getattr(R, "ORANGE", None)
+    if orange:                                           # orange recording glyph -> small inpaint
+        cx, cy, r = orange
+        pad = r + 30
+        x0, y0, x1, y1 = cx - pad, cy - pad, cx + pad, cy + pad
+        roi = np.ascontiguousarray(img[y0:y1, x0:x1])
+        if orange not in _masks:
+            _masks[orange] = _circle_mask(roi.shape, pad, pad, r)
+        img[y0:y1, x0:x1] = cv2.inpaint(roi, _masks[orange], 6, cv2.INPAINT_TELEA)
+    if getattr(R, "ASSIST", None):
+        _erase_bubble(img)
     return img

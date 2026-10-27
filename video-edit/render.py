@@ -11,15 +11,24 @@ import cv2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "lib"))
+
+def _project_dir():
+    for i, a in enumerate(sys.argv):
+        if a == "--project" and i + 1 < len(sys.argv):
+            return os.path.join(HERE, "projects", sys.argv[i + 1])
+    sys.exit("--project NAME is required (a folder under projects/)")
+
+
+sys.path.insert(0, _project_dir())
 import brand, grade, scene as scene_mod, graphics as G, timeline as TL, captions_data as CD, phonescene
 from caption import render_caption
 from gfx import blend, ease_io, ease_out, clamp01, lerp
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--work", default=os.environ.get("MB_WORK"), help="dir with face.mp4-source, screen_clean60.mp4, b-roll")
+ap.add_argument("--project", required=True, help="folder under projects/ with timeline.py, captions_data.py, screen_rules.py")
 ap.add_argument("--face", required=True)
 ap.add_argument("--screen", required=True, help="cleaned 60 fps screen recording; frame 0 == --screen-t0")
-ap.add_argument("--screen-t0", type=float, default=8.0)
+ap.add_argument("--screen-t0", type=float, default=TL.SCREEN_T0)
 ap.add_argument("--broll-dir", required=True)
 ap.add_argument("--palette", default="volt")
 ap.add_argument("--scale", type=int, default=1)
@@ -86,7 +95,8 @@ class SeekReader:
 FACE_W, FACE_H = 2560, 1440
 face_reader = SeekReader(args.face, FACE_W, FACE_H, 30.0, f"scale={FACE_W}:{FACE_H}:flags=lanczos")
 screen_reader = SeekReader(args.screen, 1320, 2868, 60.0, "null", t_off=0.0, jump=240)
-N_SCREEN = int(round((87.7 - args.screen_t0) * 60)) - 1
+N_SCREEN = int(round((TL.SCREEN_END - args.screen_t0) * 60)) - 1
+PHONE_T0 = next(sc["t0"] for sc in TL.SCENES if sc["kind"] == "phone")
 _broll = {}
 
 
@@ -117,7 +127,7 @@ def left_scrim(fr, strength=0.80, width=0.52):
 
 
 # ---------------------------------------------------------------------------------------------- scenes
-FACE_ANCHOR = dict(fx=0.54, fy=0.36, tx=0.665, ty=0.44)
+FACE_ANCHOR = dict(fx=TL.FACE_ANCHOR["fx"], fy=TL.FACE_ANCHOR["fy"], tx=0.665, ty=0.44)
 
 
 def scene_face(T, sc):
@@ -163,7 +173,7 @@ def scene_phone(T):
     idx = min(max(int(round((S_t - args.screen_t0) * 60)), 0), N_SCREEN)
     screen = screen_reader.get(idx)
     cam = phonescene.cam_at(T, TL.CAMERA)
-    enter = ease_out((T - TL.SCENES[7]["t0"]) / 0.75)
+    enter = ease_out((T - PHONE_T0) / 0.75)
     g = ps.geometry(cam, extra=((1 - enter) * 0.30 * W, 0.0))
     sway = 4.0 * S * math.sin(2 * math.pi * T / 6.5)
     fr = ps.render(screen, g, opacity=min(1.0, enter * 1.6), sway=sway)
@@ -180,7 +190,7 @@ def scene_at(T):
 
 # ---------------------------------------------------------------------------------------------- overlays
 CHUNK_STARTS = [c[0] for c in CD.CHUNKS]
-REVEAL_T0 = 17.45          # "Welcome to MEGABYTE"
+REVEAL_T0 = TL.REVEAL_T0          # logo sting
 
 
 def active_chunk(T):
@@ -218,7 +228,7 @@ def draw_caption_overlay(fr, T, kind):
     if kind == "phone":
         size, mw, top = 66, 700, 440
     else:
-        size, mw, top = 64, 580, 430 if T > 3.9 else 560
+        size, mw, top = 64, 580, 560 if T < TL.TITLE_T[1] + 0.4 else 430
     img, ox, oy, bh = render_caption(words, act if act >= 0 else -1, PAL, S=S, max_w=mw, size=size, pop=pop)
     slide = (1 - ease_out(fin)) * 16 * S
     blend(fr, img, 96 * S + ox, top * S + oy + slide, fin * fout)
@@ -233,8 +243,8 @@ def draw_overlays(fr, T, sc, geo):
             bug_a = ease_io((T - (r0 + 1.95)) / 0.6) if T > r0 + 1.95 else 0.0
         G.draw_logo_bug(fr, S, PAL, alpha=bug_a)
         G.draw_logo_reveal(fr, S, PAL, T - REVEAL_T0)
-    if T < 3.5:
-        G.draw_title(fr, S, PAL, T - 0.35)
+    if T < TL.TITLE_T[1]:
+        G.draw_title(fr, S, PAL, T - TL.TITLE_T[0], lay=dict(lines=TL.TITLE_LINES))
     # step chip + highlights + taps
     if kind == "phone":
         for (t0, t1, n, label) in TL.STEPS:
@@ -253,10 +263,10 @@ def draw_overlays(fr, T, sc, geo):
             if tt - 0.35 <= T <= tt + 0.9:
                 x, y = ps.to_out(geo, u, v)
                 G.draw_tap(fr, S, PAL, x, y + geo.get("sway", 0), T - tt)
-    if 19.9 <= T < 22.95:
-        G.draw_subscribe(fr, S, PAL, T - 19.9, x=96, y=870)
-    if 22.95 <= T < 26.6:
-        G.draw_share(fr, S, PAL, T - 22.95, x=96, y=870)
+    if TL.SUBSCRIBE_T[0] <= T < TL.SUBSCRIBE_T[1]:
+        G.draw_subscribe(fr, S, PAL, T - TL.SUBSCRIBE_T[0], x=96, y=870)
+    if TL.SHARE_T[0] <= T < TL.SHARE_T[1]:
+        G.draw_share(fr, S, PAL, T - TL.SHARE_T[0], x=96, y=870)
     draw_caption_overlay(fr, T, kind)
 
 

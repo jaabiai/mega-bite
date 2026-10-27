@@ -15,6 +15,15 @@ import cv2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "lib"))
+
+def _project_dir():
+    for i, a in enumerate(sys.argv):
+        if a == "--project" and i + 1 < len(sys.argv):
+            return os.path.join(HERE, "projects", sys.argv[i + 1])
+    sys.exit("--project NAME is required (a folder under projects/)")
+
+
+sys.path.insert(0, _project_dir())
 import brand, grade, scene as scene_mod, graphics as G, timeline as TL, captions_data as CD, phonescene
 from caption import render_caption
 from gfx import blend, blend_glow, glow_of, ease_io, ease_out, clamp01, lerp, aa_shape
@@ -24,9 +33,10 @@ TOTAL = TL.NARR_END + OUTRO
 TL.SCENES[-1] = dict(kind="outro", t0=TL.NARR_END, t1=TOTAL, name="outro")
 
 ap = argparse.ArgumentParser()
+ap.add_argument("--project", required=True, help="folder under projects/")
 ap.add_argument("--face", required=True)
 ap.add_argument("--screen", required=True)
-ap.add_argument("--screen-t0", type=float, default=8.0)
+ap.add_argument("--screen-t0", type=float, default=TL.SCREEN_T0)
 ap.add_argument("--broll-dir", required=True)
 ap.add_argument("--palette", default="volt")
 ap.add_argument("--out", default=None)
@@ -51,11 +61,10 @@ CAP_TOP_MAIN, CAP_SIZE_MAIN = 1230, 78
 CAP_TOP_PHONE, CAP_SIZE_PHONE = 362, 70
 CHIP_XY = (64, 238)
 CTA_XY = (64, 256)
-TITLE = dict(lines=[("LOCK YOUR GOOGLE", False), ("SEARCH HISTORY", True)], size=84, step=96, x=70, y0=318)
+TITLE = dict(lines=TL.TITLE_LINES, size=84, step=96, x=70, y0=318)
 LOCK = dict(cx=540, lock_y=380, lock_size=300, bar_y=900, bar_w=900, bar_h=124)
 REVEAL = dict(big=300, x=64, y=250)
-REEL_ZOOM = {"hook": (1.0, 1.10), "welcome": (1.0, 1.10), "share": (1.14, 1.04), "outro-a": (1.0, 1.10), "outro-b": (1.16, 1.06)}
-CARD = dict(x=40, y=420, w=1000, h=562, r=40)
+FACE_CARD = dict(x=28, y=520, w=1024, h=576, r=34)         # the main video, complete and uncropped (16:9)
 
 
 class SeekReader:
@@ -98,15 +107,17 @@ class SeekReader:
 FW, FH = 3840, 2160
 face_reader = SeekReader(args.face, FW, FH, 30.0, "null", jump=60)
 screen_reader = SeekReader(args.screen, 1320, 2868, 60.0, "null", jump=240)
-N_SCREEN = int(round((87.7 - args.screen_t0) * 60)) - 1
+N_SCREEN = int(round((TL.SCREEN_END - args.screen_t0) * 60)) - 1
+PHONE_T0 = next(sc["t0"] for sc in TL.SCENES if sc["kind"] == "phone")
 _broll = {}
 
 
 def broll_reader(name, clip, clip_t):
+    """Vertical stock clip, scaled to cover the whole 1080x1920 frame."""
     if name not in _broll:
-        vf = (f"scale={CARD['w']}:{CARD['h']}:force_original_aspect_ratio=increase:flags=lanczos:in_color_matrix=bt709,"
-              f"crop={CARD['w']}:{CARD['h']},fps=30")
-        _broll[name] = SeekReader(os.path.join(args.broll_dir, f"{clip}.mp4"), CARD["w"], CARD["h"], 30.0, vf, t_off=clip_t, jump=60)
+        vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos:in_color_matrix=bt709,"
+              f"crop={W}:{H},fps=30")
+        _broll[name] = SeekReader(os.path.join(args.broll_dir, f"{clip}.mp4"), W, H, 30.0, vf, t_off=clip_t, jump=60)
     return _broll[name]
 
 
@@ -139,22 +150,19 @@ def header_band(fr, hold=560, end=730, strength=0.94):
     return fr
 
 
-def card_mask():
-    if "mask" not in _cache:
-        w, h, r = CARD["w"], CARD["h"], CARD["r"]
-        m = aa_shape((w, h), lambda d, s: d.rounded_rectangle([0, 0, w * s - 1, h * s - 1], radius=r * s, fill=255))
-        _cache["mask"] = np.asarray(m, np.float32)[..., None] / 255.0
+def card_mask(w, h, r):
+    key = ("mask", w, h, r)
+    if key not in _cache:
+        m = aa_shape((w, h), lambda d, k: d.rounded_rectangle([0, 0, w * k - 1, h * k - 1], radius=r * k, fill=255))
+        mm = np.asarray(m, np.float32)[..., None] / 255.0
         pad = 90
         big = np.zeros((h + 2 * pad, w + 2 * pad), np.float32)
-        big[pad:pad + h, pad:pad + w] = _cache["mask"][..., 0]
-        _cache["shadow"] = cv2.GaussianBlur(big, (0, 0), 28) * 0.6
-    return _cache["mask"], _cache["shadow"]
+        big[pad:pad + h, pad:pad + w] = mm[..., 0]
+        _cache[key] = (mm, cv2.GaussianBlur(big, (0, 0), 28) * 0.6)
+    return _cache[key]
 
 
 # ---------------------------------------------------------------------------------------------- scenes
-FACE_CARD = dict(y=520, w=1080, h=1200)                    # tall card: whole head + shoulders, soft top/bottom edges
-
-
 def backdrop_from(card, y_dark=0.42):
     """Blurred, darkened full-frame backdrop made from a card image (any aspect)."""
     h, w = card.shape[:2]
@@ -166,62 +174,53 @@ def backdrop_from(card, y_dark=0.42):
     return cv2.resize(small, (W, H), interpolation=cv2.INTER_CUBIC) * y_dark + BG0[None, None, :] * 0.30
 
 
+def paste_card(bg, card, c):
+    """Rounded card with drop shadow and a thin accent outline onto a float frame."""
+    x, y, w, h, r = c["x"], c["y"], c["w"], c["h"], c["r"]
+    mask, shadow = card_mask(w, h, r)
+    pad = 90
+    y0s, x0s = y - pad, x - pad
+    sy0, sx0 = max(-y0s, 0), max(-x0s, 0)
+    sy1, sx1 = min(shadow.shape[0], H - y0s), min(shadow.shape[1], W - x0s)
+    bg[y0s + sy0:y0s + sy1, x0s + sx0:x0s + sx1] *= (1 - shadow[sy0:sy1, sx0:sx1, None])
+    bg[y:y + h, x:x + w] = bg[y:y + h, x:x + w] * (1 - mask) + card * mask
+    outline = np.clip(cv2.GaussianBlur(mask, (0, 0), 1.2)[..., None] - mask, 0, 1)
+    acc = np.array(brand.hex2rgb(PAL["accent"]), np.float32) / 255
+    bg[y:y + h, x:x + w] += outline * acc[None, None, :] * 0.5
+    return bg
+
+
 def scene_face(T, sc):
-    z0, z1 = REEL_ZOOM[sc["name"]]
-    prog = clamp01((T - sc["t0"]) / (sc["t1"] - sc["t0"]))
-    z = lerp(z0, z1, ease_io(prog))
+    """The main video stays complete (no crop): full 16:9 frame in a card, blurred copy of it as backdrop."""
     src = face_reader.get(int(round(T * 30)))
-    cw, ch = FACE_CARD["w"], FACE_CARD["h"]
-    fx, fy, tx, ty = 0.54, 0.36, 0.50, 0.40
-    sc_ = z * ch / FH                                        # source px -> card px
-    wv, hv = cw / sc_ / FW, ch / sc_ / FH
-    x0 = min(max(fx - tx * wv, 0.0), 1 - wv)
-    y0 = min(max(fy - ty * hv, 0.0), 1 - hv)
-    M = np.array([[sc_, 0, -x0 * FW * sc_], [0, sc_, -y0 * FH * sc_]], np.float32)
-    card = cv2.warpAffine(src, M, (cw, ch), flags=cv2.INTER_LINEAR).astype(np.float32) / 255.0
-    card = grade.grade(card, grain=0.010, rng=np.random.default_rng(int(T * 30)),
-                       face=((fx - x0) / wv, (fy - y0) / hv - 0.03, 0.30, 0.32))
+    c = FACE_CARD
+    card = cv2.resize(src, (c["w"], c["h"]), interpolation=cv2.INTER_AREA).astype(np.float32) / 255.0
+    fx, fy = TL.FACE_ANCHOR["fx"], TL.FACE_ANCHOR["fy"]
+    card = grade.grade(card, grain=0.008, rng=np.random.default_rng(int(T * 30)), face=(fx, fy - 0.02, 0.18, 0.30))
     bg = backdrop_from(card)
-    ys = np.arange(ch, dtype=np.float32)
-    feather = np.minimum(np.clip(ys / 110.0, 0, 1), np.clip((ch - ys) / 220.0, 0, 1))
-    feather = (feather * feather * (3 - 2 * feather))[:, None, None]
-    y = FACE_CARD["y"] if sc["name"] == "hook" else FACE_CARD["y"] - 90        # title needs the space only in the hook
-    bg[y:y + ch] = bg[y:y + ch] * (1 - feather) + card * feather
-    vscrim(bg, 1180, 1560, 0.62)
+    paste_card(bg, card, c)
     return np.clip(bg, 0, 1)
 
 
 def scene_broll(T, sc):
-    rd = broll_reader(sc["name"], sc["clip"], sc["clip_t"])
+    """Vertical stock footage, full-bleed, graded to sit with the brand colours."""
+    rd = broll_reader(sc["name"], sc["reel_clip"], sc.get("reel_clip_t", 0.0))
     src = rd.get(int(round((T - sc["t0"]) * 30)))
     prog = clamp01((T - sc["t0"]) / (sc["t1"] - sc["t0"]))
-    z = 1.0 + 0.08 * prog
-    w, h = CARD["w"], CARD["h"]
-    M = np.array([[z, 0, (1 - z) * w / 2], [0, z, (1 - z) * h / 2]], np.float32)
-    card = cv2.warpAffine(src, M, (w, h), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT).astype(np.float32) / 255.0
-    luma = (card * np.array([0.2126, 0.7152, 0.0722], np.float32)).sum(-1, keepdims=True)
-    card = card * 0.58 + luma * 0.42
-    card = np.clip((card - 0.5) * 1.08 + 0.5 - 0.02, 0, 1)
+    z = 1.0 + 0.07 * prog
+    M = np.array([[z, 0, (1 - z) * W / 2], [0, z, (1 - z) * H / 2]], np.float32)
+    fr = cv2.warpAffine(src, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REFLECT).astype(np.float32) / 255.0
+    luma = (fr * np.array([0.2126, 0.7152, 0.0722], np.float32)).sum(-1, keepdims=True)
+    fr = fr * 0.62 + luma * 0.38
+    fr = np.clip((fr - 0.5) * 1.08 + 0.5 - 0.03, 0, 1)
     tint = np.array(brand.hex2rgb(PAL["bg1"]), np.float32) / 255
-    card = card * (1 - 0.18 * (1 - luma)) + tint[None, None, :] * 0.18 * (1 - luma)
-    # blurred, darkened backdrop from the same clip
-    small = cv2.resize(card, (341, 192), interpolation=cv2.INTER_AREA)[:, 116:224]
-    small = cv2.GaussianBlur(small, (0, 0), 5)
-    bg = cv2.resize(small, (W, H), interpolation=cv2.INTER_CUBIC) * 0.42 + BG0[None, None, :] * 0.30
-    mask, shadow = card_mask()
-    x, y = CARD["x"], CARD["y"]
-    pad = 90
-    y0s, x0s = y - pad, x - pad
-    sy0, sx0 = max(-y0s, 0), max(-x0s, 0)                       # clip the shadow to the frame
-    sy1, sx1 = min(shadow.shape[0], H - y0s), min(shadow.shape[1], W - x0s)
-    bg[y0s + sy0:y0s + sy1, x0s + sx0:x0s + sx1] *= (1 - shadow[sy0:sy1, sx0:sx1, None])
-    bg[y:y + h, x:x + w] = bg[y:y + h, x:x + w] * (1 - mask) + card * mask
-    # thin accent outline
-    outline = cv2.GaussianBlur(mask, (0, 0), 1.2)[..., None] - mask
-    acc = np.array(brand.hex2rgb(PAL["accent"]), np.float32) / 255
-    bg[y:y + h, x:x + w] += np.clip(outline, 0, 1) * acc[None, None, :] * 0.5
-    vscrim(bg, 1000, 1500, 0.55)
-    return np.clip(bg, 0, 1)
+    fr = fr * (1 - 0.20 * (1 - luma)) + tint[None, None, :] * 0.20 * (1 - luma)
+    yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+    vig = 1 - 0.40 * np.clip((np.hypot((xx / W - 0.5) * 1.5, (yy / H - 0.5) * 0.9) - 0.30) / 0.6, 0, 1) ** 1.4
+    fr = fr * vig[..., None]
+    vscrim(fr, 1050, 1560, 0.68)                       # calm area for the captions
+    vscrim(fr, 100, 460, 0.55, from_top=True)
+    return np.clip(fr, 0, 1)
 
 
 def scene_phone(T):
@@ -229,7 +228,7 @@ def scene_phone(T):
     idx = min(max(int(round((S_t - args.screen_t0) * 60)), 0), N_SCREEN)
     screen = screen_reader.get(idx)
     cam = phonescene.cam_at(T, TL.CAMERA)
-    enter = ease_out((T - TL.SCENES[7]["t0"]) / 0.75)
+    enter = ease_out((T - PHONE_T0) / 0.75)
     g = ps.geometry(cam, extra=((1 - enter) * 0.40 * W, 0.0))
     sway = 4.0 * math.sin(2 * math.pi * T / 6.5)
     fr = ps.render(screen, g, opacity=min(1.0, enter * 1.6), sway=sway)
@@ -282,7 +281,7 @@ def draw_caption_overlay(fr, T, kind):
     blend(fr, img, CAP_X + ox, top + oy + (1 - ease_out(fin)) * 18, fin * fout)
 
 
-REVEAL_T0 = 17.45
+REVEAL_T0 = TL.REVEAL_T0
 
 
 def draw_overlays(fr, T, sc, geo):
@@ -293,8 +292,8 @@ def draw_overlays(fr, T, sc, geo):
             bug_a = ease_io((T - (REVEAL_T0 + 1.95)) / 0.6) if T > REVEAL_T0 + 1.95 else 0.0
         G.draw_logo_bug(fr, S, PAL, alpha=bug_a, x=BUG[0], y=BUG[1])
         G.draw_logo_reveal(fr, S, PAL, T - REVEAL_T0, big=REVEAL["big"], x=REVEAL["x"], y=REVEAL["y"], bug=BUG)
-    if T < 3.5:
-        G.draw_title(fr, S, PAL, T - 0.35, lay=TITLE)
+    if T < TL.TITLE_T[1]:
+        G.draw_title(fr, S, PAL, T - TL.TITLE_T[0], lay=TITLE)
     if kind == "phone":
         for (t0, t1, n, label) in TL.STEPS:
             if t0 <= T < t1:
@@ -312,10 +311,10 @@ def draw_overlays(fr, T, sc, geo):
             if tt - 0.35 <= T <= tt + 0.9:
                 x, y = ps.to_out(geo, u, v)
                 G.draw_tap(fr, S, PAL, x, y + geo.get("sway", 0), T - tt)
-    if 19.9 <= T < 22.95:
-        G.draw_subscribe(fr, S, PAL, T - 19.9, x=CTA_XY[0], y=CTA_XY[1])
-    if 22.95 <= T < 26.6:
-        G.draw_share(fr, S, PAL, T - 22.95, x=CTA_XY[0], y=CTA_XY[1])
+    if TL.SUBSCRIBE_T[0] <= T < TL.SUBSCRIBE_T[1]:
+        G.draw_subscribe(fr, S, PAL, T - TL.SUBSCRIBE_T[0], x=CTA_XY[0], y=CTA_XY[1])
+    if TL.SHARE_T[0] <= T < TL.SHARE_T[1]:
+        G.draw_share(fr, S, PAL, T - TL.SHARE_T[0], x=CTA_XY[0], y=CTA_XY[1])
     draw_caption_overlay(fr, T, kind)
 
 
