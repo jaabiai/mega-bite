@@ -1,6 +1,6 @@
 # YouTube upload pack — "Hide WhatsApp calls from the iPhone call log"
 
-Files: `MEGABYTE_WhatsApp_FaceID_16x9.mp4` (main video, 1:33) · `MEGABYTE_WhatsApp_FaceID_9x16.mp4` (Short, 1:30) · thumbnail supplied by the channel owner.
+Files: `MEGABYTE_WhatsApp_FaceID_16x9.mp4` (main video, 1:33) · `MEGABYTE_WhatsApp_FaceID_9x16.mp4` (Short, 1:30) · `whatsapp-face-id_thumbnail_v2.jpg` (the channel owner's thumbnail with two fixes: the Malayalam word *ഉപയോഗിക്കുന്നവർ* was garbled in the original, and the "after" panel showed a separate WhatsApp Calls list although the video shows those calls disappearing from Recents).
 
 ## 1. Main video
 
