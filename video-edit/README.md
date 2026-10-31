@@ -8,6 +8,7 @@ tool takes `--project <name>` (`prep_screen.py` / `render*.py` / `mix_audio.py`)
 |---------|-------|
 | `lock-google-history` | Lock your Google search history (16:9 + reel) |
 | `whatsapp-face-id` | Hide WhatsApp calls from the iPhone call log with "Require Face ID" (16:9 + reel) |
+| `iphone-48mp-camera` | Shoot 48 MP photos on iPhone: Settings > Camera > Formats, Camera app Aspect / Format (16:9 + reel, Crimson Red palette) |
 
 A project folder holds `timeline.py` (scenes, screen re-timing, camera, taps, highlights, steps, CTAs, sound effects, grade
 overrides), `captions_data.py` (English caption chunks) and `screen_rules.py` (what to blur / remove in the screen recording).
