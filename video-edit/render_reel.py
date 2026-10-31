@@ -67,6 +67,7 @@ REVEAL = dict(big=280, x=64, y=232)
 GRAPHIC_LAY = {
     "call-log": dict(cx=540, top=520, card_w=940, row_h=112, head_h=138, rows=4, badge=230, pill_size=34, t_scan=(1.55, 2.85)),
     "face-unlock": dict(cx=540, cy=730, tile=250, face=250, gap=185, vertical=True, pill_size=34),
+    "megapixel": dict(cx=540, top=545, frame_w=480, frame_h=360, num_size=150, unit_size=60, pill_size=34, chip_size=24, num_gap=18),
 }
 FACE_CARD = dict(x=28, y=520, w=1024, h=576, r=34)         # the main video, complete and uncropped (16:9)
 
@@ -227,12 +228,12 @@ def scene_broll(T, sc):
     return np.clip(fr, 0, 1)
 
 
-def scene_phone(T):
+def scene_phone(T, sc=None):
     S_t = TL.screen_time(T)
     idx = min(max(int(round((S_t - args.screen_t0) * 60)), 0), N_SCREEN)
     screen = screen_reader.get(idx)
     cam = phonescene.cam_at(T, TL.CAMERA)
-    enter = ease_out((T - PHONE_T0) / 0.75)
+    enter = ease_out((T - (sc["t0"] if sc else PHONE_T0)) / 0.75)
     g = ps.geometry(cam, extra=((1 - enter) * 0.40 * W, 0.0))
     sway = 4.0 * math.sin(2 * math.pi * T / 6.5)
     fr = ps.render(screen, g, opacity=min(1.0, enter * 1.6), sway=sway)
@@ -245,6 +246,8 @@ def scene_graphic(T, sc):
     t, g = T - sc["t0"], sc.get("graphic", "search-lock")
     if g == "call-log":
         return GC.render_call_log(t, S, PAL, bg_lock, lay=GRAPHIC_LAY[g])
+    if g == "megapixel":
+        return GC.render_megapixel(t, S, PAL, bg_lock, lay=GRAPHIC_LAY[g])
     if g == "face-unlock":
         return GC.render_face_unlock(t, S, PAL, bg_lock, lay=GRAPHIC_LAY[g])
     return G.render_search_lock(t, S, PAL, bg_lock, lay=LOCK)
@@ -348,7 +351,7 @@ def render_frame(T):
     elif kind == "graphic":
         fr = scene_graphic(T, sc)
     elif kind == "phone":
-        fr, geo = scene_phone(T)
+        fr, geo = scene_phone(T, sc)
     else:
         fr = G.render_reel_outro(T - sc["t0"], S, PAL, bg_outro)
     draw_overlays(fr, T, sc, geo)

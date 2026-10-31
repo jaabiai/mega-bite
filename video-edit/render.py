@@ -168,12 +168,12 @@ def scene_broll(T, sc):
     return np.clip(fr, 0, 1)
 
 
-def scene_phone(T):
+def scene_phone(T, sc=None):
     S_t = TL.screen_time(T)
     idx = min(max(int(round((S_t - args.screen_t0) * 60)), 0), N_SCREEN)
     screen = screen_reader.get(idx)
     cam = phonescene.cam_at(T, TL.CAMERA)
-    enter = ease_out((T - PHONE_T0) / 0.75)
+    enter = ease_out((T - (sc["t0"] if sc else PHONE_T0)) / 0.75)
     g = ps.geometry(cam, extra=((1 - enter) * 0.30 * W, 0.0))
     sway = 4.0 * S * math.sin(2 * math.pi * T / 6.5)
     fr = ps.render(screen, g, opacity=min(1.0, enter * 1.6), sway=sway)
@@ -184,6 +184,7 @@ def scene_phone(T):
 GRAPHIC_LAY = {
     "call-log": dict(cx=1290, top=190, card_w=640, row_h=92, head_h=112, rows=6),
     "face-unlock": dict(cx=1290, cy=480, tile=270, face=260, gap=250, pill_size=32),
+    "megapixel": dict(cx=1290, top=190, frame_w=560, frame_h=420, num_size=190, unit_size=74, pill_size=30),
 }
 
 
@@ -191,6 +192,8 @@ def scene_graphic(T, sc):
     t, g = T - sc["t0"], sc.get("graphic", "search-lock")
     if g == "call-log":
         return GC.render_call_log(t, S, PAL, bg_plain, lay=GRAPHIC_LAY[g])
+    if g == "megapixel":
+        return GC.render_megapixel(t, S, PAL, bg_plain, lay=GRAPHIC_LAY[g])
     if g == "face-unlock":
         return GC.render_face_unlock(t, S, PAL, bg_plain, lay=GRAPHIC_LAY[g])
     return G.render_search_lock(t, S, PAL, bg_plain)
@@ -303,7 +306,7 @@ def render_frame(T):
     elif kind == "graphic":
         fr = scene_graphic(T, sc)
     elif kind == "phone":
-        fr, geo = scene_phone(T)
+        fr, geo = scene_phone(T, sc)
     else:
         fr = G.render_end_card(T - sc["t0"], S, PAL, bg_end)
     draw_overlays(fr, T, sc, geo)

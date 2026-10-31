@@ -11,8 +11,11 @@ import screenprep, screen_rules
 
 project, src, a, b, out = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
 screenprep.configure(screen_rules)
-if getattr(screen_rules, "ASSIST", None):
-    screenprep.calibrate_bubble(src)
+if getattr(screen_rules, "ASSIST", None) and not getattr(screen_rules, "BUBBLE", None):
+    if "times" in screen_rules.BUBBLE_CAL:
+        screenprep.calibrate_bubble_multi(src)
+    else:
+        screenprep.calibrate_bubble(src)
 W, H, FPS = 1320, 2868, 60
 n = int(round((b - a) * FPS))
 dec = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", f"{a:.4f}", "-i", src, "-frames:v", str(n),

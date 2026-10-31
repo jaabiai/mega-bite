@@ -1,12 +1,13 @@
 """Explainer graphics for the "hide WhatsApp calls from the call log" video: a Recents list that loses its WhatsApp rows
 once Face ID is required, and the "Face ID unlocks WhatsApp" diagram.  All drawn procedurally (no third-party artwork)."""
 import math
+import cv2
 import numpy as np
 from PIL import Image, ImageDraw
 from brand import hex2rgb
 from caption import font
 from gfx import *
-from graphics import lock_icon, check_icon
+from graphics import lock_icon, check_icon, tint
 
 WA_GREEN = (37, 211, 102)                    # generic "messenger green" used for the WhatsApp markers
 GREY = (150, 163, 154)
@@ -347,4 +348,98 @@ def render_face_unlock(t, S, pal, bg_img, lay=None):
         dd.text((58 * S, ph / 2 - pf.size * 0.62), txt, font=pf, fill=dark + (255,))
         py = (cy + gap * 0.95 + tile_s / 2 + 70 * S) if vertical else (cy + tile_s / 2 + 80 * S)
         blend(fr, pill, cx - pw / 2, py + (1 - a) * 20 * S, a)
+    return fr
+
+
+# ---------------------------------------------------------------------------------------------- 24 MP -> 48 MP
+def _scene_image(w, h, pal):
+    """A small procedural 'photo' (sky, sun with fine rays, hills, wires) – lots of fine detail, so pixelation is obvious."""
+    acc, acc2 = [np.array(hex2rgb(pal[k]), np.float32) for k in ("accent", "accent2")]
+    b0, b1 = [np.array(hex2rgb(pal[k]), np.float32) for k in ("bg0", "bg1")]
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    u, v = xx / w, yy / h
+    sky = b1[None, None, :] * (1 - np.clip(v / 0.62, 0, 1)[..., None]) + acc2[None, None, :] * 0.85 * np.clip(v / 0.62, 0, 1)[..., None]
+    sx, sy = 0.68, 0.50
+    d = np.hypot((u - sx) * w, (v - sy) * w)
+    ang = np.arctan2((v - sy), (u - sx))
+    rays = 0.5 + 0.5 * np.sin(ang * 36.0)
+    glow = np.exp(-(d / (0.34 * h)) ** 2)[..., None]
+    sun = (d < 0.11 * h).astype(np.float32)[..., None]
+    img = sky + acc[None, None, :] * (0.55 * glow * (0.55 + 0.45 * rays[..., None]))
+    img = img * (1 - sun) + acc[None, None, :] * 1.05 * sun
+    for k, (base, amp, fr, ph, tone) in enumerate(((0.66, 0.05, 1.3, 0.8, 0.30), (0.74, 0.06, 0.9, 2.1, 0.12))):
+        ridge = base + amp * np.sin(2 * np.pi * u * fr + ph) + 0.012 * np.sin(2 * np.pi * u * 9.0 + k)
+        m = (v > ridge)[..., None]
+        img = np.where(m, (b0 * (1 - tone) + b1 * tone)[None, None, :] * np.ones_like(img), img)
+    for xw in np.linspace(0.05, 0.95, 24):                                     # thin 'wires' / fine vertical detail
+        wire = (np.abs(u - xw) < 0.0016) & (v > 0.05) & (v < 0.62)
+        img = np.where(wire[..., None], img * 0.55, img)
+    return np.clip(img, 0, 255).astype(np.uint8)
+
+
+def render_megapixel(t, S, pal, bg_img, lay=None):
+    """t since scene start (>= 6 s).  Pixelated photo sharpens as the counter runs 24 -> 48 MP; result pill at the end."""
+    lay = lay or {}
+    fr = np.asarray(bg_img.convert("RGB"), np.float32).copy() / 255.0
+    acc, dark = hex2rgb(pal["accent"]), hex2rgb(pal["on_accent"])
+    cx, top = lay.get("cx", 1290) * S, lay.get("top", 150) * S
+    fw, fh = int(lay.get("frame_w", 560) * S), int(lay.get("frame_h", 420) * S)
+    p_in = ease_out(t / 0.5)
+    # --- breadcrumb chip
+    f_c = font("label", lay.get("chip_size", 24) * S)
+    chip_txt = "CAMERA  ›  FORMAT  ›  RESOLUTION"
+    cw_, ch_ = int(f_c.getlength(chip_txt) + 56 * S), int(52 * S)
+    chip = rrect((cw_, ch_), (0, 0, cw_ - 1, ch_ - 1), ch_ / 2, tint(pal, 0.5), 0.9, outline=acc + (150,), width=2 * S)
+    ImageDraw.Draw(chip).text((28 * S, 10 * S), chip_txt, font=f_c, fill=(255, 255, 255, 235))
+    blend(fr, chip, cx - cw_ / 2, top - 70 * S + (1 - p_in) * -30 * S, p_in)
+    # --- pixelated photo
+    base = _scene_image(max(fw // 2, 8), max(fh // 2, 8), pal)
+    steps = [(0.0, 28), (1.0, 14), (1.45, 7), (1.9, 4), (2.35, 2), (2.8, 1)]
+    px = 28
+    for t0, p in steps:
+        if t >= t0:
+            px = p
+    sm = cv2.resize(base, (max(base.shape[1] // px, 2), max(base.shape[0] // px, 2)), interpolation=cv2.INTER_AREA)
+    pix = cv2.resize(sm, (base.shape[1], base.shape[0]), interpolation=cv2.INTER_NEAREST) if px > 1 else base
+    pix = cv2.resize(pix, (fw, fh), interpolation=cv2.INTER_NEAREST if px > 1 else cv2.INTER_CUBIC)
+    photo = Image.fromarray(pix, "RGB").convert("RGBA")
+    mask = aa_shape((fw, fh), lambda dr, ss: dr.rounded_rectangle([0, 0, fw * ss - 1, fh * ss - 1], radius=26 * S * ss, fill=255))
+    photo.putalpha(mask)
+    border = rrect((fw, fh), (0, 0, fw - 1, fh - 1), 26 * S, acc, 0.0, outline=acc + (255 if t > 2.8 else 140,), width=3.5 * S)
+    photo = Image.alpha_composite(photo, border)
+    g = glow_of(photo, 28 * S, 1.0)
+    blend_glow(fr, g, cx - fw / 2, top, (0.22 + (0.45 if t > 2.8 else 0.0)) * p_in)
+    blend(fr, photo, cx - fw / 2, top + (1 - p_in) * 50 * S, p_in)
+    # --- megapixel counter
+    k = ease_io((t - 0.9) / 1.6)
+    val = 24 + int(round(24 * k))
+    done = val >= 48
+    f_n = font("title", lay.get("num_size", 190) * S)
+    f_u = font("title", lay.get("unit_size", 74) * S)
+    num = str(val)
+    nw, uw = f_n.getlength("48"), f_u.getlength(" MP")
+    tx = cx - (nw + uw) / 2
+    ty = top + fh + lay.get("num_gap", 24) * S
+    layer = Image.new("RGBA", (int(nw + uw + 80 * S), int(f_n.size * 1.45)), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(layer)
+    col = (acc if done else (235, 238, 236)) + (255,)
+    ld.text((40 * S, 0), num, font=f_n, fill=col)
+    ld.text((40 * S + f_n.getlength(num) + 6 * S, f_n.size * 0.50), "MP", font=f_u, fill=col)
+    pop = 1.0 + (0.10 * max(0.0, 1 - (t - 2.5) / 0.35) if done else 0.0)
+    if pop != 1.0:
+        layer = layer.resize((int(layer.width * pop), int(layer.height * pop)), Image.LANCZOS)
+    if done:
+        blend_glow(fr, glow_of(layer, 22 * S, 1.3), tx - 40 * S - (layer.width - (nw + uw + 80 * S)) / 2, ty, 0.55)
+    blend(fr, layer, tx - 40 * S - (layer.width - (nw + uw + 80 * S)) / 2, ty - (layer.height - f_n.size * 1.45) / 2, p_in)
+    # --- result pill
+    if t > 3.0:
+        a = ease_out((t - 3.0) / 0.35)
+        pf = font("title", lay.get("pill_size", 30) * S)
+        txt = "PERFECT 48 MP PHOTOS"
+        pw, ph = int(pf.getlength(txt) + 100 * S), int(64 * S)
+        pill = rrect((pw, ph), (0, 0, pw - 1, ph - 1), ph / 2, acc, 1.0)
+        ck = check_icon(30 * S, dark, 5 * S)
+        pill.alpha_composite(ck, (int(24 * S), int(ph / 2 - ck.height / 2)))
+        ImageDraw.Draw(pill).text((66 * S, ph / 2 - pf.size * 0.62), txt, font=pf, fill=dark + (255,))
+        blend(fr, pill, cx - pw / 2, ty + f_n.size * 1.12 + 14 * S + (1 - a) * 20 * S, a)
     return fr

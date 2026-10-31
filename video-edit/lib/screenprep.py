@@ -59,6 +59,23 @@ def _blur_rect(img, rect, soft=True):
 
 
 _masks = {}
+_island = {}
+
+
+def _paint_island(img, box):
+    """Repaint the black Dynamic Island pill (anti-aliased) – used where a blur rectangle reaches over it."""
+    x0, y0, x1, y1 = box
+    if box not in _island:
+        k = 4
+        m = np.zeros(((y1 - y0 + 8) * k, (x1 - x0 + 8) * k), np.uint8)
+        cv2.rectangle(m, (4 * k + (y1 - y0) // 2 * k, 4 * k), (4 * k + (x1 - x0) * k - (y1 - y0) // 2 * k, 4 * k + (y1 - y0) * k), 255, -1)
+        r = (y1 - y0) * k // 2
+        cv2.circle(m, (4 * k + r, 4 * k + r), r, 255, -1)
+        cv2.circle(m, (4 * k + (x1 - x0) * k - r, 4 * k + r), r, 255, -1)
+        _island[box] = cv2.resize(m, (x1 - x0 + 8, y1 - y0 + 8), interpolation=cv2.INTER_AREA).astype(np.float32)[..., None] / 255.0
+    a = _island[box]
+    roi = img[y0 - 4:y1 + 4, x0 - 4:x1 + 4]
+    img[y0 - 4:y1 + 4, x0 - 4:x1 + 4] = (roi * (1 - a)).astype(np.uint8)
 
 
 def _circle_mask(shape, cx, cy, r):
@@ -68,6 +85,52 @@ def _circle_mask(shape, cx, cy, r):
 
 
 _CAL = {}
+
+
+def calibrate_bubble_multi(sdr_path):
+    """Fit the AssistiveTouch bubble per radius and channel from several frames on different flat backgrounds
+    (R.BUBBLE_CAL['times']): obs = m * bg + b with m = 1 - alpha and b = alpha * colour (least squares over the frames)."""
+    import subprocess
+    cal = R.BUBBLE_CAL
+    cx, cy, _ = R.ASSIST
+    n = 300
+    x0, y0 = max(0, min(cx - 150, SW - n)), max(0, min(cy - 150, SH - n))
+
+    def grab(t):
+        raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", str(t), "-i", sdr_path, "-frames:v", "1",
+                              "-vf", f"crop={n}:{n}:{x0}:{y0}", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+                             capture_output=True, check=True).stdout
+        return np.frombuffer(raw, np.uint8).reshape(n, n, 3).astype(np.float32)
+
+    frames = [grab(t) for t in cal["times"]]
+    yy, xx = np.mgrid[0:n, 0:n]
+    cxm, cym = cal["centre_in_crop"]
+    r = np.hypot(xx - cxm, yy - cym)
+    r_in, r_out = cal.get("ring", (105, 135))
+    ring = (r > r_in) & (r < r_out)
+    bgs = np.array([np.median(f[ring], axis=0) for f in frames])                    # (F, 3)
+    nb = 140
+    m_prof, b_prof = np.ones((nb, 3), np.float32), np.zeros((nb, 3), np.float32)
+    for k in range(nb):
+        sel = (r >= k) & (r < k + 1)
+        if sel.sum() < 6:
+            continue
+        obs = np.array([np.median(f[sel], axis=0) for f in frames])                 # (F, 3)
+        for c in range(3):
+            A = np.stack([bgs[:, c], np.ones(len(frames))], axis=1)
+            sol, *_ = np.linalg.lstsq(A, obs[:, c], rcond=None)
+            m_prof[k, c], b_prof[k, c] = sol
+    m_prof = np.clip(m_prof, 0.25, 1.0)
+    for c in range(3):                                                                # light smoothing along r
+        m_prof[:, c] = np.convolve(np.pad(m_prof[:, c], 2, mode="edge"), np.ones(3) / 3, mode="same")[2:-2]
+        b_prof[:, c] = np.convolve(np.pad(b_prof[:, c], 2, mode="edge"), np.ones(3) / 3, mode="same")[2:-2]
+    rim = cal["rim"]
+    m_prof[rim:] = 1.0
+    b_prof[rim:] = 0.0
+    ar = np.arange(nb, dtype=np.float32)
+    oma = np.stack([np.interp(r, ar, m_prof[:, c]) for c in range(3)], axis=-1).astype(np.float32)
+    aC = np.stack([np.interp(r, ar, b_prof[:, c]) for c in range(3)], axis=-1).astype(np.float32)
+    _CAL.update(oma=oma, aC=aC, box=(x0, y0, n), centre=(cxm, cym))
 
 
 def calibrate_bubble(sdr_path, bg_light=None, bg_dark=None):
@@ -210,9 +273,14 @@ def erase_bubble(img, S):
 
 def prepare(img, S):
     """img: HxWx3 uint8 RGB (modified & returned); S = recording time of the frame in seconds."""
+    if getattr(R, "ASSIST", None) and not getattr(R, "BUBBLE", None):
+        _erase_bubble(img)                               # linear overlay model: undo it on the untouched pixels, before any blur
     for s0, s1, rect in R.BLUR_RECTS:
         if s0 <= S <= s1:
             _blur_rect(img, rect)
+    for s0, s1, (ix0, iy0, ix1, iy1) in getattr(R, "ISLAND_FIX", []):      # blurs must not smear the Dynamic Island
+        if s0 <= S <= s1:
+            _paint_island(img, (ix0, iy0, ix1, iy1))
     dot = getattr(R, "DOT", None)
     if dot:                                              # island dot -> pure black
         cv2.circle(img, (dot[0], dot[1]), dot[2], (0, 0, 0), -1)
@@ -230,6 +298,4 @@ def prepare(img, S):
         _remove_indicators(img, band)
     if getattr(R, "BUBBLE", None):
         erase_bubble(img, S)
-    elif getattr(R, "ASSIST", None):
-        _erase_bubble(img)
     return img
