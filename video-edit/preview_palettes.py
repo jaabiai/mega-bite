@@ -1,15 +1,25 @@
 """Render palette preview strips (face scene | screen-recording scene) for owner approval.
 
 usage: python preview_palettes.py <face_frame.png> <screen_frame.png> <out_dir>
+         [--face-words "Lock your Google search history"] [--phone-words "Require extra verification"] [--fx 0.54]
+         [--only amber,sunset] [--no-blur]
 """
-import sys, os
+import sys, os, argparse
 import numpy as np, cv2
 from PIL import Image
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
 import brand, phone, scene, caption, grade
 from brand import PALETTES, hex2rgb
 
-face_png, screen_png, out_dir = sys.argv[1:4]
+ap = argparse.ArgumentParser()
+ap.add_argument("face_png"); ap.add_argument("screen_png"); ap.add_argument("out_dir")
+ap.add_argument("--face-words", default="Lock your Google search history")
+ap.add_argument("--phone-words", default="Require extra verification")
+ap.add_argument("--fx", type=float, default=0.54, help="face centre (x) in the source frame")
+ap.add_argument("--only", default=None, help="comma separated palette names")
+ap.add_argument("--no-blur", action="store_true")
+A = ap.parse_args()
+face_png, screen_png, out_dir = A.face_png, A.screen_png, A.out_dir
 os.makedirs(out_dir, exist_ok=True)
 PW, PH = 1280, 720
 S = PH / 1080.0
@@ -24,7 +34,7 @@ def blur_box(arr, x0, y0, x1, y1, sigma=22):
 def face_panel(pal):
     im = cv2.cvtColor(cv2.imread(face_png), cv2.COLOR_BGR2RGB).astype(np.float32) / 255
     g = grade.grade(im, grain=0.008)
-    z, fx, fx_t = 1.22, 0.54, 0.65              # zoom, face centre in source, where we want it
+    z, fx, fx_t = 1.22, A.fx, 0.65              # zoom, face centre in source, where we want it
     x0 = fx - fx_t / z
     x0 = min(max(x0, 0.0), 1 - 1 / z)
     y0 = 0.02
@@ -37,14 +47,15 @@ def face_panel(pal):
     dark = np.array(hex2rgb(pal["bg0"]), np.float32) / 255
     g = g * (1 - a) + dark[None, None, :] * a
     img = Image.fromarray((np.clip(g, 0, 1) * 255).astype(np.uint8), "RGB").convert("RGBA")
-    caption.draw_caption(img, ["Lock", "your", "Google", "search", "history"], 3, pal, S=S, x=96, y=500, max_w=470, size=70)
+    words = A.face_words.split()
+    caption.draw_caption(img, words, min(3, len(words) - 1), pal, S=S, x=96, y=500, max_w=470, size=70)
     return img.convert("RGB")
 
 
 def phone_panel(pal):
     bg = scene.background(PW, PH, pal, glow_center=(0.74, 0.5)).convert("RGBA")
     scr = cv2.cvtColor(cv2.imread(screen_png), cv2.COLOR_BGR2RGB)
-    scr = blur_box(scr.copy(), 190, 1470, 775, 1555)
+    scr = scr if A.no_blur else blur_box(scr.copy(), 190, 1470, 775, 1555)
     hs = int(PH * 0.90)
     frame, smask, (sx, sy, sw, sh) = phone.build(hs)
     scr_r = cv2.resize(scr, (sw, sh), interpolation=cv2.INTER_AREA)
@@ -67,7 +78,8 @@ def phone_panel(pal):
     shl = np.zeros((PH, PW, 4), np.uint8); shl[..., 3] = sh_a
     bg.alpha_composite(Image.fromarray(shl, "RGBA"))
     bg.alpha_composite(grp, (px, py))
-    caption.draw_caption(bg, ["Require", "extra", "verification"], 1, pal, S=S, x=96, y=500, max_w=560, size=70)
+    words = A.phone_words.split()
+    caption.draw_caption(bg, words, min(1, len(words) - 1), pal, S=S, x=96, y=500, max_w=560, size=70)
     return bg.convert("RGB")
 
 
@@ -85,6 +97,8 @@ def swatches(pal, w, h=70):
 
 
 for name, pal in PALETTES.items():
+    if A.only and name not in A.only.split(","):
+        continue
     a, b = face_panel(pal), phone_panel(pal)
     sheet = Image.new("RGB", (PW * 2, PH + 70))
     sheet.paste(a, (0, 0)); sheet.paste(b, (PW, 0))

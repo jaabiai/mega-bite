@@ -45,4 +45,19 @@ PALETTES = {
         "accent": "#22E3A0", "accent2": "#FFD23F",
         "bg0": "#05110D", "bg1": "#0B2B20", "on_accent": "#04120D", "text": "#FFFFFF",
     },
+    "magenta": {
+        "label": "Hot Magenta on Ink Black",
+        "accent": "#FF3D9A", "accent2": "#FF9A3D",
+        "bg0": "#0B090B", "bg1": "#2A1325", "on_accent": "#14060F", "text": "#FFFFFF",
+    },
+    "crimson": {
+        "label": "Crimson Red on Graphite",
+        "accent": "#FF3347", "accent2": "#FF8F5A",
+        "bg0": "#0C0B0B", "bg1": "#2B1819", "on_accent": "#190508", "text": "#FFFFFF",
+    },
+    "orchid": {
+        "label": "Orchid Violet on Midnight Plum",
+        "accent": "#C65CFF", "accent2": "#FFB36B",
+        "bg0": "#0C0710", "bg1": "#26123A", "on_accent": "#14071F", "text": "#FFFFFF",
+    },
 }

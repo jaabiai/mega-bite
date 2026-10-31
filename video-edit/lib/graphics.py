@@ -37,6 +37,12 @@ def mark(size, pal, S=1.0):
     return img
 
 
+def tint(pal, k=0.5):
+    """Dark neutral from the palette: bg0 -> bg1 (k = 0..1), so dark pills / cards follow the colour theme."""
+    a, b = hex2rgb(pal["bg0"]), hex2rgb(pal["bg1"])
+    return tuple(int(round(a[i] + (b[i] - a[i]) * k)) for i in range(3))
+
+
 BUG_X, BUG_Y, BUG_H = 56, 40, 64          # pill position / logo height in 1080p space
 BUG_PADX, BUG_PADY = 12, 8
 
@@ -260,7 +266,7 @@ def render_search_lock(t, S, pal, bg_img, lay=None):
     g = rrect(bar.size, box, bh / 2, glow_col, 0.0 + (0.55 if locked else 0.18))
     _gb = glow_of(g, 22 * S, 1.0)
     bar.alpha_composite(_gb.crop((_gb.pad, _gb.pad, _gb.pad + bar.width, _gb.pad + bar.height)))
-    bar = Image.alpha_composite(bar, rrect(bar.size, box, bh / 2, (22, 28, 24), 0.82, outline=acc + (230 if locked else 150,), width=2.5 * S))
+    bar = Image.alpha_composite(bar, rrect(bar.size, box, bh / 2, tint(pal, 0.85), 0.82, outline=acc + (230 if locked else 150,), width=2.5 * S))
     d = ImageDraw.Draw(bar)
     mg = magnifier(54 * S, (220, 226, 222), 5.5 * S)
     bar.alpha_composite(mg, (int(60 * S + 34 * S), int(60 * S + bh / 2 - 27 * S)))
@@ -321,7 +327,7 @@ def draw_subscribe(fr, S, pal, t, x=96, y=860):
     box = (20 * S, 14 * S, w - 20 * S, h - 14 * S)
     sz = (w, h)
     if clicked:
-        pill = rrect(sz, box, (h - 28 * S) / 2, (16, 21, 18), 0.92, outline=acc + (255,), width=3 * S)
+        pill = rrect(sz, box, (h - 28 * S) / 2, tint(pal, 0.4), 0.92, outline=acc + (255,), width=3 * S)
     else:
         pill = rrect(sz, box, (h - 28 * S) / 2, acc, 1.0)
     d = ImageDraw.Draw(pill)
@@ -371,7 +377,7 @@ def draw_share(fr, S, pal, t, x=96, y=860):
     w, h = int(f.getlength("SHARE") + 180 * S), int(84 * S)
     box = (20 * S, 14 * S, w - 20 * S, h - 14 * S)
     hot = t >= 1.0
-    pill = rrect((w, h), box, (h - 28 * S) / 2, acc if hot else (16, 21, 18), 1.0 if hot else 0.92,
+    pill = rrect((w, h), box, (h - 28 * S) / 2, acc if hot else tint(pal, 0.4), 1.0 if hot else 0.92,
                  outline=acc + (255,), width=3 * S)
     d = ImageDraw.Draw(pill)
     d.text((100 * S, 20 * S), "SHARE", font=f, fill=(dark if hot else acc) + (255,))

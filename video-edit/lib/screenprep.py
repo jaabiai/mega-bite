@@ -153,26 +153,28 @@ def _remove_indicators(img, band, disc=28):
 _BG = {}
 
 
-def _bubble_geom(spec):
-    if "geom" not in _BG:
-        cx, cy = spec["centre"]
+def _bubble_geom(spec, centre):
+    key = ("geom", round(centre[0], 1), round(centre[1], 1))
+    if key not in _BG:
+        cx, cy = centre
         r, f = spec["radius"], spec.get("feather", 4)
         pad = r + f + 28
         x0, y0, x1, y1 = max(int(cx - pad), 0), max(int(cy - pad), 0), min(int(cx + pad), SW), min(int(cy + pad), SH)
         yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
         d = np.hypot(xx - cx, yy - cy)
-        _BG["geom"] = dict(box=(x0, y0, x1, y1), d=d, xx=xx, yy=yy, m=np.clip((r + f - d) / f, 0, 1)[..., None])
-    return _BG["geom"]
+        _BG[key] = dict(box=(x0, y0, x1, y1), d=d, xx=xx, yy=yy, m=np.clip((r + f - d) / f, 0, 1)[..., None])
+    return _BG[key]
 
 
 def erase_bubble(img, S):
     """Mode by recording time (spec['modes'] = [(s0, s1, mode)]): 'flat' wallpaper -> fill with the colour around it,
     'inpaint' -> generic fill (transitions), 'patch' -> redraw the known header / search-field edge of the Recents page."""
     spec = R.BUBBLE
-    mode = next((m for a, b, m in spec["modes"] if a <= S < b), None)
-    if mode is None:
+    hit = next((e for e in spec["modes"] if e[0] <= S < e[1]), None)       # (s0, s1, mode) or (s0, s1, mode, (cx, cy))
+    if hit is None:
         return
-    g = _bubble_geom(spec)
+    mode = hit[2]
+    g = _bubble_geom(spec, hit[3] if len(hit) > 3 else spec["centre"])
     x0, y0, x1, y1 = g["box"]
     roi = img[y0:y1, x0:x1]
     d, m = g["d"], g["m"]
