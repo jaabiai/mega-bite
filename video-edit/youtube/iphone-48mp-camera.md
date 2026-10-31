@@ -1,4 +1,4 @@
-# YouTube upload pack — "Shoot 48 MP photos on iPhone" (Settings > Camera > Formats, then the Camera app)
+# YouTube upload pack — "Shoot 48 MP photos on iPhone" (Settings → Camera → Formats, then the Camera app)
 
 Files: `MEGABYTE_iPhone_48MP_Camera_16x9.mp4` (main video, 2:35 with end card) · `MEGABYTE_iPhone_48MP_Camera_9x16.mp4` (Short, 2:32).
 The Short is under 3 minutes, so it qualifies as a YouTube Short.
@@ -13,15 +13,15 @@ The Short is under 3 minutes, so it qualifies as a YouTube Short.
 **Description**
 
 ```
-ഐഫോൺ ക്യാമറയിൽ പലരും ശ്രദ്ധിക്കാത്ത ഒരു സെറ്റിംഗ് — ഇത് ശരിയാക്കിയാൽ 48 MP ഫോട്ടോകൾ എടുക്കാം. Settings > Camera > Formats മുതൽ Camera app-ലെ Format വരെ ഓരോ ഘട്ടവും വീഡിയോയിൽ കാണാം.
+ഐഫോൺ ക്യാമറയിൽ പലരും ശ്രദ്ധിക്കാത്ത ഒരു സെറ്റിംഗ് — ഇത് ശരിയാക്കിയാൽ 48 MP ഫോട്ടോകൾ എടുക്കാം. Settings → Camera → Formats മുതൽ Camera app-ലെ Format വരെ ഓരോ ഘട്ടവും വീഡിയോയിൽ കാണാം.
 
 ▶ ചെയ്യേണ്ട വിധം
-1. Settings > Camera > Formats
+1. Settings → Camera → Formats
 2. Camera Capture: "High Efficiency" തിരഞ്ഞെടുക്കുക
-3. Photo Capture > Photo Mode (24 MP) തിരഞ്ഞെടുക്കുക
-4. ProRAW Format > "JPEG Lossless (Most Compatible)" തിരഞ്ഞെടുക്കുക
-5. Camera app തുറക്കുക > താഴെ വലതുവശത്തെ മെനു ബട്ടൺ > Aspect > 4:3
-6. വീണ്ടും മെനു > Format > Resolution: 48 MP തിരഞ്ഞെടുക്കുക
+3. Photo Capture → Photo Mode (24 MP) തിരഞ്ഞെടുക്കുക
+4. ProRAW Format → "JPEG Lossless (Most Compatible)" തിരഞ്ഞെടുക്കുക
+5. Camera app തുറക്കുക → താഴെ വലതുവശത്തെ മെനു ബട്ടൺ → Aspect → 4:3
+6. വീണ്ടും മെനു → Format → Resolution: 48 MP തിരഞ്ഞെടുക്കുക
 
 📷 വീഡിയോയിൽ: ഒന്നും മാറ്റാതെ എടുത്ത ഫോട്ടോ 8 MP, മാക്രോ 12 MP, ഈ സെറ്റിംഗ് ചെയ്യാതെ 24 MP — അതിന്റെ താരതമ്യവും കാണിക്കുന്നു.
 
@@ -29,7 +29,7 @@ The Short is under 3 minutes, so it qualifies as a YouTube Short.
 
 ⏱ Chapters
 0:00 ആമുഖം: ആരും പറയാത്ത ക്യാമറ സെറ്റിംഗ്
-0:24 Settings > Camera > Formats
+0:24 Settings → Camera → Formats
 0:48 ProRAW Format: JPEG Lossless
 0:58 Camera app: Aspect 4:3
 1:16 Format: 48 MP തിരഞ്ഞെടുക്കാം
@@ -69,7 +69,7 @@ iphone 48mp setting, iphone camera settings malayalam, iphone camera tips malaya
 
 **Description**
 ```
-Settings > Camera > Formats, പിന്നെ Camera app-ൽ Aspect 4:3, Format > 48 MP.
+Settings → Camera → Formats, പിന്നെ Camera app-ൽ Aspect 4:3, Format → 48 MP.
 iPhone 17 Pro Max-ൽ കാണിച്ചത്; മോഡൽ അനുസരിച്ച് ഓപ്ഷനുകൾ വ്യത്യാസപ്പെടാം.
 
 പൂർണ്ണ വീഡിയോ: [main video link]
