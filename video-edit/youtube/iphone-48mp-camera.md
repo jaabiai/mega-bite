@@ -15,7 +15,7 @@ The Short is under 3 minutes, so it qualifies as a YouTube Short.
 ```
 ഐഫോൺ ക്യാമറയിൽ പലരും ശ്രദ്ധിക്കാത്ത ഒരു സെറ്റിംഗ് — ഇത് ശരിയാക്കിയാൽ 48 MP ഫോട്ടോകൾ എടുക്കാം. ഓരോ ഘട്ടവും വീഡിയോയിൽ കാണാം.
 
-📝 വിശദമായ ഗൈഡ് (ബ്ലോഗ്): [ബ്ലോഗ് ലിങ്ക് ഇവിടെ ചേർക്കുക]
+📝 വിശദമായ ഗൈഡ് (ബ്ലോഗ്): https://raabso.blogspot.com/2026/10/48-mp.html
 
 ⏱ Chapters
 0:00 ആമുഖം
@@ -58,7 +58,7 @@ iphone 48mp setting, iphone camera settings malayalam, iphone camera tips malaya
 Settings → Camera → Formats, പിന്നെ Camera app-ൽ Aspect 4:3, Format → 48 MP.
 iPhone 17 Pro Max-ൽ കാണിച്ചത്; മോഡൽ അനുസരിച്ച് ഓപ്ഷനുകൾ വ്യത്യാസപ്പെടാം.
 
-പൂർണ്ണ വീഡിയോ: [main video link]
+പൂർണ്ണ വീഡിയോ: https://youtu.be/cbNEJZDbXgI
 
 #Shorts #iPhoneTips #iPhoneCamera #MalayalamTech
 ```
