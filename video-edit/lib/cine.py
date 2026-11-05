@@ -583,6 +583,15 @@ def cta_share(fr, t, x, y, dur=3.0, scale=1.0):
     return _icon_pill(fr, t, x, y, share_icon, "SHARE", 1.0, dur, scale)
 
 
+def _yt_icon(size, rgb):
+    """YouTube-style play badge (red, white triangle) for the 'full video' prompt; rgb is ignored on purpose."""
+    return play_icon(size, (230, 33, 23), (255, 255, 255))
+
+
+def cta_fullvideo(fr, t, x, y, dur=3.6, scale=1.0, label="FULL VIDEO ON YOUTUBE"):
+    return _icon_pill(fr, t, x, y, _yt_icon, label, 0.9, dur, scale)
+
+
 def cta_engage(fr, t, x, y, dur=4.6, scale=1.0, vertical=False, grid=False):
     """LIKE, COMMENT, SHARE popping one after another, then SUBSCRIBE (one row, a column, or a 2x2 grid)."""
     if t < 0 or t > dur:
@@ -669,15 +678,14 @@ def render_end(t, W, H, bg, subtitle="THANKS FOR WATCHING"):
     return fr
 
 
-def render_reel_outro(t, W, H, bg):
+def render_reel_outro(t, W, H, bg, kicker="FOLLOW FOR MORE"):
     fr = bg.copy()
     a = ease_out(t / 0.5)
     lg = logo(300)
     blend(fr, lg, W / 2 - 150, 560 + (1 - a) * 24, a)
     m, base = text_mask(NAME, font("display", 70), tracking=16)
     blend(fr, fill_mask(m, CHROME), W / 2 - m.width / 2, 930 - base, ease_out((t - 0.2) / 0.5))
-    k = "FOLLOW FOR MORE"
-    mk, bk = text_mask(k, font("bold", 26), tracking=6)
+    mk, bk = text_mask(kicker, font("bold", 26), tracking=6)
     blend(fr, fill_mask(mk, rgb=PAL["gold"]), W / 2 - mk.width / 2, 1010 - bk, ease_out((t - 0.35) / 0.5))
     cta_subscribe(fr, (t - 0.5) + 1.25 if t > 0.5 else -1, W / 2 - 250, 1080, dur=1e9)
     return fr

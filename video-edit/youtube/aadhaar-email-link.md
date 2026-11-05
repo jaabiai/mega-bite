@@ -1,7 +1,7 @@
 # YouTube upload pack — V Create: "Link your email ID to Aadhaar"
 
-Files: `VCreate_Aadhaar_Email_16x9.mp4` (main video, 3:03 with end card) · `VCreate_Aadhaar_Email_9x16.mp4` (Short / Reel, 3:01).
-YouTube treats vertical videos up to 3 minutes as Shorts; this one runs about a second over, so trim the reel's outro if it must be a Short.
+Files: `VCreate_Aadhaar_Email_16x9.mp4` (main video, 3:03 with end card) · `VCreate_Aadhaar_Email_9x16.mp4` (Short / Reel, 1:34:
+a shorter cut of the same narration with "Full video on YouTube" prompts and outro).
 
 ## Main video
 

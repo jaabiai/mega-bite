@@ -66,7 +66,29 @@ def _cta_sfx():
     return out
 
 
-EXTRA_SFX = [(0.45, "1485", -14), (38.32, "2596", -10), (19.40, "1485", -13)] + _cta_sfx()
+BASE_SFX = [(0.45, "1485", -14), (38.32, "2596", -10), (19.40, "1485", -13)]
+EXTRA_SFX = BASE_SFX + _cta_sfx()
+
+# ---- reel: a shorter cut (narration-time ranges) with its own prompts (output time) -------------------
+REEL_CUTS = [(0.00, 6.95), (10.10, 11.95), (15.17, 29.12), (42.52, 51.90), (55.34, 59.80), (63.07, 66.70),
+             (76.30, 79.51), (91.22, 94.65), (96.07, 102.25), (105.41, 112.55), (117.02, 121.31), (128.71, 133.56),
+             (141.33, 155.41), (160.26, 164.95)]
+REEL_CTAS = [(21.6, "fullvideo"), (38.5, "like"), (55.0, "fullvideo"), (76.0, "engage")]
+
+
+def _reel_cta_sfx():
+    out = []
+    for t0, what in REEL_CTAS:
+        if what == "fullvideo":
+            out += [(t0 + 0.9, "2350", -14)]
+        elif what == "like":
+            out += [(t0 + 0.8, "2350", -14)]
+        elif what == "engage":
+            out += [(t0 + 0.8, "2350", -15), (t0 + 2.25, "2354", -11)]
+    return out
+
+
+REEL_EXTRA_SFX = _reel_cta_sfx()
 TAP_SFX = "1109"
 
 # ---- phone screen source ----------------------------------------------------------------------------

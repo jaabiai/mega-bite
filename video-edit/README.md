@@ -60,5 +60,7 @@ letterbox, centred subtitles with a gold active word (Plus Jakarta Sans), chrome
 whole-phone camera moves with spotlight highlights and callout labels, light-leak / whip / dip transitions, and
 subscribe / like / comment / share prompts (`TL.CTAS`). Graphics live in `lib/cine.py`; illustrated phone screens in
 `lib/appmock.py` + the project's `screens.py`. `tools/face_track.py` (OpenCV YuNet) writes `face_track.json`, which the
-face shots follow. Fonts: Cinzel and Plus Jakarta Sans (SIL OFL). Music "Drawing the Sky" (Mixkit 678); SFX 1491, 1492,
+face shots follow. In 9:16 the presenter is a full-bleed vertical crop lowered under a blurred ceiling
+extension (text never sits on the face or body), and `TL.REEL_CUTS` / `TL.REEL_CTAS` make the reel a shorter edit
+(`mix_audio.py --cuts` builds its audio). Fonts: Cinzel and Plus Jakarta Sans (SIL OFL). Music "Drawing the Sky" (Mixkit 678); SFX 1491, 1492,
 2596, 1485, 2350, 2354, 933, 1109; clips 14669, 47735 (wide) and 41174, 18307 (reel).

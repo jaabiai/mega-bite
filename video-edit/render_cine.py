@@ -52,20 +52,32 @@ REEL = args.format == "reel"
 W, H = (1080, 1920) if REEL else (1920, 1080)
 FPS = TL.FPS
 OUTRO = 3.4
-TOTAL = TL.NARR_END + OUTRO if REEL else TL.TOTAL
+CUTS = None
+if REEL and getattr(TL, "REEL_CUTS", None):                     # reel = a shorter edit: output time u -> narration time T
+    PRE, POST = 0.06, 0.10
+    CUTS, u = [], 0.0
+    for a, b in TL.REEL_CUTS:
+        a, b = max(a - PRE, 0.0), min(b + POST, TL.NARR_END)
+        CUTS.append((u, a, b))
+        u += b - a
+    REEL_NARR = u
+TOTAL = (REEL_NARR + OUTRO if CUTS else TL.NARR_END + OUTRO) if REEL else TL.TOTAL
 END_T = args.end if args.end is not None else TOTAL
 LB = 0 if REEL else TL.LETTERBOX
 P = C.PAL
 
 # ---- layout ---------------------------------------------------------------------------------------------------
 if REEL:
-    L = dict(bug=(60, 150, 64), cap=(540, 1200, 62, 960), cap_phone=(540, 395, 58, 960), cta=(70, 1300),
-             cta_phone=(70, 490), title=(540, 270, 64, "center"), step=(1020, 232), sting=(540, 784, 330),
-             band_y=480, chip=(540, 476))
+    # captions, prompts and titles live in the ceiling area above the presenter's head; nothing sits on the face or body
+    REEL_DROP = 500
+    L = dict(bug=(60, 150, 64), cap=(540, 345, 60, 960), cap_title=(540, 458), cap_phone=(540, 390, 56, 960),
+             cta=(60, 478), cta_phone=(70, 470), title=(540, 268, 48, "center"), step=(1020, 232), sting=(540, 900, 330),
+             chip=(540, 1735))
 else:
+    # captions sit in the bottom letterbox bar; prompts sit top-left over the window, clear of the face and body
     L = dict(bug=(40, 26, 66), cap=(960, H - LB / 2 - 2, 50, 1720), cap_phone=(960, H - LB / 2 - 2, 50, 1720),
-             cta=(110, H - LB - 118), cta_phone=(110, H - LB - 118), title=(100, 370, 62, "left"), step=(1880, 34),
-             sting=(960, 500, 330), chip=(470, LB + 26))
+             cta=(100, LB + 30), cta_phone=(100, LB + 30), title=(96, 340, 54, "left"), step=(1880, 34),
+             sting=(960, 500, 330), chip=(300, H - LB - 46))
 
 
 # ---- readers --------------------------------------------------------------------------------------------------
@@ -175,20 +187,25 @@ def scene_face(T, sc):
     rng = np.random.default_rng(int(T * 30))
     fx, fy = face_at(T)
     if REEL:
-        bw, bh = W, int(W * 9 / 16)
-        card = cv2.resize(src, (bw, bh), interpolation=cv2.INTER_AREA).astype(np.float32) / 255.0
-        card = grade.grade(card, grain=0.0, rng=rng, face=(fx, fy - 0.02, 0.18, 0.30), **GR)
-        small = cv2.resize(card, (W // 10, int(W // 10 * bh / bw)), interpolation=cv2.INTER_AREA)
-        sc_ = max(W / small.shape[1], H / small.shape[0])
-        big = cv2.resize(small, (int(small.shape[1] * sc_) + 2, int(small.shape[0] * sc_) + 2), interpolation=cv2.INTER_CUBIC)
-        oy, ox = (big.shape[0] - H) // 2, (big.shape[1] - W) // 2
-        fr = cv2.GaussianBlur(big[oy:oy + H, ox:ox + W], (0, 0), 6) * 0.32
-        fr = np.ascontiguousarray(fr, dtype=np.float32)
-        y0 = L["band_y"]
-        fr[y0:y0 + bh] = card
-        line = np.array(P["steel"], np.float32) / 255
-        fr[y0 - 2:y0] = line * 0.55
-        fr[y0 + bh:y0 + bh + 2] = line * 0.55
+        # full-bleed 9:16 crop of the 4K frame that follows the face, lowered by REEL_DROP px; the space above the head is a
+        # blurred, darkened continuation of the ceiling, so captions and prompts never sit on the face or the body
+        ch = FH
+        cw = ch * W / H
+        x0 = min(max(fx * FW - 0.5 * cw, 0.0), FW - cw)
+        s_ = H / ch
+        M = np.array([[s_, 0, -x0 * s_], [0, s_, REEL_DROP]], np.float32)
+        fr = cv2.warpAffine(src, M, (W, H), flags=cv2.INTER_AREA).astype(np.float32) / 255.0
+        fcx, fcy = (fx * FW - x0) * s_ / W, (fy * FH * s_ + REEL_DROP) / H
+        fr = grade.grade(fr, grain=0.0, rng=rng, face=(fcx, fcy - 0.03, 0.40, 0.20), **GR)
+        D = REEL_DROP
+        strip = fr[D:D + 240]
+        ext = cv2.resize(strip[::-1], (W // 8, max(D // 8, 1)), interpolation=cv2.INTER_AREA)
+        ext = cv2.GaussianBlur(cv2.resize(ext, (W, D), interpolation=cv2.INTER_CUBIC), (0, 0), 18)
+        fr[:D] = ext * 0.62
+        k = np.clip((np.arange(D, D + 140, dtype=np.float32) - D) / 140, 0, 1)[:, None, None]
+        soft = cv2.GaussianBlur(fr[D - 40:D + 180], (0, 0), 14)[40:180]
+        fr[D:D + 140] = soft * (1 - k) + fr[D:D + 140] * k
+        vgrad(fr, 60, D + 160, 0.45, from_top=True)
         return C.film_grain(fr, 0.014, rng)
     z0, z1 = sc["zoom"]
     prog = clamp01((T - sc["t0"]) / (sc["t1"] - sc["t0"]))
@@ -301,6 +318,8 @@ def draw_captions(fr, T, kind):
     cx, cy, size, mw = L["cap_phone"] if kind == "phone" else L["cap"]
     if REEL and kind == "graphic":
         cy = 1430
+    elif REEL and kind != "phone" and T < TL.TITLE_T[1] + 0.2:
+        cx, cy = L["cap_title"]
     C.draw_caption(fr, words, act, age, cx, cy, size, mw, alpha=fin * fout, rise=(1 - ease_out(fin)) * 10,
                    lines_max=2 if REEL else 1)
 
@@ -309,13 +328,14 @@ def spans(v):
     return v if isinstance(v[0], (tuple, list)) else [v]
 
 
-def draw_ctas(fr, T, kind):
+def draw_ctas(fr, T, kind, u=None):
     x, y = L["cta_phone"] if kind == "phone" else L["cta"]
-    s = 1.0
-    for cta in TL.CTAS:
+    s = 0.8 if REEL else 1.0
+    ctas, now = (TL.REEL_CTAS, u) if (CUTS and u is not None) else (TL.CTAS, T)
+    for cta in ctas:
         t0, what = cta[0], cta[1]
         dur = cta[2] if len(cta) > 2 else None
-        t = T - t0
+        t = now - t0
         if what == "subscribe":
             C.cta_subscribe(fr, t, x, y, scale=s)
         elif what == "like":
@@ -327,9 +347,11 @@ def draw_ctas(fr, T, kind):
         elif what == "engage":
             kw = {"dur": dur} if dur else {}
             if REEL:
-                C.cta_engage(fr, t, x, y, grid=True, scale=0.86, **kw)
+                C.cta_engage(fr, t, x, y, scale=0.66, **kw)
             else:
-                C.cta_engage(fr, t, x, y - 92, grid=True, scale=0.95, **kw)
+                C.cta_engage(fr, t, x, y, grid=True, scale=0.95, **kw)
+        elif what == "fullvideo":
+            C.cta_fullvideo(fr, t, x, y, scale=s)
 
 
 def draw_phone_marks(fr, T, geo):
@@ -355,7 +377,7 @@ def draw_phone_marks(fr, T, geo):
             C.draw_tap(fr, x, y + geo.get("sway", 0), T - tt)
 
 
-def draw_overlays(fr, T, sc, geo):
+def draw_overlays(fr, T, sc, geo, u=None):
     kind = sc["kind"]
     if kind in ("end", "outro"):
         return
@@ -390,29 +412,31 @@ def draw_overlays(fr, T, sc, geo):
         if t0 <= T < t1:
             ka = ease_out((T - t0) / 0.4) * (1 - ease_io((T - (t1 - 0.4)) / 0.4))
             if REEL:
-                C.draw_kicker(fr, kick, 70, 330, ka, size=24)
-                m, base = C.text_mask(title, C.font("display", 54), tracking=4)
+                C.draw_kicker(fr, kick, 70, 470, ka, size=22)
+                m, base = C.text_mask(title, C.font("display", 44), tracking=4)
                 from gfx import blend as _b
-                _b(fr, C.fill_mask(m, C.CHROME), 64, 370 - base + 40, ka)
+                _b(fr, C.fill_mask(m, C.CHROME), 64, 500 - base + 36, ka)
             else:
                 C.draw_kicker(fr, kick, 112, 700, ka, size=18)
                 m, base = C.text_mask(title, C.font("display", 48), tracking=4)
                 from gfx import blend as _b
                 _b(fr, C.fill_mask(m, C.CHROME), 104, 745 - base + 30, ka)
-    draw_ctas(fr, T, kind)
+    draw_ctas(fr, T, kind, u)
     sx, sy, ss = L["sting"]
     C.draw_sting(fr, T - s0, sx, sy, size=ss, bug=(bx, by, bs))
     draw_captions(fr, T, kind)
 
 
 # ---- frame ----------------------------------------------------------------------------------------------------
-def render_frame(T):
+def render_frame(T, u=None):
+    """T = narration time. u = output time of the reel edit (CUTS), None for the full timeline."""
     sc = scene_at(T)
     kind = sc["kind"]
     geo = None
-    if REEL and T >= TL.NARR_END:
+    outro_t = (u - REEL_NARR) if (CUTS and u is not None and u >= REEL_NARR) else (T - TL.NARR_END if REEL and T >= TL.NARR_END else None)
+    if REEL and outro_t is not None:
         kind = "outro"
-        fr = C.render_reel_outro(T - TL.NARR_END, W, H, BG_END)
+        fr = C.render_reel_outro(outro_t, W, H, BG_END, kicker="FULL VIDEO ON YOUTUBE" if CUTS else "FOLLOW FOR MORE")
     elif kind == "face":
         fr = scene_face(T, sc)
     elif kind == "broll":
@@ -425,18 +449,38 @@ def render_frame(T):
     else:
         fr = C.render_end(T - sc["t0"], W, H, BG_END)
     fr = np.ascontiguousarray(fr, dtype=np.float32)
-    for (tt, tk) in TL.TRANSITIONS:
-        p = (T - tt) / 0.32
-        if -1 < p < 1:
-            if tk == "flash":
-                fr = C.flash(fr, p)
-            elif tk == "whip":
-                fr = C.whip(fr, p, 1)
-            elif tk == "dip":
-                fr = C.dip(fr, p)
+    if kind != "outro":
+        for (tt, tk) in TL.TRANSITIONS:
+            p = (T - tt) / 0.32
+            if -1 < p < 1:
+                if tk == "flash":
+                    fr = C.flash(fr, p)
+                elif tk == "whip":
+                    fr = C.whip(fr, p, 1)
+                elif tk == "dip":
+                    fr = C.dip(fr, p)
+    if CUTS and u is not None:                                   # the reel's own joins: alternate whip / light leak
+        for k, (us, a, b) in enumerate(CUTS[1:] + [(REEL_NARR, 0, 0)]):
+            p = (u - us) / 0.30
+            if -1 < p < 1:
+                fr = C.whip(fr, p, 1) if k % 2 == 0 else C.flash(fr, p)
     fr = np.ascontiguousarray(np.clip(fr, 0, 1), dtype=np.float32)
-    draw_overlays(fr, T, dict(sc, kind=kind), geo)            # UI stays crisp: drawn after the transition effects
+    draw_overlays(fr, T, dict(sc, kind=kind), geo, u)          # UI stays crisp: drawn after the transition effects
     return np.clip(fr, 0, 1)
+
+
+def u_to_T(u):
+    """Reel output time -> narration time (the outro maps past the narration end)."""
+    for us, a, b in CUTS:
+        if u < us + (b - a):
+            return a + (u - us)
+    return TL.NARR_END + (u - REEL_NARR)
+
+
+def frame_at(t_out):
+    if CUTS:
+        return render_frame(u_to_T(t_out), t_out)
+    return render_frame(t_out)
 
 
 def main():
@@ -444,7 +488,7 @@ def main():
         os.makedirs(args.out_dir, exist_ok=True)
         for t in [float(x) for x in args.frames.split(",")]:
             t0 = time.time()
-            fr = render_frame(t)
+            fr = frame_at(t)
             cv2.imwrite(os.path.join(args.out_dir, f"{'r' if REEL else 'w'}_{t:07.3f}.png"), cv2.cvtColor((fr * 255).astype(np.uint8), cv2.COLOR_RGB2BGR))
             print(f"T={t:7.3f}  {time.time() - t0:5.2f}s", flush=True)
         return
@@ -456,7 +500,7 @@ def main():
     t_start = time.time()
     for n in range(n0, n1):
         T = n / FPS
-        enc.stdin.write((render_frame(T) * 255 + 0.5).astype(np.uint8).tobytes())
+        enc.stdin.write((frame_at(T) * 255 + 0.5).astype(np.uint8).tobytes())
         if (n - n0) % 60 == 0:
             el = time.time() - t_start
             done = n - n0 + 1

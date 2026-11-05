@@ -27,9 +27,29 @@ ap.add_argument("--sfx-dir", required=True)
 ap.add_argument("--out", required=True)
 ap.add_argument("--music-lufs", type=float, default=-27.0, help="loudness of the music bed on its own")
 ap.add_argument("--total", type=float, default=None, help="output length in seconds (default: timeline total incl. end card)")
+ap.add_argument("--cuts", action="store_true", help="mix the reel edit: TL.REEL_CUTS (voice cut, events remapped, REEL_EXTRA_SFX)")
 args = ap.parse_args()
 SR = 48000
 TOTAL = args.total if args.total else TL.TOTAL
+NARR_END = TL.NARR_END
+CUTS = None
+if args.cuts:                                         # same padding as render_cine.py
+    CUTS, u = [], 0.0
+    for a, b in TL.REEL_CUTS:
+        a, b = max(a - 0.06, 0.0), min(b + 0.10, TL.NARR_END)
+        CUTS.append((u, a, b))
+        u += b - a
+    NARR_END = u
+
+
+def remap(t):
+    """Narration time -> reel output time (None when the moment was cut)."""
+    if CUTS is None:
+        return t
+    for us, a, b in CUTS:
+        if a <= t < b:
+            return us + (t - a)
+    return None
 
 
 def decode(path, af=None, ch=2):
@@ -46,7 +66,18 @@ def lufs(x):
 N = int(round(TOTAL * SR))
 voice = decode(args.voice)
 mix_v = np.zeros((N, 2), np.float32)
-mix_v[: min(N, len(voice))] = voice[:N]
+if CUTS is None:
+    mix_v[: min(N, len(voice))] = voice[:N]
+else:
+    fl = int(0.012 * SR)
+    ramp = np.linspace(0, 1, fl, dtype=np.float32)[:, None]
+    for us, a, b in CUTS:
+        seg = voice[int(a * SR):int(b * SR)].copy()
+        seg[:fl] *= ramp
+        seg[-fl:] *= ramp[::-1]
+        i0 = int(round(us * SR))
+        i1 = min(N, i0 + len(seg))
+        mix_v[i0:i1] += seg[: i1 - i0]
 
 # ---- music bed ---------------------------------------------------------------------------------------
 music = decode(args.music, "highpass=f=110,lowpass=f=14000,equalizer=f=1800:t=q:w=0.8:g=-3.5,equalizer=f=3500:t=q:w=1.0:g=-1.5")
@@ -80,7 +111,7 @@ for i in range(1, len(sp_h)):
     y[i] = c * y[i - 1] + (1 - c) * sp_h[i]
 duck_db = np.interp(np.arange(N), np.arange(len(y)) * hop, -4.5 * y)    # up to -4.5 dB while talking
 t = np.arange(N) / SR
-swell = np.interp(t, [TL.NARR_END - 1.2, TL.NARR_END + 0.6], [0.0, 8.0])   # music comes up for the end card
+swell = np.interp(t, [NARR_END - 1.2, NARR_END + 0.6], [0.0, 8.0])   # music comes up for the end card
 fade_in = np.clip(t / 1.4, 0, 1) ** 2
 fade_out = np.clip((TOTAL - t) / 3.0, 0, 1) ** 1.5
 gain = 10 ** ((duck_db + swell) / 20) * fade_in * fade_out
@@ -108,7 +139,14 @@ for (tt, u, v) in TL.TAPS:
     events.append((tt, getattr(TL, "TAP_SFX", "1109"), -13))
 for (t0, t1, n, label) in TL.STEPS[1:]:
     events.append((t0, "3005", -17))
-events += TL.EXTRA_SFX
+if CUTS is None:
+    events += TL.EXTRA_SFX
+else:
+    events = [(remap(tt), n, g) for tt, n, g in events + list(getattr(TL, "BASE_SFX", []))]
+    events = [e for e in events if e[0] is not None]
+    events += list(getattr(TL, "REEL_EXTRA_SFX", []))
+    for k, (us, a, b) in enumerate(CUTS[1:] + [(NARR_END, 0, 0)]):       # a whoosh on each reel join
+        events.append((us - 0.35, "1492" if k % 2 == 0 else "1491", -12))
 sfx_bus = np.zeros((N, 2), np.float32)
 for tt, name, gdb in events:
     x = sfx(name) * 10 ** (gdb / 20)
