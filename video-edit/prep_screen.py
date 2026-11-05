@@ -1,6 +1,7 @@
 """Write the cleaned (blurred / de-cluttered) screen recording for a slice of recording time.
 
-usage: python prep_screen.py <project> <sdr60.mp4> <start_s> <end_s> <out.mp4>
+usage: python prep_screen.py <project> <sdr60.mp4> <start_s> <end_s> <out.mp4> [time_offset_s]
+(time_offset_s: recording time of the input file's first frame, when the input is an excerpt)
 """
 import sys, os, subprocess
 import numpy as np
@@ -10,6 +11,7 @@ sys.path.insert(0, os.path.join(HERE, "projects", sys.argv[1]))
 import screenprep, screen_rules
 
 project, src, a, b, out = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
+off = float(sys.argv[6]) if len(sys.argv) > 6 else 0.0
 screenprep.configure(screen_rules)
 if getattr(screen_rules, "ASSIST", None) and not getattr(screen_rules, "BUBBLE", None):
     if "times" in screen_rules.BUBBLE_CAL:
@@ -30,7 +32,7 @@ while True:
     if len(buf) < size:
         break
     img = np.frombuffer(buf, np.uint8).reshape(H, W, 3).copy()
-    enc.stdin.write(screenprep.prepare(img, a + i / FPS).tobytes())
+    enc.stdin.write(screenprep.prepare(img, off + a + i / FPS).tobytes())
     i += 1
 enc.stdin.close(); enc.wait(); dec.wait()
 print(out, i, "frames")

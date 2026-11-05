@@ -9,6 +9,7 @@ tool takes `--project <name>` (`prep_screen.py` / `render*.py` / `mix_audio.py`)
 | `lock-google-history` | Lock your Google search history (16:9 + reel) |
 | `whatsapp-face-id` | Hide WhatsApp calls from the iPhone call log with "Require Face ID" (16:9 + reel) |
 | `iphone-48mp-camera` | Shoot 48 MP photos on iPhone: Settings > Camera > Formats, Camera app Aspect / Format (16:9 + reel, Crimson Red palette) |
+| `aadhaar-email-link` | V Create channel: link your email ID to Aadhaar. Cinematic style (`render_cine.py`), illustrated app screens because the app blocks screen recording |
 
 A project folder holds `timeline.py` (scenes, screen re-timing, camera, taps, highlights, steps, CTAs, sound effects, grade
 overrides), `captions_data.py` (English caption chunks) and `screen_rules.py` (what to blur / remove in the screen recording).
@@ -51,3 +52,13 @@ python render.py --face main.mp4 --screen screen_clean60.mp4 --broll-dir broll/ 
 ## Licences
 Music / SFX / stock clips: Mixkit (Mixkit licence — free for commercial use, no attribution required).
 Music "Lo-Fi 05" by Lily J; clips 39782, 25451, 144 (Google video), 41165, 4805, 4915 (wide) and 41173, 49939, 39833 (reel) (WhatsApp video); SFX 1492, 1489, 1109, 3005, 3124, 2856, 2852, 2354, 933.
+
+## Cinematic style (V Create)
+
+`render_cine.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "cine"`: a 2.29:1
+letterbox, centred subtitles with a gold active word (Plus Jakarta Sans), chrome / gold Cinzel titles, a logo sting,
+whole-phone camera moves with spotlight highlights and callout labels, light-leak / whip / dip transitions, and
+subscribe / like / comment / share prompts (`TL.CTAS`). Graphics live in `lib/cine.py`; illustrated phone screens in
+`lib/appmock.py` + the project's `screens.py`. `tools/face_track.py` (OpenCV YuNet) writes `face_track.json`, which the
+face shots follow. Fonts: Cinzel and Plus Jakarta Sans (SIL OFL). Music "Drawing the Sky" (Mixkit 678); SFX 1491, 1492,
+2596, 1485, 2350, 2354, 933, 1109; clips 14669, 47735 (wide) and 41174, 18307 (reel).

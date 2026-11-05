@@ -99,13 +99,13 @@ def sfx(name):
 
 
 events = []          # (time, name, gain_dB)
+TR_SFX = getattr(TL, "TRANSITION_SFX", {"wipe": ("1492", -0.42, -9)})
 for (tt, kind) in TL.TRANSITIONS:
-    if kind == "wipe":
-        events.append((tt - 0.42, "1492", -9))
-    else:
-        events.append((tt - 0.22, "1489", -13))
+    spec = TR_SFX.get(kind, ("1489", -0.22, -13))
+    if spec:
+        events.append((tt + spec[1], spec[0], spec[2]))
 for (tt, u, v) in TL.TAPS:
-    events.append((tt, "1109", -13))
+    events.append((tt, getattr(TL, "TAP_SFX", "1109"), -13))
 for (t0, t1, n, label) in TL.STEPS[1:]:
     events.append((t0, "3005", -17))
 events += TL.EXTRA_SFX
