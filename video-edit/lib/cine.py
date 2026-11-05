@@ -365,7 +365,7 @@ def draw_frame_box(fr, rect, t, a=1.0, radius=24, width=3.0):
     blend(fr, ring, cx - W_ / 2, cy - H_ / 2, a)
 
 
-def draw_callout(fr, rect, text, t, a=1.0, side="auto", size=26, min_x=40, max_x=None):
+def draw_callout(fr, rect, text, t, a=1.0, side="auto", size=26, min_x=40, max_x=None, left_edge=None):
     """Label pill beside a highlighted rect, joined by a thin gold leader line ending in a dot."""
     if a <= 0 or not text:
         return
@@ -383,6 +383,8 @@ def draw_callout(fr, rect, text, t, a=1.0, side="auto", size=26, min_x=40, max_x
         px, ex = x0 - gap - pw, x0
     else:
         px, ex = x1 + gap, x1
+    if side == "left" and left_edge is not None:            # keep the pill off the phone body when there is room
+        px = min(px, max(left_edge - pw, min_x))
     px = min(max(px, min_x), max_x - pw)
     k = ease_out(t / 0.45)
     slide = (1 - k) * (24 if side == "left" else -24)

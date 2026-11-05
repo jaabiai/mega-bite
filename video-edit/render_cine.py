@@ -347,7 +347,8 @@ def draw_phone_marks(fr, T, geo):
             C.spotlight(fr, r, a, radius=22)
             C.draw_frame_box(fr, r, T - t0, a)
             if label:
-                C.draw_callout(fr, r, label, T - t0, a, size=24 if not REEL else 30, min_x=40 if REEL else 60)
+                C.draw_callout(fr, r, label, T - t0, a, size=24 if not REEL else 30, min_x=40 if REEL else 60,
+                               left_edge=None if REEL else geo["X0"] - 60)
     for (tt, u, v) in TL.TAPS:
         if tt - 0.3 <= T <= tt + 0.95:
             x, y = ps.to_out(geo, u, v)
