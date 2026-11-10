@@ -339,13 +339,16 @@ class Title3D:
 
     def draw(self, fr, t):
         W, H = self.W, self.H
-        for (t0, t1, blk, direction, cyf) in self.beats:
-            if not (t0 - 0.05 <= t < t1 + 0.4):
+        for bi, (t0, t1, blk, direction, cyf) in enumerate(self.beats):
+            last = bi == len(self.beats) - 1
+            # one beat on screen at a time: a beat swings out over its last 0.22 s, before the next one swings in;
+            # the last beat is closed by the cut that follows it (single headers keep their own exit)
+            if not (t0 - 0.05 <= t < t1 + 0.02):
                 continue
             tt = t - t0
             dur = t1 - t0
             k_in = ease_out(tt / 0.55)
-            k_out = ease_io((tt - dur) / 0.36)
+            k_out = 0.0 if (last and len(self.beats) > 1) else ease_io((tt - (dur - 0.22)) / 0.22)
             hold = clamp01(tt / max(dur, 0.01))
             yaw = direction * (lerp(-62, -11, k_in) + 19 * hold) + direction * 64 * k_out
             pitch = lerp(16, 5, k_in) - 3 * hold
