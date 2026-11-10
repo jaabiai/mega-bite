@@ -111,7 +111,7 @@ for i in range(1, len(sp_h)):
     y[i] = c * y[i - 1] + (1 - c) * sp_h[i]
 duck_db = np.interp(np.arange(N), np.arange(len(y)) * hop, -4.5 * y)    # up to -4.5 dB while talking
 t = np.arange(N) / SR
-swell = np.interp(t, [NARR_END - 1.2, NARR_END + 0.6], [0.0, 8.0])   # music comes up for the end card
+swell = np.interp(t, [NARR_END - 1.2, NARR_END + 0.6], [0.0, getattr(TL, "END_SWELL", 8.0)])   # music comes up for the end card
 fade_in = np.clip(t / 1.4, 0, 1) ** 2
 fade_out = np.clip((TOTAL - t) / 3.0, 0, 1) ** 1.5
 gain = 10 ** ((duck_db + swell) / 20) * fade_in * fade_out
@@ -145,8 +145,9 @@ else:
     events = [(remap(tt), n, g) for tt, n, g in events + list(getattr(TL, "BASE_SFX", []))]
     events = [e for e in events if e[0] is not None]
     events += list(getattr(TL, "REEL_EXTRA_SFX", []))
-    for k, (us, a, b) in enumerate(CUTS[1:] + [(NARR_END, 0, 0)]):       # a whoosh on each reel join
-        events.append((us - 0.35, "1492" if k % 2 == 0 else "1491", -12))
+    if getattr(TL, "REEL_JOIN_SFX", True):
+        for k, (us, a, b) in enumerate(CUTS[1:] + [(NARR_END, 0, 0)]):   # a whoosh on each reel join
+            events.append((us - 0.35, "1492" if k % 2 == 0 else "1491", -12))
 sfx_bus = np.zeros((N, 2), np.float32)
 for tt, name, gdb in events:
     x = sfx(name) * 10 ** (gdb / 20)

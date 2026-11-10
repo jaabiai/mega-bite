@@ -237,6 +237,10 @@ def erase_bubble(img, S):
     if hit is None:
         return
     mode = hit[2]
+    if mode == "unmix":                                  # translucent overlay model (calibrate_bubble_profile)
+        cx, cy = hit[3] if len(hit) > 3 else spec["centre"]
+        remove_bubble(img, cx, cy)
+        return
     g = _bubble_geom(spec, hit[3] if len(hit) > 3 else spec["centre"])
     x0, y0, x1, y1 = g["box"]
     roi = img[y0:y1, x0:x1]
@@ -299,3 +303,116 @@ def prepare(img, S):
     if getattr(R, "BUBBLE", None):
         erase_bubble(img, S)
     return img
+
+
+# ---- AssistiveTouch bubble, third method: one radial alpha profile, applied wherever the bubble sits -----------------------
+_PROF = {}
+
+
+def _centroid(f, cx, cy, bg, rmax):
+    """Sub-pixel centre of the (darker-than-background) bubble: centroid of bg - obs inside rmax."""
+    n = f.shape[0]
+    yy, xx = np.mgrid[0:n, 0:n].astype(np.float32)
+    w = np.clip((bg[None, None, :] - f).mean(-1), 0, None) * (np.hypot(xx - cx, yy - cy) < rmax)
+    return float((w * xx).sum() / w.sum()), float((w * yy).sum() / w.sum())
+
+
+def calibrate_bubble_profile(sdr_path, fps=None):
+    """Fit obs = m(r) * bg + b(r) per radius (0.5 px bins) and channel from frames where the bubble sits on flat backgrounds
+    of different colours, possibly at different screen positions (R.BUBBLE['cal'] = [(S, (cx, cy)), ...])."""
+    import subprocess
+    spec = R.BUBBLE
+    nb = int((spec["radius"] + 16) * 2)
+    obs_all, bg_all = [], []
+    for S, (cx, cy) in spec["cal"]:
+        n = 260
+        x0, y0 = int(cx - n / 2), int(cy - n / 2)
+        raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{S:.3f}", "-i", sdr_path, "-frames:v", "1", "-vf",
+                              f"crop={n}:{n}:{x0}:{y0}", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+                             capture_output=True, check=True).stdout
+        f = np.frombuffer(raw, np.uint8).reshape(n, n, 3).astype(np.float32)
+        yy, xx = np.mgrid[0:n, 0:n].astype(np.float32)
+        r0 = np.hypot(xx - (cx - x0), yy - (cy - y0))
+        bg = np.median(f[(r0 > spec["radius"] + 14) & (r0 < spec["radius"] + 30)], axis=0)
+        mx, my = _centroid(f, cx - x0, cy - y0, bg, spec["radius"] + 8)
+        r = np.hypot(xx - mx, yy - my)
+        bg_all.append(bg)
+        rows = []
+        for k in range(nb):
+            sel = (r >= k / 2) & (r < k / 2 + 0.5)
+            rows.append(np.median(f[sel], axis=0) if sel.sum() >= 3 else bg)
+        obs_all.append(np.array(rows))
+    bg_all, obs_all = np.array(bg_all), np.array(obs_all)
+    m_prof, b_prof = np.ones((nb, 3), np.float32), np.zeros((nb, 3), np.float32)
+    for k in range(nb):
+        for c in range(3):
+            A = np.stack([bg_all[:, c], np.ones(len(bg_all))], 1)
+            sol, *_ = np.linalg.lstsq(A, obs_all[:, k, c], rcond=None)
+            m_prof[k, c], b_prof[k, c] = sol
+    m_prof = np.clip(m_prof, 0.3, 1.0)
+    edge = int((spec["radius"] + 12) * 2)
+    m_prof[edge:], b_prof[edge:] = 1.0, 0.0
+    _PROF.update(m=m_prof, b=b_prof, nb=nb)
+
+
+def _unmix_maps(cx, cy, box):
+    x0, y0, x1, y1 = box
+    yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
+    r2 = np.hypot(xx - cx, yy - cy) * 2
+    ar = np.arange(_PROF["nb"], dtype=np.float32)
+    m = np.stack([np.interp(r2, ar, _PROF["m"][:, c], right=1.0) for c in range(3)], -1)
+    b = np.stack([np.interp(r2, ar, _PROF["b"][:, c], right=0.0) for c in range(3)], -1)
+    return m.astype(np.float32), b.astype(np.float32)
+
+
+def unmix_bubble(img, cx, cy, refine=True):
+    """Undo the overlay around (cx, cy).  The first call for a position searches +-2 px for the centre that leaves the
+    least edge energy on the bubble's rim (a mis-centred profile leaves a bright ring)."""
+    if not _PROF:
+        raise RuntimeError("call screenprep.calibrate_bubble_profile(sdr_path) first")
+    rad = R.BUBBLE["radius"] + 16
+    x0, y0, x1, y1 = max(int(cx - rad), 0), max(int(cy - rad), 0), min(int(cx + rad), SW), min(int(cy + rad), SH)
+    key = ("um", round(cx, 2), round(cy, 2))
+    roi = img[y0:y1, x0:x1].astype(np.float32)
+    if key not in _BG:
+        best = None
+        cands = [(dx, dy) for dx in np.arange(-2, 2.01, 0.5) for dy in np.arange(-2, 2.01, 0.5)] if refine else [(0.0, 0.0)]
+        yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
+        for dx, dy in cands:
+            m, b = _unmix_maps(cx + dx, cy + dy, (x0, y0, x1, y1))
+            out = (roi - b) / m
+            g = np.abs(cv2.Sobel(out.mean(-1), cv2.CV_32F, 1, 0)) + np.abs(cv2.Sobel(out.mean(-1), cv2.CV_32F, 0, 1))
+            rr = np.hypot(xx - cx - dx, yy - cy - dy)
+            e = float(g[(rr > R.BUBBLE["radius"] - 14) & (rr < R.BUBBLE["radius"] + 6)].sum())
+            if best is None or e < best[0]:
+                best = (e, m, b)
+        _BG[key] = best[1:]
+    m, b = _BG[key]
+    out = np.clip((roi - b) / m + 0.5, 0, 255).astype(np.uint8)
+    # the anti-aliased rim over-brightens when un-mixed: clamp it to the page colour around it (text stays darker, so it survives)
+    yy, xx = np.mgrid[y0:y1, x0:x1].astype(np.float32)
+    rr = np.hypot(xx - cx, yy - cy)
+    rad0 = R.BUBBLE["radius"]
+    outer = roi[(rr > rad0 + 14) & (rr < rad0 + 16)]
+    page = np.percentile(outer, 70, axis=0) if outer.size else np.full(3, 255.0)
+    ann = (rr > rad0 - 9) & (rr < rad0 + 12)
+    o = out.astype(np.float32)
+    o[ann] = np.minimum(o[ann], page[None, :] + 1.0)
+    img[y0:y1, x0:x1] = o.astype(np.uint8)
+
+
+def remove_bubble(img, cx, cy):
+    """Flat surroundings -> fill with their colour (exact); otherwise un-mix the overlay."""
+    spec = R.BUBBLE
+    g = _bubble_geom(spec, (cx, cy))
+    x0, y0, x1, y1 = g["box"]
+    roi = img[y0:y1, x0:x1]
+    d, m = g["d"], g["m"]
+    r, f = spec["radius"], spec.get("feather", 4)
+    px = roi[(d > r + f + 6) & (d < r + f + 24)].astype(np.float32)
+    if px.std(0).max() <= 2.5:
+        col = np.median(px, axis=0)
+        m2 = np.clip((r + f + 4 - d) / (f + 2), 0, 1)[..., None]
+        img[y0:y1, x0:x1] = (roi * (1 - m2) + col[None, None, :] * m2 + 0.5).astype(np.uint8)
+        return
+    unmix_bubble(img, cx, cy)

@@ -10,6 +10,7 @@ tool takes `--project <name>` (`prep_screen.py` / `render*.py` / `mix_audio.py`)
 | `whatsapp-face-id` | Hide WhatsApp calls from the iPhone call log with "Require Face ID" (16:9 + reel) |
 | `iphone-48mp-camera` | Shoot 48 MP photos on iPhone: Settings > Camera > Formats, Camera app Aspect / Format (16:9 + reel, Crimson Red palette) |
 | `aadhaar-email-link` | V Create channel: link your email ID to Aadhaar. Cinematic style (`render_cine.py`), illustrated app screens because the app blocks screen recording |
+| `own-ai-assistant` | V Create channel: build your own free AI assistant (Tab). Aurora style (`render_aurora.py`): full-screen 3D title, caption dock, no end card, continuous reel |
 
 A project folder holds `timeline.py` (scenes, screen re-timing, camera, taps, highlights, steps, CTAs, sound effects, grade
 overrides), `captions_data.py` (English caption chunks) and `screen_rules.py` (what to blur / remove in the screen recording).
@@ -64,3 +65,19 @@ face shots follow. In 9:16 the presenter is a full-bleed vertical crop lowered u
 extension (text never sits on the face or body), and `TL.REEL_CUTS` / `TL.REEL_CTAS` make the reel a shorter edit
 (`mix_audio.py --cuts` builds its audio). Fonts: Cinzel and Plus Jakarta Sans (SIL OFL). Music "Drawing the Sky" (Mixkit 678); SFX 1491, 1492,
 2596, 1485, 2350, 2354, 933, 1109; clips 14669, 47735 (wide) and 41174, 18307 (reel).
+
+## Aurora style (V Create, second look)
+
+`render_aurora.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "aurora"`: ink-plum
+backdrops with an orchid / rose / amber gradient, Anton + Outfit type (SIL OFL), and a full-screen extruded 3D title for
+the topic (`lib/text3d.py`: the text block is drawn once and re-posed per frame as a stack of perspective-warped layers;
+`TL.TITLE_BEATS`, section headers in `TL.HEADERS_3D`). Captions never sit on the picture: in 16:9 they live in a dock under
+it, in 9:16 in a header above a rounded picture window. Calm karaoke captions (spoken words white, current word in the
+gradient with a gliding underline), prism and light-sweep transitions, step chip on the empty side of phone scenes, no
+end card (`TL.END_SWELL = 0` keeps the music flat at the end). The reel is the narration in order with a few whole
+sentences left out (`TL.REEL_CUTS` at pauses, `TL.REEL_JOIN_SFX = False`). Kit: `lib/aurora.py` (re-skins `lib/cine.py`
+through `cine.set_theme()`).
+
+Screen clean-up for this project uses `screen_rules.FPS = 30` and a radial AssistiveTouch profile
+(`BUBBLE["cal"]`, `screenprep.calibrate_bubble_profile`): flat surroundings are filled, otherwise the translucent overlay is
+un-mixed. Music "Infinity" (Mixkit 440); clips 49042, 29050, 32457, 4196, 23073, 3298, 17999, 42123, 49381, 51123, 42130, 1787.

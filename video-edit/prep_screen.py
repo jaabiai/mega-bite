@@ -1,6 +1,6 @@
 """Write the cleaned (blurred / de-cluttered) screen recording for a slice of recording time.
 
-usage: python prep_screen.py <project> <sdr60.mp4> <start_s> <end_s> <out.mp4> [time_offset_s]
+usage: python prep_screen.py <project> <sdr.mp4> <start_s> <end_s> <out.mp4> [time_offset_s]   (60 fps unless screen_rules.FPS)
 (time_offset_s: recording time of the input file's first frame, when the input is an excerpt)
 """
 import sys, os, subprocess
@@ -13,12 +13,14 @@ import screenprep, screen_rules
 project, src, a, b, out = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
 off = float(sys.argv[6]) if len(sys.argv) > 6 else 0.0
 screenprep.configure(screen_rules)
+if getattr(screen_rules, "BUBBLE", None) and "cal" in screen_rules.BUBBLE:
+    screenprep.calibrate_bubble_profile(src)
 if getattr(screen_rules, "ASSIST", None) and not getattr(screen_rules, "BUBBLE", None):
     if "times" in screen_rules.BUBBLE_CAL:
         screenprep.calibrate_bubble_multi(src)
     else:
         screenprep.calibrate_bubble(src)
-W, H, FPS = 1320, 2868, 60
+W, H, FPS = 1320, 2868, getattr(screen_rules, "FPS", 60)        # frame rate of the SDR input (and of the output)
 n = int(round((b - a) * FPS))
 dec = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", f"{a:.4f}", "-i", src, "-frames:v", str(n),
                         "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)

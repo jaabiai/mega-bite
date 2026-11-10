@@ -31,9 +31,36 @@ def font(role, size):
     if key not in _FONTS:
         f, w = _ROLES[role]
         ft = ImageFont.truetype(os.path.join(FONT_DIR, f), key[1])
-        ft.set_variation_by_axes([w])
+        if w is not None:                                  # variable font: pick the weight; static files pass None
+            ft.set_variation_by_axes([w])
         _FONTS[key] = ft
     return _FONTS[key]
+
+
+HOT_FILL = None          # horizontal colour stops for "pressed" pills (None: brushed vertical GOLD)
+LEAK = [1.0, 0.80, 0.52]  # colour of the light-leak transition
+
+
+def set_theme(pal=None, roles=None, accent=None, chrome=None, hot_fill=None, leak=None, name=None):
+    """Re-skin the kit in place (colours, fonts, gradients) for another look built from the same parts.
+    pal keeps the key names: gold = accent, gold_hi = light accent, gold_lo = dark accent, silver, steel, ink, panel, text."""
+    global HOT_FILL, NAME
+    if pal:
+        PAL.update(pal)
+    if roles:
+        _ROLES.update(roles)
+        _FONTS.clear()
+    if accent is not None:
+        GOLD[:] = accent
+    if chrome is not None:
+        CHROME[:] = chrome
+    if hot_fill is not None:
+        HOT_FILL = hot_fill
+    if leak is not None:
+        LEAK[:] = leak
+    if name:
+        NAME = name
+    _RAYS.clear()
 
 
 def text_mask(txt, ft, tracking=0.0, pad=6):
@@ -468,8 +495,11 @@ def _pill(w, h, hot):
     if hot:
         p = rrect((w, h), (0, 0, w - 1, h - 1), h / 2, PAL["gold"], 1.0)
         # brushed gold: vertical gradient over the fill
-        a = np.asarray(p, np.float32)
-        a[..., :3] = _vgrad(h, GOLD)[:, None, :]
+        a = np.asarray(p, np.float32).copy()
+        if HOT_FILL is not None:
+            a[..., :3] = _vgrad(w, HOT_FILL)[None, :, :]
+        else:
+            a[..., :3] = _vgrad(h, GOLD)[:, None, :]
         return Image.fromarray(a.astype(np.uint8), "RGBA")
     return rrect((w, h), (0, 0, w - 1, h - 1), h / 2, PAL["panel"], 0.88, outline=PAL["silver"] + (150,), width=2)
 
@@ -630,7 +660,7 @@ def flash(fr, p):
     cx = (0.5 + 0.55 * p) * W / q
     blob = np.exp(-(((xx - cx) / (0.30 * W / q)) ** 2 + ((yy - 0.45 * H / q) / (0.75 * H / q)) ** 2))
     blob = cv2.resize(blob, (W, H), interpolation=cv2.INTER_LINEAR)[..., None]
-    warm = np.array([1.0, 0.80, 0.52], np.float32)
+    warm = np.array(LEAK, np.float32)
     fr[:] = 1 - (1 - fr) * (1 - np.clip(blob * k * 0.95, 0, 1) * warm)
     fr[:] = np.clip(fr * (1 + 0.35 * k), 0, 1)
     return fr
