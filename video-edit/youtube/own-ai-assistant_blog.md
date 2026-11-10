@@ -4,7 +4,7 @@
 **Custom permalink:** tab-ai-assistant-malayalam
 **Search description:** Tab AI അസിസ്റ്റന്റ്: WhatsApp-ൽ മെസേജ് ചെയ്താൽ റെസ്റ്റോറന്റ്, ഫ്ലൈറ്റ്, ഷോപ്പിംഗ്, ഇമെയിൽ എല്ലാം ചെയ്യും. tab.bot-ൽ സൈൻ അപ്പ് ചെയ്യുന്ന വിധം.
 **Labels:** AI Assistant, Tab AI, AI Tools Malayalam, WhatsApp, Tech Malayalam, V Create
-**Embed:** https://youtu.be/cW2Mkd6eoO0 at the top. Copy-paste version with the embed and the tab.bot button: the "V Create Tab AI Blog Post" artifact.
+**Embed:** https://youtu.be/cW2Mkd6eoO0 in the middle, just before the setup steps. The button appears three times: after the intro, before the FAQ and at the very end. Copy-paste version with the embed and the tab.bot button: the "V Create Tab AI Blog Post" artifact.
 **Facts checked (Nov 2026):** private beta with a waitlist; texts over iMessage / WhatsApp; own phone number, makes calls and uses
 websites, asks before any payment; no published price. Examples are the ones on tab.bot ("Things you can text Tab").
 
@@ -41,6 +41,8 @@ tab.bot വെബ്സൈറ്റിൽ കാണിക്കുന്ന ഉ�
 - **ഫോട്ടോ എഡിറ്റിംഗ്:** ഫോട്ടോ അയച്ച് എന്ത് മാറ്റണമെന്ന് പറഞ്ഞാൽ എഡിറ്റ് ചെയ്ത് തിരികെ അയക്കും.
 
 - **ഗ്രൂപ്പ് ചാറ്റ്:** ഏത് ഗ്രൂപ്പിലും Tab-നെ ചേർക്കാം. ട്രിപ്പും ഡിന്നറും പ്ലാൻ ചെയ്യാൻ സഹായിക്കും.
+
+Tab സെറ്റപ്പ് ചെയ്യുന്നത് വീഡിയോയിൽ കാണാം: https://youtu.be/cW2Mkd6eoO0 (video player in the HTML version)
 
 ## Tab സെറ്റപ്പ് ചെയ്യുന്ന വിധം
 
@@ -91,6 +93,8 @@ tab.bot വെബ്സൈറ്റിൽ കാണിക്കുന്ന ഉ�
 
 - നിങ്ങളുടെ മെസേജുകൾ ഒരു പുറത്തുള്ള സേവനത്തിലേക്കാണ് പോകുന്നത്. ബാങ്ക് വിവരങ്ങൾ പോലുള്ള സ്വകാര്യ കാര്യങ്ങൾ അയക്കുന്നതിന് മുമ്പ് ആലോചിക്കുക.
 
+**[ Create Your AI Assistant ]** (https://tab.bot) — button in the HTML version
+
 ## പതിവ് ചോദ്യങ്ങൾ
 
 ### Tab ഉപയോഗിക്കാൻ പ്രത്യേക ആപ്പ് വേണോ?
@@ -114,3 +118,5 @@ Tab ഘട്ടം ഘട്ടമായാണ് ലൈനുകൾ തുറ�
 ഒരു മെസേജ് അയച്ചാൽ ബുക്കിംഗും ഓർഡറും ഇമെയിലും ഫോട്ടോ എഡിറ്റിംഗും ചെയ്തുതരുന്ന Tab ഒരു ഉപകാരപ്രദമായ AI അസിസ്റ്റന്റാണ്. ഇപ്പോൾ തന്നെ Waitlist-ൽ ചേർന്ന് വെക്കൂ. ഇങ്ങനെയൊക്കെ ചെയ്യാൻ കഴിയുമെന്ന് എല്ലാവരും അറിയട്ടെ, ഈ പോസ്റ്റ് സുഹൃത്തുക്കൾക്കും ഷെയർ ചെയ്യൂ.
 
 ഇതുപോലുള്ള ഉപകാരപ്രദമായ വീഡിയോകൾക്ക് **V Create** YouTube ചാനൽ Subscribe ചെയ്യൂ.
+
+**[ Create Your AI Assistant ]** (https://tab.bot) — button in the HTML version
