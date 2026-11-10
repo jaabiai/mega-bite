@@ -4,6 +4,8 @@
 **Custom permalink:** tab-ai-assistant-malayalam
 **Search description:** Tab AI അസിസ്റ്റന്റ്: WhatsApp-ൽ മെസേജ് ചെയ്താൽ റെസ്റ്റോറന്റ്, ഫ്ലൈറ്റ്, ഷോപ്പിംഗ്, ഇമെയിൽ എല്ലാം ചെയ്യും. tab.bot-ൽ സൈൻ അപ്പ് ചെയ്യുന്ന വിധം.
 **Labels:** AI Assistant, Tab AI, AI Tools Malayalam, WhatsApp, Tech Malayalam, V Create
+**Thumbnail:** `youtube/own-ai-assistant_thumbnail.jpg` at the very top (served from the public repo via jsDelivr, pinned to commit 7194909).
+**Buttons and the step-1 link:** the Tab referral link https://tab.bot/r/D40C6938929B3BF2.
 **Embed:** https://youtu.be/cW2Mkd6eoO0 in the middle, just before the setup steps. The button appears twice: before the FAQ and at the very end. Copy-paste version with the embed and the tab.bot button: the "V Create Tab AI Blog Post" artifact.
 **Facts checked (Nov 2026):** private beta with a waitlist; texts over iMessage / WhatsApp; own phone number, makes calls and uses
 websites, asks before any payment; no published price. Examples are the ones on tab.bot ("Things you can text Tab").
@@ -46,7 +48,7 @@ Tab സെറ്റപ്പ് ചെയ്യുന്നത് വീഡി�
 
 ### ഘട്ടം 1: tab.bot തുറക്കുക
 
-ഫോണിലെ ബ്രൗസറിൽ [tab.bot](https://tab.bot) തുറക്കുക. "Meet Tab in your messages" എന്ന പേജ് കാണാം.
+ഫോണിലെ ബ്രൗസറിൽ [tab.bot](https://tab.bot/r/D40C6938929B3BF2) തുറക്കുക. "Meet Tab in your messages" എന്ന പേജ് കാണാം.
 
 ### ഘട്ടം 2: പേരും മൊബൈൽ നമ്പറും നൽകുക
 
@@ -91,7 +93,7 @@ Tab സെറ്റപ്പ് ചെയ്യുന്നത് വീഡി�
 
 - നിങ്ങളുടെ മെസേജുകൾ ഒരു പുറത്തുള്ള സേവനത്തിലേക്കാണ് പോകുന്നത്. ബാങ്ക് വിവരങ്ങൾ പോലുള്ള സ്വകാര്യ കാര്യങ്ങൾ അയക്കുന്നതിന് മുമ്പ് ആലോചിക്കുക.
 
-**[ Create Your AI Assistant ]** (https://tab.bot) — button in the HTML version
+**[ Create Your AI Assistant ]** (https://tab.bot/r/D40C6938929B3BF2) — button in the HTML version
 
 ## പതിവ് ചോദ്യങ്ങൾ
 
@@ -117,4 +119,4 @@ Tab ഘട്ടം ഘട്ടമായാണ് ലൈനുകൾ തുറ�
 
 ഇതുപോലുള്ള ഉപകാരപ്രദമായ വീഡിയോകൾക്ക് **V Create** YouTube ചാനൽ Subscribe ചെയ്യൂ.
 
-**[ Create Your AI Assistant ]** (https://tab.bot) — button in the HTML version
+**[ Create Your AI Assistant ]** (https://tab.bot/r/D40C6938929B3BF2) — button in the HTML version
