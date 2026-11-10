@@ -4,7 +4,7 @@
 **Custom permalink:** tab-ai-assistant-malayalam
 **Search description:** Tab AI അസിസ്റ്റന്റ്: WhatsApp-ൽ മെസേജ് ചെയ്താൽ റെസ്റ്റോറന്റ്, ഫ്ലൈറ്റ്, ഷോപ്പിംഗ്, ഇമെയിൽ എല്ലാം ചെയ്യും. tab.bot-ൽ സൈൻ അപ്പ് ചെയ്യുന്ന വിധം.
 **Labels:** AI Assistant, Tab AI, AI Tools Malayalam, WhatsApp, Tech Malayalam, V Create
-**Embed:** the YouTube video at the top once it is published. Copy-paste version with the embed and the tab.bot button: the "V Create Tab AI Blog Post" artifact.
+**Embed:** https://youtu.be/cW2Mkd6eoO0 at the top. Copy-paste version with the embed and the tab.bot button: the "V Create Tab AI Blog Post" artifact.
 **Facts checked (Nov 2026):** private beta with a waitlist; texts over iMessage / WhatsApp; own phone number, makes calls and uses
 websites, asks before any payment; no published price. Examples are the ones on tab.bot ("Things you can text Tab").
 
@@ -14,7 +14,7 @@ websites, asks before any payment; no published price. Examples are the ones on 
 
 Tab എന്താണ്, എന്തൊക്കെ ചെയ്യും, എങ്ങനെ സൈൻ അപ്പ് ചെയ്യാം എന്ന് ഈ പോസ്റ്റിൽ നോക്കാം.
 
-**[ tab.bot തുറക്കുക → ]** (https://tab.bot) — button in the HTML version
+**[ Create Your AI Assistant ]** (https://tab.bot) — button in the HTML version
 
 ## എന്താണ് Tab?
 
