@@ -27,7 +27,7 @@ Scene kinds: `face`, `broll` (`clip` landscape id, `reel_clip` vertical id), `gr
 | 3 | `prep_screen.py` + `lib/screenprep.py` | blur private text, remove the screen-recording indicators (fixed positions, or found by colour for the wandering ones) and the AssistiveTouch bubble (alpha un-mixing from two flat-background frames, or rebuilding the known background: flat fill / header + search-field redraw) |
 | 4 | `render.py` | compositor: cinematic grade, B-roll, phone-in-frame scenes with camera zoom + highlight rings + tap ripples, word-highlight captions, CTAs, wipes, end card → H.264 |
 | 5 | `mix_audio.py` | voice + ducked music bed + timeline-synced SFX → `mix.wav` |
-| 6 | ffmpeg | mux video + mix (`alimiter`, AAC 320k) |
+| 6 | ffmpeg | mux video + mix (`alimiter=limit=0.89:level=disabled` so the limiter does not add make-up gain, AAC 320k) |
 | 4b | `render_reel.py` | vertical 9:16 (1080×1920) version for Reels / Shorts: tall face card on a blurred backdrop, stacked phone scenes with a caption header, B-roll as a rounded card, short outro; audio via `mix_audio.py --total 104.93` |
 | QA | `qa_privacy.py`, `qa_privacy_screen.py` | OCR sweeps that fail if any e-mail / account name is still legible |
 | Extra | `make_thumbnail.py` | 1280×720 thumbnail |
