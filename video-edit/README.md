@@ -11,6 +11,7 @@ tool takes `--project <name>` (`prep_screen.py` / `render*.py` / `mix_audio.py`)
 | `iphone-48mp-camera` | Shoot 48 MP photos on iPhone: Settings > Camera > Formats, Camera app Aspect / Format (16:9 + reel, Crimson Red palette) |
 | `aadhaar-email-link` | V Create channel: link your email ID to Aadhaar. Cinematic style (`render_cine.py`), illustrated app screens because the app blocks screen recording |
 | `own-ai-assistant` | V Create channel: build your own free AI assistant (Tab). Aurora style (`render_aurora.py`): full-screen 3D title, caption dock, no end card, continuous reel |
+| `call-recording-tone` | V Create channel: record calls without the spoken announcement (Google Phone app, Android). Studio style (`render_studio.py`), Android phone frame, no end card, the reel is the whole talk |
 
 A project folder holds `timeline.py` (scenes, screen re-timing, camera, taps, highlights, steps, CTAs, sound effects, grade
 overrides), `captions_data.py` (English caption chunks) and `screen_rules.py` (what to blur / remove in the screen recording).
@@ -81,3 +82,19 @@ through `cine.set_theme()`).
 Screen clean-up for this project uses `screen_rules.FPS = 30` and a radial AssistiveTouch profile
 (`BUBBLE["cal"]`, `screenprep.calibrate_bubble_profile`): flat surroundings are filled, otherwise the translucent overlay is
 un-mixed. Music "Infinity" (Mixkit 440); clips 49042, 29050, 32457, 4196, 23073, 3298, 17999, 42123, 49381, 51123, 42130, 1787.
+
+## Studio style (V Create, third look)
+
+`render_studio.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "studio"`: a
+broadcast-desk layout on a midnight grid with teal / cyan accents and a red REC dot, Archivo Black + Manrope type (SIL OFL).
+The picture (face, B-roll or phone) sits in a rounded card with a thin teal edge; in 16:9 the left sidebar carries the logo
+bug, the topic (`TL.TOPIC_KICKER`, `TL.TOPIC`), a transcript-style caption block (previous line dimmed, current line large
+with a teal marker on the spoken word) and a numbered step badge (`TL.STEPS`, `TL.N_STEPS`); in 9:16 the card is on top and
+topic / step / captions are stacked under it, so text never covers the presenter. The opening uses the full-screen 3D title
+(`TL.TITLE_BEATS`, one beat at a time, `faces` white / accent / rec) and `TL.HEADERS_3D` for section headers; captions step
+aside while a header or the logo sting is on screen. Transitions: push, scan and prism. Kit: `lib/studio.py`.
+
+`TL.DEVICE = "android"` with `TL.SCREEN_SIZE = (720, 1608)` frames the recording in `lib/phone_android.py`: slim even
+bezels, flat aluminium rails, keys on the right and a punch-hole camera in the top-left corner of the display
+(`phonescene.PhoneScene(device=..., src=...)`). Music "Digital Clouds" (Mixkit 175); clips 42123, 39803, 309;
+SFX 1485, 1491, 1492, 2596, 2350, 2354, 933, 1109.

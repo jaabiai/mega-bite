@@ -1,0 +1,142 @@
+1
+00:00:00,000 --> 00:00:02,600
+A problem we face when recording calls:
+
+2
+00:00:02,640 --> 00:00:04,620
+that recording announcement -
+
+3
+00:00:04,670 --> 00:00:06,950
+the person on the other side hears it.
+
+4
+00:00:07,090 --> 00:00:10,950
+So in today's video, I'll
+tell you the fix for that.
+
+5
+00:00:11,280 --> 00:00:13,300
+For more useful videos like this,
+
+6
+00:00:13,460 --> 00:00:15,000
+subscribe to the channel now,
+
+7
+00:00:15,030 --> 00:00:17,720
+follow me and share the
+video with everyone -
+
+8
+00:00:17,870 --> 00:00:20,700
+let people know this is possible.
+
+9
+00:00:20,720 --> 00:00:23,400
+Welcome to V Create!
+
+10
+00:00:23,470 --> 00:00:25,900
+Welcome, everyone, to a new video.
+
+11
+00:00:26,030 --> 00:00:28,500
+Let's see how to do it.
+
+12
+00:00:28,850 --> 00:00:30,760
+This one is for Android phone users -
+
+13
+00:00:30,800 --> 00:00:34,080
+I've already made a video for iPhone.
+
+14
+00:00:34,190 --> 00:00:37,600
+It's very simple to do;
+I'll show you on my phone.
+
+15
+00:00:37,740 --> 00:00:41,300
+So, here's what to do:
+open your phone dialer.
+
+16
+00:00:41,400 --> 00:00:43,650
+Once it opens, at the very top,
+
+17
+00:00:43,680 --> 00:00:46,000
+on the left, there are
+three lines - a menu icon.
+
+18
+00:00:46,030 --> 00:00:49,700
+In other words, once it's open,
+at the very top on the left
+
+19
+00:00:49,760 --> 00:00:53,400
+you'll see three lines - the menu icon.
+
+20
+00:00:53,610 --> 00:00:56,500
+Tap it, then tap Settings.
+
+21
+00:00:56,560 --> 00:00:59,600
+In Settings, tap Call recording.
+
+22
+00:00:59,610 --> 00:01:01,950
+Scroll down a little,
+
+23
+00:01:02,170 --> 00:01:04,600
+and you'll see Play audio
+tone instead of disclaimer -
+
+24
+00:01:04,640 --> 00:01:06,600
+a toggle button.
+
+25
+00:01:06,610 --> 00:01:07,900
+Turn it on.
+
+26
+00:01:08,190 --> 00:01:12,200
+In the window that opens, tap Agree,
+
+27
+00:01:12,320 --> 00:01:14,300
+and it's turned on.
+
+28
+00:01:14,440 --> 00:01:18,500
+Once it's on, from now on,
+when you record calls -
+
+29
+00:01:18,590 --> 00:01:22,600
+as I said earlier - without
+the other person hearing
+
+30
+00:01:22,640 --> 00:01:25,400
+that announcement, you can record.
+
+31
+00:01:25,590 --> 00:01:27,700
+A really simple, useful tip.
+
+32
+00:01:27,750 --> 00:01:31,950
+So share it with everyone, let
+people know this is possible.
+
+33
+00:01:32,090 --> 00:01:35,100
+Anyway, see you again with a new topic!
+

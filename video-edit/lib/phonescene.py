@@ -22,9 +22,12 @@ def cam_at(T, keys):
 
 
 class PhoneScene:
-    def __init__(self, S, pal, out_w, out_h, layout="wide", hb_frac=None, anchor=None, x_min=None, titanium=None, bg=None):
-        """hb_frac / anchor / x_min / titanium / bg override the layout defaults (bg: RGB float image, out + 2*margin)."""
+    def __init__(self, S, pal, out_w, out_h, layout="wide", hb_frac=None, anchor=None, x_min=None, titanium=None, bg=None,
+                 device="iphone", src=(SRC_W, SRC_H)):
+        """hb_frac / anchor / x_min / titanium / bg override the layout defaults (bg: RGB float image, out + 2*margin).
+        device "android" draws the punch-hole Android frame (lib/phone_android.py); src = (w, h) of the recording."""
         self.S, self.W, self.H, self.layout = S, out_w, out_h, layout
+        self.src_w, self.src_h = src
         self.x_min = 830 * S if x_min is None else x_min
         if layout == "reel":
             self.hb = 0.52 * out_h                     # phone screen height at zoom 1 (leaves room for captions on top)
@@ -39,7 +42,12 @@ class PhoneScene:
         if anchor is not None:
             self.anchor = (anchor[0] * out_w, anchor[1] * out_h)
         self.HI = int(round(2300 * S))                 # hi-res frame build size (screen height)
-        frame, smask, (sx, sy, sw, sh) = phone.build(self.HI, **({"titanium": titanium} if titanium else {}))
+        if device == "android":
+            import phone_android
+            frame, smask, (sx, sy, sw, sh) = phone_android.build(self.HI, self.src_w / self.src_h,
+                                                                 **({"rail": titanium} if titanium else {}))
+        else:
+            frame, smask, (sx, sy, sw, sh) = phone.build(self.HI, **({"titanium": titanium} if titanium else {}))
         self.frame_hi = np.asarray(frame, np.uint8)                       # RGBA
         self.smask_hi = np.asarray(smask, np.uint8)                       # L (screen shape)
         self.sx, self.sy, self.sw, self.sh = sx, sy, sw, sh
@@ -55,10 +63,10 @@ class PhoneScene:
     # -- geometry -------------------------------------------------------------------------------
     def geometry(self, cam, extra=(0.0, 0.0), scale_mul=1.0):
         z, u, v = cam
-        s = z * self.hb / SRC_H * scale_mul
+        s = z * self.hb / self.src_h * scale_mul
         ax, ay = self.anchor
-        X0 = ax - u * SRC_W * s
-        width = SRC_W * s
+        X0 = ax - u * self.src_w * s
+        width = self.src_w * s
         if self.layout == "reel":
             lo, hi = 24 * self.S, self.W - 24 * self.S - width      # phone narrower than the frame: keep it inside
             if lo > hi:                                              # zoomed past the frame width: keep it filling the frame
@@ -70,17 +78,17 @@ class PhoneScene:
             x_max = self.W - 24 * self.S - width
             X0 = min(max(X0, x_min), max(x_max, x_min))
         X0 += extra[0]
-        Y0 = ay - v * SRC_H * s + extra[1]
+        Y0 = ay - v * self.src_h * s + extra[1]
         return dict(s=s, X0=X0, Y0=Y0)
 
     def to_out(self, g, u, v):
-        return g["X0"] + u * SRC_W * g["s"], g["Y0"] + v * SRC_H * g["s"]
+        return g["X0"] + u * self.src_w * g["s"], g["Y0"] + v * self.src_h * g["s"]
 
     # -- rendering ------------------------------------------------------------------------------
     def render(self, screen_rgb, g, opacity=1.0, sway=0.0):
         W, H = self.W, self.H
         s = g["s"]
-        f = s * SRC_H / self.HI                          # hi-res px -> output px
+        f = s * self.src_h / self.HI                     # hi-res px -> output px
         fh, fw = self.frame_hi.shape[:2]
         gw, gh = max(int(round(fw * f)), 8), max(int(round(fh * f)), 8)
         frame_rs = cv2.resize(self.frame_hi, (gw, gh), interpolation=cv2.INTER_AREA)
@@ -119,8 +127,8 @@ class PhoneScene:
         shadow = cv2.warpAffine(a_blur, M2, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0) * 0.62
 
         # background with gentle parallax against the phone's position
-        cx = g["X0"] + 0.5 * SRC_W * s
-        cy = g["Y0"] + 0.5 * SRC_H * s
+        cx = g["X0"] + 0.5 * self.src_w * s
+        cy = g["Y0"] + 0.5 * self.src_h * s
         dx = float(np.clip(-(cx - self.anchor[0]) * 0.06, -self.mg * 0.9, self.mg * 0.9))
         dy = float(np.clip(-(cy - self.anchor[1]) * 0.04, -self.mg * 0.9, self.mg * 0.9))
         x0, y0 = int(self.mg + dx), int(self.mg + dy)

@@ -291,16 +291,25 @@ class Title3D:
     """Full-screen extruded titles.  beats: [(t0, t1, [(text, style, rel_size), ...], opts)] with style "white" | "aurora";
     opts: dir (+1 / -1 swing direction), box (max_w, max_h as fractions of the frame), cy (centre as a fraction of H)."""
 
-    def __init__(self, W, H, beats, box=(0.86, 0.60)):
+    def __init__(self, W, H, beats, box=(0.86, 0.60), font=None, faces=None, side=None, glows=None, ink=None,
+                 tint=(1.0, 0.50, 0.74), streak=(1.0, 0.72, 0.86)):
+        """font / faces {style: face stops} / side / glows [(x, y, r, rgb, a, speed, phase)] / ink re-skin the title."""
         self.W, self.H = W, H
+        self.font = font or ANTON
+        self.faces = faces or {"aurora": FACE_AURORA, "white": FACE_WHITE}
+        self.side = side or SIDE
+        self.glows = glows or ((0.22, 0.30, 0.55, ORCHID, 0.25, 0.11, 0.0), (0.80, 0.72, 0.55, ROSE, 0.21, 0.09, 2.1),
+                               (0.60, 0.10, 0.40, AMBER, 0.11, 0.13, 4.0))
+        self.ink = ink or INK
+        self.tint, self.streak = tint, streak
         self.beats = []
         for i, b in enumerate(beats):
             t0, t1, lines = b[:3]
             opts = b[3] if len(b) > 3 else {}
             bw, bh = opts.get("box", box)
-            ln = [(txt, FACE_AURORA if st == "aurora" else FACE_WHITE, rel) for txt, st, rel in lines]
-            size = T3.fit_size(ln, ANTON, W * bw, H * bh)
-            blk = T3.Block(ln, ANTON, size, SIDE, depth=0.26, layers=28)
+            ln = [(txt, self.faces.get(st, FACE_WHITE), rel) for txt, st, rel in lines]
+            size = T3.fit_size(ln, self.font, W * bw, H * bh)
+            blk = T3.Block(ln, self.font, size, self.side, depth=0.26, layers=28)
             self.beats.append((t0, t1, blk, opts.get("dir", 1 if i % 2 == 0 else -1), opts.get("cy", 0.5)))
         yy, xx = np.mgrid[0:H // 8, 0:W // 8].astype(np.float32)
         self._u, self._v = xx / (W / 8), yy / (H / 8)
@@ -316,10 +325,9 @@ class Title3D:
         small = cv2.resize(fr, (W // 8, H // 8), interpolation=cv2.INTER_AREA)
         small = cv2.GaussianBlur(small, (0, 0), 5.0)
         luma = small.mean(-1, keepdims=True)
-        small = (small * 0.45 + luma * 0.55) * 0.24 + np.array(INK, np.float32) / 255 * 0.55
+        small = (small * 0.45 + luma * 0.55) * 0.24 + np.array(self.ink, np.float32) / 255 * 0.55
         asp = W / H
-        for (bx, by, br, col, a, sp, ph) in ((0.22, 0.30, 0.55, ORCHID, 0.25, 0.11, 0.0), (0.80, 0.72, 0.55, ROSE, 0.21, 0.09, 2.1),
-                                             (0.60, 0.10, 0.40, AMBER, 0.11, 0.13, 4.0)):
+        for (bx, by, br, col, a, sp, ph) in self.glows:
             cx = bx + 0.06 * math.sin(t * sp * 2 * math.pi + ph)
             cy = by + 0.05 * math.cos(t * sp * 2 * math.pi + ph)
             d = np.hypot((self._u - cx) * asp, self._v - cy) / br
@@ -365,8 +373,8 @@ class Title3D:
             if st > 0.02:
                 ys = np.arange(H, dtype=np.float32)
                 line = np.exp(-((ys - cy) / (H * 0.012)) ** 2)[:, None, None] * st * 0.55
-                fr[:] = 1 - (1 - fr) * (1 - line * np.array([1.0, 0.72, 0.86], np.float32))
-            T3.shadow_and_glow(fr, lay, shadow=0.55 * alpha, glow=0.34 * alpha, offset=(0, int(H * 0.022)), tint=(1.0, 0.50, 0.74))
+                fr[:] = 1 - (1 - fr) * (1 - line * np.array(self.streak, np.float32))
+            T3.shadow_and_glow(fr, lay, shadow=0.55 * alpha, glow=0.34 * alpha, offset=(0, int(H * 0.022)), tint=self.tint)
             T3.composite(fr, lay)
 
 
