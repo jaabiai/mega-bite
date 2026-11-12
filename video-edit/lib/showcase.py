@@ -46,6 +46,10 @@ C.set_theme(
     chrome=[(0.0, (255, 255, 255)), (1.0, (222, 216, 206))],
     hot_fill=[(0.0, EMBER_HI), (1.0, EMBER)], leak=[1.0, 0.62, 0.36])
 
+A.AURORA = [(0.0, EMBER_HI), (1.0, EMBER)]   # the logo sting's underline, in this look's colours
+A.INK = INK
+A.TEXT = PAPER
+
 _F = {}
 _FILES = {"display": "Unbounded-800.ttf", "display6": "Unbounded-600.ttf",
           "label": "BarlowCondensed-700.ttf", "label6": "BarlowCondensed-600.ttf", "label5": "BarlowCondensed-500.ttf",
@@ -190,6 +194,38 @@ def subtitle(words, act, age, size, max_w, lines_max=2):
 
 
 # ---------------------------------------------------------------------------------------------- tracked callout
+def pin_line(fr, t, ax, ay, tx, ty, alpha=1.0, dur=None):
+    """Ember ring on the product joined by a thin leader to a fixed point (e.g. the edge of a diagram)."""
+    if t < 0:
+        return
+    a = alpha * (1.0 if dur is None else 1 - ease_io(clamp01((t - (dur - 0.3)) / 0.3)))
+    if a <= 0.01:
+        return
+    H, W = fr.shape[:2]
+    k = ease_back(clamp01(t / 0.28))
+    pulse = (t * 1.2) % 1.0
+    lay = _rgba_layer(120, 120)
+    d = ImageDraw.Draw(lay)
+    c, r = 60, 13 * k
+    if r > 1:
+        d.ellipse([c - r, c - r, c + r, c + r], outline=EMBER + (255,), width=3)
+        d.ellipse([c - 4.5 * k, c - 4.5 * k, c + 4.5 * k, c + 4.5 * k], fill=PAPER + (255,))
+        rp = r + 22 * pulse
+        d.ellipse([c - rp, c - rp, c + rp, c + rp], outline=EMBER + (int(150 * (1 - pulse)),), width=2)
+    paste(fr, lay, int(ax - c), int(ay - c), a)
+    kx = ease_io(clamp01((t - 0.15) / 0.35))
+    if kx > 0:
+        line = _rgba_layer(W, H)
+        dl = ImageDraw.Draw(line)
+        ang = math.atan2(ty - ay, tx - ax)
+        p0 = (ax + 15 * math.cos(ang), ay + 15 * math.sin(ang))
+        dl.line([p0, (lerp(p0[0], tx, kx), lerp(p0[1], ty, kx))], fill=EMBER + (255,), width=2)
+        x0, x1 = int(max(min(p0[0], tx) - 4, 0)), int(min(max(p0[0], tx) + 4, W))
+        y0, y1 = int(max(min(p0[1], ty) - 4, 0)), int(min(max(p0[1], ty) + 4, H))
+        if x1 > x0 and y1 > y0:
+            paste(fr, line.crop((x0, y0, x1, y1)), x0, y0, a)
+
+
 def callout(fr, t, ax, ay, idx, label, sub=None, side="right", dist=(150, -70), alpha=1.0, size=30, dur=None,
             clip=None):
     """Pinned feature callout.  (ax, ay) = anchor on the product in frame pixels, t = seconds since the callout began.
@@ -337,12 +373,7 @@ def price_card(fr, t, x, y, mrp, price, note=None, size=1.0, dur=None, align="le
     wmax = max(lab.width + 12 + mrp_i.width, pr_i.width, note_i.width if note_i else 0)
     xx = x if align == "left" else x - wmax
     hh = mrp_i.height + pr_i.height + (note_i.height if note_i else 0) + 20
-    plate = np.zeros((hh + 100, wmax + 200, 1), np.float32)
-    plate[50:-50, 100:-100] = 1
-    plate = cv2.GaussianBlur(plate, (0, 0), 36)[..., None]
-    y0, x0 = max(int(y) - 50, 0), max(int(xx) - 100, 0)
-    sub = fr[y0:y0 + plate.shape[0], x0:x0 + plate.shape[1]]
-    sub[:] = sub * (1 - 0.55 * a * k * plate[:sub.shape[0], :sub.shape[1]])
+    _plate(fr, xx - 10, y - 6, wmax + 20, hh, a * k)
     paste(fr, lab, xx, y + 10, a * k)
     paste(fr, mrp_i, xx + lab.width + 12, y, a * k)
     ks = ease_io(clamp01((t - 0.35) / 0.3))
@@ -359,7 +390,7 @@ def price_card(fr, t, x, y, mrp, price, note=None, size=1.0, dur=None, align="le
 
 
 # ---------------------------------------------------------------------------------------------- spec list
-def spec_list(fr, t, items, x, y, size=30, dur=None, title=None):
+def spec_list(fr, t, items, x, y, size=30, dur=None, title=None, extra_h=0, extra_w=0):
     """Checklist that ticks in one item at a time (0.32 s apart)."""
     if t < 0:
         return
@@ -369,13 +400,8 @@ def spec_list(fr, t, items, x, y, size=30, dur=None, title=None):
     lh = int(size * 1.55)
     ti = _txt_rgba(title.upper(), font("label", int(size * 0.8)), EMBER, tracking=4)[0] if title else None
     wmax = max([r.width for r in rows] + ([ti.width] if ti else [])) + size * 1.4
-    hh = lh * len(rows) + (ti.height + 12 if ti else 0)
-    plate = np.zeros((hh + 100, int(wmax) + 200, 1), np.float32)
-    plate[50:-50, 100:-100] = 1
-    plate = cv2.GaussianBlur(plate, (0, 0), 36)[..., None]
-    y0, x0 = max(int(y) - 50, 0), max(int(x) - 100, 0)
-    sub = fr[y0:y0 + plate.shape[0], x0:x0 + plate.shape[1]]
-    sub[:] = sub * (1 - 0.55 * a * ease_out(clamp01(t / 0.4)) * plate[:sub.shape[0], :sub.shape[1]])
+    hh = lh * len(rows) + (ti.height + 12 if ti else 0) + (extra_h or 0)
+    _plate(fr, x - 10, y - 6, wmax + 20 + (extra_w or 0), hh + 12, a * ease_out(clamp01(t / 0.4)))
     yy = y
     if ti:
         paste(fr, ti, x, yy, a * ease_out(clamp01(t / 0.4)))
@@ -413,3 +439,228 @@ def flash(fr, p):
 
 def whip(fr, p, direction=1):
     return C.whip(fr, p, direction)
+
+
+# ---------------------------------------------------------------------------------------------- bar title
+def bar_title(fr, t, idx, title, cx, cy, size=54, dur=2.6, total=None):
+    """Big kinetic chapter title that lives in the top letterbox bar: ember index, then the name rising from a mask,
+    an ember rule drawing under it.  Centred on (cx, cy)."""
+    if t < 0 or t > dur:
+        return 0.0
+    a = 1 - ease_io(clamp01((t - (dur - 0.35)) / 0.35))
+    title = title.replace("\n", " ")
+    ti, _ = _txt_rgba(title.upper(), font("display", size), PAPER, tracking=1.5)
+    ki, _ = _txt_rgba(f"{idx:02d}", font("display6", int(size * 0.62)), EMBER, tracking=1)
+    gap = int(size * 0.45)
+    w = ki.width + gap + ti.width
+    x0 = int(cx - w / 2)
+    kk = ease_out(clamp01(t / 0.35))
+    paste(fr, ki, x0, cy - ki.height / 2 + (1 - kk) * 14, a * kk)
+    kt = ease_out(clamp01((t - 0.08) / 0.45))
+    hv = int(ti.height * kt)
+    if hv > 1:
+        paste(fr, ti.crop((0, 0, ti.width, hv)), x0 + ki.width + gap, cy - ti.height / 2 + ti.height - hv, a)
+    kr = ease_io(clamp01((t - 0.25) / 0.5))
+    rw = int(w * kr)
+    yy = int(cy + ti.height / 2 + 2)
+    if rw > 2 and yy + 3 < fr.shape[0]:
+        seg = fr[yy:yy + 3, int(cx - rw / 2):int(cx + rw / 2)]
+        seg[:] = seg * (1 - a) + np.array(EMBER, np.float32) / 255 * a
+    return a
+
+
+# ---------------------------------------------------------------------------------------------- chips / tags
+def chip(fr, t, x, y, text, dur, size=24, dot=EMBER, icon=None):
+    """Small glass pill with an ember dot: 'NOT SPONSORED · MY OWN EXPERIENCE'."""
+    if t < 0 or t > dur:
+        return
+    a = ease_out(clamp01(t / 0.3)) * (1 - ease_io(clamp01((t - (dur - 0.3)) / 0.3)))
+    ti, _ = _txt_rgba(text.upper(), font("label", size), PAPER, tracking=2.4)
+    pad = int(size * 0.7)
+    h = int(size * 1.9)
+    w = ti.width + pad * 2 + int(size * 0.9)
+    pill = _rgba_layer(w, h)
+    d = ImageDraw.Draw(pill)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=h // 2, fill=GLASS + (215,), outline=(84, 78, 72, 255), width=1)
+    r = size * 0.24
+    cyy = h / 2
+    d.ellipse([pad - r, cyy - r, pad + r, cyy + r], fill=dot + (255,))
+    pill.alpha_composite(ti, (pad + int(size * 0.7), int((h - ti.height) / 2)))
+    paste(fr, pill, x + (1 - ease_out(clamp01(t / 0.35))) * -24, y, a)
+
+
+def name_tag(fr, t, x, y, name, sub, dur, size=40):
+    if t < 0 or t > dur:
+        return
+    a = 1 - ease_io(clamp01((t - (dur - 0.35)) / 0.35))
+    ni, _ = _txt_rgba(name.upper(), font("display", size), PAPER, tracking=1.5)
+    si, _ = _txt_rgba(sub.upper(), font("label", int(size * 0.62)), EMBER, tracking=4)
+    k1 = ease_out(clamp01(t / 0.45))
+    kb = ease_io(clamp01(t / 0.35))
+    bh = ni.height + si.height + 6
+    fr[int(y):int(y + bh * kb), int(x):int(x + 4)] = np.array(EMBER, np.float32) / 255
+    hv = int(ni.height * k1)
+    if hv > 1:
+        paste(fr, ni.crop((0, 0, ni.width, hv)), x + 16, y + ni.height - hv, a)
+    paste(fr, si, x + 18, y + ni.height + 4, a * ease_out(clamp01((t - 0.25) / 0.4)))
+
+
+# ---------------------------------------------------------------------------------------------- info cards
+def _plate(fr, x, y, w, h, a, strength=0.70, blur=44):
+    plate = np.zeros((int(h) + 2 * blur * 2, int(w) + 2 * blur * 2), np.float32)
+    plate[blur * 2:-blur * 2, blur * 2:-blur * 2] = 1
+    plate = cv2.GaussianBlur(plate, (0, 0), blur)
+    y0, x0 = int(y) - blur * 2, int(x) - blur * 2
+    H, W = fr.shape[:2]
+    ys, xs = max(y0, 0), max(x0, 0)
+    ye, xe = min(y0 + plate.shape[0], H), min(x0 + plate.shape[1], W)
+    if ye <= ys or xe <= xs:
+        return
+    p = plate[ys - y0:ye - y0, xs - x0:xe - x0, None]
+    fr[ys:ye, xs:xe] *= 1 - strength * a * p
+
+
+def info_rows(fr, t, x, y, rows, dur, size=34, title=None, align="left"):
+    """Stacked facts: [(big, small)], each big value in ember Unbounded, small label in Barlow; staggered rise."""
+    if t < 0 or t > dur:
+        return
+    a = ease_out(clamp01(t / 0.35)) * (1 - ease_io(clamp01((t - (dur - 0.35)) / 0.35)))
+    items = []
+    for big, small in rows:
+        bi, _ = _txt_rgba(big, font("display", size), EMBER, tracking=0.5)
+        si, _ = _txt_rgba(small.upper(), font("label", int(size * 0.62)), PAPER, tracking=2.6)
+        items.append((bi, si))
+    ti = _txt_rgba(title.upper(), font("label", int(size * 0.55)), MUTE, tracking=4)[0] if title else None
+    lh = int(size * 2.25)
+    wmax = max(max(b.width, s.width) for b, s in items)
+    hh = lh * len(items) + (ti.height + 10 if ti else 0)
+    xx = x if align == "left" else x - wmax
+    _plate(fr, xx - 10, y - 6, wmax + 20, hh + 12, a)
+    yy = y
+    if ti:
+        paste(fr, ti, xx, yy, a)
+        yy += ti.height + 10
+    for i, (bi, si) in enumerate(items):
+        k = ease_out(clamp01((t - 0.15 - i * 0.22) / 0.4))
+        paste(fr, bi, xx, yy + (1 - k) * 16, a * k)
+        paste(fr, si, xx + 2, yy + bi.height - 2 + (1 - k) * 16, a * k)
+        yy += lh
+
+
+def lens_card(fr, t, x, y, dur, size=30, align="left"):
+    """'Why I skip a lens protector': a lens with an extra glass layer, the haze it adds, and the takeaway."""
+    if t < 0 or t > dur:
+        return
+    a = ease_out(clamp01(t / 0.35)) * (1 - ease_io(clamp01((t - (dur - 0.35)) / 0.35)))
+    l1w = font("display", int(size * 0.9)).getlength("CAMERA QUALITY") + 12
+    W0, H0 = int(size * 2.4 + size * 1.8 + size * 1.1 + l1w + 10), int(size * 7.4)
+    xx = x if align == "left" else x - W0
+    _plate(fr, xx, y, W0, H0, a)
+    lay = _rgba_layer(W0, H0)
+    d = ImageDraw.Draw(lay)
+    ti, _ = _txt_rgba("LENS PROTECTOR?", font("label", int(size * 0.9)), EMBER, tracking=3)
+    lay.alpha_composite(ti, (0, 0))
+    # icon: lens + glass layer sliding on top
+    cx, cy, r = size * 2.4, ti.height + size * 2.9, size * 1.8
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(26, 28, 32, 255), outline=(190, 186, 180, 255), width=3)
+    d.ellipse([cx - r * 0.62, cy - r * 0.62, cx + r * 0.62, cy + r * 0.62], fill=(8, 10, 14, 255), outline=(90, 96, 110, 255), width=2)
+    d.ellipse([cx - r * 0.22, cy - r * 0.42, cx + r * 0.05, cy - r * 0.18], fill=(150, 170, 200, 200))
+    kg = ease_out(clamp01((t - 0.4) / 0.5))
+    gy = cy - r * 1.25 + (1 - kg) * -size * 1.2
+    d.rounded_rectangle([cx - r * 1.15, gy, cx + r * 1.15, gy + size * 0.32], radius=4, fill=(200, 230, 255, int(150 * kg)),
+                        outline=(230, 245, 255, int(220 * kg)), width=1)
+    if kg > 0.6:                      # haze over the lens once the glass is on
+        hz = _rgba_layer(int(r * 2.2), int(r * 2.2))
+        ImageDraw.Draw(hz).ellipse([0, 0, r * 2.2 - 1, r * 2.2 - 1], fill=(220, 225, 235, int(70 * (kg - 0.6) / 0.4)))
+        lay.alpha_composite(hz.filter(ImageFilter.GaussianBlur(6)), (int(cx - r * 1.1), int(cy - r * 1.1)))
+    tx = int(cx + r + size * 1.1)
+    l1, _ = _txt_rgba("EXTRA GLASS", font("display", int(size * 0.9)), PAPER)
+    l2, _ = _txt_rgba("CAN COST YOU", font("label", int(size * 0.8)), MUTE, tracking=2)
+    l3, _ = _txt_rgba("CAMERA QUALITY", font("display", int(size * 0.9)), PAPER)
+    k2 = ease_out(clamp01((t - 0.7) / 0.4))
+    yy = int(ti.height + size * 1.1)
+    for im in (l1, l2, l3):
+        lay.alpha_composite(im, (tx, yy))
+        yy += im.height + 2
+    paste(fr, lay.crop((0, 0, W0, H0)), xx, y, a)
+    if k2 < 1:                         # reveal the text block with a wipe
+        pass
+
+
+def lip_diagram(fr, t, x, y, dur, w=560, align="left", size=26):
+    """Side-view schematic: the phone settles onto a table and the case's raised lip (ember) touches first, so the lens
+    bump hangs above the surface with a visible gap."""
+    if t < 0 or t > dur:
+        return
+    a = ease_out(clamp01(t / 0.35)) * (1 - ease_io(clamp01((t - (dur - 0.35)) / 0.35)))
+    h = int(w * 0.44)
+    xx = x if align == "left" else x - w
+    _plate(fr, xx, y, w, h, a)
+    ss = 2
+    lay = _rgba_layer(w * ss, h * ss)
+    d = ImageDraw.Draw(lay)
+    S_ = lambda v: v * ss
+    ti, _ = _txt_rgba("RAISED CAMERA LIP", font("label", size), EMBER, tracking=3)
+    table_y = h * 0.76
+    d.line([(S_(6), S_(table_y)), (S_(w - 6), S_(table_y))], fill=(176, 172, 166, 255), width=S_(2))
+    for k in range(16):
+        x0 = 12 + k * (w - 24) / 16
+        d.line([(S_(x0), S_(table_y + 3)), (S_(x0 - 11), S_(table_y + 14))], fill=(104, 100, 96, 255), width=S_(1))
+    drop = ease_out(clamp01((t - 0.15) / 0.75))
+    lift = (1 - drop) * h * 0.22
+    lip_h, bump_h, slab = h * 0.20, h * 0.05, h * 0.16
+    px0, px1 = w * 0.05, w * 0.95
+    body_bot = table_y - lip_h - lift
+    d.rounded_rectangle([S_(px0), S_(body_bot - slab), S_(px1), S_(body_bot)], radius=S_(12), fill=(116, 132, 122, 255),
+                        outline=(200, 214, 204, 255), width=S_(2))
+    cx0, cx1 = w * 0.12, w * 0.40
+    d.rectangle([S_(cx0), S_(body_bot), S_(cx1), S_(body_bot + bump_h)], fill=(52, 54, 58, 255))
+    for k in range(2):
+        lx = cx0 + (cx1 - cx0) * (0.30 + 0.40 * k)
+        d.ellipse([S_(lx - 16), S_(body_bot + bump_h * 0.1), S_(lx + 16), S_(body_bot + bump_h * 1.3)], fill=(18, 20, 24, 255),
+                  outline=(150, 160, 180, 255), width=S_(1))
+    for xa, xb in ((cx0 - 15, cx0 - 2), (cx1 + 2, cx1 + 15)):
+        d.rounded_rectangle([S_(xa), S_(body_bot), S_(xb), S_(body_bot + lip_h)], radius=S_(3), fill=EMBER + (255,))
+    kg = ease_out(clamp01((t - 1.0) / 0.5))
+    gx = (cx0 + cx1) / 2
+    if kg > 0:
+        y_a, y_b = body_bot + bump_h * 1.3 + 2, table_y - 2
+        col = PAPER + (int(255 * kg),)
+        d.line([(S_(gx), S_(y_a + 6)), (S_(gx), S_(y_b - 6))], fill=col, width=S_(2))
+        d.polygon([(S_(gx), S_(y_a)), (S_(gx - 6), S_(y_a + 9)), (S_(gx + 6), S_(y_a + 9))], fill=col)
+        d.polygon([(S_(gx), S_(y_b)), (S_(gx - 6), S_(y_b - 9)), (S_(gx + 6), S_(y_b - 9))], fill=col)
+    img = lay.resize((w, h), Image.LANCZOS)
+    img.alpha_composite(ti, (6, 2))
+    if kg > 0:
+        g1, _ = _txt_rgba("GAP", font("label", int(size * 0.95)), PAPER, tracking=2)
+        g2, _ = _txt_rgba("THE LENS NEVER TOUCHES THE TABLE", font("label6", int(size * 0.72)), (206, 202, 196), tracking=1.4)
+        lab = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        lab.alpha_composite(g1, (int(cx1 + 26), int(table_y - lip_h / 2 - g1.height / 2 - lift)))
+        lab.alpha_composite(g2, (int(w - g2.width - 6), int(h - g2.height - 2)))
+        arr = np.asarray(lab).copy()
+        arr[..., 3] = (arr[..., 3] * kg).astype(np.uint8)
+        img.alpha_composite(Image.fromarray(arr, "RGBA"))
+    paste(fr, img, xx, y, a)
+
+
+def heat_waves(fr, t, ax, ay, dur, scale=1.0):
+    """Warm air rising off a vent: three wavy ember wisps drifting up and fading."""
+    if t < 0 or t > dur:
+        return
+    a = ease_out(clamp01(t / 0.4)) * (1 - ease_io(clamp01((t - (dur - 0.4)) / 0.4)))
+    w, h = int(120 * scale), int(190 * scale)
+    lay = _rgba_layer(w, h)
+    d = ImageDraw.Draw(lay)
+    for k in range(3):
+        ph = (t * 0.9 + k / 3.0) % 1.0
+        xo = w * (0.28 + 0.22 * k)
+        pts = []
+        for i in range(24):
+            v = i / 23
+            yy = h * (1 - v) - ph * h * 0.35
+            xx = xo + math.sin(v * 6.0 + t * 5 + k) * 9 * scale * (0.4 + v)
+            pts.append((xx, yy))
+        al = int(235 * (1 - ph) * a)
+        d.line(pts, fill=EMBER_HI + (al,), width=max(3, int(5 * scale)), joint="curve")
+    lay = lay.filter(ImageFilter.GaussianBlur(1.6))
+    paste(fr, lay, ax - w / 2, ay - h + 10 * scale, 1.0)

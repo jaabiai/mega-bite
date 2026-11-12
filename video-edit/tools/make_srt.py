@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Write a YouTube-ready .srt from a project's caption chunks (captions_data.CHUNKS).
 
-usage: make_srt.py --project NAME --out subs.srt [--max-chars 62] [--max-dur 4.5]
+usage: make_srt.py --project NAME --out subs.srt [--max-chars 62] [--max-dur 4.5] [--cut-list WIDE_CUTS]
 
 Neighbouring chunks are merged into one cue while the text stays short, the gap is small and the cue stays
 under --max-dur seconds; cues longer than 42 characters are broken into two balanced lines.  Times follow the
@@ -18,6 +18,30 @@ def load_chunks(project):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return [(c[0], c[1], c[2]) for c in mod.CHUNKS]
+
+
+def remap_chunks(project, chunks, list_name):
+    """Map source-time chunks through the timeline's cut list (exact ranges, as the main edit plays them)."""
+    path = os.path.join(HERE, "..", "projects", project, "timeline.py")
+    spec = importlib.util.spec_from_file_location("timeline", path)
+    tl = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(tl)
+    cuts, u = [], 0.0
+    for a, b in getattr(tl, list_name):
+        cuts.append((u, a, b))
+        u += b - a
+
+    def m(t):
+        for us, a, b in cuts:
+            if a - 0.3 <= t <= b + 0.3:
+                return us + min(max(t, a), b) - a
+        return None
+    out = []
+    for t0, t1, txt in chunks:
+        u0, u1 = m(t0), m(t1)
+        if u0 is not None and u1 is not None and u1 > u0:
+            out.append((u0, u1, txt))
+    return out
 
 
 def merge(chunks, max_chars, max_dur, max_gap=0.25):
@@ -60,8 +84,12 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--max-chars", type=int, default=62)
     ap.add_argument("--max-dur", type=float, default=4.5)
+    ap.add_argument("--cut-list", default=None, help="timeline cut list the chunks are mapped through (e.g. WIDE_CUTS)")
     a = ap.parse_args()
-    cues = merge(load_chunks(a.project), a.max_chars, a.max_dur)
+    chunks = load_chunks(a.project)
+    if a.cut_list:
+        chunks = remap_chunks(a.project, chunks, a.cut_list)
+    cues = merge(chunks, a.max_chars, a.max_dur)
     with open(a.out, "w", encoding="utf-8") as fh:
         for i, (t0, t1, txt) in enumerate(cues, 1):
             fh.write(f"{i}\n{stamp(t0)} --> {stamp(max(t1, t0 + 0.6))}\n{two_lines(txt)}\n\n")

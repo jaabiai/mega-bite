@@ -28,15 +28,19 @@ ap.add_argument("--out", required=True)
 ap.add_argument("--music-lufs", type=float, default=-27.0, help="loudness of the music bed on its own")
 ap.add_argument("--total", type=float, default=None, help="output length in seconds (default: timeline total incl. end card)")
 ap.add_argument("--cuts", action="store_true", help="mix the reel edit: TL.REEL_CUTS (voice cut, events remapped, REEL_EXTRA_SFX)")
+ap.add_argument("--cut-list", default=None, help="mix the main edit through this cut list in the timeline (e.g. WIDE_CUTS): "
+                "voice cut and every timeline event remapped; joins get a whoosh only when TL.<NAME>_JOIN_SFX is true")
 args = ap.parse_args()
 SR = 48000
 TOTAL = args.total if args.total else TL.TOTAL
 NARR_END = TL.NARR_END
 CUTS = None
-if args.cuts:                                         # same padding as render_cine.py
+LIST = getattr(TL, args.cut_list) if args.cut_list else (TL.REEL_CUTS if args.cuts else None)
+PAD = (0.06, 0.10) if args.cuts else (0.0, 0.0)       # reel padding as in the renderers; a main-edit list is exact
+if LIST is not None:
     CUTS, u = [], 0.0
-    for a, b in TL.REEL_CUTS:
-        a, b = max(a - 0.06, 0.0), min(b + 0.10, TL.NARR_END)
+    for a, b in LIST:
+        a, b = max(a - PAD[0], 0.0), min(b + PAD[1], getattr(TL, "SRC_END", TL.NARR_END))
         CUTS.append((u, a, b))
         u += b - a
     NARR_END = u
@@ -141,6 +145,12 @@ for (t0, t1, n, label) in TL.STEPS[1:]:
     events.append((t0, "3005", -17))
 if CUTS is None:
     events += TL.EXTRA_SFX
+elif args.cut_list:
+    events = [(remap(tt), n, g) for tt, n, g in events + list(TL.EXTRA_SFX)]
+    events = [e for e in events if e[0] is not None]
+    if getattr(TL, args.cut_list.replace("_CUTS", "") + "_JOIN_SFX", False):
+        for k, (us, a, b) in enumerate(CUTS[1:]):
+            events.append((us - 0.35, "1492" if k % 2 == 0 else "1491", -12))
 else:
     events = [(remap(tt), n, g) for tt, n, g in events + list(getattr(TL, "BASE_SFX", []))]
     events = [e for e in events if e[0] is not None]

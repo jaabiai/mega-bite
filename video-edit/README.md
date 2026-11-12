@@ -12,6 +12,7 @@ tool takes `--project <name>` (`prep_screen.py` / `render*.py` / `mix_audio.py`)
 | `aadhaar-email-link` | V Create channel: link your email ID to Aadhaar. Cinematic style (`render_cine.py`), illustrated app screens because the app blocks screen recording |
 | `own-ai-assistant` | V Create channel: build your own free AI assistant (Tab). Aurora style (`render_aurora.py`): full-screen 3D title, caption dock, no end card, continuous reel |
 | `call-recording-tone` | V Create channel: record calls without the spoken announcement (Google Phone app, Android). Studio style (`render_studio.py`), Android phone frame, no end card, the reel is the whole talk |
+| `iphone-case-review` | V Create channel: iPhone case review shot as one 4K take. Showcase style (`render_showcase.py`): film grade, virtual camera, 2.39:1 letterbox, tracked feature callouts, no end card, 2-minute reel cut |
 
 A project folder holds `timeline.py` (scenes, screen re-timing, camera, taps, highlights, steps, CTAs, sound effects, grade
 overrides), `captions_data.py` (English caption chunks) and `screen_rules.py` (what to blur / remove in the screen recording).
@@ -98,3 +99,32 @@ aside while a header or the logo sting is on screen. Transitions: push, scan and
 bezels, flat aluminium rails, keys on the right and a punch-hole camera in the top-left corner of the display
 (`phonescene.PhoneScene(device=..., src=...)`). Music "Digital Clouds" (Mixkit 175); clips 42123, 39803, 309;
 SFX 1485, 1491, 1492, 2596, 2350, 2354, 933, 1109.
+
+## Showcase style (V Create, product film)
+
+`render_showcase.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "showcase"`: a single
+4K face-cam take treated as a product film.
+
+* **Grade** (`lib/grade_cine.py`): a colourist-style node chain at output resolution: exposure / white balance, dehaze of the
+  milky background, filmic tone curve with a long highlight shoulder, hue-selective work (skin kept natural and protected
+  from the split tone, loud reds calmed, foliage pushed to olive, sky to cyan), teal shadows / warm highlights, a face power
+  window that follows `face_track.json`, clarity, halation, bloom, vignette and per-frame grain.  `TL.GRADE` trims any
+  parameter.
+* **Virtual camera**: the source is decoded at 2880x1620 and reframed per keyframe (`TL.CAM_WIDE`, `TL.CAM_REEL`:
+  `(t, cx, cy, zoom[, "cut"])`, linear drift between rows, instant change on a `"cut"` row) — slow push-ins, punch-ins on
+  sentence boundaries, and close-ups on the product details.
+* **Edit**: `TL.WIDE_CUTS` / `TL.REEL_CUTS` are the kept source ranges; every timeline time is a source time and the
+  renderer, `mix_audio.py --cut-list WIDE_CUTS` (or `--cuts` for the reel) and `tools/make_srt.py --cut-list WIDE_CUTS` map
+  through them.
+* **Layout**: 16:9 plays in a 2.39:1 letterbox; the bars carry the logo bug, the chapter label (`TL.CHAPTERS`, with a
+  progress hairline), big chapter titles, prompts and the subtitles, so text never sits on the presenter or the product.
+  The 9:16 reel shows a 4:5 window over a blurred extension of the same frame, with the header / product panels above it
+  and subtitles below.
+* **Callouts** (`TL.CALLOUTS`): an ember ring pinned to the product, a leader and a glass label.  Anchor points are
+  tracked with `tools/track_points.py` (Lucas-Kanade on features around a hand-picked seed, forward-backward checked) into
+  `tracks.json`; keep each callout inside the part of the track that holds.
+* **Cards** (`lib/showcase.py`): opening 3D title, "not sponsored" chip, name tag, info rows, lens-protector card,
+  raised-lip side-view diagram, price card (struck MRP, counting price), heat-vent wisps, summary checklist.
+  Unbounded + Barlow Condensed + Inter (SIL OFL); ember / graphite / paper palette taken from the product.
+
+Music "Deep Urban" (Mixkit 623); SFX 1485, 1491, 1492, 2596, 3005, 2350, 2354, 933.
