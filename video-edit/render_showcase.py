@@ -204,9 +204,19 @@ def graded(src, win, ow, oh, grader, T, n):
 
 
 # ---- captions -------------------------------------------------------------------------------------------------
+def _seg_of(T):
+    for us, a, b in CUTS:
+        if a <= T <= b:
+            return a, b
+    return None
+
+
 def active_chunk(T):
     best = None
+    seg = _seg_of(T)
     for i, c in enumerate(CD.CHUNKS):
+        if seg is not None and c[0] > seg[1] - PAD[1] - 0.02:
+            continue                                   # starts after this kept range: never flash it in the padding
         nxt = CD.CHUNKS[i + 1][0] if i + 1 < len(CD.CHUNKS) else 1e9
         if c[0] - 0.05 <= T < min(c[1] + 0.35, nxt - 0.02):
             best = i
