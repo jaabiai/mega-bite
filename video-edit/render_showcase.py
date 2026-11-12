@@ -213,9 +213,9 @@ def active_chunk(T):
     return best
 
 
-def draw_subs(fr, T, cy, size, max_w):
+def draw_subs(fr, T, cy, size, max_w, alpha=1.0):
     i = active_chunk(T)
-    if i is None:
+    if i is None or alpha <= 0.01:
         return
     c = CD.CHUNKS[i]
     wt = CD.word_times(c)
@@ -226,7 +226,7 @@ def draw_subs(fr, T, cy, size, max_w):
             act, age = k, T - ws
     fin = clamp01((T - c[0] + 0.05) / 0.12)
     img = S.subtitle(words, act, age, size, max_w)
-    S.paste(fr, img, (W - img.width) / 2, cy - img.height / 2, fin)
+    S.paste(fr, img, (W - img.width) / 2, cy - img.height / 2, fin * alpha)
 
 
 # ---- chapters / header ----------------------------------------------------------------------------------------
@@ -425,10 +425,11 @@ def finish(fr, u, T, a_ui, win):
             S.letterbox(fr, int(round(BAR * a_ui)))
         draw_top(fr, T, a_ui)
         draw_ctas(fr, T, a_ui)
+        sub_a = clamp01((a_ui - 0.85) / 0.15)           # subtitles wait until the bars / panels are in place
         if REEL:
-            draw_subs(fr, T, PY + PH + 135, 42, 980)
+            draw_subs(fr, T, PY + PH + 135, 42, 980, sub_a)
         else:
-            draw_subs(fr, T, H - BAR / 2, 38, 1640)
+            draw_subs(fr, T, H - BAR / 2, 38, 1640, sub_a)
         s0 = TL.STING_T0
         if s0 <= T < s0 + 3.0:
             if REEL:
