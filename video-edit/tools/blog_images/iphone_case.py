@@ -4,8 +4,9 @@
 usage: iphone_case.py OUT_DIR
 writes hero.jpg (1280x720), features.jpg (1280x1000), camera-lip.jpg (1280x620), price.jpg (1280x640)
 
-The case is drawn as a flat vector illustration in the product's colours (sage-grey shell, ember accents): a raised
-camera island with three lenses, MagSafe ring, dotted heat vents, button covers on the sides, thicker corners.
+The case is drawn as a flat vector illustration of the actual design (charcoal shell, camera window showing the phone's
+finish with three lenses and a white chevron, flash / LiDAR / triangle vent, ember strips, octagonal textured panel with a
+MagSafe ring and oval, corner vents with ember stripes, bumper corners).
 """
 import math, os, sys
 import numpy as np
@@ -76,87 +77,139 @@ def tracked(d, xy, s, ft, fill, tr):
 
 
 # ---------------------------------------------------------------------------------------------- the case
+CH = (78, 81, 87)          # charcoal shell
+CH_D = (48, 50, 55)
+CH_L = (122, 126, 133)
+PANEL = (60, 63, 68)
+CREAM = (233, 221, 198)    # the phone's own finish, seen through the camera window
+
+
+def _dots(d, P, S, pts_fn, x0, y0, x1, y1, step, r, fill):
+    y = y0
+    row = 0
+    while y <= y1:
+        x = x0 + (step / 2 if row % 2 else 0)
+        while x <= x1:
+            if pts_fn(x, y):
+                d.ellipse([*P(x - r, y - r), *P(x + r, y + r)], fill=fill)
+            x += step
+        y += step * 0.87
+        row += 1
+
+
+def _in_tri(a, b, c):
+    def f(x, y):
+        def sgn(p1, p2, p3):
+            return (p1[0] - p3[0]) * (p2[1] - p3[1]) - (p2[0] - p3[0]) * (p1[1] - p3[1])
+        d1, d2, d3 = sgn((x, y), a, b), sgn((x, y), b, c), sgn((x, y), c, a)
+        neg = d1 < 0 or d2 < 0 or d3 < 0
+        pos = d1 > 0 or d2 > 0 or d3 > 0
+        return not (neg and pos)
+    return f
+
+
 def case_back(h=1100):
-    """Back view of the case (portrait), RGBA, height h.  Returns (img, anchors) with anchors in image px."""
+    """Back view of the case as sold (charcoal shell, camera window showing the phone's cream finish, three lenses,
+    white chevron strips, flash / LiDAR / triangle vent, ember strips, octagonal textured panel with MagSafe ring and
+    oval, corner vents with ember stripes, bumper corners).  RGBA at height h; returns (img, anchors)."""
     ss = 2
-    W0, H0 = 560, 1140                       # design units
+    W0, H0 = 560, 1140
     k = h / H0
     S = lambda v: v * k * ss
     W, H = int(W0 * k), int(H0 * k)
-    im = Image.new("RGBA", (W * ss + 4 * ss, H * ss), (0, 0, 0, 0))
-    d = ImageDraw.Draw(im)
-    ox = 2 * ss
+    pad = 6
+    im = Image.new("RGBA", (W * ss + 2 * pad * ss, H * ss), (0, 0, 0, 0))
+    ox = pad * ss
     P = lambda x, y: (ox + S(x), S(y))
-    # side button covers (behind the shell): right edge = phone's left side seen from the back
-    for (y0, y1) in ((250, 312), (360, 450), (480, 570)):
-        d.rounded_rectangle([*P(W0 - 14, y0), *P(W0 + 1, y1)], radius=S(6), fill=SAGE_D)
-    for (y0, y1) in ((360, 500), (760, 830)):
-        d.rounded_rectangle([*P(-1, y0), *P(14, y1)], radius=S(6), fill=SAGE_D)
-    # shell with a vertical gradient
+    d = ImageDraw.Draw(im)
+    # button covers (behind the shell): right edge = action + volume, left edge = power + camera control
+    for (y0, y1) in ((236, 296), (330, 420), (446, 536)):
+        d.rounded_rectangle([*P(W0 - 16, y0), *P(W0 + 3, y1)], radius=S(7), fill=CH_D)
+    for (y0, y1) in ((330, 450), (610, 690)):
+        d.rounded_rectangle([*P(-3, y0), *P(16, y1)], radius=S(7), fill=CH_D)
+    # shell with a soft vertical gradient
     shell = Image.new("L", im.size, 0)
-    ImageDraw.Draw(shell).rounded_rectangle([*P(6, 0), *P(W0 - 6, H0)], radius=S(92), fill=255)
+    ImageDraw.Draw(shell).rounded_rectangle([*P(6, 0), *P(W0 - 6, H0)], radius=S(98), fill=255)
     grad = np.zeros((im.size[1], im.size[0], 4), np.uint8)
     t = np.linspace(0, 1, im.size[1])[:, None]
     for c in range(3):
-        grad[..., c] = (SAGE_L[c] * (1 - t) * 0.35 + SAGE[c] * (1 - t) * 0.65 + SAGE_D[c] * t).astype(np.uint8)
+        grad[..., c] = (CH_L[c] * 0.25 * (1 - t) + CH[c] * (1 - 0.25 * (1 - t)) * (1 - 0.18 * t)).astype(np.uint8)
     grad[..., 3] = 255
     im.paste(Image.fromarray(grad, "RGBA"), (0, 0), shell)
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle([*P(6, 0), *P(W0 - 6, H0)], radius=S(92), outline=(84, 96, 90), width=int(S(5)))
-    d.rounded_rectangle([*P(22, 16), *P(W0 - 22, H0 - 16)], radius=S(78), outline=(176, 190, 181), width=int(S(3)))
-    # thicker corners (drop protection)
-    for cx, cy, a0 in ((6, 0, 180), (W0 - 6, 0, 270), (6, H0, 90), (W0 - 6, H0, 0)):
-        bx = (cx - 4 if cx < W0 / 2 else cx - 180 + 4)
-        by = (cy - 4 if cy < H0 / 2 else cy - 180 + 4)
-        d.arc([*P(bx, by), *P(bx + 184, by + 184)], start=a0, end=a0 + 90, fill=(74, 86, 80), width=int(S(10)))
-    # camera island (raised plate)
-    isl = [*P(44, 40), *P(404, 400)]
+    d.rounded_rectangle([*P(6, 0), *P(W0 - 6, H0)], radius=S(98), outline=(36, 38, 42), width=int(S(5)))
+    d.rounded_rectangle([*P(18, 12), *P(W0 - 18, H0 - 12)], radius=S(86), outline=(112, 116, 123), width=int(S(3)))
+    d.rounded_rectangle([*P(30, 24), *P(W0 - 30, H0 - 24)], radius=S(74), outline=(58, 61, 66), width=int(S(2)))
+    # bumper corners (air-cushion style)
+    for (bx, by, a0) in ((6, 0, 180), (W0 - 6 - 196, 0, 270), (6, H0 - 196, 90), (W0 - 6 - 196, H0 - 196, 0)):
+        d.arc([*P(bx, by), *P(bx + 196, by + 196)], start=a0 + 12, end=a0 + 78, fill=(140, 144, 151), width=int(S(4)))
+    # camera island: raised plate with a lip
+    isl = (40, 38, 520, 404)
     sh = Image.new("RGBA", im.size, (0, 0, 0, 0))
-    ImageDraw.Draw(sh).rounded_rectangle([isl[0] + S(6), isl[1] + S(10), isl[2] + S(6), isl[3] + S(10)], radius=S(70), fill=(0, 0, 0, 120))
-    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(S(8))))
+    ImageDraw.Draw(sh).rounded_rectangle([*P(isl[0] + 4, isl[1] + 12), *P(isl[2] + 4, isl[3] + 14)], radius=S(66), fill=(0, 0, 0, 150))
+    im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(S(9))))
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle(isl, radius=S(70), fill=(168, 181, 172), outline=(92, 104, 98), width=int(S(5)))
-    d.rounded_rectangle([isl[0] + S(16), isl[1] + S(16), isl[2] - S(16), isl[3] - S(16)], radius=S(56),
-                        outline=(204, 214, 207), width=int(S(3)))
-    # X pattern
-    d.line([*P(230, 120), *P(300, 210)], fill=(222, 230, 225), width=int(S(9)))
-    d.line([*P(300, 280), *P(230, 350)], fill=(222, 230, 225), width=int(S(9)))
-    # dotted vent triangle in the island
-    for i in range(9):
-        for j in range(9):
-            if i + j < 9:
-                x = 250 + i * 14 + (j % 2) * 7
-                y = 360 - j * 13
-                d.ellipse([*P(x - 3.2, y - 3.2), *P(x + 3.2, y + 3.2)], fill=(74, 84, 80))
-    # lenses
-    for (lx, ly, r) in ((136, 130, 66), (136, 300, 66), (262, 216, 66)):
-        d.ellipse([*P(lx - r - 10, ly - r - 10), *P(lx + r + 10, ly + r + 10)], fill=(196, 202, 206), outline=(120, 126, 132), width=int(S(3)))
-        d.ellipse([*P(lx - r, ly - r), *P(lx + r, ly + r)], fill=(24, 27, 32))
-        d.ellipse([*P(lx - r * 0.55, ly - r * 0.55), *P(lx + r * 0.55, ly + r * 0.55)], fill=(10, 12, 16), outline=(60, 70, 90), width=int(S(2)))
-        d.ellipse([*P(lx - r * 0.38, ly - r * 0.52), *P(lx - r * 0.08, ly - r * 0.22)], fill=(150, 170, 205))
-    d.ellipse([*P(342, 92), *P(384, 134)], fill=(236, 232, 214), outline=(140, 140, 130), width=int(S(2)))       # flash
-    d.ellipse([*P(357, 172), *P(369, 184)], fill=(40, 44, 48))                                                    # mic
-    d.ellipse([*P(336, 300), *P(382, 346)], fill=(20, 22, 26), outline=(110, 116, 122), width=int(S(2)))       # LiDAR
-    # ember accents
-    d.rounded_rectangle([*P(36, 150), *P(48, 250)], radius=S(5), fill=EMBER)
-    d.rounded_rectangle([*P(400, 200), *P(412, 300)], radius=S(5), fill=EMBER)
-    d.line([*P(430, 600), *P(500, 690)], fill=EMBER, width=int(S(11)))
-    # dotted vent bottom right of the shell
-    for i in range(7):
-        for j in range(5):
-            x = 430 + i * 14 + (j % 2) * 7
-            y = 720 + j * 14
-            d.ellipse([*P(x - 3.2, y - 3.2), *P(x + 3.2, y + 3.2)], fill=(84, 96, 90))
-    # MagSafe ring
-    cx, cy, r = 280, 760, 190
-    d.ellipse([*P(cx - r, cy - r), *P(cx + r, cy + r)], outline=(96, 108, 102), width=int(S(16)))
-    d.ellipse([*P(cx - r + 30, cy - r + 30), *P(cx + r - 30, cy + r - 30)], outline=(160, 172, 165), width=int(S(4)))
-    d.rounded_rectangle([*P(cx - 16, cy + r + 20), *P(cx + 16, cy + r + 66)], radius=S(8), fill=(110, 122, 116))
-    im = im.resize((W + 4, H), Image.LANCZOS)
+    d.rounded_rectangle([*P(*isl[:2]), *P(*isl[2:])], radius=S(66), fill=(96, 100, 107), outline=(34, 36, 40), width=int(S(6)))
+    d.rounded_rectangle([*P(isl[0] + 14, isl[1] + 14), *P(isl[2] - 14, isl[3] - 14)], radius=S(54),
+                        outline=(140, 145, 152), width=int(S(3)))
+    # camera window (phone finish) bounded on the right by the white chevron
+    win = [(70, 66), (300, 66), (356, 221), (300, 376), (70, 376)]
+    m = Image.new("L", im.size, 0)
+    ImageDraw.Draw(m).polygon([P(x, y) for x, y in win], fill=255)
+    rr = Image.new("L", im.size, 0)
+    ImageDraw.Draw(rr).rounded_rectangle([*P(70, 66), *P(420, 376)], radius=S(44), fill=255)
+    m = Image.fromarray(np.minimum(np.asarray(m), np.asarray(rr)))
+    cream = np.zeros((im.size[1], im.size[0], 4), np.uint8)
+    tt = np.linspace(0, 1, im.size[0])[None, :]
+    for c in range(3):
+        cream[..., c] = (CREAM[c] * (1.02 - 0.10 * tt)).clip(0, 255).astype(np.uint8)
+    cream[..., 3] = 255
+    im.paste(Image.fromarray(cream, "RGBA"), (0, 0), m)
+    d = ImageDraw.Draw(im)
+    for (lx, ly, r) in ((152, 138, 66), (152, 304, 66), (262, 221, 66)):
+        d.ellipse([*P(lx - r - 7, ly - r - 7), *P(lx + r + 7, ly + r + 7)], fill=(30, 31, 34))
+        d.ellipse([*P(lx - r, ly - r), *P(lx + r, ly + r)], fill=(14, 15, 18), outline=(70, 74, 82), width=int(S(2)))
+        d.ellipse([*P(lx - r * 0.5, ly - r * 0.5), *P(lx + r * 0.5, ly + r * 0.5)], fill=(8, 9, 12), outline=(48, 58, 82), width=int(S(2)))
+        d.ellipse([*P(lx - r * 0.34, ly - r * 0.46), *P(lx - r * 0.08, ly - r * 0.20)], fill=(120, 150, 205))
+    d.line([*P(312, 82), *P(364, 204)], fill=(236, 236, 234), width=int(S(11)))
+    d.line([*P(364, 238), *P(312, 360)], fill=(236, 236, 234), width=int(S(11)))
+    # right side of the island: flash, mic, LiDAR, triangle vent
+    d.ellipse([*P(414, 88), *P(470, 144)], fill=(40, 40, 42))
+    d.ellipse([*P(422, 96), *P(462, 136)], fill=(236, 200, 70))
+    d.rounded_rectangle([*P(430, 168), *P(452, 196)], radius=S(10), fill=(40, 42, 46))
+    d.ellipse([*P(410, 286), *P(470, 346)], fill=(16, 17, 20), outline=(70, 74, 80), width=int(S(2)))
+    tri = ((350, 376), (412, 376), (381, 316))
+    _dots(d, P, S, _in_tri(*tri), 350, 318, 412, 374, 10, 2.8, (34, 36, 40))
+    d.rounded_rectangle([*P(46, 170), *P(58, 262)], radius=S(5), fill=EMBER)
+    d.rounded_rectangle([*P(502, 196), *P(514, 288)], radius=S(5), fill=EMBER)
+    # octagonal textured panel
+    oct_ = [(142, 452), (418, 452), (488, 522), (488, 1012), (418, 1082), (142, 1082), (72, 1012), (72, 522)]
+    d.polygon([P(x, y) for x, y in oct_], fill=PANEL, outline=(40, 42, 46))
+    tex = Image.new("L", im.size, 0)
+    ImageDraw.Draw(tex).polygon([P(x, y) for x, y in oct_], fill=255)
+    dots = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    _dots(ImageDraw.Draw(dots), P, S, lambda x, y: True, 72, 452, 488, 1082, 9, 1.7, (44, 46, 51, 255))
+    im.paste(dots, (0, 0), Image.fromarray(np.minimum(np.asarray(tex), np.asarray(dots.split()[3]))))
+    d = ImageDraw.Draw(im)
+    for (x, y) in ((150, 474), (410, 474), (466, 530), (466, 1004), (410, 1060), (150, 1060), (94, 1004), (94, 530)):
+        d.ellipse([*P(x - 7, y - 7), *P(x + 7, y + 7)], fill=(36, 38, 42), outline=(104, 108, 114), width=int(S(1.5)))
+    # corner vents with ember stripes (top-right and bottom-left chamfers)
+    _dots(d, P, S, _in_tri((436, 446), (512, 446), (512, 522)), 436, 446, 512, 522, 10, 2.8, (30, 32, 36))
+    d.line([*P(410, 474), *P(470, 534)], fill=EMBER, width=int(S(10)))
+    _dots(d, P, S, _in_tri((48, 1012), (48, 1090), (126, 1090)), 48, 1012, 126, 1090, 10, 2.8, (30, 32, 36))
+    d.line([*P(92, 1000), *P(150, 1058)], fill=EMBER, width=int(S(10)))
+    # MagSafe ring and the oval below it
+    cx, cy, r = 280, 712, 168
+    d.ellipse([*P(cx - r - 10, cy - r - 10), *P(cx + r + 10, cy + r + 10)], fill=(42, 44, 49))
+    d.ellipse([*P(cx - r + 26, cy - r + 26), *P(cx + r - 26, cy + r - 26)], fill=(66, 69, 75), outline=(96, 100, 107), width=int(S(2)))
+    d.arc([*P(cx - r - 4, cy - r - 4), *P(cx + r + 4, cy + r + 4)], start=200, end=320, fill=(120, 124, 131), width=int(S(3)))
+    d.rounded_rectangle([*P(256, 924), *P(304, 1022)], radius=S(24), fill=(52, 54, 59), outline=(96, 100, 107), width=int(S(2)))
+    im = im.resize((W + 2 * pad, H), Image.LANCZOS)
+    A = lambda x, y: (x * k + pad, y * k)
     anchors = {
-        "action": ((W0 + 1) * k + 2, 281 * k), "buttons": ((W0 + 1) * k + 2, 465 * k),
-        "lip": (44 * k + 2, 380 * k), "lens": (262 * k + 2, 216 * k), "magsafe": ((cx - r) * k + 2, cy * k),
-        "vent": (480 * k + 2, 748 * k), "corner": (40 * k + 2, (H0 - 40) * k), "island": (230 * k + 2, 40 * k),
+        "lens": A(152, 138), "lip": A(isl[0] + 3, 300), "action": A(W0 + 2, 266), "buttons": A(W0 + 2, 375),
+        "magsafe": A(cx - r - 6, cy + 40), "grip": A(420, 860), "vent": A(488, 470), "corner": A(30, H0 - 40),
+        "island": A(280, isl[1]),
     }
     return im, anchors
 
@@ -204,7 +257,8 @@ def callout(img, ax, ay, tx, ty, n, title, sub, align="left"):
 # ---------------------------------------------------------------------------------------------- 1. hero
 def hero():
     W, H = 1280, 720
-    img = backdrop(W, H, glows=((0.74, 0.45, 0.50, EMBER, 0.26), (0.10, 0.90, 0.5, SAGE, 0.10)))
+    img = backdrop(W, H, glows=((0.74, 0.40, 0.48, (255, 150, 70), 0.34), (0.86, 0.08, 0.40, (255, 205, 120), 0.16),
+                                (0.10, 0.90, 0.5, SAGE, 0.06)))
     case, _ = case_back(620)
     case = rotate(case, -14)
     shadow(img, Image.new("RGBA", img.size), 0, 0, 1, 0)
@@ -236,7 +290,7 @@ def hero():
 # ---------------------------------------------------------------------------------------------- 2. features
 def features():
     W, H = 1280, 1000
-    img = backdrop(W, H, glows=((0.5, 0.45, 0.45, EMBER, 0.14), (0.5, 1.0, 0.6, SAGE, 0.10)))
+    img = backdrop(W, H, glows=((0.5, 0.42, 0.45, (255, 150, 70), 0.22), (0.5, 1.0, 0.6, (255, 205, 120), 0.08)))
     case, A = case_back(820)
     x0, y0 = (W - case.width) // 2, 120
     lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
@@ -248,12 +302,13 @@ def features():
     P = lambda k: (x0 + A[k][0], y0 + A[k][1])
     items = [
         ("lens", (380, 150), 1, "Camera design", "Perfectly designed camera area", "right"),
-        ("action", (930, 250), 2, "Action button", "Covered, not left open", "left"),
-        ("corner", (380, 860), 3, "Drop protection", "Built to take a fall", "right"),
+        ("action", (930, 230), 2, "Action button", "Covered, not left open", "left"),
+        ("corner", (380, 900), 3, "Drop protection", "Built to take a fall", "right"),
         ("lip", (380, 360), 4, "Raised camera lip", "Lens stays off the table", "right"),
-        ("magsafe", (380, 620), 5, "MagSafe", "Supported", "right"),
-        ("buttons", (930, 440), 6, "Button grip", "Good grip on every button", "left"),
-        ("vent", (930, 760), 7, "Heat vents", "Let warm air escape", "left"),
+        ("magsafe", (380, 650), 5, "MagSafe", "Supported", "right"),
+        ("buttons", (930, 380), 6, "Button grip", "Good grip on every button", "left"),
+        ("vent", (930, 540), 7, "Heat vents", "Let warm air escape", "left"),
+        ("grip", (930, 800), 8, "Textured back", "Satisfying to hold", "left"),
     ]
     for key, (tx, ty), n, t1, t2, al in items:
         ax, ay = P(key)
@@ -280,8 +335,8 @@ def camera_lip():
         dl.line([S(x), S(table_y + 10), S(x - 22), S(table_y + 60)], fill=(70, 60, 54, 255), width=S(2))
     lip_h, bump_h, slab = 70, 14, 78
     bot = table_y - lip_h
-    dl.rounded_rectangle([S(140), S(bot - slab), S(1140), S(bot)], radius=S(26), fill=SAGE + (255,), outline=(208, 220, 212, 255), width=S(3))
-    dl.rounded_rectangle([S(160), S(bot - slab + 12), S(1120), S(bot - 10)], radius=S(18), outline=(120, 134, 126, 255), width=S(2))
+    dl.rounded_rectangle([S(140), S(bot - slab), S(1140), S(bot)], radius=S(26), fill=CH + (255,), outline=(150, 154, 161, 255), width=S(3))
+    dl.rounded_rectangle([S(160), S(bot - slab + 12), S(1120), S(bot - 10)], radius=S(18), outline=(60, 63, 68, 255), width=S(2))
     cx0, cx1 = 230, 560
     dl.rectangle([S(cx0), S(bot), S(cx1), S(bot + bump_h)], fill=(58, 60, 64, 255))
     for k in range(3):
@@ -304,6 +359,7 @@ def camera_lip():
     tracked(d, (770, 218), "RAISED BORDER TOUCHES FIRST", LAB(30), EMBER_HI, 2)
     d.text((770, 258), "the lenses never scrape the surface", font=BODY(24), fill=(214, 210, 204))
     tracked(d, (60, 560), "NO LENS PROTECTOR NEEDED  ·  NO SCRATCHES", LAB(28), (190, 186, 180), 3)
+    d.text((1220, 566), "Brand spec: 1.5 mm raised camera lip", font=BODY(20), fill=(150, 146, 140), anchor="ra")
     return img.convert("RGB")
 
 
