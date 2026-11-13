@@ -67,13 +67,20 @@ def u_to_T(u):
 
 # ---- layout ---------------------------------------------------------------------------------------------------
 if REEL:
+    # 9:16 layout built around the Reels / Shorts safe zone: the platform UI covers the top ~220 px, the bottom ~420 px
+    # and a button column on the right (x > ~940 from y ~1000).  Text lives only inside x 48..940, y 236..1500.
     BAR = 0
-    PX, PY, PW, PH = 0, 300, 1080, 1350
+    PX, PY, PW, PH = 40, 484, 1000, 880                          # picture card (rounded, shadowed)
+    SAFE_L, SAFE_R = 48, 940
+    SAFE_CX = (SAFE_L + SAFE_R) / 2
+    ROW1_Y, PANEL_Y = 240, 318                                   # logo + chapter row, panel / big-title row
+    SUB_Y = 1432                                                 # subtitle block centre (between card and bottom zone)
+    REEL_ZOOM = getattr(TL, "REEL_ZOOM", 1.12)                   # the card is wider than 4:5: punch in to keep the phone big
 else:
     BAR = S.bar_h(W, H)
     PX, PY, PW, PH = 0, BAR, W, H - 2 * BAR
 TITLE_END = TL.TITLE_END
-TITLE = S.title3d(W, H, TL.TITLE_BEATS_REEL if REEL else TL.TITLE_BEATS, box=(0.86, 0.40) if REEL else (0.80, 0.56))
+TITLE = S.title3d(W, H, TL.TITLE_BEATS_REEL if REEL else TL.TITLE_BEATS, box=(0.76, 0.32) if REEL else (0.80, 0.56))
 GRADE_PIC = G.Grader(PW, PH, getattr(TL, "GRADE", {}))
 GRADE_FULL = G.Grader(W, H, getattr(TL, "GRADE", {}))
 
@@ -223,7 +230,7 @@ def active_chunk(T):
     return best
 
 
-def draw_subs(fr, T, cy, size, max_w, alpha=1.0):
+def draw_subs(fr, T, cy, size, max_w, alpha=1.0, cx=None):
     i = active_chunk(T)
     if i is None or alpha <= 0.01:
         return
@@ -236,7 +243,7 @@ def draw_subs(fr, T, cy, size, max_w, alpha=1.0):
             act, age = k, T - ws
     fin = clamp01((T - c[0] + 0.05) / 0.12)
     img = S.subtitle(words, act, age, size, max_w)
-    S.paste(fr, img, (W - img.width) / 2, cy - img.height / 2, fin * alpha)
+    S.paste(fr, img, (W / 2 if cx is None else cx) - img.width / 2, cy - img.height / 2, fin * alpha)
 
 
 # ---- chapters / header ----------------------------------------------------------------------------------------
@@ -257,7 +264,7 @@ def draw_top(fr, T, a_ui):
     sting_on = s0 <= T < s0 + 2.9
     bug_a = a_ui * (0.0 if (sting_on and T < s0 + 2.75) else 1.0)
     if REEL:
-        bx, by, bs = 40, 54, 56
+        bx, by, bs = SAFE_L, ROW1_Y, 48
     else:
         bx, by, bs = 40, BAR // 2 - 22, 44
     S.draw_bug(fr, bx, by, bug_a, size=bs)
@@ -270,15 +277,14 @@ def draw_top(fr, T, a_ui):
     bt = 0.0
     if card:
         if REEL:
-            bt = S.bar_title(fr, T - t_ch, ci + 1, card, W / 2, 205, size=44, dur=2.6)
+            bt = S.bar_title(fr, T - t_ch, ci + 1, card, SAFE_CX, PANEL_Y + 74, size=40, dur=2.6)
         else:
             bt = S.bar_title(fr, T - t_ch, ci + 1, card, W / 2, BAR / 2 - 4, size=50, dur=2.6)
     ha = a_ui * (1 - (bt if (card and T - t_ch < 2.6) else 0.0)) * ease_out(clamp01((T - t_ch) / 0.4 if not card else 1.0))
     if card and T - t_ch < 2.6:
         ha = a_ui * (ease_out(clamp01((T - t_ch - 2.3) / 0.3)))
     if REEL:
-        if not panel_active(T):
-            S.draw_header(fr, 40, 196, ci + 1, len(CH), name, alpha=ha, size=26, progress=prog, width=1)
+        S.draw_header(fr, 0, ROW1_Y + 10, ci + 1, len(CH), name, alpha=ha, size=22, right=SAFE_R - 8, progress=prog, width=1)
     else:
         S.draw_header(fr, 0, BAR // 2 - 16, ci + 1, len(CH), name, alpha=ha, size=24, right=W - 48, progress=prog, width=1)
 
@@ -292,7 +298,7 @@ def draw_ctas(fr, T, a_ui):
         if t < 0 or t > 4.0:
             continue
         if REEL:
-            x, y, s = 560, 60, 0.72
+            x, y, s = SAFE_L, PANEL_Y + 82, 0.70
         else:
             x, y, s = W / 2 - 205, BAR / 2 - 31, 0.80
         if what == "subscribe":
@@ -332,7 +338,8 @@ def draw_graphics(fr, T, win):
             S.pin_line(fr, T - t0, ax, ay, tx, ty, dur=t1 - t0)
             continue
         dd = (dist[0] * (0.75 if REEL else 1.0), dist[1] * (0.75 if REEL else 1.0))
-        S.callout(fr, T - t0, ax, ay, idx, label, sub, side=side, dist=dd, size=sz, dur=t1 - t0, clip=(PY, PY + PH))
+        S.callout(fr, T - t0, ax, ay, idx, label, sub, side=side, dist=dd, size=sz, dur=t1 - t0, clip=(PY, PY + PH),
+                  xmax=(SAFE_R if REEL else None))
     for (t0, t1, name) in getattr(TL, "HEAT_WAVES", []):
         if t0 <= T < t1:
             p = track_at(name, T)
@@ -342,13 +349,13 @@ def draw_graphics(fr, T, win):
 
     if REEL:
         a, b = TL.INFO_CARD
-        S.info_rows(fr, T - a, 44, 122, [("5 COLOURS", "plus a transparent version"), ("iPHONE 13+", "and newer models")],
-                    b - a, size=30)
+        S.info_rows(fr, T - a, SAFE_L + 4, PANEL_Y + 6, [("5 COLOURS", "plus a transparent version"),
+                                                         ("iPHONE 13+", "and newer models")], b - a, size=26)
         a, b = TL.LIP_DIAGRAM
-        S.lip_diagram(fr, T - a, 40, 116, b - a, w=400, size=22)
+        S.lip_diagram(fr, T - a, SAFE_L, PANEL_Y - 4, b - a, w=340, size=20)
         a, b, mrp, price, note = TL.PRICE
-        S.price_card(fr, T - a, 44, 124, mrp, price, note=note, size=0.70, dur=b - a)
-        S.chip(fr, T - 199.61, 40, 132, "Link in the description", 4.1, size=28)
+        S.price_card(fr, T - a, SAFE_L + 4, PANEL_Y + 6, mrp, price, note=note, size=0.62, dur=b - a)
+        S.chip(fr, T - 199.61, SAFE_L, PANEL_Y + 8, "Link in the description", 4.1, size=26)
         return
 
     a, b = TL.NOT_SPONSORED
@@ -396,19 +403,40 @@ def render(u):
         if t_open >= 0:
             k = ease_io(clamp01(t_open / 0.55))
             if REEL:
-                win = window(cx, cy, z, PW / PH, True)
+                win = window(cx, cy, z * REEL_ZOOM, PW / PH, True)
                 lay = layout_reel(src, win, T, n)
                 fr = fr * (1 - k) + lay * k
             else:
                 S.letterbox(fr, int(round(BAR * k)))
         return finish(fr, u, T, max(0.0, clamp01(t_open / 0.55)) if t_open >= 0 else 0.0,
-                      window(cx, cy, z, PW / PH, REEL))
-    win = window(cx, cy, z, PW / PH, REEL)
+                      window(cx, cy, z * (REEL_ZOOM if REEL else 1.0), PW / PH, REEL))
+    win = window(cx, cy, z * (REEL_ZOOM if REEL else 1.0), PW / PH, REEL)
     if REEL:
         fr = layout_reel(src, win, T, n)
     else:
         fr[PY:PY + PH] = graded(src, win, PW, PH, GRADE_PIC, T, n)
     return finish(fr, u, T, 1.0, win)
+
+
+_CARD = {}
+
+
+def _card_masks():
+    """Anti-aliased rounded-card alpha, its drop shadow and a thin warm rim (cached)."""
+    if not _CARD:
+        r, ss = 34, 3
+        m = np.zeros((PH * ss, PW * ss), np.uint8)
+        cv2.rectangle(m, (r * ss, 0), ((PW - r) * ss, PH * ss), 255, -1)
+        cv2.rectangle(m, (0, r * ss), (PW * ss, (PH - r) * ss), 255, -1)
+        for cx_, cy_ in ((r, r), (PW - r, r), (r, PH - r), (PW - r, PH - r)):
+            cv2.circle(m, (cx_ * ss, cy_ * ss), r * ss, 255, -1, lineType=cv2.LINE_AA)
+        alpha = cv2.resize(m, (PW, PH), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
+        shadow = np.zeros((H, W), np.float32)
+        shadow[PY + 18:PY + PH + 18, PX:PX + PW] = alpha
+        shadow = cv2.GaussianBlur(shadow, (0, 0), 26)
+        er = cv2.erode(alpha, np.ones((3, 3), np.uint8))
+        _CARD.update(alpha=alpha[..., None], shadow=shadow[..., None], rim=np.clip(alpha - er, 0, 1)[..., None])
+    return _CARD
 
 
 def layout_reel(src, win, T, n):
@@ -420,10 +448,14 @@ def layout_reel(src, win, T, n):
     bg = cv2.resize(bg, (W, H), interpolation=cv2.INTER_LINEAR)
     g = bg.mean(-1, keepdims=True)
     fr[:] = (bg * 0.45 + g * 0.55) * 0.30 + np.array(S.INK, np.float32) / 255 * 0.45
-    fr[PY:PY + PH] = graded(src, win, PW, PH, GRADE_PIC, T, n)
-    hair = np.array((90, 66, 50), np.float32) / 255
-    fr[PY - 1:PY] = hair
-    fr[PY + PH:PY + PH + 1] = hair
+    yy = np.linspace(0, 1, H, dtype=np.float32)[:, None, None]
+    fr *= 1 - 0.35 * np.clip((yy - 0.78) / 0.22, 0, 1)             # calmer bottom zone under the platform caption
+    M = _card_masks()
+    fr *= 1 - 0.55 * M["shadow"]
+    pic = graded(src, win, PW, PH, GRADE_PIC, T, n)
+    sub = fr[PY:PY + PH, PX:PX + PW]
+    sub[:] = sub * (1 - M["alpha"]) + pic * M["alpha"]
+    sub[:] = sub * (1 - 0.8 * M["rim"]) + np.array((150, 112, 88), np.float32) / 255 * 0.8 * M["rim"]
     return fr
 
 
@@ -437,13 +469,13 @@ def finish(fr, u, T, a_ui, win):
         draw_ctas(fr, T, a_ui)
         sub_a = clamp01((a_ui - 0.85) / 0.15)           # subtitles wait until the bars / panels are in place
         if REEL:
-            draw_subs(fr, T, PY + PH + 135, 42, 980, sub_a)
+            draw_subs(fr, T, SUB_Y, 40, SAFE_R - SAFE_L - 20, sub_a, cx=SAFE_CX)
         else:
             draw_subs(fr, T, H - BAR / 2, 38, 1640, sub_a)
         s0 = TL.STING_T0
         if s0 <= T < s0 + 3.0:
             if REEL:
-                A.draw_sting(fr, T - s0, W / 2, PY + 240, size=150, bug=(40, 54, 56), name=True)
+                A.draw_sting(fr, T - s0, SAFE_CX, PY + PH / 2, size=180, bug=(SAFE_L, ROW1_Y, 48), name=True)
             else:
                 A.draw_sting(fr, T - s0, 400, PY + PH / 2, size=210, bug=(40, BAR // 2 - 22, 44), name=True)
     fade = clamp01((OUT_TOTAL - u) / 0.6)

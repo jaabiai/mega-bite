@@ -227,7 +227,7 @@ def pin_line(fr, t, ax, ay, tx, ty, alpha=1.0, dur=None):
 
 
 def callout(fr, t, ax, ay, idx, label, sub=None, side="right", dist=(150, -70), alpha=1.0, size=30, dur=None,
-            clip=None):
+            clip=None, xmax=None):
     """Pinned feature callout.  (ax, ay) = anchor on the product in frame pixels, t = seconds since the callout began.
     The ring pops (0-0.25 s), the leader draws (0.15-0.45 s), the card wipes in (0.35-0.7 s); `dur` fades it out over
     its last 0.3 s.  clip = (y0, y1) keeps the card inside the picture area."""
@@ -272,7 +272,7 @@ def callout(fr, t, ax, ay, idx, label, sub=None, side="right", dist=(150, -70), 
     cw = pad + t_num.width + int(size * 0.45) + max(t_lab.width, t_sub.width if t_sub else 0) + pad
     chh = pad + t_lab.height + (t_sub.height + 2 if t_sub else 0) + pad - 6
     cx0 = ex + (10 if sgn > 0 else -10 - cw)
-    cx0 = min(max(cx0, 24), W - cw - 24)
+    cx0 = min(max(cx0, 24), (W if xmax is None else xmax) - cw - 24)
     cy0 = ey - chh / 2
     if clip is not None:
         cy0 = min(max(cy0, clip[0] + 14), clip[1] - chh - 14)

@@ -70,18 +70,22 @@ iphone case, iphone case malayalam, best iphone case, iphone cover malayalam, ma
 
 ## Short / Reel
 
+The 9:16 file follows the Reels / Shorts safe zone: no text in the top ~220 px, the bottom ~420 px or the right-hand
+button column, so the platform UI never covers a subtitle, label or price.
+
 **YouTube Short title** `iPhone-ന് ഈ കവർ ഒന്ന് നോക്കൂ 🔥 Action Button വരെ കവർ, ₹520 മുതൽ #shorts`
 
 **Short description**
 ```
 Action Button കവർ, ഉയർന്ന ക്യാമറ ബോർഡർ, MagSafe, ഹീറ്റ് വെന്റുകൾ: ₹520 മുതൽ, iPhone 13 മുതലുള്ള മോഡലുകൾക്ക്.
-🛒 ലിങ്ക്: [product link]
-▶️ പൂർണ്ണ റിവ്യൂ: [main video link]
+🛒 Flipkart (iPhone 17 Pro / 18 Pro): https://dl.flipkart.com/s/1MQHI5NNNN
+▶️ പൂർണ്ണ റിവ്യൂ: https://youtu.be/W-PhjnONWvA
 #Shorts #iPhoneCase #MalayalamTech
 ```
 Set **Related video** to the main video.
 
-**Instagram / Facebook Reel caption**
+**Instagram / Facebook Reel caption** (Instagram captions do not make links clickable: put the Flipkart link in the bio
+or a story link sticker; on Facebook it can stay in the caption)
 ```
 iPhone-ന് ഒരു കിടിലൻ കവർ 🔥 (പ്രൊമോഷൻ അല്ല, എന്റെ അനുഭവം)
 

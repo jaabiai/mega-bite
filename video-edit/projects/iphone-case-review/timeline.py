@@ -85,10 +85,11 @@ TITLE_BEATS = [
     (0.40, 3.18, [("NEED A NEW", "white", 0.62), ("iPHONE CASE?", "accent", 1.0)]),
     (3.20, 5.62, [("THIS ONE IS", "white", 0.62), ("EXCELLENT", "accent", 1.0)]),
 ]
-TITLE_BEATS_REEL = [
-    (0.40, 3.18, [("NEED A NEW", "white", 0.55), ("iPHONE", "accent", 1.0), ("CASE?", "accent", 1.0)]),
-    (3.20, 5.62, [("THIS ONE IS", "white", 0.55), ("EXCELLENT", "accent", 1.0)]),
+TITLE_BEATS_REEL = [          # three lines each, centred above the Reels button column (safe zone)
+    (0.40, 3.18, [("NEED A NEW", "white", 0.55), ("iPHONE", "accent", 1.0), ("CASE?", "accent", 1.0)], {"cy": 0.38}),
+    (3.20, 5.62, [("AN", "white", 0.50), ("EXCELLENT", "accent", 1.0), ("CASE", "white", 0.80)], {"cy": 0.38}),
 ]
+REEL_ZOOM = 1.12
 TITLE_END = 5.66
 
 # ---- chapters (top-bar label; feature title card when `card`) -------------------------------------------------

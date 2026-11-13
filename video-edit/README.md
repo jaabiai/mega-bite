@@ -118,8 +118,10 @@ SFX 1485, 1491, 1492, 2596, 2350, 2354, 933, 1109.
   through them.
 * **Layout**: 16:9 plays in a 2.39:1 letterbox; the bars carry the logo bug, the chapter label (`TL.CHAPTERS`, with a
   progress hairline), big chapter titles, prompts and the subtitles, so text never sits on the presenter or the product.
-  The 9:16 reel shows a 4:5 window over a blurred extension of the same frame, with the header / product panels above it
-  and subtitles below.
+  The 9:16 reel is laid out for the Reels / Shorts safe zone (no text in the top ~220 px, the bottom ~420 px or the
+  right-hand button column, x > 940): logo + chapter row at y 240, product panels / big chapter titles at y 316-470, the
+  picture as a large rounded, shadowed card (1000x880 at y 484, punched in by `TL.REEL_ZOOM`), subtitles at y ~1432, and
+  only the blurred extension of the frame in the unsafe areas.  Opening titles are three lines (`TL.TITLE_BEATS_REEL`).
 * **Callouts** (`TL.CALLOUTS`): an ember ring pinned to the product, a leader and a glass label.  Anchor points are
   tracked with `tools/track_points.py` (Lucas-Kanade on features around a hand-picked seed, forward-backward checked) into
   `tracks.json`; keep each callout inside the part of the track that holds.
