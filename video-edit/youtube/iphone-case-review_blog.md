@@ -7,8 +7,8 @@
 **Copy-paste version:** the "V Create iPhone Case Blog Post" artifact (HTML code + rich copy).
 
 **Images** (original illustrations, not video frames; `youtube/blog/iphone-case-review/`, served from the public repo via
-jsDelivr pinned to commit 38f94c2; generator `tools/blog_images/iphone_case.py`):
-`hero.jpg` (top), `features.jpg` (seven-point feature map), `camera-lip.jpg` (side-view diagram), `price.jpg` (price & models).
+jsDelivr pinned to commit c32b37b; drawn from the real case design (charcoal shell, camera window, octagonal textured panel, corner vents); generator `tools/blog_images/iphone_case.py`):
+`hero.jpg` (top), `features.jpg` (eight-point feature map), `camera-lip.jpg` (side-view diagram), `price.jpg` (price & models).
 
 **Embed:** https://youtu.be/W-PhjnONWvA just below the middle of the post (after "ports & speaker"; the player starts at
 about 53% of the post height, measured at phone and desktop width).
