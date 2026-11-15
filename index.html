@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MEGA BITE – Tech News, AI Tools &amp; Technology Updates</title>
+  <meta name="description" content="MEGA BITE brings you tech news, AI tools and technology updates in quick, bite-sized reads.">
+  <meta name="theme-color" content="#0b5fff">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script>
+    // Apply saved theme before first paint to avoid a flash.
+    try {
+      var t = localStorage.getItem('mb-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="#/" aria-label="MEGA BITE home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 3a13 13 0 1 0 13 13c0-1.1-.9-2-2-2a4 4 0 0 1-4-4c0-1.1-.9-2-2-2a4 4 0 0 1-4-4c0-1.1-.9-1-1-1z" fill="currentColor"/>
+        </svg>
+        <span>MEGA<b>BITE</b></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#/" data-nav="news">News</a>
+        <a href="#/tools" data-nav="tools">AI Tools</a>
+        <a href="#/about" data-nav="about">About</a>
+      </nav>
+
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+
+    <!-- HOME -->
+    <section id="view-home" class="view" hidden>
+      <div class="hero">
+        <p class="eyebrow">Tech · AI · Gadgets</p>
+        <h1>Tech news in <span class="accent">bite-sized</span> reads.</h1>
+        <p class="lead">Fresh technology updates, AI tool discoveries and practical how-tos — short enough to finish with your coffee.</p>
+        <form class="search" role="search" id="search-form">
+          <label class="sr-only" for="q">Search articles</label>
+          <input id="q" type="search" placeholder="Search news, tools, topics…" autocomplete="off">
+        </form>
+      </div>
+
+      <p class="demo-note" role="note">
+        <strong>Demo content.</strong> The articles below are placeholders. Replace them in <code>assets/data.js</code>.
+      </p>
+
+      <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+
+      <div id="featured"></div>
+      <div id="grid" class="grid" aria-live="polite"></div>
+      <p id="empty" class="empty" hidden>No articles match your search.</p>
+    </section>
+
+    <!-- AI TOOLS -->
+    <section id="view-tools" class="view" hidden>
+      <h1>AI Tools</h1>
+      <p class="lead">Browse by what you want to get done. Pick a category to see related articles.</p>
+      <div id="tools-grid" class="grid tools"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="view-about" class="view prose" hidden>
+      <h1>About MEGA BITE</h1>
+      <p>MEGA BITE is a tech news and updates site covering technology, AI tools and the gadgets people actually use. Every story is written to be read in a few minutes.</p>
+      <h2>What you'll find here</h2>
+      <ul>
+        <li><strong>Tech news</strong> – what happened and why it matters.</li>
+        <li><strong>AI tools</strong> – practical picks for writing, coding, design and productivity.</li>
+        <li><strong>How-tos &amp; explainers</strong> – plain-language guides to getting more from your devices.</li>
+      </ul>
+    </section>
+
+    <!-- ARTICLE -->
+    <article id="view-article" class="view prose" hidden></article>
+
+    <!-- NOT FOUND -->
+    <section id="view-404" class="view" hidden>
+      <h1>Page not found</h1>
+      <p class="lead">We couldn't find that page. <a href="#/">Back to the latest news</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>MEGA BITE</strong> – Tech News, AI Tools and Technology Updates</p>
+      <p class="muted">&copy; <span id="year"></span> MEGA BITE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
