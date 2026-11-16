@@ -275,9 +275,31 @@ def erase_bubble(img, S):
     img[y0:y1, x0:x1] = (roi * (1 - m) + patch * m + 0.5).astype(np.uint8)
 
 
+_FIT = {}
+
+
+def erase_bubble_fit(img):
+    """Un-mix a fixed bubble with the radial profile written by tools/bubble_fit.py (R.BUBBLE_FIT = npz path), then soften
+    the thin annuli where the profile steps (ring edges), which the codec smeared differently on every background."""
+    if not _FIT:
+        z = np.load(R.BUBBLE_FIT)
+        oma, aC = z["oma"], z["aC"]
+        g = np.abs(np.gradient(oma.mean(-1))[0]) + np.abs(np.gradient(oma.mean(-1))[1])
+        edge = cv2.GaussianBlur((g > 0.01).astype(np.float32), (0, 0), 1.2)
+        _FIT.update(oma=oma, aC=aC, box=tuple(int(v) for v in z["box"]), edge=np.clip(edge * 1.6, 0, 1)[..., None])
+    x0, y0, x1, y1 = _FIT["box"]
+    roi = img[y0:y1, x0:x1].astype(np.float32)
+    out = (roi - _FIT["aC"]) / _FIT["oma"]
+    soft = cv2.GaussianBlur(out, (0, 0), 1.3)
+    e = _FIT["edge"]
+    img[y0:y1, x0:x1] = np.clip(out * (1 - e) + soft * e + 0.5, 0, 255).astype(np.uint8)
+
+
 def prepare(img, S):
     """img: HxWx3 uint8 RGB (modified & returned); S = recording time of the frame in seconds."""
-    if getattr(R, "ASSIST", None) and not getattr(R, "BUBBLE", None):
+    if getattr(R, "BUBBLE_FIT", None):
+        erase_bubble_fit(img)
+    elif getattr(R, "ASSIST", None) and not getattr(R, "BUBBLE", None):
         _erase_bubble(img)                               # linear overlay model: undo it on the untouched pixels, before any blur
     for s0, s1, rect in R.BLUR_RECTS:
         if s0 <= S <= s1:

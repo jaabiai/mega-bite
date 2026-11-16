@@ -85,7 +85,12 @@ class PhoneScene:
         return g["X0"] + u * self.src_w * g["s"], g["Y0"] + v * self.src_h * g["s"]
 
     # -- rendering ------------------------------------------------------------------------------
-    def render(self, screen_rgb, g, opacity=1.0, sway=0.0):
+    def layer(self, screen_rgb, g, sway=0.0):
+        """The phone alone as a full-frame premultiplied RGBA float layer (for compositors that draw their own background
+        and shadow, e.g. the Pop style's hard ink shadow)."""
+        return self.render(screen_rgb, g, sway=sway, _layer_only=True)
+
+    def render(self, screen_rgb, g, opacity=1.0, sway=0.0, _layer_only=False):
         W, H = self.W, self.H
         s = g["s"]
         f = s * self.src_h / self.HI                     # hi-res px -> output px
@@ -117,6 +122,8 @@ class PhoneScene:
         ty = g["Y0"] - self.sy * f + sway
         M = np.array([[1, 0, tx], [0, 1, ty]], np.float32)
         placed = cv2.warpAffine(grp, M, (W, H), flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0)
+        if _layer_only:
+            return placed
         # soft drop shadow from the alpha channel
         a_small = grp[..., 3]
         sig = max(26 * f * self.S ** 0 * (self.HI / 2300.0) ** 0, 3.0) * 0.9

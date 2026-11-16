@@ -130,3 +130,36 @@ SFX 1485, 1491, 1492, 2596, 2350, 2354, 933, 1109.
   Unbounded + Barlow Condensed + Inter (SIL OFL); ember / graphite / paper palette taken from the product.
 
 Music "Deep Urban" (Mixkit 623); SFX 1485, 1491, 1492, 2596, 3005, 2350, 2354, 933.
+
+## Pop style (MEGABYTE, light explainer)
+
+`render_pop.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "pop"`: a light,
+neo-brutalist explainer look (kit: `lib/pop.py`), the opposite of the dark cinematic styles. No blue anywhere.
+
+* **Look**: warm paper with a slowly drifting dot grid; everything is outlined in ink with hard offset shadows (no blur);
+  marker yellow, pink, mint and lilac accents; Bricolage Grotesque (display), Figtree (text) and Space Mono (labels), all
+  SIL OFL. The face-cam gets a clean, bright grade (`lib/grade_cine.py` with `TL.GRADE`).
+* **Talk scenes**: the face in an ink-bordered card (16:9: left, with the logo bug, topic stickers `TL.TOPIC_KICKER` /
+  `TL.TOPIC`, question chips `TL.FACE_NOTES` / `TL.TIP_STAMP` and CTA stickers in the right column; 9:16: a 1000x1030
+  card under the top safe line, stickers over its top edge). Captions are a white speech card under the picture with the
+  spoken word on a yellow marker that wipes in and the words still to come in a lighter ink.
+* **Phone scenes**: the whole iPhone on the paper with a hard ink shadow (`PhoneScene.layer()`), re-timed by
+  `TL.SCREEN_MAP`. A round magnifier (`TL.LOUPES`) joined by an ink line blows up the control being talked about, with a
+  yellow label; taps (`TL.TAPS`), hand-drawn marker rings (`TL.RINGS`), ratio stickers on thumbnails (`TL.THUMB_TAGS`),
+  side stickers (`TL.SIDE_NOTES`), a ticking step checklist in 16:9 or a step sticker in 9:16 (`TL.STEPS`) and the face in
+  a round sticker (16:9).
+* **Explainer** (`kind="explain"`, `TL.EXPLAIN`): drawn graphics instead of B-roll — where the picture is going (Status /
+  Reels / anything else as 9:16 screens), then square tiles with question marks and a "HARD TO TELL!" stamp.
+* **Titles**: extruded 3D blocks with an ink outline and a hard shadow on a turning sunburst (`TL.TITLE_BEATS`,
+  `TL.TITLE_BEATS_REEL`, one beat at a time, with a kicker sticker); `TL.HEADERS` are full-frame interstitials. Captions
+  step aside while they play (they still time the SRT).
+* **Transitions**: a diagonal yellow paper wipe on every scene cut (`TL.WIPES`) and a punch-in on jumps inside the phone
+  footage (`TL.POPS`) and on reel joins.
+* **Reel**: the whole talk with `TL.REEL_CUTS` left out (`TL.REEL_PAD`, `TL.reel_time()`), laid out for the Reels /
+  Shorts safe zone (no text above y 220 or below y 1500, nothing in the right-hand button column below y 1000).
+
+Screen clean-up for this video also removes an idle AssistiveTouch bubble that never moves: `tools/bubble_fit.py` fits its
+radial translucent profile (`obs = m(r) * bg + b(r)` per channel) from flat-background pixels of two frames
+(`bubble_spec.json`) with a sub-pixel centre search, and `screen_rules.BUBBLE_FIT` un-mixes it in every frame.
+
+Music Mixkit 1147; SFX 1485, 1491, 1492, 2350, 2354, 933, 3005, 1109.
