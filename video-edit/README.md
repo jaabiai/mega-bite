@@ -131,7 +131,7 @@ SFX 1485, 1491, 1492, 2596, 2350, 2354, 933, 1109.
 
 Music "Deep Urban" (Mixkit 623); SFX 1485, 1491, 1492, 2596, 3005, 2350, 2354, 933.
 
-## Pop style (MEGABYTE, light explainer)
+## Pop style (V Create, light explainer)
 
 `render_pop.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "pop"`: a light,
 neo-brutalist explainer look (kit: `lib/pop.py`), the opposite of the dark cinematic styles. No blue anywhere.
@@ -155,6 +155,8 @@ neo-brutalist explainer look (kit: `lib/pop.py`), the opposite of the dark cinem
   step aside while they play (they still time the SRT).
 * **Transitions**: a diagonal yellow paper wipe on every scene cut (`TL.WIPES`) and a punch-in on jumps inside the phone
   footage (`TL.POPS`) and on reel joins.
+* **Channel**: `TL.LOGO` (a file in `assets/logo/`), `TL.LOGO_FILL` (how much of the round bug the logo fills; 0.98 for
+  the V Create badge) and `TL.CHANNEL` (the name beside the bug).
 * **Reel**: the whole talk with `TL.REEL_CUTS` left out (`TL.REEL_PAD`, `TL.reel_time()`), laid out for the Reels /
   Shorts safe zone (no text above y 220 or below y 1500, nothing in the right-hand button column below y 1000).
 

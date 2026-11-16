@@ -1,4 +1,4 @@
-# English caption script — "See the real shape of every photo: Aspect Ratio Grid" (MEGABYTE, as burned into the video)
+# English caption script — "See the real shape of every photo: Aspect Ratio Grid" (V Create, as burned into the video)
 
 The narration is Malayalam. Chunk times come from the word-level timestamps of a Malayalam speech-recognition pass
 (accurate to roughly ±0.2 s); the English is a caption-style translation. The 3D title carries the first 3.6 s on screen

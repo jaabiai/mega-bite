@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MEGABYTE / V Create "Pop" compositor (16:9 YouTube or 9:16 reel) for projects whose timeline sets STYLE = "pop".
+"""V Create / MEGABYTE "Pop" compositor (16:9 YouTube or 9:16 reel) for projects whose timeline sets STYLE = "pop".
 
 Light neo-brutalist explainer: warm dotted paper, the face-cam in an ink-bordered card with a hard shadow, karaoke
 captions on a white speech card under it (never on the presenter), stickers for the topic / channel / prompts.  Phone
@@ -81,6 +81,7 @@ CX, CY, CW, CH = L["card"]
 CARD = pop.HardCard(CX, CY, CW, CH, r=30, border=6, shadow=14)
 PAPER = pop.Paper(W, H)
 LOGO = os.path.join(HERE, "assets", "logo", getattr(TL, "LOGO", "logo.png"))
+LOGO_FILL = getattr(TL, "LOGO_FILL", 0.86)
 
 # ---- readers --------------------------------------------------------------------------------------------------
 FW, FH = 2560, 1440
@@ -263,7 +264,7 @@ def draw_captions(fr, T, spec):
 def draw_bug(fr, T, a=1.0):
     x, y, s = L["bug"]
     k = pop.pop_in(T - TITLE.span()[1] - 0.25)
-    img = pop.logo_bug(s, LOGO)
+    img = pop.logo_bug(s, LOGO, LOGO_FILL)
     if REEL:
         pop.place(fr, img, x, y, scale=k, alpha=a * min(k * 2, 1))
         return
@@ -600,10 +601,10 @@ def draw_phone_scene(fr, T, sc):
     draw_pip(fr, T, clamp01((T - sc["t0"] - 0.3) / 0.35))
     if not REEL:
         bx, by, bs = L["bug"]
-        pop.place(fr, pop.logo_bug(64, LOGO), W - 70, 70)
+        pop.place(fr, pop.logo_bug(64, LOGO, LOGO_FILL), W - 70, 70)
     else:
         bx, by, bs = L["bug"]
-        pop.place(fr, pop.logo_bug(bs, LOGO), bx, by)
+        pop.place(fr, pop.logo_bug(bs, LOGO, LOGO_FILL), bx, by)
     draw_captions(fr, T, L["cap_phone"])
 
 
@@ -612,9 +613,9 @@ def draw_explain_scene(fr, T, sc):
     draw_pip(fr, T, clamp01((T - sc["t0"] - 0.3) / 0.35))
     if REEL:
         bx, by, bs = L["bug"]
-        pop.place(fr, pop.logo_bug(bs, LOGO), bx, by)
+        pop.place(fr, pop.logo_bug(bs, LOGO, LOGO_FILL), bx, by)
     else:
-        pop.place(fr, pop.logo_bug(64, LOGO), W - 70, 70)
+        pop.place(fr, pop.logo_bug(64, LOGO, LOGO_FILL), W - 70, 70)
     draw_captions(fr, T, L["cap_explain"])
 
 

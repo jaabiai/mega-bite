@@ -1,4 +1,4 @@
-"""Timeline for the MEGABYTE video "see the real shape of every photo: Photos > View Options > Aspect Ratio Grid" -
+"""Timeline for the V Create video "see the real shape of every photo: Photos > View Options > Aspect Ratio Grid" -
 Pop style (render_pop.py).  All times are narration seconds T (= output time of the 16:9 edit).  Screen times S are
 seconds of the cleaned 30 fps copy of the 1320x2868 iPhone recording (screen_rules.py)."""
 import numpy as np
@@ -12,8 +12,9 @@ SCREEN_SIZE = (1320, 2868)
 SCREEN_FPS = 30
 SCREEN_T0, SCREEN_END = 0.0, 110.40
 FACE_ANCHOR = dict(fx=0.586, fy=0.46)
-LOGO = "logo.png"                              # assets/logo/ (MEGABYTE)
-CHANNEL = "MEGABYTE"
+LOGO = "vcreate.png"                           # assets/logo/ (V Create round badge)
+LOGO_FILL = 0.98
+CHANNEL = "V CREATE"
 GRADE = dict(exposure=0.02, temp=0.012, tint=-0.002, dehaze=0.22, contrast=0.30, toe=0.012, shoulder=0.76,
              skin_sat=0.97, skin_warm=0.012, red_sat=0.92, red_val=0.97, green_sat=0.86, green_val=0.93, green_hue=-6.0,
              sky_teal=0.0, split=0.45, vibrance=0.10, sat=1.0, face_lift=0.14, face_contrast=0.08, clarity=0.08,

@@ -3,7 +3,7 @@
 Warm paper with a drifting dot grid, everything outlined in ink with hard offset shadows (no blur), marker-yellow
 karaoke captions on white speech cards, sticker labels, a pink hand-drawn marker ring for the thing being talked about,
 a magnifier loupe joined to the phone by an ink line, chunky extruded 3D titles, sticker CTAs and a diagonal
-yellow paper wipe between scenes.  No blue anywhere (MEGABYTE rule).  Fonts: Bricolage Grotesque (display),
+yellow paper wipe between scenes.  No blue anywhere, so the kit suits both channels (MEGABYTE's no-blue rule).  Fonts: Bricolage Grotesque (display),
 Figtree (text), Space Mono (labels) - all OFL, in assets/fonts.
 """
 import math, os, subprocess
@@ -646,9 +646,10 @@ def pop_zoom(fr, p):
 _LOGO = {}
 
 
-def logo_bug(size, path):
-    """Round sticker with the channel logo: white disc, ink rim, hard shadow (PIL RGBA)."""
-    key = (size, path)
+def logo_bug(size, path, fill=0.86):
+    """Round sticker with the channel logo: white disc, ink rim, hard shadow (PIL RGBA).  The logo is cropped to its
+    visible pixels, centred and scaled to `fill` of the disc (a round badge logo can fill it: ~0.98)."""
+    key = (size, path, fill)
     if key in _LOGO:
         return _LOGO[key]
     k = 3
@@ -660,13 +661,18 @@ def logo_bug(size, path):
     d.ellipse([0, 0, (size + 2 * b) * k - 1, (size + 2 * b) * k - 1], fill=INK + (255,))
     d.ellipse([b * k, b * k, (size + b) * k - 1, (size + b) * k - 1], fill=(255, 255, 255, 255))
     lg = Image.open(path).convert("RGBA")
-    ls = int(size * 0.86 * k)
-    lg = lg.resize((ls, ls), Image.LANCZOS)
+    bb = lg.split()[3].getbbox() or (0, 0, lg.width, lg.height)
+    lg = lg.crop(bb)
+    side = max(lg.size)
+    sq = Image.new("RGBA", (side, side), (0, 0, 0, 0))
+    sq.paste(lg, ((side - lg.width) // 2, (side - lg.height) // 2))
+    ls = int(size * fill * k)
+    lg = sq.resize((ls, ls), Image.LANCZOS)
     mask = Image.new("L", (ls, ls), 0)
     ImageDraw.Draw(mask).ellipse([0, 0, ls - 1, ls - 1], fill=255)
     a = Image.fromarray((np.asarray(lg.split()[3], np.float32) * np.asarray(mask, np.float32) / 255).astype(np.uint8))
     lg.putalpha(a)
-    off = int((b + size * 0.07) * k)
+    off = int((b + size * (1 - fill) / 2) * k)
     img.alpha_composite(lg, (off, off))
     out = img.resize((S, S), Image.LANCZOS)
     _LOGO[key] = out

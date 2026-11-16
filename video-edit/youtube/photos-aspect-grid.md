@@ -1,6 +1,6 @@
-# YouTube upload pack — MEGABYTE: see the real shape of every photo (iPhone Photos → Aspect Ratio Grid)
+# YouTube upload pack — V Create: see the real shape of every photo (iPhone Photos → Aspect Ratio Grid)
 
-Files: `MEGABYTE_Photos_Aspect_Grid_16x9.mp4` (main video, 1:50, no end card) · `MEGABYTE_Photos_Aspect_Grid_9x16.mp4`
+Files: `VCreate_Photos_Aspect_Grid_16x9.mp4` (main video, 1:50, no end card) · `VCreate_Photos_Aspect_Grid_9x16.mp4`
 (Short / Reel, 1:43: the whole talk minus the like / comment request and one repeated "share it", so it plays as one
 continuous talk).
 
@@ -33,15 +33,15 @@ iPhone-ലെ Photos ആപ്പിൽ എല്ലാ ഫോട്ടോയു
 1:16 റിസൾട്ട്: യഥാർത്ഥ Aspect Ratio
 1:33 Zoom In / Zoom Out
 
-👍 ഉപകാരപ്പെട്ടെങ്കിൽ ലൈക്ക് ചെയ്യൂ, അറിയാത്തവർക്ക് ഷെയർ ചെയ്യൂ, MEGABYTE ചാനൽ Subscribe ചെയ്യൂ.
+👍 ഉപകാരപ്പെട്ടെങ്കിൽ ലൈക്ക് ചെയ്യൂ, അറിയാത്തവർക്ക് ഷെയർ ചെയ്യൂ, V Create ചാനൽ Subscribe ചെയ്യൂ.
 
-#iPhoneTips #iPhone #PhotosApp #MalayalamTech #MEGABYTE
+#iPhoneTips #iPhone #PhotosApp #MalayalamTech #VCreate
 ```
 Chapters start at 0:00 and each is at least 10 s long. The description has no angle brackets.
 
 **Tags**
 ```
-iphone tips malayalam, iphone photos app, aspect ratio grid, iphone gallery tips, iphone hidden features, ios tips malayalam, whatsapp status photo size, reels photo size, iphone tricks malayalam, malayalam tech, megabyte
+iphone tips malayalam, iphone photos app, aspect ratio grid, iphone gallery tips, iphone hidden features, ios tips malayalam, whatsapp status photo size, reels photo size, iphone tricks malayalam, malayalam tech, v create
 ```
 
 **Pinned comment**
@@ -78,7 +78,7 @@ Status-നോ Reels-നോ പറ്റിയ ഫോട്ടോ ഏതാണെ
 4️⃣ Aspect Ratio Grid ✅
 
 ഇനി ഓരോ ഫോട്ടോയും വീഡിയോയും അതിന്റെ യഥാർത്ഥ ആകൃതിയിൽ (9:16, 16:9…) കാണാം 📸
-അറിയാത്തവർക്ക് ഷെയർ ചെയ്യൂ, ഇതുപോലുള്ള ടിപ്പുകൾക്ക് MEGABYTE ഫോളോ ചെയ്യൂ 🙌
+അറിയാത്തവർക്ക് ഷെയർ ചെയ്യൂ, ഇതുപോലുള്ള ടിപ്പുകൾക്ക് V Create ഫോളോ ചെയ്യൂ 🙌
 
-#iphonetips #iphonetricks #photosapp #techtips #techmalayalam #malayalamtech #megabyte
+#iphonetips #iphonetricks #photosapp #techtips #techmalayalam #malayalamtech #vcreate
 ```
