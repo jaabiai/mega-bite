@@ -65,6 +65,11 @@ SCREEN_MAP = [
 
 
 def screen_time(T):
+    """Linear between rows; two rows at most 0.02 s apart are a cut (the earlier S holds until the later T), so no frame
+    can land inside a jump and show the footage in between."""
+    for (t0, s0), (t1, s1) in zip(SCREEN_MAP[:-1], SCREEN_MAP[1:]):
+        if t1 - t0 <= 0.02 and t0 <= T < t1:
+            return s0
     return float(np.interp(T, [p[0] for p in SCREEN_MAP], [p[1] for p in SCREEN_MAP]))
 
 
