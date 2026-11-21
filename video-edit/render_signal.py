@@ -381,7 +381,10 @@ def draw_tip_card(fr, T):
 
 def draw_steps(fr, T, sc):
     x, y = L["step"]
-    for st in TL.STEPS:
+    started = [st for st in TL.STEPS if st[0] <= T]
+    if not started:
+        return
+    for st in started[-1:]:                     # only the latest step: a new step replaces the previous one outright
         t0, t1, n, label = st
         if not (t0 <= T <= t1 + 0.4):
             continue
