@@ -106,6 +106,8 @@ GR_REEL = Grader(W, H - REEL_TOP, TL.GRADE) if REEL else None
 if REEL:
     _f = np.clip(np.arange(H - REEL_TOP, dtype=np.float32) / 170.0, 0, 1)
     REEL_FEATHER = (_f * _f * (3 - 2 * _f))[:, None, None]
+    _p = np.clip((np.arange(H, dtype=np.float32) - 640.0) / 150.0, 0, 1)
+    PHONE_FADE = (_p * _p * (3 - 2 * _p))[:, None, None]
 GR_SMALL = Grader(W // 4, H // 4, dict(TL.GRADE, grain=0.0, vignette=0.0, halation=0.0, bloom=0.0))
 PIP = L["pip"]
 GR_PIP = Grader(PIP[2], PIP[3], dict(TL.GRADE, vignette=0.1)) if PIP else None
@@ -199,6 +201,8 @@ def phone_shot(T, sc):
     g = ps.geometry(cam, extra=(0.0, (1 - enter) * 0.18 * H))
     g["sway"] = 2.0 * math.sin(2 * math.pi * T / 7.0)
     lay = ps.layer(screen, g, sway=g["sway"])
+    if REEL:                                   # keep the overlay band clear: the zoomed phone fades out under it
+        lay = lay * PHONE_FADE
     a = lay[..., 3]
     small = cv2.resize(a, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
     sh = cv2.GaussianBlur(small, (0, 0), 7)
