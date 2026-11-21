@@ -165,3 +165,30 @@ radial translucent profile (`obs = m(r) * bg + b(r)` per channel) from flat-back
 (`bubble_spec.json`) with a sub-pixel centre search, and `screen_rules.BUBBLE_FIT` un-mixes it in every frame.
 
 Music Mixkit 1147; SFX 1485, 1491, 1492, 2350, 2354, 933, 3005, 1109.
+
+## Signal style (V Create, cinematic keynote)
+
+`render_signal.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "signal"` (kit:
+`lib/signalkit.py`): a premium, keynote-grade explainer. One accent (electric lime) on graphite; Geist (headlines,
+captions), Geist Mono (labels) and Instrument Serif Italic for the words that matter, all SIL OFL.
+
+* **Picture**: the face-cam runs full-bleed with a film grade (`lib/grade_cine.py`, `TL.GRADE`) and cut-to-cut framing
+  (wide / close via the scene `zoom` and `tx`); B-roll scenes (`kind="broll"`, Mixkit clips, `TL.BROLL_GRADE`) run
+  full-bleed too. A graphite shade on the free side (left in 16:9, top in 9:16) carries every overlay, so nothing sits on
+  the presenter. In 9:16 the presenter sits in the lower part of the frame over a soft, dark extension of the same shot.
+* **Tip counter** (`TL.TIPS`: `(t0, t1, n, title, path)`): each tip opens with a full-frame numeral card ("01", ring
+  sweep, title in serif italic, path), then a numbered ring stays in the corner and fills from the first word of the tip
+  to the last, flashing when it completes.
+* **Captions**: karaoke lines bottom-left (16:9) / top (9:16): spoken words white, the current word underlined in lime,
+  words still to come faded, and key words (`TL.KEY_WORDS`) in lime serif italic. **Key points** (`TL.KEY_POINTS`) appear
+  as a mono kicker + serif line with a lime underline sweep.
+* **Phone**: the iPhone floats over a blurred, darkened copy of the shot, with camera moves (`TL.CAMERA`), a spotlight
+  and lime frame plus leader-line label on the control being talked about (`TL.HIGHLIGHTS`), lime tap ripples
+  (`TL.TAPS`), a "STEP 0n" line (`TL.STEPS`) and the face in a rounded picture-in-picture (16:9).
+  `TL.SCREEN_MAP` rows at most 0.02 s apart are cuts.
+* **Title**: extruded Geist Black block (silver / lime faces, graphite sides, lime rim light) over the softened shot,
+  with a mono kicker and a serif subtitle (`TL.TITLE_BEATS`, `TL.TITLE_BEATS_REEL`).
+* **Transitions**: lens-blur crossfades on every scene change (`TL.MIXES`); a quick dip on reel joins.
+* **Prompts**: glass pills with icons that a click turns lime ("Subscribed", "Shared", ...), `TL.CTAS` / `TL.REEL_CTAS`.
+
+Music Mixkit 770; B-roll Mixkit 21262, 1711, 21605, 8757, 9067; SFX 1485, 1491, 1492, 2596, 3005, 2354, 933, 1109.

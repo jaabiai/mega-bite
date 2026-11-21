@@ -1,0 +1,278 @@
+1
+00:00:00,000 --> 00:00:03,040
+For iPhone users, two brilliant
+features - let me show you.
+
+2
+00:00:03,040 --> 00:00:04,600
+Useful for a lot of people.
+
+3
+00:00:04,600 --> 00:00:07,000
+It's not new - it's an old feature,
+
+4
+00:00:07,000 --> 00:00:10,680
+but far more people don't know it than do,
+
+5
+00:00:10,680 --> 00:00:12,600
+so I made this video.
+
+6
+00:00:12,690 --> 00:00:14,170
+If you already know it,
+
+7
+00:00:14,170 --> 00:00:16,240
+share this video with those who don't -
+
+8
+00:00:16,240 --> 00:00:18,790
+let everyone know this is possible.
+
+9
+00:00:18,790 --> 00:00:20,470
+If you like it, hit like
+
+10
+00:00:20,470 --> 00:00:22,450
+and drop your thoughts in the comments.
+
+11
+00:00:22,520 --> 00:00:23,820
+So, what are the tips?
+
+12
+00:00:23,820 --> 00:00:26,620
+Tip one: taking screenshots.
+
+13
+00:00:26,620 --> 00:00:28,890
+Normally, we take a screenshot
+
+14
+00:00:28,890 --> 00:00:31,770
+by pressing two buttons
+- power and volume down -
+
+15
+00:00:31,770 --> 00:00:33,600
+at the same time,
+
+16
+00:00:33,630 --> 00:00:37,200
+or by adding a shortcut to take one.
+
+17
+00:00:37,290 --> 00:00:40,900
+There's something simpler,
+built into the iPhone.
+
+18
+00:00:41,000 --> 00:00:44,700
+Many may know it, but more people don't,
+
+19
+00:00:44,700 --> 00:00:46,100
+so here's the video.
+
+20
+00:00:46,100 --> 00:00:48,310
+So how do we do it?
+
+21
+00:00:48,310 --> 00:00:51,300
+We can do it with AssistiveTouch.
+
+22
+00:00:51,360 --> 00:00:55,300
+Add a screenshot option
+to it - it's very simple.
+
+23
+00:00:55,360 --> 00:00:57,020
+Go to your Settings,
+
+24
+00:00:57,020 --> 00:00:59,910
+search for AssistiveTouch there,
+
+25
+00:00:59,910 --> 00:01:02,830
+and you'll find the option to turn it on.
+
+26
+00:01:02,830 --> 00:01:04,230
+Turn it on.
+
+27
+00:01:04,230 --> 00:01:07,640
+Once it's on, AssistiveTouch
+shows up like this.
+
+28
+00:01:08,320 --> 00:01:09,530
+Many people know this much.
+
+29
+00:01:09,530 --> 00:01:12,550
+From here, select
+Customise Top Level Menu.
+
+30
+00:01:12,930 --> 00:01:16,340
+Now you can add the
+screenshot option here.
+
+31
+00:01:16,340 --> 00:01:17,330
+To add it,
+
+32
+00:01:17,330 --> 00:01:21,380
+tap the plus icon at the bottom.
+
+33
+00:01:21,380 --> 00:01:24,640
+After tapping plus, choose Device.
+
+34
+00:01:24,640 --> 00:01:27,530
+Under Device, pick Screenshot,
+
+35
+00:01:28,030 --> 00:01:30,160
+then tap the check mark at the top.
+
+36
+00:01:30,380 --> 00:01:32,600
+You'll see Screenshot added here.
+
+37
+00:01:33,040 --> 00:01:35,710
+Now open AssistiveTouch,
+
+38
+00:01:35,710 --> 00:01:38,530
+and the screenshot option is right there.
+
+39
+00:01:38,530 --> 00:01:41,020
+That's how simply you
+can take a screenshot.
+
+40
+00:01:41,500 --> 00:01:43,110
+Tip two: restart.
+
+41
+00:01:43,670 --> 00:01:45,550
+Normally, to restart our iPhone,
+
+42
+00:01:45,550 --> 00:01:49,860
+we use a Siri shortcut
+or the power button.
+
+43
+00:01:49,860 --> 00:01:53,110
+But there's a simpler
+way: just like before,
+
+44
+00:01:53,110 --> 00:01:58,240
+in AssistiveTouch, we
+can add a restart option.
+
+45
+00:01:58,560 --> 00:02:00,780
+This one, too, many people know -
+
+46
+00:02:01,340 --> 00:02:03,000
+but more people don't.
+
+47
+00:02:03,070 --> 00:02:06,130
+The benefit: when your phone hangs,
+
+48
+00:02:06,130 --> 00:02:09,340
+you can restart it easily.
+
+49
+00:02:09,860 --> 00:02:12,100
+Or any time you want to restart -
+
+50
+00:02:12,560 --> 00:02:15,280
+really simply, without
+pressing any button,
+
+51
+00:02:15,660 --> 00:02:18,760
+right from AssistiveTouch,
+wherever it sits on screen,
+
+52
+00:02:18,760 --> 00:02:21,320
+you can restart your phone.
+
+53
+00:02:21,910 --> 00:02:23,810
+This is an old option too - not new.
+
+54
+00:02:23,810 --> 00:02:25,430
+To set it up, just like before,
+
+55
+00:02:25,430 --> 00:02:28,880
+go to the AssistiveTouch section,
+
+56
+00:02:29,360 --> 00:02:32,340
+and select Customise Top Level Menu.
+
+57
+00:02:32,560 --> 00:02:35,460
+As before, tap the plus icon,
+
+58
+00:02:35,460 --> 00:02:37,700
+then tap the plus again.
+
+59
+00:02:37,710 --> 00:02:40,730
+From here, choose System,
+
+60
+00:02:40,730 --> 00:02:43,220
+then select Restart.
+
+61
+00:02:43,560 --> 00:02:46,420
+Then, as before, enable the check mark.
+
+62
+00:02:46,710 --> 00:02:50,960
+Open AssistiveTouch, and
+the restart option is there.
+
+63
+00:02:51,920 --> 00:02:55,300
+So - two really useful, simple tips.
+
+64
+00:02:55,470 --> 00:02:57,690
+To every iPhone user out there - share it,
+
+65
+00:02:58,120 --> 00:03:00,760
+let them know this is possible.
+
+66
+00:03:00,760 --> 00:03:03,400
+See you again with a new topic!
+
