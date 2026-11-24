@@ -79,7 +79,7 @@ SCENES = [
     F(189.40, 197.30),
     P(197.30, 229.35, "languages"),
     F(229.35, 237.50),
-    B(237.50, 243.40, "10452", 0.0, 0.5, 0.45),
+    B(237.50, 243.40, "10452", 0.0, 0.5, 0.18),          # 9:16 crop kept on the woman (left of the clip)
     C(243.40, 249.85),
     P(249.85, 283.00, "voice+silent"),
     F(283.00, 288.35),
@@ -108,7 +108,6 @@ KEY_POINTS = [                                          # (T0, T1, phrase) - fac
 
 # ---- prompts ----------------------------------------------------------------------------------------------------
 CTAS = [(33.40, "subscribe"), (36.30, "share"), (313.00, "subscribe")]
-REEL_CTAS = [(313.00, "follow")]
 
 # ---- phone: narration T -> screen S (rows <= 0.02 s apart are cuts) ------------------------------------------------
 SCREEN_MAP = [
@@ -276,14 +275,24 @@ BASE_SFX = ([(0.0, "1485", -12)] + [(t0, "2596", -15) for t0, *_ in CHAPTERS]
             + [(t0 + 0.1, "3005", -21) for t0, *_ in KEY_POINTS])
 EXTRA_SFX = BASE_SFX + _cta_sfx(CTAS)
 
-# ---- 9:16 Short (<= 3:00): the whole how-to, cut only at pauses in the voice -----------------------------------------
-# dropped: subscribe / share request, welcome line, "I won't explain it all", OTP sign-in, the privacy aside, profile,
-# the preset walk-through, voice-note detail, the long confirm explanation, language step-by-step, voice browsing,
-# the "talk to Equal" help, "try it then decide"
-REEL_CUTS = [(0.00, 30.44), (39.62, 42.09), (46.30, 56.34), (59.17, 64.73), (79.88, 91.06), (107.62, 123.06),
-             (143.71, 152.62), (162.84, 175.56), (186.61, 203.66), (229.58, 249.28), (252.86, 258.81),
-             (263.64, 288.24), (303.64, 308.20), (312.72, NARR_END)]
+# ---- 9:16 Short (~1:22): one clear story, cut only at real pauses in the voice -------------------------------------
+# the problem -> what the AI does -> it is an app for iPhone and Android -> choose which calls it answers -> it talks to
+# the caller before you pick up -> in the caller's own language -> promotional calls go silent -> try it (link) ->
+# end card "full video on YouTube".  Cut points sit in measured silences (the padded edges included).
+REEL_CUTS = [(0.00, 13.40), (18.62, 30.44), (46.30, 52.02), (162.84, 175.56), (186.70, 197.00), (237.66, 249.28),
+             (276.56, 288.30)]
 REEL_PAD = (0.06, 0.10)
+REEL_CHAPTERS = [                               # feature slates + rail in the Short (instead of the long chapters)
+    (7.14, 30.44, 1, "How it works"),
+    (46.30, 52.02, 2, "iPhone + Android"),
+    (162.84, 197.00, 3, "Choose the calls"),
+    (237.66, 249.28, 4, "Any language"),
+    (276.56, 288.30, 5, "Mute promo calls"),
+]
+REEL_END_CARD = 3.6                             # seconds after the last word: "full video on YouTube"
+REEL_END_TEXT = dict(ml1="പൂർണ്ണ വീഡിയോ കാണാൻ", ml2="V Create YouTube ചാനൽ സന്ദർശിക്കൂ",
+                     en="FULL VIDEO ON YOUTUBE  ·  V CREATE")
+REEL_CTAS = []
 
 
 def reel_time(T):
@@ -296,5 +305,10 @@ def reel_time(T):
     return None
 
 
-REEL_EXTRA_SFX = [(reel_time(t), n, g) for t, n, g in _cta_sfx(REEL_CTAS) if reel_time(t) is not None]
+def _reel_narr():
+    return sum(min(b + REEL_PAD[1], NARR_END) - max(a - REEL_PAD[0], 0.0) for a, b in REEL_CUTS)
+
+
+REEL_EXTRA_SFX = ([(reel_time(t0), "2596", -15) for t0, *_ in REEL_CHAPTERS]      # a soft hit on each feature slate
+                  + [(_reel_narr() + 0.25, "2596", -13)])                         # and on the end card
 REEL_JOIN_SFX = False                          # joins must not be heard: no whoosh, the music runs straight through

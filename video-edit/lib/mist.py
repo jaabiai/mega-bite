@@ -25,15 +25,34 @@ REDF = np.array(RED, np.float32) / 255
 BONEF = np.array(BONE, np.float32) / 255
 
 FILES = {"display": "BigShouldersDisplay-900.ttf", "display8": "BigShouldersDisplay-800.ttf", "text": "AlbertSans-600.ttf",
-         "text7": "AlbertSans-700.ttf", "text8": "AlbertSans-800.ttf", "mono": "JetBrainsMono-700.ttf", "mono5": "JetBrainsMono-500.ttf"}
+         "text7": "AlbertSans-700.ttf", "text8": "AlbertSans-800.ttf", "mono": "JetBrainsMono-700.ttf", "mono5": "JetBrainsMono-500.ttf",
+         "ml": "AnekMalayalam-800.ttf"}
 _F = {}
 
 
 def font(kind, size):
     key = (kind, int(size))
     if key not in _F:
-        _F[key] = ImageFont.truetype(os.path.join(FONT_DIR, FILES[kind]), int(size))
+        eng = ImageFont.Layout.RAQM if kind == "ml" else ImageFont.Layout.BASIC     # Malayalam needs complex shaping
+        _F[key] = ImageFont.truetype(os.path.join(FONT_DIR, FILES[kind]), int(size), layout_engine=eng)
     return _F[key]
+
+
+def line(txt, kind, size, rgb=BONE, shadow=True):
+    """A whole line drawn in one go (keeps complex-script shaping, e.g. Malayalam conjuncts, intact)."""
+    key = ("line", txt, kind, size, rgb, shadow)
+    if key in _T:
+        return _T[key]
+    ft = font(kind, size)
+    pad = 26
+    x0, y0, x1, y1 = ft.getbbox(txt)
+    img = Image.new("RGBA", (x1 - x0 + 2 * pad, y1 - y0 + 2 * pad), (0, 0, 0, 0))
+    ImageDraw.Draw(img).text((pad - x0, pad - y0), txt, font=ft, fill=tuple(rgb) + (255,))
+    if shadow:
+        img = _shadow(img, max(size // 7, 4), 0.7)
+    img.pad = pad
+    _T[key] = img
+    return img
 
 
 def fpath(kind):
@@ -184,11 +203,11 @@ def caption_img(words, act, age, keys, size, max_w, lines_max=2):
 
 
 # ---------------------------------------------------------------------------------------------- chapter slate
-def chapter(fr, t, dur, n, title, x, y, size=58):
+def chapter(fr, t, dur, n, title, x, y, size=58, kicker=None):
     if t < 0 or t > dur + 0.4:
         return
     a = 1 - ease_io((t - dur) / 0.4)
-    kick = label(f"CHAPTER {n:02d}", "mono", 20, RED, tracking=0.25)
+    kick = label(kicker or f"CHAPTER {n:02d}", "mono", 20, RED, tracking=0.25)
     tt = label(title.upper(), "display", size, BONE, tracking=0.02)
     scrim(fr, x - 8, y - 4, x + tt.width - 2 * tt.pad + 8, y + 36 + size * 1.1, a=0.40 * a * clamp01(t / 0.3))
     reveal(fr, kick, x, y, clamp01(t / 0.35), a)

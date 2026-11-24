@@ -68,7 +68,9 @@ if REEL and getattr(TL, "REEL_CUTS", None):
         u += b2 - a2
     REEL_NARR = u
 NARR = REEL_NARR if CUTS else TL.NARR_END
-TOTAL = NARR + TAIL
+END_CARD = getattr(TL, "REEL_END_CARD", 0.0) if CUTS else 0.0       # Short: "full video on YouTube" card at the end
+TOTAL = NARR + (END_CARD if END_CARD else TAIL)
+CHAPTERS = getattr(TL, "REEL_CHAPTERS", TL.CHAPTERS) if CUTS else TL.CHAPTERS
 END_T = args.end if args.end is not None else TOTAL
 
 # ---- layout ---------------------------------------------------------------------------------------------------
@@ -413,7 +415,7 @@ def draw_captions(fr, T, spec):
 
 def chapter_now(T):
     cur = None
-    for ch in TL.CHAPTERS:
+    for ch in CHAPTERS:
         if ch[0] <= T:
             cur = ch
     return cur
@@ -430,7 +432,7 @@ def slate_t0(t0):
     return t0
 
 
-SLATES = [(slate_t0(t0), n, title) for t0, t1, n, title in TL.CHAPTERS]
+SLATES = [(slate_t0(t0), n, title) for t0, t1, n, title in CHAPTERS]
 
 
 def slate_on(T):
@@ -445,7 +447,8 @@ def draw_chapter(fr, T, sc):
     if sc["kind"] == "phone" and not REEL:
         x, size = L["step"][0], 50
     for t0, n, title in SLATES:
-        MS.chapter(fr, T - t0, TL.CHAPTER_SLATE, n, title, x, y, size=size)
+        MS.chapter(fr, T - t0, TL.CHAPTER_SLATE, n, title, x, y, size=size,
+                   kicker=f"{n:02d}  /  {len(CHAPTERS):02d}" if CHAPTERS is not TL.CHAPTERS else None)
 
 
 def draw_rail(fr, T, sc):
@@ -461,7 +464,8 @@ def draw_rail(fr, T, sc):
     if a <= 0.01:
         return
     x, y = L["rail"]
-    lab = MS.label(f"CH {n:02d}", "mono", 18 if not REEL else 22, MS.RED, tracking=0.2)
+    lab = MS.label(f"CH {n:02d}" if CHAPTERS is TL.CHAPTERS else f"{n:02d}/{len(CHAPTERS):02d}", "mono",
+                   18 if not REEL else 22, MS.RED, tracking=0.2)
     if not REEL:
         MS.scrim(fr, x - 6, y - 4, x + 300, y + 40, a=0.40 * a, feather=30)
     MS.put(fr, lab, x, y, a)
@@ -582,8 +586,43 @@ def u_to_T(u):
     return CUTS[-1][2] + (u - REEL_NARR)
 
 
+_END = {}
+
+
+def end_card(u):
+    """Short: after the last word the shot softens and dims, and a card asks viewers to watch the full video."""
+    t = u - REEL_NARR
+    if "bg" not in _END:
+        T_last = CUTS[-1][2] - 1.0 / FPS
+        _SEG_IDX[0] = len(CUTS) - 1
+        live, _ = base_frame(T_last, scene_for(T_last))
+        small = cv2.resize(live, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
+        bg = cv2.resize(cv2.GaussianBlur(small, (0, 0), 5), (W, H), interpolation=cv2.INTER_CUBIC)
+        _END["live"], _END["bg"] = live, bg * 0.40
+    k = ease_io(clamp01(t / 0.55))
+    fr = _END["live"] * (1 - k) + _END["bg"] * k
+    txt = TL.REEL_END_TEXT
+    cx = W / 2
+    lg = MS.logo_bug(200, LOGO)
+    a = ease_out(clamp01((t - 0.25) / 0.45))
+    blend(fr, lg, cx - lg.width / 2, 600 - lg.height / 2 + (1 - a) * 20, a)
+    l1 = MS.line(txt["ml1"], "ml", 64, MS.BONE)
+    MS.reveal(fr, l1, cx, 790, clamp01((t - 0.40) / 0.45), 1.0, "ct")
+    l2 = MS.line(txt["ml2"], "ml", 48, MS.RED)
+    MS.reveal(fr, l2, cx, 890, clamp01((t - 0.55) / 0.45), 1.0, "ct")
+    w = ease_out(clamp01((t - 0.8) / 0.5)) * 420
+    if w > 2:
+        fr[1000:1003, int(cx - w / 2):int(cx + w / 2)] = MS.REDF
+    en = MS.label(txt["en"], "mono", 26, MS.FOG, tracking=0.18)
+    MS.reveal(fr, en, cx, 1030, clamp01((t - 0.8) / 0.45), 1.0, "ct")
+    fade = 1 - clamp01((t - (END_CARD - 0.35)) / 0.33)
+    return np.clip(fr * fade, 0, 1)
+
+
 def frame_at(t_out):
     if CUTS:
+        if END_CARD and t_out >= REEL_NARR:
+            return end_card(t_out)
         return render_frame(u_to_T(t_out), t_out)
     return render_frame(t_out)
 
