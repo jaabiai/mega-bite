@@ -59,6 +59,9 @@ iphone tips malayalam, assistivetouch, iphone screenshot without button, iphone 
 
 ## Short / Reel
 
+**Copy from the phone:** the "AssistiveTouch Reels Pack" page (source `youtube/kit/assistivetouch-tips-reels.html`) has the
+Instagram caption, cover text, first comment, Facebook caption and the Short title / description, each with a Copy button.
+
 The 9:16 file follows the Reels / Shorts safe zone: no text in the top ~220 px, the bottom ~420 px or the right-hand
 button column; the presenter sits in the lower part of the frame so the tip counter and captions stay off his face.
 
