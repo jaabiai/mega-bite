@@ -192,3 +192,36 @@ captions), Geist Mono (labels) and Instrument Serif Italic for the words that ma
 * **Prompts**: glass pills with icons that a click turns lime ("Subscribed", "Shared", ...), `TL.CTAS` / `TL.REEL_CTAS`.
 
 Music Mixkit 770; B-roll Mixkit 21262, 1711, 21605, 8757, 9067; SFX 1485, 1491, 1492, 2596, 3005, 2354, 933, 1109.
+
+## Mist style (V Create, moody thriller)
+
+`render_mist.py --project NAME --format wide|reel` renders projects whose timeline sets `STYLE = "mist"` (kit:
+`lib/mist.py`, grade: `lib/grade_moody.py`): a moody, green-tinted thriller-film look (reference: the misty high-range
+grade of Malayalam thrillers such as *Varathan*). Bone-white type with one blood-red accent; Big Shoulders Display
+(film-title headlines, 3D title), Albert Sans (captions, notes, steps) and JetBrains Mono (kickers, chapter rail), all
+SIL OFL.
+
+* **Grade** (`TL.GRADE_MOODY`): `MoodyGrader` wraps the cinematic grader with a highlight roll-off that turns a blown
+  window into grey-green mist, a printer-light colour decision (green-teal shadows, olive mids, cool cream highlights),
+  green-black shadows and low saturation with skin kept warm (skin is never allowed to go green).
+* **Talking head**: full-bleed graded shot, wide / close framing per scene; a green-black shade on the free side (left in
+  16:9, top in 9:16) carries everything else. The opening 3D title (`TL.TITLE_BEATS`) sits in that free column - the
+  frame is never dimmed or blurred behind it, and the title shot is zoomed so the face sits clear of it.
+* **Chapters** (`TL.CHAPTERS`: `(t0, t1, n, title)`): a "CHAPTER 0n" slate at the start of each chapter, then a rail in the
+  corner ("CH 03  INSTRUCTIONS") whose hairline fills red from the chapter's first word to its last. In the Short each
+  slate starts at the first kept moment of its chapter.
+* **Captions**: film-subtitle style, the layout fixed per chunk and each word fading up as it is spoken, key words
+  (`TL.KEY_WORDS`) in red Albert Sans ExtraBold, a thin red rule down the left edge. Bottom-left in 16:9, in the top band
+  in 9:16. **Notes** (`TL.KEY_POINTS`) are a mono "NOTE" kicker + a balanced, wrapped line with a red underline.
+* **App demos (16:9)**: a split frame - the iPhone on a dark misty stage on the left, the presenter in a tall graded
+  panel on the right (a hairline and red tick at its edge), so the speaker is never covered. The stage's left column
+  holds the chapter rail, a "STEP 0n" line (`TL.STEPS`) and the captions. Highlights (`TL.HIGHLIGHTS`) are a soft
+  spotlight + red corner brackets; taps are a bone press with a red ring. 9:16: the iPhone floats over the softened shot
+  below the top band. `TL.SCREEN_MAP` rows at most 0.02 s apart are cuts; several recordings can be joined into one
+  screen file (time offsets in the timeline).
+* **Transitions**: film-burn dissolves (a warm light leak sweeps across) on every scene change (`TL.MIXES`).
+* **Short** (`TL.REEL_CUTS`): cut only at pauses in the voice; joins are hidden by alternating wide / close framing so
+  they read as camera cuts - no dip, no whoosh (`REEL_JOIN_SFX = False`), the music runs straight through.
+* **Prompts**: hairline bone pills with icons that a click fills red ("Subscribed", "Shared", ...).
+
+Equal AI video: music Mixkit 593; B-roll Mixkit 39790, 39776, 10452; SFX 1485, 1491, 1492, 2354, 2596, 3005, 933, 1109.

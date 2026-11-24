@@ -113,7 +113,7 @@ class Grader:
         img = (img - A * k) / np.maximum(1.0 - k, 0.35)
 
         # 3. tone
-        img = np.interp(np.clip(img, 0, 1) * 2047.0, np.arange(2048, dtype=np.float32), self.lut).astype(np.float32)
+        img = self.lut[(np.clip(img, 0, 1) * 2047.0 + 0.5).astype(np.int16)]      # 2048-step curve, table lookup
 
         # 4. colour (HSV, H in degrees)
         hsv = cv2.cvtColor(np.clip(img, 0, 1), cv2.COLOR_RGB2HSV)

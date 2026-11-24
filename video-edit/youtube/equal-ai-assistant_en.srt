@@ -1,0 +1,449 @@
+1
+00:00:00,000 --> 00:00:03,620
+When spam calls come in,
+or promotional calls -
+
+2
+00:00:03,620 --> 00:00:07,100
+any call like that - they
+really disturb you, don't they?
+
+3
+00:00:07,140 --> 00:00:08,450
+So when such a call comes,
+
+4
+00:00:08,450 --> 00:00:11,250
+your phone itself picks
+it up automatically,
+
+5
+00:00:11,250 --> 00:00:13,400
+asks them why they're calling,
+
+6
+00:00:13,400 --> 00:00:15,700
+who they're calling for and why -
+
+7
+00:00:15,700 --> 00:00:18,450
+it gets all those details from them,
+
+8
+00:00:18,450 --> 00:00:21,150
+works out whether it's a call you want,
+
+9
+00:00:21,150 --> 00:00:23,200
+and rejects the call,
+
+10
+00:00:23,200 --> 00:00:27,000
+or else forwards the call to you.
+
+11
+00:00:27,050 --> 00:00:28,770
+That's a brilliant AI assistant,
+
+12
+00:00:28,770 --> 00:00:30,440
+and I'm introducing it in this video.
+
+13
+00:00:30,850 --> 00:00:32,880
+For more useful videos like this,
+
+14
+00:00:32,880 --> 00:00:35,200
+subscribe to the channel right now,
+
+15
+00:00:35,250 --> 00:00:37,590
+and share this video with others
+
+16
+00:00:37,590 --> 00:00:39,500
+so people know this is possible.
+
+17
+00:00:39,620 --> 00:00:42,090
+So let's see how it's done.
+
+18
+00:00:42,320 --> 00:00:46,100
+Welcome, everyone, to
+a new V Create video.
+
+19
+00:00:46,350 --> 00:00:48,760
+For this, we use an app.
+
+20
+00:00:48,760 --> 00:00:51,450
+It works on iPhone and Android alike.
+
+21
+00:00:52,170 --> 00:00:54,500
+If you need it, the link is
+
+22
+00:00:54,500 --> 00:00:56,480
+in the description -
+download it from there.
+
+23
+00:00:59,100 --> 00:01:02,430
+Open the app - how to set it up,
+
+24
+00:01:02,430 --> 00:01:04,950
+the app itself will call you and explain.
+
+25
+00:01:05,360 --> 00:01:08,220
+So I don't need to explain all of it,
+
+26
+00:01:09,020 --> 00:01:11,700
+but just to introduce it to you,
+
+27
+00:01:12,050 --> 00:01:13,490
+I'll open it and show you.
+
+28
+00:01:13,910 --> 00:01:16,710
+Open the app, enter your phone number,
+
+29
+00:01:17,100 --> 00:01:19,360
+verify with the OTP and move on.
+
+30
+00:01:19,650 --> 00:01:22,450
+After that, it gives
+you a few instructions.
+
+31
+00:01:23,500 --> 00:01:27,650
+Allow whatever permissions it
+needs - contacts, and likewise
+
+32
+00:01:27,650 --> 00:01:30,210
+the microphone - it asks
+for several permissions.
+
+33
+00:01:31,100 --> 00:01:33,300
+You can allow them without worry.
+
+34
+00:01:33,300 --> 00:01:36,710
+It works without affecting
+your privacy at all -
+
+35
+00:01:36,710 --> 00:01:40,570
+they promise that when they call you.
+
+36
+00:01:40,600 --> 00:01:44,530
+Then create your full profile.
+
+37
+00:01:44,850 --> 00:01:47,400
+Once you're in the app,
+
+38
+00:01:47,400 --> 00:01:49,900
+you'll see an option called 'You'.
+
+39
+00:01:50,180 --> 00:01:55,120
+From there you can switch
+it on or off anytime.
+
+40
+00:01:55,600 --> 00:01:58,520
+Then, to give it the
+instructions you need,
+
+41
+00:01:59,250 --> 00:02:02,850
+select 'Your Instructions'
+and set them there.
+
+42
+00:02:03,300 --> 00:02:06,260
+How should that instruction work?
+
+43
+00:02:06,260 --> 00:02:09,520
+Busy? The same instruction for every call?
+
+44
+00:02:10,700 --> 00:02:13,380
+Or only for business calls?
+
+45
+00:02:13,380 --> 00:02:16,290
+You can choose any of these here.
+
+46
+00:02:16,290 --> 00:02:17,700
+As you choose each one,
+
+47
+00:02:17,700 --> 00:02:20,800
+the options it needs are right here -
+
+48
+00:02:20,800 --> 00:02:23,110
+read them and apply what you need.
+
+49
+00:02:23,150 --> 00:02:26,110
+Then tap 'Add new instruction'
+
+50
+00:02:26,110 --> 00:02:29,380
+to give it a new instruction by voice,
+
+51
+00:02:29,380 --> 00:02:32,480
+or create one right here.
+
+52
+00:02:33,950 --> 00:02:37,270
+Do it that way, or send
+a message if you prefer -
+
+53
+00:02:37,270 --> 00:02:39,920
+whichever you want, select it,
+
+54
+00:02:39,920 --> 00:02:42,500
+and create your assistant right here.
+
+55
+00:02:42,830 --> 00:02:45,990
+Also, which calls should
+the assistant handle?
+
+56
+00:02:45,990 --> 00:02:48,440
+Open 'Your Call Preferences',
+
+57
+00:02:48,440 --> 00:02:52,000
+then pick 'All calls'
+or 'All calls except',
+
+58
+00:02:52,000 --> 00:02:55,580
+or 'Only unknown numbers'.
+
+59
+00:02:55,950 --> 00:02:58,570
+If, for unknown numbers,
+
+60
+00:02:58,570 --> 00:03:01,300
+you want to know who, how and why
+
+61
+00:03:01,300 --> 00:03:04,900
+before you take the call
+- that's the best option.
+
+62
+00:03:05,180 --> 00:03:08,550
+Select what you need, and tap 'Confirm'.
+
+63
+00:03:08,700 --> 00:03:10,800
+After that, before you take a call,
+
+64
+00:03:10,800 --> 00:03:13,800
+the AI assistant talks to them,
+
+65
+00:03:13,800 --> 00:03:16,980
+decides whether you need
+the call, and passes it on.
+
+66
+00:03:17,300 --> 00:03:20,770
+To set the languages it speaks with them,
+
+67
+00:03:20,770 --> 00:03:23,660
+there's a 'Voice & Language' section.
+
+68
+00:03:23,970 --> 00:03:26,540
+Select it, and choose
+the languages you need
+
+69
+00:03:26,540 --> 00:03:29,480
+right here - tap 'Edit',
+
+70
+00:03:29,950 --> 00:03:32,610
+pick the languages you like,
+
+71
+00:03:32,610 --> 00:03:36,890
+confirm, and those are
+the languages it will use.
+
+72
+00:03:37,020 --> 00:03:40,140
+You can pick three languages at a time.
+
+73
+00:03:40,350 --> 00:03:42,590
+Confirm, then the primary language
+
+74
+00:03:42,590 --> 00:03:45,960
+you want can also be chosen here.
+
+75
+00:03:46,360 --> 00:03:49,020
+Then tap 'Confirm'.
+
+76
+00:03:49,350 --> 00:03:51,710
+When it first talks to someone,
+
+77
+00:03:51,710 --> 00:03:53,750
+the language you chose as primary -
+
+78
+00:03:53,900 --> 00:03:56,940
+it asks the caller
+questions in that language.
+
+79
+00:03:57,450 --> 00:04:00,310
+Whether they speak Malayalam,
+Hindi or any other language,
+
+80
+00:04:00,310 --> 00:04:03,080
+it automatically switches
+to that same language,
+
+81
+00:04:03,400 --> 00:04:06,260
+asks questions, gives answers,
+
+82
+00:04:06,260 --> 00:04:09,280
+and works out exactly
+whether you need the call.
+
+83
+00:04:09,850 --> 00:04:12,490
+This voice that asks the questions -
+
+84
+00:04:12,600 --> 00:04:15,020
+if you want to change the voice,
+
+85
+00:04:15,020 --> 00:04:18,340
+select 'Assistant Voice'
+at the top, then 'Edit',
+
+86
+00:04:19,000 --> 00:04:23,060
+and pick any voice you like from here.
+
+87
+00:04:23,350 --> 00:04:27,590
+Select it and confirm, and that's
+the voice callers will hear.
+
+88
+00:04:28,000 --> 00:04:31,250
+Likewise, for unknown callers -
+
+89
+00:04:31,250 --> 00:04:34,390
+should the phone ring,
+or switch to silent mode?
+
+90
+00:04:34,390 --> 00:04:36,580
+You can choose that here.
+
+91
+00:04:36,580 --> 00:04:39,500
+Promotional calls and the
+like can automatically
+
+92
+00:04:39,550 --> 00:04:41,910
+be set to go silent, all of them.
+
+93
+00:04:42,100 --> 00:04:45,240
+So many features - a brilliant app.
+
+94
+00:04:45,240 --> 00:04:48,240
+Try it today - the link
+is in the description.
+
+95
+00:04:48,350 --> 00:04:50,150
+If you have any doubts,
+
+96
+00:04:50,150 --> 00:04:53,030
+you can ask Equal itself, right here -
+
+97
+00:04:53,100 --> 00:04:55,380
+tap 'Talk to Equal' and ask them,
+
+98
+00:04:55,380 --> 00:04:58,140
+and they'll clear up
+whatever doubts you have.
+
+99
+00:04:59,100 --> 00:05:02,640
+They'll call you the same
+way and explain things.
+
+100
+00:05:03,350 --> 00:05:04,550
+Very useful, isn't it?
+
+101
+00:05:04,550 --> 00:05:08,310
+It has free features, and you
+can also upgrade for more.
+
+102
+00:05:08,400 --> 00:05:12,550
+Try what you need first, then decide.
+
+103
+00:05:12,600 --> 00:05:15,440
+Anyway, I'm sure this
+video will be useful.
+
+104
+00:05:15,440 --> 00:05:18,100
+See you again with more
+new things like this.
+

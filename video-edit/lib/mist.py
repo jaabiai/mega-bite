@@ -180,19 +180,55 @@ def chapter(fr, t, dur, n, title, x, y, size=58):
         fr[yy:yy + 3, x0:x1] = fr[yy:yy + 3, x0:x1] * (1 - a) + REDF * a
 
 
-def key_line(fr, t, dur, text, x, y, size=46):
-    """A key phrase: mono kicker 'NOTE' + bone phrase with a red underline drawn under it."""
+def _greedy(words, ft, max_w):
+    out, cur = [], ""
+    for w in words:
+        t = (cur + " " + w).strip()
+        if cur and ft.getlength(t) > max_w:
+            out.append(cur)
+            cur = w
+        else:
+            cur = t
+    if cur:
+        out.append(cur)
+    return out
+
+
+def wrap(text, kind, size, max_w):
+    """Greedy wrap to max_w, then balanced: the narrowest width that still needs the same number of lines (no orphans)."""
+    ft = font(kind, size)
+    words = text.split()
+    best = _greedy(words, ft, max_w)
+    n = len(best)
+    if n > 1:
+        w = max_w
+        while w > 80:
+            w -= 8
+            trial = _greedy(words, ft, w)
+            if len(trial) > n:
+                break
+            best = trial
+    return best
+
+
+def key_line(fr, t, dur, text, x, y, size=46, max_w=None, kicker="NOTE"):
+    """A key phrase: mono kicker 'NOTE' + bone phrase (wrapped to max_w) with a red underline under the last line."""
     if t < 0 or t > dur + 0.35:
         return
     a = 1 - ease_io((t - dur) / 0.35)
-    kick = label("NOTE", "mono", 18, FOG, tracking=0.3)
+    kick = label(kicker, "mono", 18 if size < 50 else 22, FOG, tracking=0.3)
     reveal(fr, kick, x, y, clamp01(t / 0.3), a)
-    tt = label(text, "text8", size, BONE)
-    reveal(fr, tt, x, y + 28, clamp01((t - 0.08) / 0.4), a)
-    wln = (tt.width - 2 * tt.pad) * ease_out((t - 0.25) / 0.5)
+    lines = wrap(text, "text8", size, max_w) if max_w else [text]
+    lh = size * 1.16
+    wmax = 0
+    for k, ln in enumerate(lines):
+        tt = label(ln, "text8", size, BONE)
+        reveal(fr, tt, x, y + 28 + k * lh, clamp01((t - 0.08 - 0.06 * k) / 0.4), a)
+        wmax = max(wmax, tt.width - 2 * tt.pad)
+    wln = wmax * ease_out((t - 0.25) / 0.5)
     if wln > 2:
         H, W = fr.shape[:2]
-        yy = int(y + 28 + size * 1.12)
+        yy = int(y + 28 + (len(lines) - 1) * lh + size * 1.12)
         fr[yy:yy + 3, int(x):int(min(x + wln, W))] = fr[yy:yy + 3, int(x):int(min(x + wln, W))] * (1 - a) + REDF * a
 
 
@@ -239,8 +275,9 @@ def brackets(fr, rect, t, a=1.0, width=4):
     reg[:] = reg * (1 - mm) + REDF * mm
 
 
-def tag(fr, rect, text, t, a=1.0, side="right", size=26, xmin=10, xmax=None):
-    """Mono label on a dark plate joined to the rect by a short red line."""
+def tag(fr, rect, text, t, a=1.0, side="right", size=26, xmin=10, xmax=None, below=True):
+    """Mono label on a dark plate joined to the rect by a short red line (below the rect, or skipped when below=False,
+    if neither side has room)."""
     if a <= 0.01 or not text:
         return
     H, W = fr.shape[:2]
@@ -256,6 +293,8 @@ def tag(fr, rect, text, t, a=1.0, side="right", size=26, xmin=10, xmax=None):
     elif side == "left" and not fits_l and fits_r:
         side = "right"
     elif not fits_r and not fits_l:
+        if not below:
+            return
         reveal(fr, lab, min(max((x0 + x1) / 2 - lw / 2, xmin + 6), xmax - lw - 6), y1 + 18, clamp01((t - 0.1) / 0.35), a)
         return
     g = ease_out(t / 0.3)
@@ -413,7 +452,7 @@ class MistTitle:
             T3.composite(fr, lay)
             bh, bw = blk.h * scale, blk.w * scale
             if o.get("kicker"):
-                kk = label(o["kicker"], "mono", int(H * (0.020 if W > H else 0.015)), RED, tracking=0.28)
+                kk = label(o["kicker"], "mono", int(H * (0.023 if W > H else 0.016)), RED, tracking=0.24)
                 reveal(fr, kk, cx, cy - bh / 2 - H * 0.045, clamp01((tt - 0.2) / 0.4), alpha, "ct")
             if o.get("sub"):
                 st = label(o["sub"], "text", int(H * (0.034 if W > H else 0.024)), FOG)
