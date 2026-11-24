@@ -41,7 +41,7 @@ def fpath(kind):
 
 
 # ---------------------------------------------------------------------------------------------- shading
-def side_shade(W, H, reel, strength=0.55):
+def side_shade(W, H, reel, strength=0.55, tint=(1.0, 0.90, 0.95)):
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
     if reel:
         k = np.clip(1 - yy / (H * 0.40), 0, 1) ** 1.3 * strength
@@ -49,8 +49,28 @@ def side_shade(W, H, reel, strength=0.55):
         k = np.clip(1 - xx / (W * 0.52), 0, 1) ** 1.2 * strength
         k = k + np.clip(1 - (H - yy) / (H * 0.30), 0, 1) ** 2 * 0.25 * np.clip(1 - xx / (W * 0.65), 0, 1)
     k = np.clip(k, 0, 0.8)[..., None]
-    tint = np.array([0.80, 1.0, 0.92], np.float32)                  # the shade leans green-black, not neutral grey
+    tint = np.array(tint, np.float32)              # darkens red / blue a touch more than green: leans green-black
     return (1 - k * tint).astype(np.float32)
+
+
+def scrim(fr, x0, y0, x1, y1, a=0.42, feather=46):
+    """Soft, local green-black shadow behind a text block (keeps text readable over a bright window without darkening
+    the rest of the picture)."""
+    if a <= 0.01:
+        return
+    H, W = fr.shape[:2]
+    f = feather
+    X0, Y0 = int(max(x0 - 2 * f, 0)), int(max(y0 - 2 * f, 0))
+    X1, Y1 = int(min(x1 + 2 * f, W)), int(min(y1 + 2 * f, H))
+    if X1 <= X0 or Y1 <= Y0:
+        return
+    k = 4
+    m = np.zeros(((Y1 - Y0) // k + 1, (X1 - X0) // k + 1), np.float32)
+    cv2.rectangle(m, (int((x0 - X0) / k), int((y0 - Y0) / k)), (int((x1 - X0) / k), int((y1 - Y0) / k)), 1.0, -1)
+    m = cv2.GaussianBlur(m, (0, 0), f / k / 1.6)
+    m = cv2.resize(m, (X1 - X0, Y1 - Y0), interpolation=cv2.INTER_LINEAR)[..., None]
+    tint = np.array([1.0, 0.90, 0.95], np.float32)
+    fr[Y0:Y1, X0:X1] *= 1 - a * m * tint
 
 
 # ---------------------------------------------------------------------------------------------- text
@@ -169,8 +189,9 @@ def chapter(fr, t, dur, n, title, x, y, size=58):
         return
     a = 1 - ease_io((t - dur) / 0.4)
     kick = label(f"CHAPTER {n:02d}", "mono", 20, RED, tracking=0.25)
-    reveal(fr, kick, x, y, clamp01(t / 0.35), a)
     tt = label(title.upper(), "display", size, BONE, tracking=0.02)
+    scrim(fr, x - 8, y - 4, x + tt.width - 2 * tt.pad + 8, y + 36 + size * 1.1, a=0.40 * a * clamp01(t / 0.3))
+    reveal(fr, kick, x, y, clamp01(t / 0.35), a)
     reveal(fr, tt, x, y + 30, clamp01((t - 0.1) / 0.45), a)
     wln = (tt.width - 2 * tt.pad) * ease_out((t - 0.3) / 0.6)
     if wln > 2:
@@ -217,9 +238,12 @@ def key_line(fr, t, dur, text, x, y, size=46, max_w=None, kicker="NOTE"):
         return
     a = 1 - ease_io((t - dur) / 0.35)
     kick = label(kicker, "mono", 18 if size < 50 else 22, FOG, tracking=0.3)
-    reveal(fr, kick, x, y, clamp01(t / 0.3), a)
     lines = wrap(text, "text8", size, max_w) if max_w else [text]
     lh = size * 1.16
+    ft = font("text8", size)
+    wl = max(ft.getlength(ln) for ln in lines)
+    scrim(fr, x - 8, y - 4, x + wl + 8, y + 28 + len(lines) * lh + 8, a=0.42 * a * clamp01(t / 0.3))
+    reveal(fr, kick, x, y, clamp01(t / 0.3), a)
     wmax = 0
     for k, ln in enumerate(lines):
         tt = label(ln, "text8", size, BONE)
@@ -447,13 +471,20 @@ class MistTitle:
             alpha = clamp01((tt + 0.05) / 0.25) * (1 - k_out)
             cx, cy = W * self.cx, H * self.cy
             sw = (tt - 0.6) / 1.0
+            bh, bw = blk.h * scale, blk.w * scale
+            if W > H:                               # 16:9: a soft shadow behind the block keeps it off the bright window
+                kw = 0
+                if o.get("kicker"):
+                    kk0 = label(o["kicker"], "mono", int(H * 0.023), RED, tracking=0.24)
+                    kw = kk0.width - 2 * kk0.pad
+                hw = max(bw, kw) / 2 + 12
+                scrim(fr, cx - hw, cy - bh / 2 - H * 0.065, cx + hw, cy + bh / 2 + H * 0.07, a=0.42 * alpha)
             lay = blk.render(W, H, yaw=yaw, pitch=pitch, scale=scale, cx=cx, cy=cy, sweep=sw if 0 < sw < 1 else None, alpha=alpha)
             T3.shadow_and_glow(fr, lay, shadow=0.65 * alpha, glow=0.10 * alpha, offset=(0, int(H * 0.018)), tint=(1.0, 0.4, 0.3))
             T3.composite(fr, lay)
-            bh, bw = blk.h * scale, blk.w * scale
             if o.get("kicker"):
-                kk = label(o["kicker"], "mono", int(H * (0.023 if W > H else 0.016)), RED, tracking=0.24)
+                kk = label(o["kicker"], "mono", int(H * (0.023 if W > H else 0.016)), BONE if W > H else RED, tracking=0.24)
                 reveal(fr, kk, cx, cy - bh / 2 - H * 0.045, clamp01((tt - 0.2) / 0.4), alpha, "ct")
             if o.get("sub"):
-                st = label(o["sub"], "text", int(H * (0.034 if W > H else 0.024)), FOG)
+                st = label(o["sub"], "text7", int(H * (0.034 if W > H else 0.024)), BONE)
                 reveal(fr, st, cx, cy + bh / 2 + H * 0.012, clamp01((tt - 0.4) / 0.5), alpha, "ct")

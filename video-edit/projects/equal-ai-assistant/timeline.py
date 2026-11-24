@@ -17,12 +17,18 @@ FACE_ANCHOR = dict(fx=0.538, fy=0.43)
 LOGO = "vcreate.png"
 CHANNEL = "V CREATE"
 
-# Varathan-style moody green grade (lib/grade_moody.py): misty grey-green window, darker cabin, muted skin kept warm
-GRADE_MOODY = dict(knee=0.44, roll=2.8, mist=0.55, mist_rgb=(0.74, 0.86, 0.80), sat=0.72, skin_keep=0.38,
-                   lift=(-0.016, 0.028, 0.018), gamma=(0.95, 1.05, 0.985), gain=(0.95, 0.99, 0.93), shadow_green=0.026,
-                   base=dict(exposure=-0.40, green_hue=10.0, green_sat=0.58, vignette=0.60, skin_sat=0.80, face_lift=0.24,
-                             contrast=0.55, halation=0.12, bloom=0.11, clarity=0.06, dehaze=0.16))
-BROLL_GRADE = dict(exposure=-0.30, vignette=0.50, clarity=0.04)
+# Soft moody grade (lib/grade_moody.py), chosen on real frames of this video (work notes: gtest.py): the face stays
+# as bright as the rest of the shot, skin keeps its natural colour, the bright window rolls off into a soft green mist,
+# a light green-teal in the shadows. (The first heavy Varathan-style setting lifted the face, crushed everything
+# else and turned skin grey-green - rejected.)
+GRADE_MOODY = dict(knee=0.58, roll=2.2, mist=0.26, mist_rgb=(0.84, 0.93, 0.88), sat=0.92, skin_keep=0.85,
+                   lift=(-0.004, 0.012, 0.008), gamma=(0.995, 1.02, 1.0), gain=(0.99, 1.0, 0.975), shadow_green=0.008,
+                   base=dict(exposure=-0.08, temp=0.002, tint=-0.008, dehaze=0.20, contrast=0.34, toe=0.034, shoulder=0.70,
+                             skin_sat=0.96, skin_warm=0.014, green_sat=0.64, green_val=0.84, green_hue=9.0, split=0.95,
+                             sat=0.92, vibrance=0.02, face_lift=0.03, face_contrast=0.02, clarity=0.03, halation=0.06,
+                             bloom=0.05, vignette=0.32, grain=0.013))
+SHADE_STRENGTH = 0.38                          # the left-side shade under the text column (16:9)
+BROLL_GRADE = dict(exposure=-0.04, vignette=0.30, clarity=0.03)
 
 s1 = lambda t: O1 + t
 s2 = lambda t: O2 + t

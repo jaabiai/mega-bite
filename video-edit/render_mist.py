@@ -81,8 +81,8 @@ else:
     L = dict(bug=(1826, 86, 84), rail=(64, 58), chap=(64, 112, 60), key=(64, 300), step=(64, 300),
              cap=(64, 1000, 680, 46, 2, "bottom"), cap_phone=(56, 1000, 430, 38, 3, "bottom"),
              cta=[(64, 560), (64, 650)], phone_hb=0.86, phone_anchor=(0.43, 0.5), x_min=520, tag_x=(500, PANEL_X - 12))
-SHADE = MS.side_shade(W, H, REEL)
-TITLE_SHADE = MS.side_shade(W, H, REEL, strength=0.80)
+SHADE = MS.side_shade(W, H, REEL, strength=0.55 if REEL else getattr(TL, "SHADE_STRENGTH", 0.55))
+TITLE_SHADE = MS.side_shade(W, H, REEL, strength=0.80 if REEL else 0.62)
 STAGE_SHADE = SHADE * 0.5 + 0.5
 LOGO = os.path.join(HERE, "assets", "logo", getattr(TL, "LOGO", "vcreate.png"))
 
@@ -406,6 +406,8 @@ def draw_captions(fr, T, spec):
     p = img.pad
     rise = (1 - ease_out(fin)) * 12
     yy = (y - (img.height - 2 * p) if align == "bottom" else y) + rise
+    if not REEL:                                   # soft local shadow under the block (bright window behind)
+        MS.scrim(fr, x - 6, yy - 6, x + img.width - 2 * p + 4, yy + img.height - 2 * p + 4, a=0.44 * fin * fout * hide)
     blend(fr, img, x - p, yy - p, fin * fout * hide)
 
 
@@ -460,6 +462,8 @@ def draw_rail(fr, T, sc):
         return
     x, y = L["rail"]
     lab = MS.label(f"CH {n:02d}", "mono", 18 if not REEL else 22, MS.RED, tracking=0.2)
+    if not REEL:
+        MS.scrim(fr, x - 6, y - 4, x + 300, y + 40, a=0.40 * a, feather=30)
     MS.put(fr, lab, x, y, a)
     nm = MS.label(title.upper(), "mono", 18 if not REEL else 22, MS.FOG, tracking=0.16)
     MS.put(fr, nm, x + lab.width - 2 * lab.pad + 18, y, a)
