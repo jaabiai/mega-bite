@@ -5,6 +5,8 @@ Files: `VCreate_Equal_AI_16x9.mp4` (main video, 5:18, the whole talk, no end car
 talks to the caller first, in the caller's language, promotional calls muted, try it - cut only at pauses, ending on a
 card "full video on YouTube").
 
+**Uploaded:** https://youtu.be/qCdEDVCiRQw (main video). The blog embed and the Short description use it.
+
 **Copy from the phone:** the "Equal AI Upload Kit" page (https://claude.ai/artifact/XnosUoYTsdjDp7JJjMWbGZ) has every
 field below with a Copy button, plus the blog post HTML. Blog notes: `youtube/equal-ai-assistant_blog.md`.
 
@@ -90,7 +92,7 @@ his face. It is 1:22 and ends with a Malayalam card: "പൂർണ്ണ വീ�
 Equal AI നിങ്ങളുടെ കോളുകൾ എടുത്ത്, ആരാണ് എന്തിനാണ് വിളിക്കുന്നത് എന്ന് ചോദിച്ച് മനസ്സിലാക്കി, സ്പാം കോളുകൾ റിജക്ട് ചെയ്യും. നിങ്ങളുടെ ഭാഷയിൽ സംസാരിക്കും, പ്രൊമോഷണൽ കോളുകൾ സൈലന്റ് ആക്കും.
 Android: https://play.google.com/store/apps/details?id=in.equal.ai.assistant
 iPhone: https://apps.apple.com/in/app/id6757906431
-ഫുൾ സെറ്റപ്പ് വീഡിയോ V Create ചാനലിൽ.
+ഫുൾ സെറ്റപ്പ് വീഡിയോ: https://youtu.be/qCdEDVCiRQw
 #Shorts #EqualAI #SpamCalls #MalayalamTech
 ```
 Set **Related video** to the main video.

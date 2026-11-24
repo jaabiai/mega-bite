@@ -78,7 +78,7 @@ input#yt { font: 500 15px var(--body); color: var(--ink); background: var(--fiel
   <section id="reels"><h2>Instagram / Facebook Reel<small>SAME 9:16 FILE</small></h2><div id="f-reels"></div></section>
   <section id="blog"><h2>Blog post<small>BLOGGER · HTML VIEW</small></h2>
     <div class="field">
-      <label class="in" for="yt">YouTube-ൽ വീഡിയോ അപ്‌ലോഡ് ചെയ്ത ശേഷം അതിന്റെ ലിങ്ക് ഇവിടെ പേസ്റ്റ് ചെയ്യുക. ബ്ലോഗിലെ വീഡിയോ (embed) തനിയെ ചേരും.
+      <label class="in" for="yt">ബ്ലോഗിൽ ചേർക്കുന്ന YouTube വീഡിയോ (ഇതിനകം ചേർത്തിട്ടുണ്ട്). മറ്റൊരു വീഡിയോ വേണമെങ്കിൽ ലിങ്ക് മാറ്റിയാൽ മതി.
         <input id="yt" type="url" inputmode="url" autocomplete="off" placeholder="https://youtu.be/..." />
       </label>
       <div id="ytstatus" class="status wait">വീഡിയോ ലിങ്ക് ഇതുവരെ ചേർത്തിട്ടില്ല</div>
@@ -89,6 +89,7 @@ input#yt { font: 500 15px var(--body); color: var(--ink); background: var(--fiel
 
 <script>
 const BLOG = __BLOG_HTML__;
+const VIDEO = "https://youtu.be/qCdEDVCiRQw";          // the uploaded main video
 const PLAY = "https://play.google.com/store/apps/details?id=in.equal.ai.assistant";
 const APPSTORE = "https://apps.apple.com/in/app/id6757906431";
 
@@ -127,7 +128,7 @@ const SHORT_DESC = `Equal AI നിങ്ങളുടെ കോളുകൾ എ�
 Android: ${PLAY}
 iPhone: ${APPSTORE}
 
-ഫുൾ സെറ്റപ്പ് വീഡിയോ V Create ചാനലിൽ.
+ഫുൾ സെറ്റപ്പ് വീഡിയോ: ${VIDEO}
 #Shorts #EqualAI #SpamCalls #MalayalamTech`;
 
 const REEL = `സ്പാം കോളുകൾ ഇനി AI എടുക്കും 🤖📵
@@ -160,7 +161,7 @@ const DATA = {
   short: [
     { label: "Title", text: "Spam Calls ഇനി AI എടുക്കും 🤖 Equal AI Call Assistant #shorts" },
     { label: "Description", text: SHORT_DESC },
-    { list: "After upload", items: [ "Related video: മെയിൻ 16:9 വീഡിയോ തിരഞ്ഞെടുക്കുക", "Short-ന്റെ അവസാനം \"പൂർണ്ണ വീഡിയോ കാണാൻ V Create YouTube ചാനൽ സന്ദർശിക്കൂ\" എന്ന് കാണിക്കുന്നുണ്ട്" ] },
+    { list: "After upload", items: [ "Related video: മെയിൻ വീഡിയോ (youtu.be/qCdEDVCiRQw) തിരഞ്ഞെടുക്കുക", "Short-ന്റെ അവസാനം \"പൂർണ്ണ വീഡിയോ കാണാൻ V Create YouTube ചാനൽ സന്ദർശിക്കൂ\" എന്ന് കാണിക്കുന്നുണ്ട്" ] },
   ],
   reels: [ { label: "Caption", text: REEL } ],
   blog: [
@@ -238,7 +239,8 @@ function updateBlog() {
   else { status.textContent = "വീഡിയോ ലിങ്ക് ഇതുവരെ ചേർത്തിട്ടില്ല"; status.className = "status wait"; }
   try { localStorage.setItem("equal-yt", input.value); } catch (e) {}
 }
-try { input.value = localStorage.getItem("equal-yt") || ""; } catch (e) {}
+input.value = VIDEO;
+try { const saved = localStorage.getItem("equal-yt"); if (saved && ytId(saved)) input.value = saved; } catch (e) {}
 input.addEventListener("input", updateBlog);
 updateBlog();
 </script>

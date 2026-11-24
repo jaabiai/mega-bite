@@ -8,6 +8,8 @@
 the "Equal AI Upload Kit" artifact (https://claude.ai/artifact/XnosUoYTsdjDp7JJjMWbGZ, source
 `youtube/kit/equal-ai-assistant.template.html`) fills it in from the YouTube link and copies the finished HTML.
 
+**Embed:** https://youtu.be/qCdEDVCiRQw at the `<!--EMBED-->` mark (about 40 % of the post), filled in by the kit.
+
 **Images** (original illustrations, not video frames or app artwork; generator `tools/blog_images/equal_ai.py`; served from
 the public repo via jsDelivr pinned to commit ffb7e9c): `hero.jpg` (top), `how-it-works.jpg` (after "What is Equal AI"),
 `settings.jpg` (before the settings section).
