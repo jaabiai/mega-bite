@@ -1,0 +1,244 @@
+<title>Equal AI Upload Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@500;700&family=Anek+Malayalam:wght@500;700&family=Big+Shoulders+Display:wght@800&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+/* Layout: one phone-first column; a sticky chip bar jumps between YouTube, Short, Reels and Blog; every field is a
+   labelled block with its own Copy button. Palette follows the video's "Mist" look. */
+:root {
+  --bg: #eef2ee; --surface: #ffffff; --field: #f5f7f4; --ink: #121a16; --muted: #56645b; --line: #d4ddd5;
+  --accent: #b8321f; --ok: #2c7a4b; --chip: #e2e9e3;
+  --display: "Big Shoulders Display", "Albert Sans", system-ui, sans-serif;
+  --body: "Albert Sans", "Anek Malayalam", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ml: "Anek Malayalam", "Albert Sans", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b100d; --surface: #131c17; --field: #0f1612; --ink: #ece7da; --muted: #a3b0a6; --line: #26342c;
+  --accent: #e2604c; --ok: #7cc48f; --chip: #1b2620; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b100d; --surface: #131c17; --field: #0f1612; --ink: #ece7da; --muted: #a3b0a6; --line: #26342c;
+  --accent: #e2604c; --ok: #7cc48f; --chip: #1b2620; color-scheme: dark }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; }
+header { display: grid; gap: 6px; padding-bottom: 14px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 12vw, 64px); line-height: .95; margin: 0; letter-spacing: .01em; }
+.lede { font-family: var(--ml); color: var(--muted); margin: 4px 0 0; max-width: 60ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.meta span { font-family: var(--mono); font-size: 12px; padding: 5px 10px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px;
+  display: flex; gap: 8px; overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+nav a { flex: 0 0 auto; font-weight: 700; font-size: 14px; color: var(--ink); text-decoration: none; padding: 8px 14px;
+  border-radius: 999px; background: var(--chip); }
+nav a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section { display: grid; gap: 14px; padding-top: 30px; scroll-margin-top: 64px; }
+h2 { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1; margin: 0; letter-spacing: .01em; }
+h2 small { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--muted); margin-top: 6px; font-weight: 600; }
+
+.field { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 12px 14px; display: grid; gap: 10px; min-width: 0; }
+.fhead { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.flabel { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.flabel b { color: var(--accent); font-weight: 600; }
+.text { font-family: var(--ml); font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--field);
+  border-radius: 10px; padding: 10px 12px; margin: 0; max-height: 320px; overflow: auto; min-width: 0; }
+.text.code { font-family: var(--mono); font-size: 12px; line-height: 1.5; max-height: 260px; }
+button.copy { flex: 0 0 auto; font: 700 14px var(--body); color: #fff; background: var(--accent); border: 0; border-radius: 999px;
+  padding: 9px 18px; min-width: 92px; cursor: pointer; }
+button.copy.done { background: var(--ok); }
+.note { font-family: var(--ml); font-size: 14px; color: var(--muted); margin: 0; }
+ul.check { margin: 0; padding-left: 1.1em; font-family: var(--ml); font-size: 15px; display: grid; gap: 4px; }
+label.in { display: grid; gap: 6px; font-family: var(--ml); font-size: 14px; color: var(--muted); }
+input#yt { font: 500 15px var(--body); color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 10px;
+  padding: 11px 12px; width: 100%; min-width: 0; }
+.status { font-family: var(--mono); font-size: 12px; }
+.status.ok { color: var(--ok); } .status.wait { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) { button.copy { transition: background .2s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">V Create · Upload kit</div>
+    <h1>Equal AI</h1>
+    <p class="lede">YouTube, Short, Reels, ബ്ലോഗ്: എല്ലാം ഇവിടെ. ഓരോന്നിന്റെയും Copy ബട്ടൺ അമർത്തി ഫോണിൽ നിന്ന് തന്നെ പേസ്റ്റ് ചെയ്യാം.</p>
+    <div class="meta"><span>16:9 · 5:18</span><span>9:16 · 1:22</span><span>Blog · Blogger HTML</span></div>
+  </header>
+
+  <nav aria-label="Sections"><a href="#youtube">YouTube</a><a href="#short">Short</a><a href="#reels">Reels</a><a href="#blog">Blog</a></nav>
+
+  <section id="youtube"><h2>YouTube video<small>VCREATE_EQUAL_AI_16X9.MP4</small></h2><div id="f-youtube" class="grid"></div></section>
+  <section id="short"><h2>YouTube Short<small>VCREATE_EQUAL_AI_9X16.MP4</small></h2><div id="f-short"></div></section>
+  <section id="reels"><h2>Instagram / Facebook Reel<small>SAME 9:16 FILE</small></h2><div id="f-reels"></div></section>
+  <section id="blog"><h2>Blog post<small>BLOGGER · HTML VIEW</small></h2>
+    <div class="field">
+      <label class="in" for="yt">YouTube-ൽ വീഡിയോ അപ്‌ലോഡ് ചെയ്ത ശേഷം അതിന്റെ ലിങ്ക് ഇവിടെ പേസ്റ്റ് ചെയ്യുക. ബ്ലോഗിലെ വീഡിയോ (embed) തനിയെ ചേരും.
+        <input id="yt" type="url" inputmode="url" autocomplete="off" placeholder="https://youtu.be/..." />
+      </label>
+      <div id="ytstatus" class="status wait">വീഡിയോ ലിങ്ക് ഇതുവരെ ചേർത്തിട്ടില്ല</div>
+    </div>
+    <div id="f-blog"></div>
+  </section>
+</div>
+
+<script>
+const BLOG = __BLOG_HTML__;
+const PLAY = "https://play.google.com/store/apps/details?id=in.equal.ai.assistant";
+const APPSTORE = "https://apps.apple.com/in/app/id6757906431";
+
+const DESC = `സ്പാം കോളുകളും പ്രൊമോഷണൽ കോളുകളും ശല്യമാകുന്നുണ്ടോ? Equal AI എന്ന ആപ്പ് നിങ്ങളുടെ ഫോണിൽ വരുന്ന കോളുകൾ സ്വയം എടുത്ത്, ആരാണ് വിളിക്കുന്നത്, എന്തിനാണ് വിളിക്കുന്നത് എന്ന് ചോദിച്ച് മനസ്സിലാക്കി, ആവശ്യമില്ലാത്ത കോളുകൾ റിജക്ട് ചെയ്യുകയും ആവശ്യമുള്ളവ നിങ്ങൾക്ക് കൈമാറുകയും ചെയ്യും. iPhone-ലും Android-ലും ഉപയോഗിക്കാം.
+
+📲 Equal AI ഡൗൺലോഡ് ചെയ്യാം
+Android: ${PLAY}
+iPhone: ${APPSTORE}
+
+✅ ഈ വീഡിയോയിൽ
+• ആപ്പ് സെറ്റ് ചെയ്യുന്ന വിധം, ആവശ്യമായ പെർമിഷനുകൾ
+• You → AI Assistant ഓൺ / ഓഫ്
+• Your Instructions → Busy / Everyday calls / Business പ്രീസെറ്റുകൾ, വോയ്‌സ് നോട്ടായോ മെസേജായോ പുതിയ ഇൻസ്ട്രക്ഷൻ
+• Your Call Preferences → All calls / All calls except / Only unknown numbers
+• Voice & Language → 3 ഭാഷകൾ വരെ, പ്രൈമറി ഭാഷ, അസിസ്റ്റന്റിന്റെ ശബ്ദം
+• Silent Mode → പ്രൊമോഷണൽ കോളുകൾ ഓട്ടോമാറ്റിക്കായി മ്യൂട്ട്
+• സംശയങ്ങൾക്ക് Talk to Equal, ഫ്രീ പ്ലാനും പ്രീമിയം അപ്ഗ്രേഡും
+
+⏱ Chapters
+0:00 സ്പാം കോളുകൾ ഇനി AI എടുക്കും
+0:46 ആപ്പ് ഡൗൺലോഡ് (iPhone & Android)
+0:59 സെറ്റ് അപ്പ്
+1:47 Your Instructions
+2:42 ഏതൊക്കെ കോളുകൾ AI എടുക്കണം
+3:17 ഭാഷകൾ
+4:09 അസിസ്റ്റന്റിന്റെ ശബ്ദം
+4:28 Silent Mode, പ്രൊമോഷണൽ കോളുകൾ
+4:42 സംശയങ്ങൾ, ഫ്രീ & പ്രീമിയം
+
+👍 ഉപകാരപ്പെട്ടെങ്കിൽ ലൈക്ക് ചെയ്യൂ, സ്പാം കോളുകൾ കൊണ്ട് ബുദ്ധിമുട്ടുന്നവർക്ക് ഷെയർ ചെയ്യൂ, V Create ചാനൽ Subscribe ചെയ്യൂ.
+
+#EqualAI #SpamCalls #AIAssistant #MalayalamTech #VCreate`;
+
+const SHORT_DESC = `Equal AI നിങ്ങളുടെ കോളുകൾ എടുത്ത്, ആരാണ് എന്തിനാണ് വിളിക്കുന്നത് എന്ന് ചോദിച്ച് മനസ്സിലാക്കി, സ്പാം കോളുകൾ റിജക്ട് ചെയ്യും. നിങ്ങളുടെ ഭാഷയിൽ സംസാരിക്കും, പ്രൊമോഷണൽ കോളുകൾ സൈലന്റ് ആക്കും.
+
+Android: ${PLAY}
+iPhone: ${APPSTORE}
+
+ഫുൾ സെറ്റപ്പ് വീഡിയോ V Create ചാനലിൽ.
+#Shorts #EqualAI #SpamCalls #MalayalamTech`;
+
+const REEL = `സ്പാം കോളുകൾ ഇനി AI എടുക്കും 🤖📵
+
+Equal AI ആപ്പ് നിങ്ങൾക്ക് പകരം കോൾ എടുത്ത് ആരാണ്, എന്തിനാണ് എന്ന് ചോദിച്ച് മനസ്സിലാക്കും. ആവശ്യമുള്ള കോൾ മാത്രം നിങ്ങൾക്ക് തരും 🙌
+
+✅ iPhone-ലും Android-ലും
+✅ ഏതൊക്കെ കോളുകൾ എടുക്കണം എന്ന് നിങ്ങൾ തീരുമാനിക്കാം (Only unknown numbers)
+✅ വിളിക്കുന്നയാളുടെ ഭാഷയിൽ മറുപടി: മലയാളം, ഹിന്ദി, ഇംഗ്ലീഷ്...
+✅ ലോൺ, ക്രെഡിറ്റ് കാർഡ് പ്രൊമോഷൻ കോളുകൾ സൈലന്റ്
+
+ഡൗൺലോഡ് ലിങ്ക് ബയോയിൽ. ഫുൾ വീഡിയോ V Create YouTube ചാനലിൽ.
+
+#equalai #spamcalls #aiassistant #techmalayalam #malayalamtech #vcreate`;
+
+const DATA = {
+  youtube: [
+    { label: "Title · option 1 (recommended)", text: "Spam Calls ഇനി AI എടുക്കും! നിങ്ങൾക്ക് പകരം സംസാരിക്കുന്ന AI Call Assistant | Equal AI | Malayalam" },
+    { label: "Title · option 2", text: "ശല്യപ്പെടുത്തുന്ന Promotional Calls-ന് വിട! AI നിങ്ങൾക്ക് പകരം കോൾ എടുക്കും | Equal AI Malayalam" },
+    { label: "Title · option 3", text: "Unknown Calls ഇനി AI Screen ചെയ്യും | iPhone & Android | Equal AI Setup Malayalam" },
+    { label: "Description", text: DESC },
+    { label: "Tags", text: "equal ai, equal ai malayalam, spam call blocker, ai call assistant, block promotional calls, unknown call screening, ai answers calls, call screening app, iphone tips malayalam, android tips malayalam, malayalam tech, v create" },
+    { label: "Pinned comment", text: "സ്പാം കോളുകൾ ഇനി AI നോക്കിക്കോളും 😄 നിങ്ങൾക്ക് ദിവസം എത്ര സ്പാം / പ്രൊമോഷണൽ കോളുകൾ വരാറുണ്ട്? കമന്റ് ചെയ്യൂ 👇" },
+    { list: "Studio settings", items: [
+      "Category: Science & Technology · Language: Malayalam · Made for kids: No",
+      "Subtitles (optional): English → Upload file → With timing → equal-ai-assistant_en.srt",
+      "End screen: വീഡിയോയിൽ എൻഡ് കാർഡ് ഇല്ല; വേണമെങ്കിൽ അവസാന 5–10 സെക്കൻഡിൽ ചേർക്കാം",
+      "Publish: വൈകുന്നേരം 6:30–8:30 PM IST" ] },
+  ],
+  short: [
+    { label: "Title", text: "Spam Calls ഇനി AI എടുക്കും 🤖 Equal AI Call Assistant #shorts" },
+    { label: "Description", text: SHORT_DESC },
+    { list: "After upload", items: [ "Related video: മെയിൻ 16:9 വീഡിയോ തിരഞ്ഞെടുക്കുക", "Short-ന്റെ അവസാനം \"പൂർണ്ണ വീഡിയോ കാണാൻ V Create YouTube ചാനൽ സന്ദർശിക്കൂ\" എന്ന് കാണിക്കുന്നുണ്ട്" ] },
+  ],
+  reels: [ { label: "Caption", text: REEL } ],
+  blog: [
+    { label: "Post title", text: "Equal AI: സ്പാം കോളുകൾ ഇനി AI എടുക്കും – സെറ്റപ്പ് ചെയ്യുന്ന വിധം (iPhone, Android)" },
+    { label: "Custom permalink", text: "equal-ai-call-assistant-malayalam" },
+    { label: "Search description", text: "Equal AI: സ്പാം, പ്രൊമോഷണൽ കോളുകൾ AI എടുത്ത് ആരാണ്, എന്തിനാണ് എന്ന് ചോദിച്ചറിയും. iPhone, Android-ൽ സെറ്റപ്പ് ചെയ്യുന്ന വിധവും പ്രധാന സെറ്റിംഗുകളും ഡൗൺലോഡ് ലിങ്കും." },
+    { label: "Labels", text: "Equal AI, AI Call Assistant, Spam Calls, AI Tools Malayalam, iPhone, Android, Tech Malayalam, V Create" },
+    { label: "Post HTML · paste in HTML view", id: "blog-html", code: true, text: "" },
+    { list: "How to post", items: [
+      "Blogger → New post → മുകളിലെ ✎ ഐക്കൺ → HTML view",
+      "മുകളിൽ YouTube ലിങ്ക് ചേർത്ത ശേഷം Post HTML കോപ്പി ചെയ്ത് പേസ്റ്റ് ചെയ്യുക",
+      "Post settings: Permalink → Custom, Search description, Labels മുകളിൽ നിന്ന് കോപ്പി ചെയ്യുക",
+      "ഡൗൺലോഡ് ബട്ടണുകൾ പോസ്റ്റിന്റെ പകുതിക്ക് താഴെയും ഏറ്റവും അവസാനവും ഉണ്ട്" ] },
+  ],
+};
+
+function ytId(u) {
+  if (!u) return "";
+  u = u.trim();
+  const m = u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/))([A-Za-z0-9_-]{11})/);
+  if (m) return m[1];
+  return /^[A-Za-z0-9_-]{11}$/.test(u) ? u : "";
+}
+function embed(id) {
+  if (!id) return "<!-- YouTube embed: paste the video link in the upload kit, then copy this HTML again -->";
+  return `<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin:1.2em 0;">
+<iframe src="https://www.youtube.com/embed/${id}" title="Equal AI: സ്പാം കോളുകൾ ഇനി AI എടുക്കും" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+<p style="font-size:.95em;">YouTube-ൽ കാണാൻ: <a href="https://youtu.be/${id}" target="_blank" rel="noopener">https://youtu.be/${id}</a></p>`;
+}
+
+async function copyText(text, btn, pre) {
+  let ok = false;
+  try { await navigator.clipboard.writeText(text); ok = true; } catch (e) { ok = false; }
+  if (!ok && pre) {
+    const r = document.createRange(); r.selectNodeContents(pre);
+    const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+  }
+  btn.textContent = ok ? "Copied" : "Selected";
+  btn.classList.add("done");
+  setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("done"); }, 1600);
+}
+
+function render(key) {
+  const host = document.getElementById("f-" + key);
+  host.style.display = "grid"; host.style.gap = "12px";
+  for (const f of DATA[key]) {
+    const box = document.createElement("div"); box.className = "field";
+    if (f.list) {
+      box.innerHTML = `<div class="fhead"><span class="flabel">${f.list}</span></div>`;
+      const ul = document.createElement("ul"); ul.className = "check";
+      for (const it of f.items) { const li = document.createElement("li"); li.textContent = it; ul.appendChild(li); }
+      box.appendChild(ul); host.appendChild(box); continue;
+    }
+    const head = document.createElement("div"); head.className = "fhead";
+    const lab = document.createElement("span"); lab.className = "flabel"; lab.textContent = f.label;
+    const btn = document.createElement("button"); btn.className = "copy"; btn.type = "button"; btn.textContent = "Copy";
+    head.append(lab, btn);
+    const pre = document.createElement("pre"); pre.className = "text" + (f.code ? " code" : "");
+    if (f.id) pre.id = f.id;
+    pre.textContent = f.text;
+    btn.addEventListener("click", () => copyText(pre.textContent, btn, pre));
+    box.append(head, pre); host.appendChild(box);
+  }
+}
+["youtube", "short", "reels", "blog"].forEach(render);
+
+const input = document.getElementById("yt"), status = document.getElementById("ytstatus");
+function updateBlog() {
+  const id = ytId(input.value);
+  document.getElementById("blog-html").textContent = BLOG.replace("<!--EMBED-->", embed(id));
+  if (id) { status.textContent = "വീഡിയോ ചേർത്തു: youtu.be/" + id; status.className = "status ok"; }
+  else if (input.value.trim()) { status.textContent = "ഇത് ഒരു YouTube ലിങ്ക് ആയി തോന്നുന്നില്ല. ലിങ്ക് വീണ്ടും പരിശോധിക്കുക."; status.className = "status wait"; }
+  else { status.textContent = "വീഡിയോ ലിങ്ക് ഇതുവരെ ചേർത്തിട്ടില്ല"; status.className = "status wait"; }
+  try { localStorage.setItem("equal-yt", input.value); } catch (e) {}
+}
+try { input.value = localStorage.getItem("equal-yt") || ""; } catch (e) {}
+input.addEventListener("input", updateBlog);
+updateBlog();
+</script>

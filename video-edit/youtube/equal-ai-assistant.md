@@ -1,8 +1,12 @@
 # YouTube upload pack — V Create: Equal AI, an AI assistant that answers spam calls for you
 
 Files: `VCreate_Equal_AI_16x9.mp4` (main video, 5:18, the whole talk, no end card) · `VCreate_Equal_AI_9x16.mp4`
-(Short / Reel, 2:56: the full how-to cut only at pauses - without the subscribe request, the welcome line, the OTP
-sign-in, the preset walk-through and the "talk to Equal" help part).
+(Short / Reel, 1:22: one clear story - the problem, what the AI does, iPhone + Android, choosing which calls, the AI
+talks to the caller first, in the caller's language, promotional calls muted, try it - cut only at pauses, ending on a
+card "full video on YouTube").
+
+**Copy from the phone:** the "Equal AI Upload Kit" page (https://claude.ai/artifact/XnosUoYTsdjDp7JJjMWbGZ) has every
+field below with a Copy button, plus the blog post HTML. Blog notes: `youtube/equal-ai-assistant_blog.md`.
 
 What the video shows (Equal AI app, iPhone and Android):
 * **Set up:** open the app → it gives set-up instructions → allow the permissions it asks for (contacts, microphone)
@@ -28,7 +32,9 @@ What the video shows (Equal AI app, iPhone and Android):
 ```
 സ്പാം കോളുകളും പ്രൊമോഷണൽ കോളുകളും ശല്യമാകുന്നുണ്ടോ? Equal AI എന്ന ആപ്പ് നിങ്ങളുടെ ഫോണിൽ വരുന്ന കോളുകൾ സ്വയം എടുത്ത്, ആരാണ് വിളിക്കുന്നത്, എന്തിനാണ് വിളിക്കുന്നത് എന്ന് ചോദിച്ച് മനസ്സിലാക്കി, ആവശ്യമില്ലാത്ത കോളുകൾ റിജക്ട് ചെയ്യുകയും ആവശ്യമുള്ളവ നിങ്ങൾക്ക് കൈമാറുകയും ചെയ്യും. iPhone-ലും Android-ലും ഉപയോഗിക്കാം.
 
-📲 Equal AI ഡൗൺലോഡ് ലിങ്ക്: [ഇവിടെ ലിങ്ക് ചേർക്കുക]
+📲 Equal AI ഡൗൺലോഡ് ചെയ്യാം
+Android: https://play.google.com/store/apps/details?id=in.equal.ai.assistant
+iPhone: https://apps.apple.com/in/app/id6757906431
 
 ✅ ഈ വീഡിയോയിൽ
 • ആപ്പ് സെറ്റ് ചെയ്യുന്ന വിധം, ആവശ്യമായ പെർമിഷനുകൾ
@@ -54,8 +60,8 @@ What the video shows (Equal AI app, iPhone and Android):
 
 #EqualAI #SpamCalls #AIAssistant #MalayalamTech #VCreate
 ```
-Chapters start at 0:00 and each is at least 10 s long. The description has no angle brackets. Replace the link
-placeholder with the app's download link before publishing (the video says the link is in the description).
+Chapters start at 0:00 and each is at least 10 s long. The description has no angle brackets. The store links were
+checked on Google Play and the App Store (Nov 2026).
 
 **Tags**
 ```
@@ -74,14 +80,17 @@ equal ai, equal ai malayalam, spam call blocker, ai call assistant, block promot
 ## Short / Reel
 
 The 9:16 file follows the Reels / Shorts safe zone: no text in the top ~220 px, the bottom ~420 px or the right-hand
-button column; the presenter sits in the lower part of the frame so the title, chapter slates and captions stay off
-his face. It is 2:56, inside the 3-minute Shorts limit.
+button column; the presenter sits in the lower part of the frame so the title, feature slates and captions stay off
+his face. It is 1:22 and ends with a Malayalam card: "പൂർണ്ണ വീഡിയോ കാണാൻ V Create YouTube ചാനൽ സന്ദർശിക്കൂ".
 
 **YouTube Short title** `Spam Calls ഇനി AI എടുക്കും 🤖 Equal AI Call Assistant #shorts`
 
 **Short description**
 ```
-Equal AI നിങ്ങളുടെ കോളുകൾ എടുത്ത്, ആരാണ് എന്തിനാണ് എന്ന് ചോദിച്ച് മനസ്സിലാക്കി, സ്പാം കോളുകൾ റിജക്ട് ചെയ്യും. iPhone-ലും Android-ലും. ഫുൾ വീഡിയോ ചാനലിൽ.
+Equal AI നിങ്ങളുടെ കോളുകൾ എടുത്ത്, ആരാണ് എന്തിനാണ് വിളിക്കുന്നത് എന്ന് ചോദിച്ച് മനസ്സിലാക്കി, സ്പാം കോളുകൾ റിജക്ട് ചെയ്യും. നിങ്ങളുടെ ഭാഷയിൽ സംസാരിക്കും, പ്രൊമോഷണൽ കോളുകൾ സൈലന്റ് ആക്കും.
+Android: https://play.google.com/store/apps/details?id=in.equal.ai.assistant
+iPhone: https://apps.apple.com/in/app/id6757906431
+ഫുൾ സെറ്റപ്പ് വീഡിയോ V Create ചാനലിൽ.
 #Shorts #EqualAI #SpamCalls #MalayalamTech
 ```
 Set **Related video** to the main video.
