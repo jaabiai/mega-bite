@@ -163,7 +163,7 @@ def face_shot(T, sc):
     if REEL:
         z *= 1.0 if _SEG_IDX[0] % 2 == 0 else 1.13      # wide / close on alternate Short segments
         hh = H - REEL_TOP
-        pic, (fx, fy) = face_crop(T, W, hh, z * 0.9, 0.5, 0.40)
+        pic, (fx, fy) = face_crop(T, W, hh, max(z, 1.0), 0.5, 0.40)     # zoom >= 1: the shot always fills its area
         pic = np.clip(GR_REEL(pic, face=(fx, fy - 0.02, 0.30, 0.22), center=(fx, 0.45)), 0, 1)
         small, _ = face_crop(T, W // 4, H // 4, 1.0, 0.5, 0.50)
         bg = cv2.resize(cv2.GaussianBlur(small, (0, 0), 6), (W, H), interpolation=cv2.INTER_CUBIC)
@@ -296,6 +296,39 @@ def picture(T, sc):
     return fr, g
 
 
+def seg_bounds(T):
+    """Short: the padded kept segment that contains T (None in the 16:9 edit)."""
+    if not SEGS:
+        return None
+    for a, b in SEGS:
+        a2, b2 = max(a - TL.REEL_PAD[0], 0.0), min(b + TL.REEL_PAD[1], TL.NARR_END)
+        if a2 - 1e-6 <= T < b2 + 1e-6:
+            return a2, b2
+    return None
+
+
+def scene_for(T):
+    """Short: a scene change that falls just after a join (or just before one) is moved onto the join itself, so the
+    join is one clean camera cut - no half dissolve, no one-frame flash of the other framing."""
+    sc = scene_at(T)
+    sb = seg_bounds(T)
+    if sb is None:
+        return sc
+    a2, b2 = sb
+    for t in TL.MIXES:
+        if a2 < t <= a2 + 0.4 and T < t:
+            return scene_at(t)
+        if b2 - 0.4 <= t < b2 and T >= t:
+            return scene_at(t - 1e-3)
+    return sc
+
+
+def mix_ok(t, T):
+    """A dissolve at scene change t is drawn only if it lies wholly inside the kept segment (Short) - never across a join."""
+    sb = seg_bounds(T)
+    return sb is None or (sb[0] <= t - MIX / 2 and t + MIX / 2 <= sb[1])
+
+
 def prev_scene(sc):
     i = TL.SCENES.index(sc)
     return TL.SCENES[i - 1] if i > 0 else None
@@ -391,7 +424,7 @@ def slate_t0(t0):
     for a, b in SEGS:
         a2, b2 = a - TL.REEL_PAD[0], b + TL.REEL_PAD[1]
         if b2 > t0:
-            return max(t0, a2) + (0.25 if a2 > t0 else 0.0)
+            return max(t0, a2)
     return t0
 
 
@@ -499,7 +532,7 @@ MIX = 0.6
 def base_frame(T, sc):
     fr, g = picture(T, sc)
     i = TL.SCENES.index(sc)
-    if sc["t0"] in TL.MIXES and T - sc["t0"] < MIX / 2:
+    if sc["t0"] in TL.MIXES and T - sc["t0"] < MIX / 2 and mix_ok(sc["t0"], T):
         pv = prev_scene(sc)
         if pv is not None:
             fa, _ = picture(T, pv)
@@ -507,7 +540,7 @@ def base_frame(T, sc):
             fr = MS.burn_mix(fa, fr, p)
             g = g if p > 0.5 else None
     nxt = TL.SCENES[i + 1] if i + 1 < len(TL.SCENES) else None
-    if nxt is not None and nxt["t0"] in TL.MIXES and nxt["t0"] - T < MIX / 2:
+    if nxt is not None and nxt["t0"] in TL.MIXES and nxt["t0"] - T < MIX / 2 and mix_ok(nxt["t0"], T):
         fb, _ = picture(T, nxt)
         p = (T - nxt["t0"] + MIX / 2) / MIX
         fr = MS.burn_mix(fr, fb, p)
@@ -516,7 +549,7 @@ def base_frame(T, sc):
 
 
 def render_frame(T, u=None):
-    sc = scene_at(T)
+    sc = scene_for(T)
     fr, g = base_frame(T, sc)
     ph = sc["kind"] == "phone"
     if T < TITLE.span()[1] + 0.45:
